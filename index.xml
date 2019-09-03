@@ -1,38 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Even - A super concise theme for Hugo</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Even - A super concise theme for Hugo</description>
+    <title>None - 记录在日本从事IT的所感所想。</title>
+    <link>https://inuwashi123.github.io/</link>
+    <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Tue, 03 Sep 2019 21:14:58 +0900</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title></title>
-      <link>http://localhost:1313/post/some-content/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/some-content/</guid>
-      <description>很多热爱写作的小伙伴或许都曾想过，要是能拥有一个自己专属的博客就好了。这里呢，就跟大家详细地分享一种自己动手搭建博客的简单方案：GitHub Pages + Hugo。 如果你感觉有点儿陌生，没关系。虽说是自己动手搭建，但并不要求你有多少技术基础，熟悉一下就好了。我在之前的分享中，曾跟大家提到过 GitHub，老读者肯定不陌生了。例如这两篇，不了解的小伙伴可以先戳链接去看下：
-技术写作工具 | GitHub + Markdown 的新轻型技术写作模式速览 技术文档方案 | GitHub + Markdown 的深度实践解析
-那 GitHub Pages 和 Hugo 又是什么呢？
-GitHub Pages 是一个静态站点托管服务，直接将个人、组织或项目的页面托管于 GitHub 库或仓库 (repository) 中。
-Hugo 是一个用 Go 语言编写的静态站点生成器，它针对速度、易用性和可配置性进行了优化，快速灵活。
-作者：Lilian_Lee 链接：https://www.jianshu.com/p/ca04631f4438 来源：简书 简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</description>
-    </item>
     
     <item>
-      <title></title>
-      <link>http://localhost:1313/post/test2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>python基础教程001 关于Python</title>
+      <link>https://inuwashi123.github.io/post/python/001/</link>
+      <pubDate>Tue, 03 Sep 2019 21:14:58 +0900</pubDate>
       
-      <guid>http://localhost:1313/post/test2/</guid>
-      <description>第一个网站hugo 网站网站网站网站网站网站网站网站网站网站网站 网站
-网站网站网站网站网站网站网站网站网站
-网站</description>
+      <guid>https://inuwashi123.github.io/post/python/001/</guid>
+      <description>Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P</description>
     </item>
     
   </channel>
