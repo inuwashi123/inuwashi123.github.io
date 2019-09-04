@@ -6,17 +6,26 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 03 Sep 2019 21:14:58 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>python基础教程001 关于Python</title>
-      <link>https://inuwashi123.github.io/post/python/001/</link>
+      <title>Python教程002 Python环境搭建</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B002-python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 04 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B002-python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>Windows下python环境搭建 访问Python的官方站点https://www.python.org/,点击Download，下载最新</description>
+    </item>
+    
+    <item>
+      <title>python教程001 关于Python</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B001-%E5%85%B3%E4%BA%8Epython/</link>
       <pubDate>Tue, 03 Sep 2019 21:14:58 +0900</pubDate>
       
-      <guid>https://inuwashi123.github.io/post/python/001/</guid>
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B001-%E5%85%B3%E4%BA%8Epython/</guid>
       <description>Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P</description>
     </item>
     

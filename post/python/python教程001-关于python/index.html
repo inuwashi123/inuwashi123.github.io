@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python教程001 关于Python - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P" /><meta name="keywords" content="python, python教程, python基础知识" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B001-%E5%85%B3%E4%BA%8Epython/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python教程001 关于Python" />
+<meta property="og:description" content="Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B001-%E5%85%B3%E4%BA%8Epython/" />
+<meta property="article:published_time" content="2019-09-03T21:14:58+09:00" />
+<meta property="article:modified_time" content="2019-09-03T21:14:58+09:00" />
+<meta itemprop="name" content="python教程001 关于Python">
+<meta itemprop="description" content="Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P">
+
+
+<meta itemprop="datePublished" content="2019-09-03T21:14:58&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-03T21:14:58&#43;09:00" />
+<meta itemprop="wordCount" content="1732">
+
+
+
+<meta itemprop="keywords" content="python,python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python教程001 关于Python"/>
+<meta name="twitter:description" content="Python简介 Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 P"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python教程001 关于Python</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-03 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1732 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      
+
+<h2 id="python简介">Python简介</h2>
+
+<p>Python是一种解释性、交互式、面向对象的编程语言。 它包含了模块、异常、动态类型、非常高层级的动态数据类型以及类的概念。 Python结合了超强的功能和极清晰的语法。 它带有许多系统调用和库以及各种窗口系统的接口，并且可以用 C 或 C ++ 来进行扩展。 它还可用作需要可编程接口的应用程序的扩展语言。 最后，Python 还是可移植的：它可以在许多 Unix 变种、Mac 以及 Windows 2000 以上的操作系统中运行。</p>
+
+<p>Python的创始人为Guido van Rossum。自从20世纪90年代初Python语言诞生至今，它已被逐渐广泛应用于系统管理任务的处理和Web编程。之所以选中Python（大蟒蛇的意思）作为该编程语言的名字，是取自英国20世纪70年代首播的电视喜剧《蒙提.派森干的飞行马戏团》（Monty Python&rsquo;s Flying Circus）。现在 Python 是由一个核心开发团队在维护，Guido van Rossum 仍然占据着至关重要的作用，指导其进展。</p>
+
+<h2 id="python版本">Python版本</h2>
+
+<p>Python由Guido van Rossum于1989年底发明，第一个公开发行版发行于1991年。现在最新的版本是Python 3.8。注意，Python3.0版本设计的时候是不向下兼容的，本教程主要针对Python 3.x版本的学习，关于Python 2.x的语法，请查找相关的资料。</p>
+
+<h2 id="python特点">Python特点</h2>
+
+<ol>
+<li><p>简单<br />
+Python是一种代表简单思想的语言。</p></li>
+
+<li><p>易学<br />
+Python有极其简单的语法。</p></li>
+
+<li><p>免费、开源<br />
+Python是FLOSS（自由/开放源码软件）之一。</p></li>
+
+<li><p>高层语言<br />
+使用Python编写程序时无需考虑如何管理程序使用的内存一类的底层细节。</p></li>
+
+<li><p>可移植性<br />
+Python已被移植到很多平台，这些平台包括Linux、Windows、FreeBSD、Macintosh、Solaris、OS/2、Amiga、AROS、AS/400、BeOS、OS/390、z/OS、Palm OS、QNX、VMS、Psion、Acom RISC OS、VxWorks、PlayStation、Sharp Zaurus、Windows CE甚至还有PocketPC。</p></li>
+
+<li><p>解释性<br />
+可以直接从源代码运行。在计算机内部，python解释器把源代码转换为字节码的中间形式，然后再把它翻译成计算机使用的机器语言。</p></li>
+
+<li><p>面向对象<br />
+python既支持面向过程编程也支持面向对象编程。</p></li>
+
+<li><p>可扩展性<br />
+部分程序可以使用其他语言编写，如c/c++。</p></li>
+
+<li><p>可嵌入型<br />
+可以把Python嵌入到c/c++程序中，从而提供脚本功能。</p></li>
+
+<li><p>丰富的库<br />
+Python标准库确实很庞大。它可以帮助你处理各种工作，包括正则表达式、文档生成、单元测试、线程、数据库、网页浏览器、CGI、FTP、电子邮件、XML、XML-RPC、HTML、WAV文件、密码系统、GUI（图形用户界面）、Tk和其他与系统有关的操作。</p></li>
+</ol>
+
+<h2 id="python各种解释器实现">Python各种解释器实现</h2>
+
+<h3 id="cpython">CPython</h3>
+
+<p>当我们从Python官方网站下载并安装好Python 3.x后，我们就直接获得了一个官方版本的解释器：CPython。这个解释器是用C语言开发的，所以叫CPython。在命令行下运行python就是启动CPython解释器。CPython是使用最广的Python解释器。新的语言特性通常首先出现在这里。本教程使用的就是CPython解释器。</p>
+
+<h3 id="jython">Jython</h3>
+
+<p>Python在Java中实现。可以用作Java应用程序的脚本语言，或者可以用于使用Java类库创建应用程序。它也经常用于为Java库创建测试。更多信息可以在the Jython website上找到。</p>
+
+<h3 id="python-for-net">Python for .NET</h3>
+
+<p>此实现实际上使用了CPython实现，但它是一个托管的.NET应用程序，并使.NET库可用。有关详细信息，请参见.NET的python主页<a href="https://pythonnet.github.io/">Python for .NET home page</a>。</p>
+
+<h3 id="ironpython">IronPython</h3>
+
+<p>.NET的另一个python。与python.net不同，这是一个完整的python实现，它生成IL，并将python代码直接编译到.NET程序集。有关更多信息，请参见<a href="https://ironpython.net/">the IronPython website</a>。</p>
+
+<h3 id="pypy">PyPy</h3>
+
+<p>完全用Python编写的Python实现。它支持其他实现中没有的几个高级功能，比如无堆栈支持和实时编译器。该项目的目标之一是通过使解释器更容易修改（因为它是用Python编写的），鼓励对语言本身进行实验。Pypy项目主页上<a href="http://pypy.org/">the PyPy project’s home page</a>提供了其他信息。</p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://docs.python.org/3/reference/introduction.html#alternate-implementations">https://docs.python.org/3/reference/introduction.html#alternate-implementations</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">python</a>
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B002-python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程002 Python环境搭建</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
