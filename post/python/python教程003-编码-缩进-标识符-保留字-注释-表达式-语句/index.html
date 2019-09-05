@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="编码 默认情况下，Python 3源码文件以UTF-8编码，所有字符串都是unicode字符串。 当然也可以手动指定文件编码，有两种形式。 1 # -*- coding:" /><meta name="keywords" content="编码, 缩进, 标识符, 保留字, 注释, 多行语句" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B003-%E7%BC%96%E7%A0%81-%E7%BC%A9%E8%BF%9B-%E6%A0%87%E8%AF%86%E7%AC%A6-%E4%BF%9D%E7%95%99%E5%AD%97-%E6%B3%A8%E9%87%8A-%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E8%AF%AD%E5%8F%A5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句" />
+<meta property="og:description" content="编码 默认情况下，Python 3源码文件以UTF-8编码，所有字符串都是unicode字符串。 当然也可以手动指定文件编码，有两种形式。 1 # -*- coding:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B003-%E7%BC%96%E7%A0%81-%E7%BC%A9%E8%BF%9B-%E6%A0%87%E8%AF%86%E7%AC%A6-%E4%BF%9D%E7%95%99%E5%AD%97-%E6%B3%A8%E9%87%8A-%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E8%AF%AD%E5%8F%A5/" />
+<meta property="article:published_time" content="2019-09-05T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-09-05T09:09:45+09:00" />
+<meta itemprop="name" content="Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句">
+<meta itemprop="description" content="编码 默认情况下，Python 3源码文件以UTF-8编码，所有字符串都是unicode字符串。 当然也可以手动指定文件编码，有两种形式。 1 # -*- coding:">
+
+
+<meta itemprop="datePublished" content="2019-09-05T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-05T09:09:45&#43;09:00" />
+<meta itemprop="wordCount" content="2545">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句"/>
+<meta name="twitter:description" content="编码 默认情况下，Python 3源码文件以UTF-8编码，所有字符串都是unicode字符串。 当然也可以手动指定文件编码，有两种形式。 1 # -*- coding:"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-05 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2545 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#编码">编码</a></li>
+<li><a href="#缩进">缩进</a></li>
+<li><a href="#标识符">标识符</a></li>
+<li><a href="#保留字-关键字">保留字(关键字)</a></li>
+<li><a href="#注释">注释</a>
+<ul>
+<li><a href="#单行注释">单行注释</a></li>
+<li><a href="#多行注释">多行注释</a></li>
+</ul></li>
+<li><a href="#表达式-expression">表达式（expression）</a></li>
+<li><a href="#语句-statement">语句（statement）</a></li>
+<li><a href="#多行语句">多行语句</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="编码">编码</h2>
+
+<p>默认情况下，Python 3源码文件以UTF-8编码，所有字符串都是unicode字符串。 当然也可以手动指定文件编码，有两种形式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: &lt;encoding-name&gt; -*-</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># vim:fileencoding=&lt;encoding-name&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>注意:</strong> 编码声明必须位于文件第一行。如果非第一行的话，该行前面必须是注释。</p>
+
+<p>如果找不到编码声明，则默认编码为UTF-8。此外，如果文件的第一个字节是utf-8字节顺序标记(b&rsquo;\xef\xbb\xbf&rsquo;)，则声明的文件编码是utf-8（微软记事本也支持）。如果声明了编码，则必须由python识别编码名称。</p>
+
+<p>例如，将编码声明为utf-8</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如，将编码声明为SJIS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: SJIS -*-</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="缩进">缩进</h2>
+
+<p>python最具特色的就是使用缩进来表示代码块，不需要像其他编程语言一样，使用大括号{}。使用空格或者tab键（制表符）来缩进。一般是用半角4个空格或一个tab键。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;True&#34;</span><span class="p">)</span>  <span class="c1"># 使用了4个空格表示缩进</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span> <span class="c1"># 使用了4个空格表示缩进</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;True&#34;</span><span class="p">)</span>  <span class="c1"># 使用了1个tab键</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span> <span class="c1"># 使用了1个tab键</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>缩进的前导空格（空格和tab键）用于计算行的缩进级别。第一个非空白字符前面的空格总数确定了行的缩进量。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;Outer True&#34;</span><span class="p">)</span>      <span class="c1"># 缩进级别1,p字符前面有4个空格</span>
+    <span class="k">if</span> <span class="bp">True</span><span class="p">:</span>                  <span class="c1"># 缩进级别1</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;Outer True&#34;</span><span class="p">)</span>      <span class="c1"># 缩进级别1</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;Inner True&#34;</span><span class="p">)</span>  <span class="c1"># 缩进级别2，p字符前面有8个空格</span>
+    <span class="k">else</span><span class="p">:</span>                     <span class="c1"># 缩进级别1</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;Inner False&#34;</span><span class="p">)</span> <span class="c1"># 缩进级别2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span>           <span class="c1"># 缩进级别1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>同一个代码块的语句必须包含相同的缩进数。否则会导致运行错误，抛出IndentationError异常：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;True&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s2">&#34;the end&#34;</span><span class="p">)</span>  <span class="c1"># 缩进不一致,报错</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序由于缩进不一致，执行后会出现类似以下错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;the end&#34;</span><span class="p">)</span>  <span class="c1"># 缩进不一致,报错</span>
+                            <span class="o">^</span>
+<span class="ne">IndentationError</span><span class="p">:</span> <span class="n">unindent</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">match</span> <span class="nb">any</span> <span class="n">outer</span> <span class="n">indentation</span> <span class="n">level</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>缩进不能混用空格和tab键，两者选择其一。否则会引起TabError异常。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;True&#34;</span><span class="p">)</span>  <span class="c1"># print前面有一个tab和一个空格</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span> <span class="c1"># print前面有一个tab和一个空格</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;the end&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="标识符">标识符</h2>
+
+<p>python中标识符的语法基于Unicode标准附件UAX-31，其规则如下:</p>
+
+<ul>
+<li>在ASCII范围内(U+0001..U+007F)，第一个字符必须是字母表中字母或下划线_，不能以数字开头。</li>
+<li>标识符的其他的部分由字母、数字和下划线组成。</li>
+</ul>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">abc</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span> <span class="c1"># 合法</span>
+<span class="n">_abc</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c1"># 合法</span>
+
+<span class="mi">1</span><span class="n">abc</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span> <span class="c1"># 非法 数字开头</span>
+<span class="nd">@abc</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># 非法 @开头</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Python 3.0引入了ASCII范围之外的其他字符（请参见<a href="https://www.python.org/dev/peps/pep-3131/">pep 3131</a>）。对于这些字符，使用unicodedata模块中包含的unicode字符数据库版本。例如以下的也是合法的标识符。</li>
+</ul>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">中国</span> <span class="o">=</span> <span class="s2">&#34;China&#34;</span>              <span class="c1"># 合法 可识别的Unicode</span>
+<span class="err">百度网站</span> <span class="o">=</span> <span class="s2">&#34;www.baidu.com&#34;</span>  <span class="c1"># 合法 可识别的Unicode</span>
+<span class="mi">0</span><span class="err">中国</span> <span class="o">=</span> <span class="s2">&#34;China&#34;</span>             <span class="c1"># 非法 数字0-9开头的。</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Python标识符长度不受限制，大小写敏感。</li>
+</ul>
+
+<p>例如，下例中的A和a是不同的标识符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span>  <span class="o">=</span> <span class="s2">&#34;小写a&#34;</span>
+<span class="n">A</span>  <span class="o">=</span> <span class="s2">&#34;大写A&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 打印 小写a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># 打印 大写A</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="保留字-关键字">保留字(关键字)</h2>
+
+<p>以下标识符是Python语言的保留字(也叫关键字)，不能用作标识符。它们的拼写必须与此处所写的完全一致(注意大小写)：</p>
+
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>-</th>
+<th>一览表</th>
+<th>-</th>
+<th>-</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>False</td>
+<td>await</td>
+<td>else</td>
+<td>import</td>
+<td>pass</td>
+</tr>
+
+<tr>
+<td>None</td>
+<td>break</td>
+<td>except</td>
+<td>in</td>
+<td>raise</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>class</td>
+<td>finally</td>
+<td>is</td>
+<td>return</td>
+</tr>
+
+<tr>
+<td>and</td>
+<td>continue</td>
+<td>for</td>
+<td>lambda</td>
+<td>try</td>
+</tr>
+
+<tr>
+<td>as</td>
+<td>def</td>
+<td>from</td>
+<td>nonlocal</td>
+<td>while</td>
+</tr>
+
+<tr>
+<td>assert</td>
+<td>del</td>
+<td>global</td>
+<td>not</td>
+<td>with</td>
+</tr>
+
+<tr>
+<td>async</td>
+<td>elif</td>
+<td>if</td>
+<td>or</td>
+<td>yield</td>
+</tr>
+</tbody>
+</table>
+
+<p>用作标识符时，会报语法错误，抛出SyntaxError异常。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="bp">None</span><span class="o">=</span><span class="mi">1</span>
+  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="bp">None</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t assign to keyword</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其实，以上的保留字是由Python的标准库keyword模块来提供的。keyword模块可以输出当前Python版本的所有保留字(关键字)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">keyword</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span>
+<span class="p">[</span><span class="s1">&#39;False&#39;</span><span class="p">,</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;assert&#39;</span><span class="p">,</span> <span class="s1">&#39;break&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="s1">&#39;del&#39;</span><span class="p">,</span> <span class="s1">&#39;elif&#39;</span><span class="p">,</span> <span class="s1">&#39;else&#39;</span><span class="p">,</span> <span class="s1">&#39;except&#39;</span><span class="p">,</span> <span class="s1">&#39;finally&#39;</span><span class="p">,</span> <span class="s1">&#39;for&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;global&#39;</span><span class="p">,</span> <span class="s1">&#39;if&#39;</span><span class="p">,</span> <span class="s1">&#39;import&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">,</span> <span class="s1">&#39;nonlocal&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">,</span> <span class="s1">&#39;raise&#39;</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">,</span> <span class="s1">&#39;try&#39;</span><span class="p">,</span> <span class="s1">&#39;while&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;yield&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="注释">注释</h2>
+
+<p>注释是为了说明程序的逻辑，运行程序时，注释将被忽略。分为单行注释和多行注释。</p>
+
+<h3 id="单行注释">单行注释</h3>
+
+<p>单行注释以#开头，后面是注释内容。</p>
+
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">abc</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span> <span class="c1"># 这是一个字符串变量</span>
+
+<span class="c1"># 这是一个数字变量</span>
+<span class="n">num</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="c1"># 后面可以是任何字符。包括#，&#39;&#39;&#39;和&#34;&#34;&#34;。</span>
+<span class="n">abc</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span> <span class="c1"># 这是一个字符串变量 注释字符\#&#39;&#39;&#39;&#34;&#34;&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="多行注释">多行注释</h3>
+
+<p>多行注释可以用多个#号，也可以用三个单引号或双引号&rdquo;&lsquo;和&rdquo;&ldquo;&ldquo;。
+单引号或双引号必须成对出现。</p>
+
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 注释1</span>
+<span class="c1"># 注释2</span>
+<span class="c1"># 注释3</span>
+
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">注释4
+</span><span class="s1">注释5
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">注释6
+</span><span class="s2">注释7
+</span><span class="s2">&#34;&#34;&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&rdquo;&lsquo;注释可以跨越多行，后面可以包含空行和&rdquo;&ldquo;&ldquo;。</p>
+
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">第一行
+</span><span class="s1">第二行
+</span><span class="s1">&#34;&#34;&#34;
+</span><span class="s1">
+</span><span class="s1">最后一行
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">第一行</span>
+<span class="err">第二行</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">
+</span><span class="s2">最后一行</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&rdquo;&ldquo;&ldquo;注释也可以跨越多行，后面可以包含空行和&rdquo;&lsquo;。</p>
+
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">第一行
+</span><span class="s2">第二行
+</span><span class="s2">&#39;&#39;&#39;
+</span><span class="s2">
+</span><span class="s2">最后一行
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">第一行</span>
+<span class="err">第二行</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">
+</span><span class="s1">最后一行</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="表达式-expression">表达式（expression）</h2>
+
+<p>可以求出某个值的语法单元。 换句话说，一个表达式就是表达元素例如字面值、名称、属性访问、运算符或函数调用的汇总，它们最终都会返回一个值。 与许多其他语言不同，并非所有语言构件都是表达式。 还存在不能被用作表达式的语句（statement），例如 while。 赋值也是属于语句而非表达式。</p>
+
+<h2 id="语句-statement">语句（statement）</h2>
+
+<p>语句（statement）是程序段（一个代码“块”）的组成单位。一条语句可以是一个表达式（expression）或某个带有关键字的结构，例如 if、while 或 for。</p>
+
+<p>语句包含表达式，表达式肯定是语句，语句不一定是表达式。</p>
+
+<h2 id="多行语句">多行语句</h2>
+
+<p>Python语句可以跨越多行，Python有以下两种方式来写多行语句。</p>
+
+<ul>
+<li>使用反斜杠\来实现多行语句。\后面不能再有其他字符。<br /></li>
+</ul>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> \
+    <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 没有语法错误，输出结果13</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>在[], {}, 或()中的多行语句，不需要使用反斜杠\。<br /></li>
+</ul>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span>
+         <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+<span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>注意：</strong> b是字典，字典是无序的，可能你的输出结果不是<code>{'a': 1, 'b': 2, 'c': 3}</code>,有可能是<code>{'b': 2, 'a': 1, 'c': 3}</code>，或者<code>{'c': 3，'a': 1, 'b': 2,}</code>等等。</p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://docs.python.org/3/reference/lexical_analysis.html">https://docs.python.org/3/reference/lexical_analysis.html</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B002-python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+            <span class="next-text nav-default">Python教程002 Python环境搭建</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
