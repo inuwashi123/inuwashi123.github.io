@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程004 变量</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B004-%E5%8F%98%E9%87%8F/</link>
+      <pubDate>Fri, 06 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B004-%E5%8F%98%E9%87%8F/</guid>
+      <description>什么是变量 用标识符命名的存储单元的地址称为变量，变量是用来存储数据的，通过标识符可以获取变量的值，也可以对变量进行赋值。对变量赋值的意思是将</description>
+    </item>
     
     <item>
       <title>Python教程003 编码 缩进 标识符 保留字 注释 表达式 语句</title>
