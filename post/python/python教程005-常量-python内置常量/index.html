@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程005 常量 Python内置常量 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="常量 值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C&#43;&#43;，Java一样的const修饰符来声明常量，换言之，Pytho" /><meta name="keywords" content="内置常量, debug, true, false" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B005-%E5%B8%B8%E9%87%8F-python%E5%86%85%E7%BD%AE%E5%B8%B8%E9%87%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程005 常量 Python内置常量" />
+<meta property="og:description" content="常量 值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C&#43;&#43;，Java一样的const修饰符来声明常量，换言之，Pytho" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B005-%E5%B8%B8%E9%87%8F-python%E5%86%85%E7%BD%AE%E5%B8%B8%E9%87%8F/" />
+<meta property="article:published_time" content="2019-09-07T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-09-07T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程005 常量 Python内置常量">
+<meta itemprop="description" content="常量 值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C&#43;&#43;，Java一样的const修饰符来声明常量，换言之，Pytho">
+
+
+<meta itemprop="datePublished" content="2019-09-07T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-07T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="1792">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程005 常量 Python内置常量"/>
+<meta name="twitter:description" content="常量 值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C&#43;&#43;，Java一样的const修饰符来声明常量，换言之，Pytho"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程005 常量 Python内置常量</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-07 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1792 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#常量">常量</a></li>
+<li><a href="#python内置常量">Python内置常量</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="常量">常量</h2>
+
+<p>值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C++，Java一样的const修饰符来声明常量，换言之，Python中没有声明常量的语法。Python程序一般通过约定俗成的变量名全大写的形式来表示这是一个常量(实际上还是变量)。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">MYNAME</span> <span class="o">=</span> <span class="s2">&#34;Python&#34;</span>  <span class="c1"># 实际上，MYNAME还是一个变量。</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">MYNAME</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">MYNAME</span><span class="p">)</span>
+
+<span class="n">MYNAME</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">MYNAME</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">MYNAME</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+<span class="n">Python</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">int</span><span class="s1">&#39;&gt;</span>
+<span class="mi">100</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="python内置常量">Python内置常量</h2>
+
+<p>Python内有一些内置常量(和前面介绍的大写表示的常量不同，内置常量的值是不可改变的)，主要是以下。</p>
+
+<p><strong>False</strong><br />
+bool类型，表示错误值。对False的赋值是非法的，并引发语法错误，抛出SyntaxError异常。</p>
+
+<p><strong>True</strong><br />
+bool类型，表示正确值。对True的赋值是非法的，并引发语法错误，抛出SyntaxError异常。</p>
+
+<p><strong>None</strong><br />
+NoneType类型的唯一的值。None通常用于表示缺少值，例如当默认参数未传递给函数时。对None的赋值是非法的，并引发语法错误，抛出SyntaxError异常。bool(None)结果是False。</p>
+
+<p><strong>NotImplemented</strong><br />
+NotImplementedType类型，故名思议，就是“未实现”，一般是用在一些比较算法中的。如果二元比较算法(如<strong>eq</strong>(), __lt__(), __add__(), __rsub__()，__imul__(), __iand__()等)没有提供具体的比较实现时，应返回此值表示还没有实现。bool(NotImplemented)结果是True。</p>
+
+<p><strong>Ellipsis</strong><br />
+与省略号文本&rdquo;&hellip;&ldquo;相同。主要与用户定义的容器数据类型的扩展切片语法一起使用的特殊值。bool(Ellipsis)结果是True。<br />
+这东西有啥用呢？据说它是Numpy的语法糖，不玩Numpy的人，可以说是没啥用的。在网上只看到用 &ldquo;&hellip;&rdquo; 代替 pass ，稍微有点用。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="o">...</span>    <span class="c1"># 代替pass</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong><strong>debug</strong></strong><br />
+如果python不是以-o选项启动的，则此常量的值为是True。反之是False。</p>
+
+<p>示例，打印内置常量的值和类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>             <span class="c1"># 输出 False</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>              <span class="c1"># 输出 True</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>              <span class="c1"># 输出 None</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">NotImplemented</span><span class="p">)</span>    <span class="c1"># 输出 NotImplemented</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">Ellipsis</span><span class="p">)</span>          <span class="c1"># 输出 Ellipsis</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__debug__</span><span class="p">)</span>         <span class="c1"># 输出 True</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">False</span><span class="p">))</span>         <span class="c1"># 输出 &lt;class &#39;bool&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>          <span class="c1"># 输出 &lt;class &#39;bool&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>          <span class="c1"># 输出 &lt;class &#39;NoneType&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">NotImplemented</span><span class="p">))</span><span class="c1"># 输出 &lt;class &#39;NotImplementedType&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">Ellipsis</span><span class="p">))</span>      <span class="c1"># 输出 &lt;class &#39;ellipsis&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">False</span>
+<span class="bp">True</span>
+<span class="bp">None</span>
+<span class="bp">NotImplemented</span>
+<span class="bp">Ellipsis</span>
+<span class="bp">True</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">bool</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">bool</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">NoneType</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">NotImplementedType</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">ellipsis</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，内置常量的bool类型转换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">False</span><span class="p">))</span>         <span class="c1"># 输出False</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">True</span><span class="p">))</span>          <span class="c1"># 输出True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>          <span class="c1"># 输出False</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">NotImplemented</span><span class="p">))</span><span class="c1"># 输出True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">Ellipsis</span><span class="p">))</span>      <span class="c1"># 输出True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">__debug__</span><span class="p">))</span>     <span class="c1"># 输出True。如果Python是以-o选项启动的话，结果是False。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">False</span>
+<span class="bp">True</span>
+<span class="bp">False</span>
+<span class="bp">True</span>
+<span class="bp">True</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，Ellipsis和&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 比较Ellipsis和...</span>
+<span class="n">result</span> <span class="o">=</span> <span class="bp">Ellipsis</span> <span class="ow">is</span> <span class="o">...</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>           <span class="c1"># 输出True</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">Ellipsis</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="bp">Ellipsis</span><span class="p">))</span>   <span class="c1"># 输出True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>        <span class="c1"># 输出True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">True</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">ellipsis</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">ellipsis</span><span class="s1">&#39;&gt;</span>
+<span class="bp">True</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>注意：</strong> NotImplemented并不是异常，所以不能使用raise。当需要返回值时，应该是return NotImplemented。</p>
+
+<p>我们看下面一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Person</span><span class="p">):</span>  
+            <span class="k">return</span> <span class="bp">NotImplemented</span>  
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">person</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 输出False</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>为啥结果是false呢？<br />
+NotImplemented对象向运行时环境发出一个信号，告诉运行环境如果当前操作失败，它应该再检查一下其他可行方法。例如在 a == b 表达式，如果 a.__eq__(b) 返回 NotImplemented，那么 Python 会尝试 b.__eq__(a)。如果调用 b 的__eq__() 方法可以返回 True 或者 False，那么该表达式就成功了。如果 b.__eq__(a) 也不能得出结果，那么 Python 会继续尝试其他方法，例如使用 != 来比较。</p>
+
+<p>person == 10,首先person.__eq__(10)返回NotImplemented，接下来10.__eq__(person)返回false。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Person</span><span class="p">):</span>  
+            <span class="k">return</span> <span class="bp">NotImplemented</span>  
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+<span class="k">class</span> <span class="nc">Age</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  
+<span class="n">age</span> <span class="o">=</span> <span class="n">Age</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">person</span> <span class="o">==</span> <span class="n">age</span><span class="p">)</span> <span class="c1"># 输出True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>首先person.__eq__(age)返回NotImplemented，接下来age.__eq__(person)返回True。</p>
+
+<p>我们在写一些基础代码时，即使是没实现，也不要raise NotImplementedError，而是return NotImplemented，相当于提供给其它不同对象的比较接口，这对代码扩展非常有好处。</p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://www.jianshu.com/p/23df8d592a31">https://www.jianshu.com/p/23df8d592a31</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B004-%E5%8F%98%E9%87%8F/">
+            <span class="next-text nav-default">Python教程004 变量</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

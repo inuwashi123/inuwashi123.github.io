@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程005 常量 Python内置常量</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B005-%E5%B8%B8%E9%87%8F-python%E5%86%85%E7%BD%AE%E5%B8%B8%E9%87%8F/</link>
+      <pubDate>Sat, 07 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B005-%E5%B8%B8%E9%87%8F-python%E5%86%85%E7%BD%AE%E5%B8%B8%E9%87%8F/</guid>
+      <description>常量 值不可以变化的量，即为常量。因为种种原因，Python并未提供如C，C++，Java一样的const修饰符来声明常量，换言之，Pytho</description>
+    </item>
     
     <item>
       <title>Python教程004 变量</title>
