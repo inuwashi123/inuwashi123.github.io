@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 07 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程006 数字number</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B006-%E6%95%B0%E5%AD%97number/</link>
+      <pubDate>Sun, 08 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B006-%E6%95%B0%E5%AD%97number/</guid>
+      <description>标准数据类型 Python3 中有六个标准的数据类型： Number（数字） String（字符串） List（列表） Tuple（元组） Set（集合） Dictio</description>
+    </item>
     
     <item>
       <title>Python教程005 常量 Python内置常量</title>
