@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程007 浮点运算 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="浮点数在计算机硬件中表示为以2为基数（二进制）的小数。举例而言，十进制的小数0.125等于1/10 &#43; 2&amp;frasl;100 &#43; 5&amp;frasl;1000 ，同理，二进制的小数0.001等于" /><meta name="keywords" content="浮点运算, decimal模块, fractions模块" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B007-%E6%B5%AE%E7%82%B9%E8%BF%90%E7%AE%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程007 浮点运算" />
+<meta property="og:description" content="浮点数在计算机硬件中表示为以2为基数（二进制）的小数。举例而言，十进制的小数0.125等于1/10 &#43; 2&frasl;100 &#43; 5&frasl;1000 ，同理，二进制的小数0.001等于" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B007-%E6%B5%AE%E7%82%B9%E8%BF%90%E7%AE%97/" />
+<meta property="article:published_time" content="2019-09-09T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-09-09T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程007 浮点运算">
+<meta itemprop="description" content="浮点数在计算机硬件中表示为以2为基数（二进制）的小数。举例而言，十进制的小数0.125等于1/10 &#43; 2&frasl;100 &#43; 5&frasl;1000 ，同理，二进制的小数0.001等于">
+
+
+<meta itemprop="datePublished" content="2019-09-09T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-09T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3321">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程007 浮点运算"/>
+<meta name="twitter:description" content="浮点数在计算机硬件中表示为以2为基数（二进制）的小数。举例而言，十进制的小数0.125等于1/10 &#43; 2&frasl;100 &#43; 5&frasl;1000 ，同理，二进制的小数0.001等于"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程007 浮点运算</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-09 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3321 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#表示性错误">表示性错误</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>浮点数在计算机硬件中表示为以2为基数（二进制）的小数。举例而言，十进制的小数0.125等于1/10 + <sup>2</sup>&frasl;<sub>100</sub> + <sup>5</sup>&frasl;<sub>1000</sub> ，同理，二进制的小数0.001等于0/2 + 0/4 + 1/8。这两个小数具有相同的值，唯一真正的区别是第一个是以10为基数的小数表示法，第二个则是2为基数。</p>
+
+<p>而在python的浮点计算，结果并不是准确的。例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mf">1.2</span> <span class="o">-</span> <span class="mf">1.0</span>
+<span class="mf">0.19999999999999996</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>为什么浮点计算不准确？<br />
+CPython中的float类型使用C语言的double类型进行存储。 float对象的值是以固定的精度（通常为53位）存储的二进制浮点数，由于Python使用C操作，而后者依赖于处理器中的硬件实现来执行浮点运算。 这意味着就浮点运算而言，Python的行为类似于许多流行的语言，包括C和Java。这不是Python中的一个bug。这与Python关系不大，而与底层平台如何处理浮点数字关系更大。</p>
+
+<p>用十进制来理解这个问题显得更加容易一些。考虑分数1/3。我们可以得到它在十进制下的一个近似值0.3,或者更近似的0.33,或者更近似的0.333,以此类推。结果是无论你写下多少的数字，它都永远不会等于1/3 ，只是更加更加地接近1/3 。</p>
+
+<p>同样的道理，无论你使用多少位以2为基数的数码，十进制的0.1都无法精确地表示为一个以2为基数的小数。 在以2为基数的情况下， 1/10是一个无限循环小数0.0001100110011001100110011001100110011001100110011&hellip;
+在任何一个位置停下，你都只能得到一个近似值。因此，在今天的大部分架构上，浮点数都只能近似地使用二进制小数表示，对应分数的分子使用每8字节的前53位表示，分母则表示为2的幂次。在1/10这个例子中，相应的二进制分数是3602879701896397 / 2 ** 55，它很接近1/10，但并不是1/10。</p>
+
+<p>大部分用户都不会意识到这个差异的存在，因为Python只会打印计算机中存储的二进制值的十进制近似值。在大部分计算机中，如果Python想把0.1的二进制对应的精确十进制打印出来，将会变成这样:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span>
+<span class="mf">0.1000000000000000055511151231257827021181583404541015625</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这比大多数人认为有用的数字更多，因此Python通过显示舍入值来保持可管理的位数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="mf">0.1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>牢记</strong> 即使输出的结果看起来好像就是 <sup>1</sup>&frasl;<sub>10</sub> 的精确值，实际储存的值只是最接近 <sup>1</sup>&frasl;<sub>10</sub> 的计算机可表示的二进制分数。</p>
+
+<p>有趣的是，有许多不同的十进制数共享相同的最接近的近似二进制小数。例如，0.1、 0.10000000000000001、 0.1000000000000000055511151231257827021181583404541015625全都近似于 3602879701896397 / 2 ** 55 。由于所有这些十进制值都具有相同的近似值，因此可以显示其中任何一个，同时仍然保留不变的 eval(repr(x)) == x 。</p>
+
+<p>在历史上，Python提示符和内置的repr()函数会选择具有 17 位有效数字的来显示，即 0.10000000000000001。 从 Python 3.1 开始，Python（在大多数系统上）现在能够选择这些表示中最短的并简单地显示 0.1 。</p>
+
+<p>请注意这种情况是二进制浮点数的本质特性：它不是 Python 的错误，也不是你代码中的错误。 你会在所有支持你的硬件中的浮点运算的语言中发现同样的情况（虽然某些语言在默认状态或所有输出模块下都不会 显示 这种差异）。</p>
+
+<p>想要更美观的输出，你可能会希望使用字符串格式化来产生限定长度的有效位数:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="s1">&#39;.12g&#39;</span><span class="p">)</span>  <span class="c1"># 12位（包括小数点前1位和小数点后11位）</span>
+<span class="s1">&#39;3.14159265359&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)</span>   <span class="c1"># 小数点后2位</span>
+<span class="s1">&#39;3.14&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">repr</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="s1">&#39;3.141592653589793&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>必须重点了解的是，这在实际上只是一个假象：你只是将真正的机器码值进行了舍入操作再显示而已。</p>
+
+<p>一个假象还可能导致另一个假象。 例如，由于这个0.1并非真正的1/10，将三个0.1的值相加也不一定能恰好得到 0.3:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="o">.</span><span class="mi">1</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span> <span class="o">==</span> <span class="o">.</span><span class="mi">3</span>
+<span class="bp">False</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>而且，由于这个0.1无法精确表示 <sup>1</sup>&frasl;<sub>10</sub> 的值而这个 0.3 也无法精确表示 <sup>3</sup>&frasl;<sub>10</sub> 的值，使用round()函数进行预先舍入也是没用的:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="bp">False</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>虽然这些小数无法精确表示其所要代表的实际值，round()函数还是可以用来“事后舍入”，使得实际的结果值可以做相互比较:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Python 浮点运算中的错误是从浮点运算硬件继承而来，而在大多数机器上每次浮点运算得到的 2**53 数码位都会被作为 1 个整体来处理。 这对大多数任务来说都已足够，但你确实需要记住它并非十进制算术，且每次浮点运算都可能会导致新的舍入错误。</p>
+
+<p>虽然病态的情况确实存在，但对于大多数正常的浮点运算使用来说，你只需简单地将最终显示的结果舍入为你期望的十进制数值即可得到你期望的结果。 str() 通常已足够，对于更精度的控制可参看 Format String Syntax 中 str.format() 方法的格式描述符。</p>
+
+<p>对于需要精确十进制表示的使用场景，请尝试使用 decimal 模块，该模块实现了适合会计应用和高精度应用的十进制运算。</p>
+
+<p>另一种形式的精确运算由 fractions 模块提供支持，该模块实现了基于有理数的算术运算（因此可以精确表示像 <sup>1</sup>&frasl;<sub>3</sub> 这样的数值）。</p>
+
+<p>如果你是浮点运算的重度用户，你应该看一下数值运算 Python 包 NumPy 以及由 SciPy 项目所提供的许多其它数学和统计运算包。 参见 <a href="https://scipy.org">https://scipy.org</a>。</p>
+
+<p>Python 也提供了一些工具，可以在你真的想要知道一个浮点数精确值的少数情况下提供帮助。 例如 float.as_integer_ratio()方法会将浮点数表示为一个分数:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">as_integer_ratio</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">3537115888337719</span><span class="p">,</span> <span class="mi">1125899906842624</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于这是一个精确的比值，它可以被用来无损地重建原始值:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">3537115888337719</span> <span class="o">/</span> <span class="mi">1125899906842624</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>float.hex() 方法会以十六进制（以 16 为基数）来表示浮点数，同样能给出保存在你的计算机中的精确值:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+<span class="s1">&#39;0x1.921f9f01b866ep+1&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这种精确的十六进制表示法可被用来精确地重建浮点值:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">==</span> <span class="nb">float</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;0x1.921f9f01b866ep+1&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于这种表示法是精确的，它适用于跨越不同版本（平台无关）的 Python 移植数值，以及与支持相同格式的其他语言（例如 Java 和 C99）交换数据.</p>
+
+<p>另一个有用的工具是 math.fsum() 函数，它有助于减少求和过程中的精度损失。 它会在数值被添加到总计值的时候跟踪“丢失的位”。 这可以很好地保持总计值的精确度， 使得错误不会积累到能影响结果总数的程度:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">([</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.0</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">fsum</span><span class="p">([</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.0</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="表示性错误">表示性错误</h2>
+
+<p>本小节将详细解释 &ldquo;0.1&rdquo; 的例子，并说明你可以怎样亲自对此类情况进行精确分析。 假定前提是已基本熟悉二进制浮点表示法。</p>
+
+<p>表示性错误是指某些（其实是大多数）十进制小数无法以二进制（以 2 为基数的计数制）精确表示这一事实造成的错误。 这就是为什么 Python（或者 Perl、C、C++、Java、Fortran 以及许多其他语言）经常不会显示你所期待的精确十进制数值的主要原因。</p>
+
+<p>为什么会这样？ <sup>1</sup>&frasl;<sub>10</sub> 是无法用二进制小数精确表示的。 目前（2000年11月）几乎所有使用 IEEE-754 浮点运算标准的机器以及几乎所有系统平台都会将 Python 浮点数映射为 IEEE-754 “双精度类型”。 754 双精度类型包含 53 位精度，因此在输入时，计算会尽量将 0.1 转换为以 J/2<strong>N 形式所能表示的最接近分数，其中 J 为恰好包含 53 个二进制位的整数。 重新将
+1 / 10 ~= J / (2</strong>N)
+写为
+J ~= 2<strong>N / 10
+并且由于 J 恰好有 53 位 (即 &gt;= 2</strong>52 但 &lt; 2**53)，N 的最佳值为 56:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">52</span> <span class="o">&lt;=</span>  <span class="mi">2</span><span class="o">**</span><span class="mi">56</span> <span class="o">//</span> <span class="mi">10</span>  <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">53</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>也就是说，56 是唯一的 N 值能令 J 恰好有 53 位。 这样 J 的最佳可能值就是经过舍入的商:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">56</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span>
+<span class="mi">6</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于余数超过 10 的一半，最佳近似值可通过四舍五入获得:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">+</span><span class="mi">1</span>
+<span class="mi">7205759403792794</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这样在 754 双精度下 <sup>1</sup>&frasl;<sub>10</sub> 的最佳近似值为:
+7205759403792794 / 2 ** 56
+分子和分母都除以二则结果小数为:
+3602879701896397 / 2 ** 55
+请注意由于我们做了向上舍入，这个结果实际上略大于 1/10；如果我们没有向上舍入，则商将会略小于 1/10。 但无论如何它都不会是 精确的 1/10！</p>
+
+<p>因此计算永远不会“看到”1/10：它实际看到的就是上面所给出的小数，它所能达到的最佳 754 双精度近似值:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">55</span>
+<span class="mf">3602879701896397.0</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果我们将该小数乘以 10**55，我们可以看到该值输出为 55 位的十进制数:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="mi">3602879701896397</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">55</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">55</span>
+<span class="mi">1000000000000000055511151231257827021181583404541015625</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这意味着存储在计算机中的确切数值等于十进制数值 0.1000000000000000055511151231257827021181583404541015625。 许多语言（包括较旧版本的 Python）都不会显示这个完整的十进制数值，而是将结果舍入为 17 位有效数字:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;.17f&#39;</span><span class="p">)</span>
+<span class="s1">&#39;0.10000000000000001&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>fractions 和 decimal 模块可令进行此类计算更加容易:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Fraction</span><span class="o">.</span><span class="n">from_float</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">Fraction</span><span class="p">(</span><span class="mi">3602879701896397</span><span class="p">,</span> <span class="mi">36028797018963968</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">as_integer_ratio</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">3602879701896397</span><span class="p">,</span> <span class="mi">36028797018963968</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Decimal</span><span class="o">.</span><span class="n">from_float</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1000000000000000055511151231257827021181583404541015625&#39;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="n">Decimal</span><span class="o">.</span><span class="n">from_float</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span> <span class="s1">&#39;.17&#39;</span><span class="p">)</span>
+<span class="s1">&#39;0.10000000000000001&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>参考资料：</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B006-%E6%95%B0%E5%AD%97number/">
+            <span class="next-text nav-default">Python教程006 数字number</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
