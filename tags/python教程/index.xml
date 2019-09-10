@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程008 标准数据类型 字符串str</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B008-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%AD%97%E7%AC%A6%E4%B8%B2str/</link>
+      <pubDate>Tue, 10 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B008-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%AD%97%E7%AC%A6%E4%B8%B2str/</guid>
+      <description>字符串定义 python中的文本数据是用字符串处理的。字符串是Unicode码位的不可变序列。 字符串文本的编写方式多种多样:可以用单引号 &amp;lsquo; 或双</description>
+    </item>
     
     <item>
       <title>Python教程007 浮点运算</title>

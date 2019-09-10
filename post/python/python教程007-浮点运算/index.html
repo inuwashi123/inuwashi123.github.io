@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-09T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-09T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="3321">
+<meta itemprop="wordCount" content="3377">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 3321 字 </span>
+          <span class="more-meta"> 约 3377 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         
       </div>
@@ -341,11 +341,11 @@ CPython中的float类型使用C语言的double类型进行存储。 float对象�
 
 <p>表示性错误是指某些（其实是大多数）十进制小数无法以二进制（以 2 为基数的计数制）精确表示这一事实造成的错误。 这就是为什么 Python（或者 Perl、C、C++、Java、Fortran 以及许多其他语言）经常不会显示你所期待的精确十进制数值的主要原因。</p>
 
-<p>为什么会这样？ <sup>1</sup>&frasl;<sub>10</sub> 是无法用二进制小数精确表示的。 目前（2000年11月）几乎所有使用 IEEE-754 浮点运算标准的机器以及几乎所有系统平台都会将 Python 浮点数映射为 IEEE-754 “双精度类型”。 754 双精度类型包含 53 位精度，因此在输入时，计算会尽量将 0.1 转换为以 J/2<strong>N 形式所能表示的最接近分数，其中 J 为恰好包含 53 个二进制位的整数。 重新将
-1 / 10 ~= J / (2</strong>N)
+<p>为什么会这样？ <sup>1</sup>&frasl;<sub>10</sub> 是无法用二进制小数精确表示的。 目前（2000年11月）几乎所有使用 IEEE-754 浮点运算标准的机器以及几乎所有系统平台都会将 Python 浮点数映射为 IEEE-754 “双精度类型”。 754 双精度类型包含 53 位精度，因此在输入时，计算会尽量将 0.1 转换为以 J/2**N 形式所能表示的最接近分数，其中 J 为恰好包含 53 个二进制位的整数。 重新将
+1 / 10 ~= J / (2**N)
 写为
-J ~= 2<strong>N / 10
-并且由于 J 恰好有 53 位 (即 &gt;= 2</strong>52 但 &lt; 2**53)，N 的最佳值为 56:</p>
+J ~= 2**N / 10
+并且由于 J 恰好有 53 位 (即 &gt;= 2**52 但 &lt; 2**53)，N 的最佳值为 56:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -380,10 +380,10 @@ J ~= 2<strong>N / 10
 <span class="mi">7205759403792794</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>这样在 754 双精度下 <sup>1</sup>&frasl;<sub>10</sub> 的最佳近似值为:
-7205759403792794 / 2 ** 56
-分子和分母都除以二则结果小数为:
-3602879701896397 / 2 ** 55
+<p>这样在 754 双精度下 <sup>1</sup>&frasl;<sub>10</sub> 的最佳近似值为:<br />
+7205759403792794 / 2 ** 56<br />
+分子和分母都除以二则结果小数为:<br />
+3602879701896397 / 2 ** 55<br />
 请注意由于我们做了向上舍入，这个结果实际上略大于 1/10；如果我们没有向上舍入，则商将会略小于 1/10。 但无论如何它都不会是 精确的 1/10！</p>
 
 <p>因此计算永远不会“看到”1/10：它实际看到的就是上面所给出的小数，它所能达到的最佳 754 双精度近似值:</p>
@@ -456,7 +456,8 @@ J ~= 2<strong>N / 10
 </div>
 <hr />
 
-<p>参考资料：</p>
+<p>参考资料：<br />
+翻译自<a href="https://docs.python.org/3/tutorial/floatingpoint.html">https://docs.python.org/3/tutorial/floatingpoint.html</a></p>
 
     </div>
 
@@ -466,7 +467,11 @@ J ~= 2<strong>N / 10
           <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B008-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%AD%97%E7%AC%A6%E4%B8%B2str/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程008 标准数据类型 字符串str</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B006-%E6%95%B0%E5%AD%97number/">
             <span class="next-text nav-default">Python教程006 数字number</span>
             <span class="next-text nav-mobile">下一篇</span>
