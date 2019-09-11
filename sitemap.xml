@@ -10,21 +10,49 @@
   
   <url>
     <loc>https://inuwashi123.github.io/categories/</loc>
-    <lastmod>2019-09-10T09:09:44+09:00</lastmod>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/categories/markdown/</loc>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/tags/markdown%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/other/markdown%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/</loc>
-    <lastmod>2019-09-10T09:09:44+09:00</lastmod>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/post/</loc>
-    <lastmod>2019-09-10T09:09:44+09:00</lastmod>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/tags/</loc>
+    <lastmod>2019-09-11T09:00:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,13 +73,6 @@
   
   <url>
     <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B008-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%AD%97%E7%AC%A6%E4%B8%B2str/</loc>
-    <lastmod>2019-09-10T09:09:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://inuwashi123.github.io/tags/</loc>
     <lastmod>2019-09-10T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

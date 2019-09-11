@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Markdown on None - 记录在日本从事IT的所感所想。</title>
+    <link>https://inuwashi123.github.io/categories/markdown/</link>
+    <description>Recent content in Markdown on None - 记录在日本从事IT的所感所想。</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Sep 2019 09:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://inuwashi123.github.io/categories/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Markdown简易入手教程</title>
+      <link>https://inuwashi123.github.io/post/other/markdown%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Wed, 11 Sep 2019 09:00:00 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/other/markdown%E6%95%99%E7%A8%8B/</guid>
+      <description>前言 IT开发，离不开进度项目管理工具。我们主要用的开源的redmine程序(Redmine是用Ruby开发的基于web的项目管理软件)。尤其</description>
+    </item>
+    
+  </channel>
+</rss>

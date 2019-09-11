@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 11 Sep 2019 09:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>我，网络名inuwashi，在日本从事IT工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：sai.in</description>
+    </item>
+    
+    <item>
+      <title>Markdown简易入手教程</title>
+      <link>https://inuwashi123.github.io/post/other/markdown%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Wed, 11 Sep 2019 09:00:00 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/other/markdown%E6%95%99%E7%A8%8B/</guid>
+      <description>前言 IT开发，离不开进度项目管理工具。我们主要用的开源的redmine程序(Redmine是用Ruby开发的基于web的项目管理软件)。尤其</description>
     </item>
     
     <item>
