@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程009 字节对象bytes</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B009-%E5%AD%97%E8%8A%82%E5%AF%B9%E8%B1%A1bytes/</link>
+      <pubDate>Thu, 12 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B009-%E5%AD%97%E8%8A%82%E5%AF%B9%E8%B1%A1bytes/</guid>
+      <description>字节对象bytes 字节对象bytes是单字节的不可变序列，用于存储和传输。字节对象语法与字符串对象语法基本相同，只是添加了b或B前缀。与字符</description>
+    </item>
     
     <item>
       <title>Python教程008 标准数据类型 字符串str</title>

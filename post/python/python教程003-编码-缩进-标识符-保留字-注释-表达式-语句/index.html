@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-05T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-05T09:09:45&#43;09:00" />
-<meta itemprop="wordCount" content="2548">
+<meta itemprop="wordCount" content="2489">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 2548 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+          <span class="more-meta"> 约 2489 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
     </header>
@@ -153,8 +153,8 @@
 <li><a href="#单行注释">单行注释</a></li>
 <li><a href="#多行注释">多行注释</a></li>
 </ul></li>
-<li><a href="#表达式-expression">表达式（expression）</a></li>
-<li><a href="#语句-statement">语句（statement）</a></li>
+<li><a href="#表达式">表达式</a></li>
+<li><a href="#语句">语句</a></li>
 <li><a href="#多行语句">多行语句</a></li>
 </ul></li>
 </ul>
@@ -481,7 +481,7 @@
 </div>
 <h2 id="注释">注释</h2>
 
-<p>注释是为了说明程序的逻辑，运行程序时，注释将被忽略。分为单行注释和多行注释。</p>
+<p>注释是为了说明程序的逻辑，运行程序时，注释将被忽略。注释分为单行注释和多行注释。</p>
 
 <h3 id="单行注释">单行注释</h3>
 
@@ -558,34 +558,15 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">第一行
-</span><span class="s1">第二行
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">第一行注释
+</span><span class="s1">第二行注释
 </span><span class="s1">&#34;&#34;&#34;
 </span><span class="s1">
-</span><span class="s1">最后一行
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>执行以上程序会输出如下结果：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">第一行</span>
-<span class="err">第二行</span>
-<span class="s2">&#34;&#34;&#34;
-</span><span class="s2">
-</span><span class="s2">最后一行</span></code></pre></td></tr></table>
+</span><span class="s1">最后一行注释
+</span><span class="s1">&#39;&#39;&#39;</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>&rdquo;&ldquo;&ldquo;注释也可以跨越多行，后面可以包含空行和&rdquo;&lsquo;。</p>
@@ -603,38 +584,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">第一行
-</span><span class="s2">第二行
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">第一行注释
+</span><span class="s2">第二行注释
 </span><span class="s2">&#39;&#39;&#39;
 </span><span class="s2">
-</span><span class="s2">最后一行
+</span><span class="s2">最后一行注释
 </span><span class="s2">&#34;&#34;&#34;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>执行以上程序会输出如下结果：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">第一行</span>
-<span class="err">第二行</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">
-</span><span class="s1">最后一行</span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="表达式-expression">表达式（expression）</h2>
+<h2 id="表达式">表达式</h2>
 
-<p>可以求出某个值的语法单元。 换句话说，一个表达式就是表达元素例如字面值、名称、属性访问、运算符或函数调用的汇总，它们最终都会返回一个值。 与许多其他语言不同，并非所有语言构件都是表达式。 还存在不能被用作表达式的语句（statement），例如 while。 赋值也是属于语句而非表达式。</p>
+<p>表达式（expression）是可以求出某个值的语法单元。 换句话说，一个表达式就是表达元素例如字面值、名称、属性访问、运算符或函数调用的汇总，它们最终都会返回一个值。 与许多其他语言不同，并非所有语言构件都是表达式。 还存在不能被用作表达式的语句（statement），例如 while。 赋值也是属于语句而非表达式。</p>
 
-<h2 id="语句-statement">语句（statement）</h2>
+<h2 id="语句">语句</h2>
 
 <p>语句（statement）是程序段（一个代码“块”）的组成单位。一条语句可以是一个表达式（expression）或某个带有关键字的结构，例如 if、while 或 for。</p>
 
