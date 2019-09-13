@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Sep 2019 08:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程011 str类型 bytes类型 bytearray类型区别</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B011-str%E7%B1%BB%E5%9E%8B-bytes%E7%B1%BB%E5%9E%8B-bytearray%E7%B1%BB%E5%9E%8B%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Sat, 14 Sep 2019 08:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B011-str%E7%B1%BB%E5%9E%8B-bytes%E7%B1%BB%E5%9E%8B-bytearray%E7%B1%BB%E5%9E%8B%E5%8C%BA%E5%88%AB/</guid>
+      <description>str类型和bytes类型区别 大多数情况下，str上的操作均可用于bytes。然而，这里也有一些需要注意的不同点。 python3对文本和二进</description>
+    </item>
     
     <item>
       <title>Python教程010 bytearray对象</title>
