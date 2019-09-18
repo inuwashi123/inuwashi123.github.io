@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="inuwashi" /><meta name="description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中循环特定次数。range构造函数生成range对象。 rang" /><meta name="keywords" content="range对象" />
+<meta name="author" content="inuwashi" /><meta name="description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中,循环特定次数。range构造函数生成range对象。 ran" /><meta name="keywords" content="range对象" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Python教程014 标准数据类型 range对象" />
-<meta property="og:description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中循环特定次数。range构造函数生成range对象。 rang" />
+<meta property="og:description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中,循环特定次数。range构造函数生成range对象。 ran" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B014-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-range%E5%AF%B9%E8%B1%A1/" />
 <meta property="article:published_time" content="2019-09-17T09:09:44+09:00" />
 <meta property="article:modified_time" content="2019-09-17T09:09:44+09:00" />
 <meta itemprop="name" content="Python教程014 标准数据类型 range对象">
-<meta itemprop="description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中循环特定次数。range构造函数生成range对象。 rang">
+<meta itemprop="description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中,循环特定次数。range构造函数生成range对象。 ran">
 
 
 <meta itemprop="datePublished" content="2019-09-17T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-17T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="1121">
+<meta itemprop="wordCount" content="1075">
 
 
 
 <meta itemprop="keywords" content="python教程," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python教程014 标准数据类型 range对象"/>
-<meta name="twitter:description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中循环特定次数。range构造函数生成range对象。 rang"/>
+<meta name="twitter:description" content="range对象定义 range类型表示一个不可变的数字序列，通常用于在for循环中,循环特定次数。range构造函数生成range对象。 ran"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 1121 字 </span>
+          <span class="more-meta"> 约 1075 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -155,16 +155,16 @@
 
 <h2 id="range对象定义">range对象定义</h2>
 
-<p>range类型表示一个不可变的数字序列，通常用于在for循环中循环特定次数。range构造函数生成range对象。</p>
+<p>range类型表示一个不可变的数字序列，通常用于在for循环中,循环特定次数。range构造函数生成range对象。</p>
 
 <p>range构造函数有两种形式。<br />
 range(stop)<br />
 range(start, stop[, step])</p>
 
-<p>start参数:起始位置的值（如果未提供参数，则为0）<br />
+<p>start参数:起始位置（如果未提供参数，则为0）<br />
 stop参数:终止位置<br />
 step参数:步长（如果未提供参数，则为1）<br />
-range构造函数的参数必须是整数（内置int或任何实现<strong>index</strong>方法的对象）。如果省略step参数，则默认为1。如果省略start参数，则默认为0。如果step参数为零，则会引发ValueError。用list()函数将range对象转换成列表。</p>
+range构造函数的参数必须是整数（内置int或任何实现__index__方法的对象）。如果step参数为零，则会引发ValueError。用list()函数将range对象转换成列表。</p>
 
 <p>例如：</p>
 <div class="highlight"><div class="chroma">
@@ -211,10 +211,10 @@ range构造函数的参数必须是整数（内置int或任何实现<strong>inde
 <span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;float&#39;</span> <span class="nb">object</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">interpreted</span> <span class="k">as</span> <span class="n">an</span> <span class="n">integer</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>对于正step，range对象r的内容由公式r[i] = start +step*i确定，其中约束条件i&gt;=0，r[i]<stop。  
-对于负step，range对象r的内容仍然由公式r[i]=start+step*i确定，但约束条件是i>=0，r[i]&gt;stop。<br />
-如果r[0]不满足值约束，则range对象将为空。Ranges确实支持负指数，但这些指数被解释为序列末尾开始的索引。<br />
-允许包含大于sys.maxsize的绝对值的Ranges，但某些功能（如len()）可能会引发溢出错误OverflowError。</p>
+<p>如果 step 为正值，确定 range r 内容的公式为 r[i] = start + step*i 其中 i &gt;= 0 且 r[i] &lt; stop。
+如果 step 为负值，确定 range 内容的公式仍然为 r[i] = start + step*i，但限制条件改为 i &gt;= 0 且 r[i] &gt; stop.
+如果 r[0] 不符合值的限制条件，则该 range 对象为空。 range 对象确实支持负索引，但是会将其解读为从正索引所确定的序列的末尾开始索引。
+元素绝对值大于 sys.maxsize 的 range 对象是被允许的，但某些特性 (例如 len()) 可能引发 OverflowError。</p>
 
 <p>例如：</p>
 <div class="highlight"><div class="chroma">
@@ -364,7 +364,11 @@ range构造函数的参数必须是整数（内置int或任何实现<strong>inde
           <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B015-sequence%E7%B1%BB%E5%9E%8B%E5%9F%BA%E6%9C%AC%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程015 序列类型基本通用操作</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B013-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%85%83%E7%BB%84tuple/">
             <span class="next-text nav-default">Python教程013 标准数据类型 元组tuple</span>
             <span class="next-text nav-mobile">下一篇</span>
