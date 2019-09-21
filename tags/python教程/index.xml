@@ -17,7 +17,7 @@
       <pubDate>Sat, 21 Sep 2019 09:10:44 +0900</pubDate>
       
       <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B018-%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E5%AD%97%E5%85%B8%E8%A7%86%E5%9B%BE%E5%AF%B9%E8%B1%A1/</guid>
-      <description>键视图对象 字典的keys()方法返回一个展现键集合的键视图对象。键视图的一个很少被了解的特性就是它们也支持集合操作，比如集合并、交、差运算。</description>
+      <description>键视图对象 字典的keys()方法返回一个所有键集合的键视图对象。键视图的一个很少被了解的特性就是它们也支持集合操作，比如集合并、交、差运算。</description>
     </item>
     
     <item>

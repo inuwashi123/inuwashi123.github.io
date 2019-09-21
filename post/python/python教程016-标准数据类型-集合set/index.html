@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-19T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-19T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="2255">
+<meta itemprop="wordCount" content="2297">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 2255 字 </span>
+          <span class="more-meta"> 约 2297 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -145,6 +145,7 @@
 <li>
 <ul>
 <li><a href="#集合定义">集合定义</a></li>
+<li><a href="#使用集合推导来生成集合">使用集合推导来生成集合</a></li>
 <li><a href="#集合可用于成员测试">集合可用于成员测试</a></li>
 <li><a href="#set计算操作">set计算操作</a></li>
 <li><a href="#集合不支持索引取值和切片取值">集合不支持索引取值和切片取值</a></li>
@@ -169,36 +170,32 @@
 
 <p>set对象,也就是集合对象，是不同哈希对象的无序集合。构成集合的事物或对象称作元素或是成员。常见的用途包括成员资格测试、从序列中删除重复项以及计算数学运算，如交集、并集、差分和对称差分。</p>
 
-<p>集合对象可以用多种方式构建:<br />
-- 使用大括号，用逗号分隔项目: {a}, {a, b, c}<br />
-- 使用集合推导: { x for x in iterable }<br />
-- 使用类型构造函数set(iterable)。其中iterable参数是序列类型。省略iterable参数，构建空集合对象set()</p>
+<p>集合对象可以用多种方式构建:</p>
+
+<ul>
+<li>使用大括号，用逗号分隔项目: {a}, {a, b, c}<br /></li>
+<li>使用类型构造函数set(iterable)。其中iterable参数是序列类型。省略iterable参数，构建空集合对象set()<br /></li>
+</ul>
 
 <p>例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>        <span class="c1"># 集合L1有四个元素，分别是数字1，数字2，数字3和数字4</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>            <span class="c1"># L2是空集合。构造函数生成空列表</span>
-<span class="n">a</span> <span class="o">=</span> <span class="s2">&#34;hello&#34;</span>
-<span class="n">s3</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}</span>   <span class="c1"># 集合推导生成集合</span>
-<span class="n">s4</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>           <span class="c1"># 根据字符串，转换成集合</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>           <span class="c1"># 根据字符串，转换成集合</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s4</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>执行以上程序会输出如下结果：</p>
@@ -207,12 +204,10 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
 <span class="nb">set</span><span class="p">()</span>
-<span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">}</span>
 <span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
@@ -280,6 +275,37 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">set</span><span class="s1">&#39;&gt;</span>
 <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="使用集合推导来生成集合">使用集合推导来生成集合</h2>
+
+<p>集合推导语法：<br />
+<code>{ x for x in iterable if 条件 }</code></p>
+
+<p>其中if语句是可以省略的。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s2">&#34;hello&#34;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}</span>   <span class="c1"># 集合推导生成集合</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>集合成员是不可重复的。</p>
