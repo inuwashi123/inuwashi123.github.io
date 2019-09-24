@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 23 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程021 算术运算符 比较运算符</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B021-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Tue, 24 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B021-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>算术运算符 运算符 描述 + 加 - 减 * 乘 / 除 // 取整除。返回商的整数部分。地板除。 % 取模，返回除法的余数 ** 幂运算。 例如： 1 2 3 4 5 6 7 8 9 10 x = 9 y =</description>
+    </item>
     
     <item>
       <title>Python教程020 类型转换(二)</title>
