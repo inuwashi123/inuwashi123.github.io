@@ -6,10 +6,19 @@
     <description>Recent content in 软件 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 26 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>高速查找软件everything使用教程</title>
+      <link>https://inuwashi123.github.io/post/soft/everything/</link>
+      <pubDate>Thu, 26 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/soft/everything/</guid>
+      <description>Windows自带的搜索功能比较笨重，搜索占时长，费系统资源。而everything搜索软件恰好解决了这些痛点，是Windows下必装的软件</description>
+    </item>
     
     <item>
       <title>日本IT开发常用到的软件</title>

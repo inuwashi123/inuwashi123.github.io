@@ -6,10 +6,28 @@
     <description>Recent content in Tags on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 26 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>everything</title>
+      <link>https://inuwashi123.github.io/tags/everything/</link>
+      <pubDate>Thu, 26 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/tags/everything/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>https://inuwashi123.github.io/tags/software/</link>
+      <pubDate>Thu, 26 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/tags/software/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>python教程</title>
