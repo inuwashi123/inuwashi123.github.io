@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门01-认识vba（宏） - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="本教程是介绍Excel VBA编写的入手教程，只求简单介绍VBA功能，能够自己写出第一个VBA程序为目标。由于本人是在日本工作，所以教程中使用" /><meta name="keywords" content="vba, 宏, excel, VBE, office" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A801-%E8%AE%A4%E8%AF%86vba/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门01-认识vba（宏）" />
+<meta property="og:description" content="本教程是介绍Excel VBA编写的入手教程，只求简单介绍VBA功能，能够自己写出第一个VBA程序为目标。由于本人是在日本工作，所以教程中使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A801-%E8%AE%A4%E8%AF%86vba/" />
+<meta property="article:published_time" content="2019-09-27T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-09-27T09:09:44+09:00" />
+<meta itemprop="name" content="vba快速入门01-认识vba（宏）">
+<meta itemprop="description" content="本教程是介绍Excel VBA编写的入手教程，只求简单介绍VBA功能，能够自己写出第一个VBA程序为目标。由于本人是在日本工作，所以教程中使用">
+
+
+<meta itemprop="datePublished" content="2019-09-27T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-27T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2487">
+
+
+
+<meta itemprop="keywords" content="excel vba," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门01-认识vba（宏）"/>
+<meta name="twitter:description" content="本教程是介绍Excel VBA编写的入手教程，只求简单介绍VBA功能，能够自己写出第一个VBA程序为目标。由于本人是在日本工作，所以教程中使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门01-认识vba（宏）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-27 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 2487 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#vba">VBA</a></li>
+<li><a href="#vba编辑器-vbe">VBA编辑器(VBE)</a>
+<ul>
+<li><a href="#调出-开发-菜单">调出“开发“菜单</a></li>
+<li><a href="#开发-菜单组成">“开发“菜单组成</a></li>
+<li><a href="#打开vba编辑器-vbe-方法">打开VBA编辑器(VBE)方法</a></li>
+</ul></li>
+<li><a href="#认识vba编辑器-vbe">认识VBA编辑器(VBE)</a>
+<ul>
+<li><a href="#默认的窗口和工具栏">默认的窗口和工具栏</a></li>
+<li><a href="#立即窗口-和-监视窗口">“立即窗口”和“监视窗口”</a></li>
+<li><a href="#编辑工具栏-和-调试工具栏">“编辑工具栏”和“调试工具栏”</a></li>
+<li><a href="#对象浏览器">“对象浏览器”</a></li>
+</ul></li>
+<li><a href="#vba安全性设置">VBA安全性设置</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>本教程是介绍Excel VBA编写的入手教程，只求简单介绍VBA功能，能够自己写出第一个VBA程序为目标。由于本人是在日本工作，所以教程中使用的都是日语版本的Excel，功能和中文版本的Excel是一样的，只是菜单的显示是日文的，我会仅可能的用中文菜单名来介绍。</p>
+
+<p>我使用的是Office 365 ProPlus 32bit的，版本是16.0.11901.20070，相当于单机版本的Excel 2016。</p>
+
+<h2 id="vba">VBA</h2>
+
+<p>VBA，是Visual Basic for Applications的缩写。VBA是Visual Basic的一种宏语言，重要的组成部分，主要能用来扩展Windows的应用程序功能，特别是Microsoft Office套件。VBA也可说是一种应用程式视觉化的Basic Sc​​ript。 1994年发行的Excel 5.0首次具备了VBA功能。最新的版本是VBA7.1。</p>
+
+<p>Microsoft Office套件主要包括Excel，Word，PowerPoint，OutLook，Access。商业版的Office365还包括Publisher，SharePoint，Onedrive和Skype。其中Excel，Word，PowerPoint，OutLook，Access，Publisher都可以使用VBA编写程序实现自动化。</p>
+
+<h2 id="vba编辑器-vbe">VBA编辑器(VBE)</h2>
+
+<p>VBE是Visual Basic Editor的缩写，VBE就是VBA的编辑窗口，是一个可见的实体,所有的VBA操作都在VBE里完成。
+联系:VBA必须有VBE才能使用,不然就是一堆无用的代码.而VBE是盛放VBA的容器,没有VBA代码,VBE的意义也不大。
+区别:VBA是程序代码,是由VB语言组成的,是附加在某一程序或应用上面的,可以为某一程序或应用添加新的功能或者应用。VBE同样是附加在某一程序或应用上面的,它只是一个编辑器.</p>
+
+<h3 id="调出-开发-菜单">调出“开发“菜单</h3>
+
+<p>默认的Office365 Excel文档是隐藏了“开发”菜单。按照下面步骤1-3，就能调出“开发”菜单。</p>
+
+<ol>
+<li><p>点击“文件”菜单，选择“选项”。
+<img src="/images/vba/001-1-development1.PNG" alt="点击文件菜单" />
+<img src="/images/vba/001-1-development2.PNG" alt="选择“选项”" /></p></li>
+
+<li><p>在弹出的“选项对话“中点击“用户设定“，在右侧画面中找到“开发“复选框，点击选中。
+<img src="/images/vba/001-1-development3.PNG" alt="“开发“复选框" /></p></li>
+
+<li><p>返回到Excel，就可以看见“开发“菜单了。
+<img src="/images/vba/001-1-development4.PNG" alt="“开发“菜单" /></p></li>
+</ol>
+
+<h3 id="开发-菜单组成">“开发“菜单组成</h3>
+
+<p>开发菜单默认分为四部分，分别是代码，加载项，控件和XML。最常用的是代码，里面包含有打开VBE，录制宏和宏的安全性。
+<img src="/images/vba/001-3-development-menu1.PNG" alt="“开发“菜单组成" /></p>
+
+<h3 id="打开vba编辑器-vbe-方法">打开VBA编辑器(VBE)方法</h3>
+
+<p>打开VBE有两种方法。</p>
+
+<p>方法1，打开Excel，新建一个Excel空白文档后，按快捷键 ALT + F11 即可。</p>
+
+<p>方法2，选择“开发” —&gt;“Visual Basic编辑器”命令。</p>
+
+<h2 id="认识vba编辑器-vbe">认识VBA编辑器(VBE)</h2>
+
+<h3 id="默认的窗口和工具栏">默认的窗口和工具栏</h3>
+
+<p>默认打开的VBE主要有菜单栏，常用工具栏，编码窗口，属性窗口，工程窗口。如下图所示。
+<img src="/images/vba/001-2-vbe1.PNG" alt="VBA编辑器组成部分" /></p>
+
+<ul>
+<li>菜单栏主要包括：文件、编辑、视图、插入、格式、调试、运行、工具、外接程序、窗口和帮助。</li>
+<li>常用工具栏主要包括：常用命令按钮，如保存，粘贴，复制，查找等等。</li>
+<li>工程资源管理器主要包括：当前Excel应用程序中所有VBA工程，每一个VBA工程对应着一个打开的Excel文件（工作簿），每个VBA工程目录下又包括了其对应工作簿中的Excel对象、用户窗体、模块、类模块等资源。</li>
+<li>代码窗口从字面上就可以知道，就是在这里写VBA的代码的，也就是在这里查看代码的。</li>
+<li>属性窗口主要包括：工程资源管理器中所选对象的所有属性和属性的值。</li>
+</ul>
+
+<p>代码窗口是最重要的窗口，包含对象列表框、过程列表框、视图按钮、代码编辑区、过程分界线。
+<img src="/images/vba/001-2-vbe6.PNG" alt="代码窗口" /></p>
+
+<p>除了默认的窗口和工具栏，还有几个窗口和工具栏比较重要，也来了解一下。</p>
+
+<h3 id="立即窗口-和-监视窗口">“立即窗口”和“监视窗口”</h3>
+
+<p>点击“视图”菜单，选择“立即窗口”和“监视窗口”。快捷键Ctrl + G 也可以调出“立即窗口”。
+<img src="/images/vba/001-2-vbe2.PNG" alt="“视图”菜单" />
+<img src="/images/vba/001-2-vbe3.PNG" alt="立即窗口，监视窗口" /></p>
+
+<ul>
+<li>立即窗口主要作用：执行单句代码，显示使用语句Debug.Print输出的结果。</li>
+<li>监视窗口主要作用：观察代码调试时在中断模式下对象以及变量的变化。</li>
+</ul>
+
+<h3 id="编辑工具栏-和-调试工具栏">“编辑工具栏”和“调试工具栏”</h3>
+
+<p>在常用工具栏右击，在弹出的菜单中选择“编辑”和“调试”。
+<img src="/images/vba/001-2-vbe4.PNG" alt="常用工具栏右击" />
+<img src="/images/vba/001-2-vbe5.PNG" alt="“编辑”和“调试”" /></p>
+
+<ul>
+<li>编辑工具栏主要作用：编辑代码的相关帮助，注释代码，接触注释代码，代码对齐等等。</li>
+<li>调试工具栏主要作用：代码的执行，中断和设置断点，解除断点等。</li>
+</ul>
+
+<h3 id="对象浏览器">“对象浏览器”</h3>
+
+<p>点击“视图”菜单，选择“对象浏览器”。快捷键 F2 也可以调出“对象浏览器”。
+<img src="/images/vba/001-2-vbe5.PNG" alt="对象浏览器" /></p>
+
+<ul>
+<li>对象浏览器主要作用：了解各对象的构成和具体类，方法的详细信息。</li>
+</ul>
+
+<h2 id="vba安全性设置">VBA安全性设置</h2>
+
+<p>有一种专门针对vba的病毒，通过vba代码来感染计算机，破坏文件。为了避免感染病毒，微软提供了vba的安全级别功能来避免。如何打开vba的安全级别呢？有两种方法。</p>
+
+<p>第一种方法是在功能区的“开发工具”选项卡中点击“宏安全性”按钮，如图所示。
+<img src="/images/vba/001-3-development-menu2.PNG" alt="宏安全性" /></p>
+
+<p>第二种方法是点击“文件”—&gt;在弹出的对话框中点击“选项”—&gt;在弹出的“Excel 选项”对话框中点击“信任中心”—&gt;然后点击“信任中心设置”按钮—&gt;在弹出的“信任中心”对话框中点击“宏设置”。
+<img src="/images/vba/001-3-development-menu3.PNG" alt="宏安全性设置" />
+<img src="/images/vba/001-3-development-menu4.PNG" alt="宏安全性设置" /></p>
+
+<p>vba的安全级别主要有5种。主要是:</p>
+
+<ol>
+<li><p>“禁用所有宏，并且不通知”<br />
+在不信任宏的时候选择此项。此时，将禁用文档中的所有宏以及有关宏的安全警告。</p></li>
+
+<li><p>“禁用所有宏，并发出通知”<br />
+此选项是软件的默认设置，在希望禁用宏，又希望在有宏存在的情况下获得安全警告时可以选择此项。该选项可以使用户根据具体情况选择是否启用宏。</p></li>
+
+<li><p>“禁用无数字签署的所有宏”<br />
+如果宏进行了数字签名，并且发布者已经得到计算机管理员信任，则可以运行，且不发出通知；如果宏进行了数字签名但发布者未获得信任，则会收到相应的通知；所有未签名的宏都将被禁用，且不会发出通知。</p></li>
+
+<li><p>“启用所有宏(不推荐；可能会运行有潜在危险的代码)”<br />
+任何宏都被允许运行。该项设置会使计算机很容易中病毒，所以不建议使用该设置。</p></li>
+
+<li><p>“信任对 VBA 工程对象模型的访问”<br />
+该选项专门用于禁止或允许自动化客户机以编程方式访问 VBA 对象模型。通过该安全选项，未授权程序很难生成损害用户系统的病毒代码。任何自动化客户机若要以编程方式访问 VBA 对象模型，必须首先选中该复选框。</p></li>
+</ol>
+
+<p>默认的宏设置就能满足我们学习vba的需求，所以宏设置保持“禁用所有宏，并发出通知” 不变。</p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications">维基百科-vba</a>  <a href="https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications">https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel-vba/">excel vba</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/soft/everything/">
+            <span class="next-text nav-default">高速查找软件everything使用教程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
