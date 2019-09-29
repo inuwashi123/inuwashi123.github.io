@@ -210,21 +210,24 @@
 
 <h3 id="录制宏rowabolder">录制宏rowABolder</h3>
 
-<p>从开始按钮找到Excel应用程序，打开Excel，新建一个空白Excel工作簿。点击“开发工具”菜单的“录制宏”。弹出录制宏对话框。宏名为rowABolder。快捷键Ctrl + C。
-<img src="/images/vba/002-1-vba-operate1.PNG" alt="实际操作录制宏" /></p>
+<p>从开始按钮找到Excel应用程序，打开Excel，新建一个空白Excel工作簿。点击“开发工具”菜单的“录制宏”。弹出录制宏对话框。宏名为rowABolder。快捷键Ctrl + C。</p>
 
-<p>点击OK按钮后，开始录制宏。“录制宏”按钮变为正在录制。选中A列，加上粗体效果。然后再次点击“开发工具”菜单的“结束宏录制”按钮，结束录制宏。
-<img src="/images/vba/002-1-vba-operate2.PNG" alt="结束宏录制" /></p>
+<p><img src="/images/vba/002-1-vba-operate1.PNG" alt="实际操作录制宏" /></p>
+
+<p>点击OK按钮后，开始录制宏。“录制宏”按钮变为正在录制。选中A列，加上粗体效果。然后再次点击“开发工具”菜单的“结束宏录制”按钮，结束录制宏。</p>
+
+<p><img src="/images/vba/002-1-vba-operate2.PNG" alt="结束宏录制" /></p>
 
 <h3 id="查看宏rowabolder的代码">查看宏rowABolder的代码</h3>
 
-<p>打开Visual Basic编辑器（快捷键Alt + F11），查看录制好的宏代码。在项目资源窗口会多出一个模块项目。里面有模块1。录制好的宏代码就在模块1里面。
-<img src="/images/vba/002-1-vba-operate3.PNG" alt="录制好的宏代码" /></p>
+<p>打开Visual Basic编辑器（快捷键Alt + F11），查看录制好的宏代码。在项目资源窗口会多出一个模块项目。里面有模块1。录制好的宏代码就在模块1里面。</p>
+
+<p><img src="/images/vba/002-1-vba-operate3.PNG" alt="录制好的宏代码" /></p>
 
 <p>录制好的代码如下，从代码可以看到之前输入的快捷键和宏说明都编程了注释（注释是以单引号&rsquo;开始的，运行时会被忽略的部分，在VBE中注释默认是绿色的）。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-VBA" data-lang="VBA"><span class="lnt"> 1
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -236,16 +239,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-VBA" data-lang="VBA">Sub rowABolder()
-&#39;
-&#39; rowABolder Macro
-&#39; A列的文字变粗体。
-&#39;
-&#39; Keyboard Shortcut: Ctrl+c
-&#39;
-    Columns(&#34;A:A&#34;).Select
-    Selection.Font.Bold = True
-End Sub</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">rowABolder</span><span class="p">()</span>
+<span class="c">&#39;
+</span><span class="c">&#39; rowABolder Macro
+</span><span class="c">&#39; A列的文字变粗体。
+</span><span class="c">&#39;
+</span><span class="c">&#39; Keyboard Shortcut: Ctrl+c
+</span><span class="c">&#39;
+</span><span class="c"></span>    <span class="n">Columns</span><span class="p">(</span><span class="s">&#34;A:A&#34;</span><span class="p">).</span><span class="n">Select</span>
+    <span class="n">Selection</span><span class="p">.</span><span class="n">Font</span><span class="p">.</span><span class="n">Bold</span> <span class="o">=</span> <span class="k">True</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>关于代码的写法我们以后会逐步讲解，现在你先有个大概印象即可。</p>
@@ -254,25 +257,31 @@ End Sub</code></pre></td></tr></table>
 
 <p>新建一个sheet，在A1单元格里面写入写东西，例如“vba快速入手02-录制宏”。运行刚才录制好的宏rowABolder，就可以将新建sheet里面的A列设置为粗体。运行宏rowABolder有三种方法。</p>
 
-<p>方法1，快捷键 Ctrl + c 。录制宏设定的时候，我们就指定了快捷键。按下Ctrl+c就会执行宏rowABolder。注意此时的快捷键Ctrl+c覆盖了Excel自带的Ctrl+c（复制功能），因为宏的快捷键优先级高。如图执行前和执行后效果。
-<img src="/images/vba/002-1-vba-operate4.PNG" alt="快捷键运行" /></p>
+<p>方法1，快捷键 Ctrl + c 。录制宏设定的时候，我们就指定了快捷键。按下Ctrl+c就会执行宏rowABolder。注意此时的快捷键Ctrl+c覆盖了Excel自带的Ctrl+c（复制功能），因为宏的快捷键优先级高。如图执行前和执行后效果。</p>
 
-<p>方法2，点击“开发工具”中的“宏”按钮，弹出运行宏的对话框（快捷键Alt + F8也可以）。
-<img src="/images/vba/002-1-vba-operate5.PNG" alt="运行宏按钮" /></p>
+<p><img src="/images/vba/002-1-vba-operate4.PNG" alt="快捷键运行" /></p>
 
-<p>选中宏rowABolder，然后点击运行按钮。
-<img src="/images/vba/002-1-vba-operate6.PNG" alt="运行宏" /></p>
+<p>方法2，点击“开发工具”中的“宏”按钮，弹出运行宏的对话框（快捷键Alt + F8也可以）。</p>
 
-<p>方法3，点击“开发工具”中的“Visual Basic”按钮，进入VBE编辑器。
-<img src="/images/vba/002-1-vba-operate7.PNG" alt="Visual Basic编辑器" /></p>
+<p><img src="/images/vba/002-1-vba-operate5.PNG" alt="运行宏按钮" /></p>
 
-<p>点击你录制好的宏代码，此时画面右上侧的rowABolder是选中状态，按下工具栏中的“运行”即可（快捷键F5也可以。）
-<img src="/images/vba/002-1-vba-operate8.PNG" alt="Visual Basic编辑器，运行宏" /></p>
+<p>选中宏rowABolder，然后点击运行按钮。</p>
+
+<p><img src="/images/vba/002-1-vba-operate6.PNG" alt="运行宏" /></p>
+
+<p>方法3，点击“开发工具”中的“Visual Basic”按钮，进入VBE编辑器。</p>
+
+<p><img src="/images/vba/002-1-vba-operate7.PNG" alt="Visual Basic编辑器" /></p>
+
+<p>点击你录制好的宏代码，此时画面右上侧的rowABolder是选中状态，按下工具栏中的“运行”即可（快捷键F5也可以。）</p>
+
+<p><img src="/images/vba/002-1-vba-operate8.PNG" alt="Visual Basic编辑器，运行宏" /></p>
 
 <h3 id="保存宏rowabolder">保存宏rowABolder</h3>
 
-<p>为了以后继续使用宏rowABolder，需要保存宏rowABolder。Excel 2007版本开始，普通的Excel文档（扩展名是.xlsx）是不能保存宏文件的。要想保存带有宏文件的Excel文档，必须将其保存为扩展名是.xlsm的Excel文档才可以。所以，点击文件-&gt;文件另存为，在另存为对话框中，选择保存文件类型是.xlsm的文档，如下图。
-<img src="/images/vba/002-1-vba-operate9.PNG" alt="保存宏" /></p>
+<p>为了以后继续使用宏rowABolder，需要保存宏rowABolder。Excel 2007版本开始，普通的Excel文档（扩展名是.xlsx）是不能保存宏文件的。要想保存带有宏文件的Excel文档，必须将其保存为扩展名是.xlsm的Excel文档才可以。所以，点击文件-&gt;文件另存为，在另存为对话框中，选择保存文件类型是.xlsm的文档，如下图。</p>
+
+<p><img src="/images/vba/002-1-vba-operate9.PNG" alt="保存宏" /></p>
 
 <hr />
 
