@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vba教程 on None - 记录在日本从事IT的所感所想。</title>
+    <link>https://inuwashi123.github.io/tags/vba%E6%95%99%E7%A8%8B/</link>
+    <description>Recent content in vba教程 on None - 记录在日本从事IT的所感所想。</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 30 Sep 2019 06:09:44 +0900</lastBuildDate>
+    
+	<atom:link href="https://inuwashi123.github.io/tags/vba%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>vba快速入门02-录制宏</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A802-%E5%BD%95%E5%88%B6%E5%AE%8F/</link>
+      <pubDate>Mon, 30 Sep 2019 06:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A802-%E5%BD%95%E5%88%B6%E5%AE%8F/</guid>
+      <description>关于录制宏 VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。 在我看来，录制</description>
+    </item>
+    
+  </channel>
+</rss>

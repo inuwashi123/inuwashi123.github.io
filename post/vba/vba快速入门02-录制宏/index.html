@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门02-录制宏 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="关于录制宏 VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。 在我看来，录制" /><meta name="keywords" content="vba, 宏, 录制宏, VBE, office" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A802-%E5%BD%95%E5%88%B6%E5%AE%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门02-录制宏" />
+<meta property="og:description" content="关于录制宏 VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。 在我看来，录制" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A802-%E5%BD%95%E5%88%B6%E5%AE%8F/" />
+<meta property="article:published_time" content="2019-09-30T06:09:44+09:00" />
+<meta property="article:modified_time" content="2019-09-30T06:09:44+09:00" />
+<meta itemprop="name" content="vba快速入门02-录制宏">
+<meta itemprop="description" content="关于录制宏 VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。 在我看来，录制">
+
+
+<meta itemprop="datePublished" content="2019-09-30T06:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-30T06:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="1886">
+
+
+
+<meta itemprop="keywords" content="excel,vba教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门02-录制宏"/>
+<meta name="twitter:description" content="关于录制宏 VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。 在我看来，录制"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门02-录制宏</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-30 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 1886 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#关于录制宏">关于录制宏</a></li>
+<li><a href="#如何录制宏">如何录制宏</a></li>
+<li><a href="#实际操作-录制宏">实际操作-录制宏</a>
+<ul>
+<li><a href="#录制宏rowabolder">录制宏rowABolder</a></li>
+<li><a href="#查看宏rowabolder的代码">查看宏rowABolder的代码</a></li>
+<li><a href="#应用宏rowabolder">应用宏rowABolder</a></li>
+<li><a href="#保存宏rowabolder">保存宏rowABolder</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="关于录制宏">关于录制宏</h2>
+
+<p>VBA最大的特点就是可以录制宏，将你所有的操作都以代码的形式录制下来，以备将来使用。这也是宏使用如此广泛的原因之一。</p>
+
+<p>在我看来，录制宏最大的好处是查看代码的写法。在vba开发过程中，难免会遇到不知道某个方法，某个参数的时候，这时候录制宏就是一个很好地解决方法。边录制宏边写宏也许是你以后vba开发的常态。</p>
+
+<p>当然了，录制宏也还是有缺陷的，有些操作是录制不了的。比如循环，分级判断等。</p>
+
+<h2 id="如何录制宏">如何录制宏</h2>
+
+<p>在功能区的“开发工具”选项卡中点击“录制宏”按钮，弹出录制宏对话框。如图所示。
+<img src="/images/vba/002-1-vba-record1.PNG" alt="录制宏" />
+<img src="/images/vba/002-1-vba-record2.PNG" alt="录制宏对话框" /></p>
+
+<p>录制宏对话框可以设置的项目。</p>
+
+<ul>
+<li><p>宏名：
+录制的宏的名字，默认是Macro1。第二次录制是Macro2，第三次是Macro3……以此类推。宏的名字可以修改。建议根据宏的功能起一个容易一看就明白的名字，如sheetAdd，rowsDelete。宏名必须是英文，下划线_或者汉子开头，特殊符号和数字开头的宏名，会报错。</p></li>
+
+<li><p>快捷键：
+执行宏的快捷方式。如果设置的快捷键和Excel自带的快捷键有冲突时，优先执行宏。例如，Ctrl + c 是Excel自带的复制功能，如果你录制的宏设置了快捷键 Ctrl + c，那么按下 Ctrl + c 时，会执行宏而不是复制。</p></li>
+
+<li><p>宏的保存地址：
+保存地址有三个选项，默认是当前工作簿，其余的两个分别是个人宏工作簿和新工作簿。具体的含义如下。</p></li>
+</ul>
+
+<p>（1）个人宏工作簿
+如果把录制的宏保存在“个人宏工作簿”中，那么该宏在所有本机上打开的Excel文件中都能使用，“个人宏工作簿”在正常情况下是隐藏的，并随着Excel的启动而开启。</p>
+
+<p>如果想在本机上其它EXCEL中使用此宏，需要保存到个个宏工作簿中。</p>
+
+<p>（2）新工作簿
+如果把录制的宏保存在“新工作簿”中，那么录制的宏会保存在一个新建的工作簿中，当前工作簿并不保存录制宏所自动生成的VBA代码。</p>
+
+<p>（3）当前工作簿
+如果选择把即将录制的宏保存在“当前工作簿”中，那么录制宏所自动生成的VBA代码将保存在当前工作簿文件中，可以随着当前文件分发给其他用户。</p>
+
+<ul>
+<li>宏说明：
+宏的说明。最后会以注释的形式来说明宏。</li>
+</ul>
+
+<h2 id="实际操作-录制宏">实际操作-录制宏</h2>
+
+<p>现在我们来实际操作下录制宏的功能。</p>
+
+<h3 id="录制宏rowabolder">录制宏rowABolder</h3>
+
+<p>从开始按钮找到Excel应用程序，打开Excel，新建一个空白Excel工作簿。点击“开发工具”菜单的“录制宏”。弹出录制宏对话框。宏名为rowABolder。快捷键Ctrl + C。
+<img src="/images/vba/002-1-vba-operate1.PNG" alt="实际操作录制宏" /></p>
+
+<p>点击OK按钮后，开始录制宏。“录制宏”按钮变为正在录制。选中A列，加上粗体效果。然后再次点击“开发工具”菜单的“结束宏录制”按钮，结束录制宏。
+<img src="/images/vba/002-1-vba-operate2.PNG" alt="结束宏录制" /></p>
+
+<h3 id="查看宏rowabolder的代码">查看宏rowABolder的代码</h3>
+
+<p>打开Visual Basic编辑器（快捷键Alt + F11），查看录制好的宏代码。在项目资源窗口会多出一个模块项目。里面有模块1。录制好的宏代码就在模块1里面。
+<img src="/images/vba/002-1-vba-operate3.PNG" alt="录制好的宏代码" /></p>
+
+<p>录制好的代码如下，从代码可以看到之前输入的快捷键和宏说明都编程了注释（注释是以单引号&rsquo;开始的，运行时会被忽略的部分，在VBE中注释默认是绿色的）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-VBA" data-lang="VBA"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-VBA" data-lang="VBA">Sub rowABolder()
+&#39;
+&#39; rowABolder Macro
+&#39; A列的文字变粗体。
+&#39;
+&#39; Keyboard Shortcut: Ctrl+c
+&#39;
+    Columns(&#34;A:A&#34;).Select
+    Selection.Font.Bold = True
+End Sub</code></pre></td></tr></table>
+</div>
+</div>
+<p>关于代码的写法我们以后会逐步讲解，现在你先有个大概印象即可。</p>
+
+<h3 id="应用宏rowabolder">应用宏rowABolder</h3>
+
+<p>新建一个sheet，在A1单元格里面写入写东西，例如“vba快速入手02-录制宏”。运行刚才录制好的宏rowABolder，就可以将新建sheet里面的A列设置为粗体。运行宏rowABolder有三种方法。</p>
+
+<p>方法1，快捷键 Ctrl + c 。录制宏设定的时候，我们就指定了快捷键。按下Ctrl+c就会执行宏rowABolder。注意此时的快捷键Ctrl+c覆盖了Excel自带的Ctrl+c（复制功能），因为宏的快捷键优先级高。如图执行前和执行后效果。
+<img src="/images/vba/002-1-vba-operate4.PNG" alt="快捷键运行" /></p>
+
+<p>方法2，点击“开发工具”中的“宏”按钮，弹出运行宏的对话框（快捷键Alt + F8也可以）。
+<img src="/images/vba/002-1-vba-operate5.PNG" alt="运行宏按钮" /></p>
+
+<p>选中宏rowABolder，然后点击运行按钮。
+<img src="/images/vba/002-1-vba-operate6.PNG" alt="运行宏" /></p>
+
+<p>方法3，点击“开发工具”中的“Visual Basic”按钮，进入VBE编辑器。
+<img src="/images/vba/002-1-vba-operate7.PNG" alt="Visual Basic编辑器" /></p>
+
+<p>点击你录制好的宏代码，此时画面右上侧的rowABolder是选中状态，按下工具栏中的“运行”即可（快捷键F5也可以。）
+<img src="/images/vba/002-1-vba-operate8.PNG" alt="Visual Basic编辑器，运行宏" /></p>
+
+<h3 id="保存宏rowabolder">保存宏rowABolder</h3>
+
+<p>为了以后继续使用宏rowABolder，需要保存宏rowABolder。Excel 2007版本开始，普通的Excel文档（扩展名是.xlsx）是不能保存宏文件的。要想保存带有宏文件的Excel文档，必须将其保存为扩展名是.xlsm的Excel文档才可以。所以，点击文件-&gt;文件另存为，在另存为对话框中，选择保存文件类型是.xlsm的文档，如下图。
+<img src="/images/vba/002-1-vba-operate9.PNG" alt="保存宏" /></p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications">维基百科-vba</a>  <a href="https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications">https://zh.wikipedia.org/wiki/Visual_Basic_for_Applications</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel/">excel</a>
+          <a href="/tags/vba%E6%95%99%E7%A8%8B/">vba教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B023-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6/">
+            <span class="next-text nav-default">Python教程023 运算符优先级 三元运算符</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
