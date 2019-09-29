@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程023 运算符优先级 三元运算符</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B023-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Sun, 29 Sep 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B023-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>运算符优先级(从低到高) 运算符 描述 lambda Lambda表达式 or 布尔“或” and 布尔“与” not 布尔“非” in，not in 成员测试 is，is not 同一性测试 &amp;lt</description>
+    </item>
     
     <item>
       <title>Python教程022 逻辑运算符 位运算符 赋值运算符</title>
