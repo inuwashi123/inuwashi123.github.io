@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程024 if条件控制 while循环  for循环  break  continue - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="if条件控制语句 if语句用于条件执行，一般形式如下所示： 1 2 3 4 5 6 if condition_1: statement_block_1 elif condition_2: statement_block_2 else: statement_block_3 如果 &amp;ldquo;condition_1&amp;rdquo; 为 True 将执行 &amp;ldquo;statement_block_1&amp;rdquo; 块语句 如果 &amp;ldquo;condition_1&amp;rdquo; 为False，将判断 &amp;ldquo;condition_2&amp;rdquo; 如果" /><meta name="keywords" content="if条件控制, while循环, for循环, break, continue" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B024-if%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6-while%E5%BE%AA%E7%8E%AF-for%E5%BE%AA%E7%8E%AF-break-continue/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程024 if条件控制 while循环  for循环  break  continue" />
+<meta property="og:description" content="if条件控制语句 if语句用于条件执行，一般形式如下所示： 1 2 3 4 5 6 if condition_1: statement_block_1 elif condition_2: statement_block_2 else: statement_block_3 如果 &ldquo;condition_1&rdquo; 为 True 将执行 &ldquo;statement_block_1&rdquo; 块语句 如果 &ldquo;condition_1&rdquo; 为False，将判断 &ldquo;condition_2&rdquo; 如果" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B024-if%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6-while%E5%BE%AA%E7%8E%AF-for%E5%BE%AA%E7%8E%AF-break-continue/" />
+<meta property="article:published_time" content="2019-10-01T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-01T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程024 if条件控制 while循环  for循环  break  continue">
+<meta itemprop="description" content="if条件控制语句 if语句用于条件执行，一般形式如下所示： 1 2 3 4 5 6 if condition_1: statement_block_1 elif condition_2: statement_block_2 else: statement_block_3 如果 &ldquo;condition_1&rdquo; 为 True 将执行 &ldquo;statement_block_1&rdquo; 块语句 如果 &ldquo;condition_1&rdquo; 为False，将判断 &ldquo;condition_2&rdquo; 如果">
+
+
+<meta itemprop="datePublished" content="2019-10-01T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-01T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2047">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程024 if条件控制 while循环  for循环  break  continue"/>
+<meta name="twitter:description" content="if条件控制语句 if语句用于条件执行，一般形式如下所示： 1 2 3 4 5 6 if condition_1: statement_block_1 elif condition_2: statement_block_2 else: statement_block_3 如果 &ldquo;condition_1&rdquo; 为 True 将执行 &ldquo;statement_block_1&rdquo; 块语句 如果 &ldquo;condition_1&rdquo; 为False，将判断 &ldquo;condition_2&rdquo; 如果"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程024 if条件控制 while循环  for循环  break  continue</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-01 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2047 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#if条件控制语句">if条件控制语句</a>
+<ul>
+<li><a href="#if语句的嵌套">if语句的嵌套</a></li>
+</ul></li>
+<li><a href="#while循环语句">while循环语句</a></li>
+<li><a href="#for-语句">for 语句</a></li>
+<li><a href="#break语句">break语句</a></li>
+<li><a href="#continue语句">continue语句</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="if条件控制语句">if条件控制语句</h2>
+
+<p>if语句用于条件执行，一般形式如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">condition_1</span><span class="p">:</span>
+    <span class="n">statement_block_1</span>
+<span class="k">elif</span> <span class="n">condition_2</span><span class="p">:</span>
+    <span class="n">statement_block_2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">statement_block_3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果 &ldquo;condition_1&rdquo; 为 True 将执行 &ldquo;statement_block_1&rdquo; 块语句<br />
+如果 &ldquo;condition_1&rdquo; 为False，将判断 &ldquo;condition_2&rdquo;<br />
+如果&rdquo;condition_2&rdquo; 为 True 将执行 &ldquo;statement_block_2&rdquo; 块语句<br />
+如果 &ldquo;condition_2&rdquo; 为False，将执行&rdquo;statement_block_3&rdquo;块语句<br />
+Python 中用 elif 代替了 else if，所以if语句的关键字为：if – elif – else。</p>
+
+<p><strong>注意</strong><br />
+1、每个条件后面要使用冒号 :，表示接下来是满足条件后要执行的语句块。<br />
+2、使用缩进来划分语句块，相同缩进数的语句在一起组成一个语句块。<br />
+3、在Python中没有switch – case语句。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">score</span> <span class="o">=</span> <span class="mi">65</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩优秀&#34;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩良好&#34;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩及格&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩不及格&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：<br />
+<code>成绩及格</code></p>
+
+<p>if判断条件还可以简写，只要x是非零数值、非空字符串、非空list等，就判断为True，否则为False。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">x</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;hello world&#34;</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以简写为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;hello world&#34;</span>
+<span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="if语句的嵌套">if语句的嵌套</h3>
+
+<p>if语句中还可以嵌入if – elif – else，称为if语句嵌套。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">score</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">score</span><span class="o">==</span><span class="mi">100</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;满分&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩优秀&#34;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩良好&#34;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩及格&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;成绩不及格&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：<br />
+<code>满分</code></p>
+
+<h2 id="while循环语句">while循环语句</h2>
+
+<p>Python中while语句的一般形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">while</span> <span class="err">判断条件：</span>
+    <span class="err">语句</span>
+<span class="k">else</span><span class="err">：</span>
+    <span class="err">语句</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>只要判断条件为True，while语句重复执行。如果判断条件False则执行else子句（如果存在）并终止循环。</p>
+
+<p>例如：计算1 到 10 的总和。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">start</span>
+    <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;1 到 10 的总和：&#34;</span><span class="p">,</span><span class="nb">sum</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：<br />
+<code>1 到 100 的总和： 55</code></p>
+
+<h2 id="for-语句">for 语句</h2>
+
+<p>for语句用于迭代序列的元素（例如字符串，元组或列表）或其他可迭代对象:for循环的一般格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="o">&lt;</span><span class="n">variable</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">sequence</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">statements</span><span class="o">&gt;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">statements</span><span class="o">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如，打印列表的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;for循环结束&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span>
+<span class="n">b</span>
+<span class="n">c</span>
+<span class="n">for循环结束</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="break语句">break语句</h2>
+
+<p>break语句用于跳出 for 和 while 的循环体，不执行else语句。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">start</span>
+    <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">start</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span> <span class="c1"># 退出while循环，不执行后面的else子句</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;start的当前值：&#34;</span><span class="p">,</span><span class="n">start</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;1 到 10 的总和：&#34;</span><span class="p">,</span><span class="nb">sum</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;break语句执行完毕&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">start的当前值</span><span class="err">：</span> <span class="mi">2</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">3</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">4</span>
+<span class="n">break语句执行完毕</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;for循环结束&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;break语句执行完毕&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span>
+<span class="n">break语句执行完毕</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="continue语句">continue语句</h2>
+
+<p>continue语句用来告诉Python跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</p>
+
+<p>例如，计算1 到 10 的总和：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">start</span>
+    <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">start</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span> <span class="c1">#不执行后面的print语句</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;start的当前值：&#34;</span><span class="p">,</span><span class="n">start</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;1 到 10 的总和：&#34;</span><span class="p">,</span><span class="nb">sum</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;continue语句执行完毕&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">start的当前值</span><span class="err">：</span> <span class="mi">2</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">3</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">4</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">6</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">7</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">8</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">9</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">10</span>
+<span class="n">start的当前值</span><span class="err">：</span> <span class="mi">11</span>
+<span class="mi">1</span> <span class="err">到</span> <span class="mi">10</span> <span class="err">的总和：</span> <span class="mi">55</span>
+<span class="n">continue语句执行完毕</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;for循环结束&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;continue语句执行完毕&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span>
+<span class="n">c</span>
+<span class="n">for循环结束</span>
+<span class="n">continue语句执行完毕</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>break语句和continue语句操作的都是自身所属的循环。例如，循环A里嵌套一个循环B，则B循环里的break语句，只能跳出B循环，不能跳出最外层的A循环。continue语句也是一样的。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">list_num</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">list_letter</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_num</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">list_letter</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1">#只能跳出内层循环</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;内层循环结束&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;外层循环结束&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">1</span>
+<span class="n">a</span>
+<span class="n">b</span>
+<span class="mi">2</span>
+<span class="n">a</span>
+<span class="n">b</span>
+<span class="mi">3</span>
+<span class="n">a</span>
+<span class="n">b</span>
+<span class="mi">4</span>
+<span class="n">a</span>
+<span class="n">b</span>
+<span class="err">外层循环结束</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A802-%E5%BD%95%E5%88%B6%E5%AE%8F/">
+            <span class="next-text nav-default">vba快速入门02-录制宏</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

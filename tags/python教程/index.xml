@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 29 Sep 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程024 if条件控制 while循环  for循环  break  continue</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B024-if%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6-while%E5%BE%AA%E7%8E%AF-for%E5%BE%AA%E7%8E%AF-break-continue/</link>
+      <pubDate>Tue, 01 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B024-if%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6-while%E5%BE%AA%E7%8E%AF-for%E5%BE%AA%E7%8E%AF-break-continue/</guid>
+      <description>if条件控制语句 if语句用于条件执行，一般形式如下所示： 1 2 3 4 5 6 if condition_1: statement_block_1 elif condition_2: statement_block_2 else: statement_block_3 如果 &amp;ldquo;condition_1&amp;rdquo; 为 True 将执行 &amp;ldquo;statement_block_1&amp;rdquo; 块语句 如果 &amp;ldquo;condition_1&amp;rdquo; 为False，将判断 &amp;ldquo;condition_2&amp;rdquo; 如果</description>
+    </item>
     
     <item>
       <title>Python教程023 运算符优先级 三元运算符</title>
