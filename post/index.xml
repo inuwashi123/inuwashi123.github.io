@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 02 Oct 2019 06:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Oct 2019 06:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程026 函数</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B026-%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 03 Oct 2019 06:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B026-%E5%87%BD%E6%95%B0/</guid>
+      <description>函数 函数是组织好的，可重复使用的，用来实现单一，或相关联功能的一系列语句，它们向调用者返回一些值。它也可以传递零个或多个参数，这些参数可以用</description>
+    </item>
     
     <item>
       <title>Python教程025 assert语句 pass语句 del语句 with语句</title>
