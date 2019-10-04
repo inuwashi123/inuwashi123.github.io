@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程027 闭包函数 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="闭包 函数闭包的概念在初学时容易迷糊，尤其涉及到闭包的作用域和参数问题。先看下维基百科对闭包的定义。 在计算机科学中，闭包（英语：Closure" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B027-%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程027 闭包函数" />
+<meta property="og:description" content="闭包 函数闭包的概念在初学时容易迷糊，尤其涉及到闭包的作用域和参数问题。先看下维基百科对闭包的定义。 在计算机科学中，闭包（英语：Closure" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B027-%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/" />
+<meta property="article:published_time" content="2019-10-04T06:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-04T06:09:44+09:00" />
+<meta itemprop="name" content="Python教程027 闭包函数">
+<meta itemprop="description" content="闭包 函数闭包的概念在初学时容易迷糊，尤其涉及到闭包的作用域和参数问题。先看下维基百科对闭包的定义。 在计算机科学中，闭包（英语：Closure">
+
+
+<meta itemprop="datePublished" content="2019-10-04T06:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-04T06:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="1829">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程027 闭包函数"/>
+<meta name="twitter:description" content="闭包 函数闭包的概念在初学时容易迷糊，尤其涉及到闭包的作用域和参数问题。先看下维基百科对闭包的定义。 在计算机科学中，闭包（英语：Closure"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程027 闭包函数</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-04 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1829 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#闭包">闭包</a></li>
+<li><a href="#python中的闭包">Python中的闭包</a></li>
+<li><a href="#nonlocal语句">nonlocal语句</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="闭包">闭包</h2>
+
+<p>函数闭包的概念在初学时容易迷糊，尤其涉及到闭包的作用域和参数问题。先看下维基百科对闭包的定义。</p>
+
+<p>在计算机科学中，闭包（英语：Closure），又稱词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。</p>
+
+<p>在一些语言中，在函数中可以（嵌套）定义另一个函数时，如果内部的函数引用了外部的函数的变量，则可能产生闭包。运行时，一旦外部的 函数被执行，一个闭包就形成了，闭包中包含了内部函数的代码，以及所需外部函数中的变量的引用。</p>
+
+<h2 id="python中的闭包">Python中的闭包</h2>
+
+<p>函数(内层函数)的定义嵌套在另一个函数(外层函数)之中，内层函数引用了外层函数的自由变量。调用外层函数时，运行到的内层函数def语句仅仅是完成对内层函数的定义，而不会去调用内层函数，除非在嵌套函数之后又显式的对其进行调用。</p>
+
+<p>简单来说，一个闭包就是你调用了一个函数A，这个函数A返回了一个函数B给你。这个返回的函数B就叫做闭包。<br />
+闭包函数须满足以下条件：<br />
+1.在函数内部定义函数；<br />
+2.包含对外部作用域而非全局作用域的自由变量的引用；</p>
+
+<p>自由变量（free variable），是一个技术术语，指未在本地作用域中绑定的变量。例如下面例子中的x，对于内部函数f2来说，x没在本地作用域f2中进行绑定，x是自由变量。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">88</span>
+    <span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f2</span>  <span class="c1"># 返回内部函数</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">f1</span><span class="p">()</span>  
+<span class="n">a</span><span class="p">()</span>  <span class="c1"># 结果 88</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看出，f1中的嵌套变量x覆盖了全局变量x=99，然后f2中的本地变量按照引用规则，就引用了x=88。闭包的特殊之处在于，执行a()的时候，自由变量x = 88的作用域已经消失，但是还是能读取到x的值。</p>
+
+<p>当然，你也可以在显示调用内部函数。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">88</span>
+    <span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">f2</span><span class="p">()</span> <span class="c1"># 显式调用内部函数。</span>
+
+<span class="c1">#执行函数f1</span>
+<span class="n">f1</span><span class="p">()</span>  <span class="c1"># 结果 88</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>下面我们来说说嵌套作用域的一个特殊之处:<br />
+本地作用域在函数结束后就立即失效，而嵌套作用域在嵌套的函数返回后却仍然有效。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">88</span>
+    <span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f2</span>
+
+<span class="c1">#执行f1函数后，返回函数对象f2，再将f2赋值给action变量。action变为函数对象</span>
+<span class="n">action</span> <span class="o">=</span> <span class="n">f1</span><span class="p">()</span>
+<span class="c1">#执行函数action</span>
+<span class="n">action</span><span class="p">()</span> <span class="c1"># 结果 88</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>函数f1中定义了函数f2，f2引用了f1嵌套作用域内的变量x，并且f1将函数f2作为返回对象进行返回。最值得注意的是我们通过变量action获取了返回的f2，虽然此时f1函数已经退出结束了，但是f2仍然记住了f1嵌套作用域内的变量名x。一个能记住嵌套作用域变量值的函数，尽管作用域已经不存在。</p>
+
+<p>闭包的一个应用就是工厂函数。<br />
+工厂函数定义了一个外部的函数，这个函数简单的生成并返回一个内嵌的函数，仅仅是返回却不调用，因此通过调用这个工厂函数，可以得到内嵌函数的一个引用。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">maker</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="n">n</span> <span class="o">+</span> <span class="n">k</span>
+    <span class="k">return</span> <span class="n">action</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">maker</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c1">#结果 &lt;function maker.&lt;locals&gt;.action at 0x00000000021C51E0&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>再看一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">maker</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="n">n</span> <span class="o">+</span> <span class="n">k</span>
+    <span class="k">return</span> <span class="n">action</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">maker</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># 结果 24</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里我们可以看出，内嵌的函数action记住了嵌套作用域内得两个嵌套变量，一个是变量k，一个是参数n，即使后面maker返回并退出。我们通过调用外部的函数maker，得到内嵌的函数action的引用。这种函数嵌套的方法在装饰器中会经常用到。这种嵌套作用域引用，就是python的函数能够保留状态信息的主要方法了。</p>
+
+<h2 id="nonlocal语句">nonlocal语句</h2>
+
+<p>本地函数通过global声明对全局变量进行引用修改，那么对应的，内嵌函数内部想对嵌套作用域中的变量进行修改，就要使用nonlocal进行声明。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">in_num</span> <span class="o">=</span> <span class="n">num</span>
+    <span class="k">def</span> <span class="nf">nested</span><span class="p">(</span><span class="n">label</span><span class="p">):</span>
+        <span class="n">nonlocal</span> <span class="n">in_num</span>
+        <span class="n">in_num</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">in_num</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nested</span>
+
+<span class="n">F</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="mi">3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>我们在nested函数中通过nonlocal关键字引用了内嵌作用域中的变量in_num，那么我们就可以在nested函数中修改他，即使test函数已经退出调用，这个“记忆”依然有效。
+再一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="n">in_num</span> <span class="o">=</span> <span class="n">num</span>
+    <span class="k">def</span> <span class="nf">nested</span><span class="p">(</span><span class="n">label</span><span class="p">):</span>
+        <span class="n">nonlocal</span> <span class="n">in_num</span>
+        <span class="n">in_num</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">in_num</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nested</span>
+
+<span class="n">F</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">G</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="mi">3</span>
+<span class="n">mm</span> <span class="mi">101</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>多次调用工厂函数返回的不同内嵌函数副本F和G，彼此间的内嵌变量in_num是彼此独立隔离的。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B026-%E5%87%BD%E6%95%B0/">
+            <span class="next-text nav-default">Python教程026 函数</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
