@@ -6,10 +6,19 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 04 Oct 2019 06:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Oct 2019 06:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程028 匿名函数</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B028-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 05 Oct 2019 06:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B028-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/</guid>
+      <description>匿名函数 匿名函数语法: lambda x: expression python使用关键字lambda来创建匿名函数。冒号前面的x表示函数参数。匿名函数只能有一个表达式，不用写re</description>
+    </item>
     
     <item>
       <title>Python教程027 闭包函数</title>
