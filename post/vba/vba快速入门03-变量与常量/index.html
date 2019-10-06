@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门03-变量与常量 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="变量 值可以变化的量就是变量。变量主要是用来保存程序运行过程中需要的临时保存值或对象。 声明变量 变量都是保存在内存中的，要想使用变量，首先需要在" /><meta name="keywords" content="vba, 宏, 变量与常量" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门03-变量与常量" />
+<meta property="og:description" content="变量 值可以变化的量就是变量。变量主要是用来保存程序运行过程中需要的临时保存值或对象。 声明变量 变量都是保存在内存中的，要想使用变量，首先需要在" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F/" />
+<meta property="article:published_time" content="2019-10-06T09:00:44+09:00" />
+<meta property="article:modified_time" content="2019-10-06T09:00:44+09:00" />
+<meta itemprop="name" content="vba快速入门03-变量与常量">
+<meta itemprop="description" content="变量 值可以变化的量就是变量。变量主要是用来保存程序运行过程中需要的临时保存值或对象。 声明变量 变量都是保存在内存中的，要想使用变量，首先需要在">
+
+
+<meta itemprop="datePublished" content="2019-10-06T09:00:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-06T09:00:44&#43;09:00" />
+<meta itemprop="wordCount" content="2321">
+
+
+
+<meta itemprop="keywords" content="excel,vba教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门03-变量与常量"/>
+<meta name="twitter:description" content="变量 值可以变化的量就是变量。变量主要是用来保存程序运行过程中需要的临时保存值或对象。 声明变量 变量都是保存在内存中的，要想使用变量，首先需要在"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门03-变量与常量</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-06 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 2321 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#变量">变量</a>
+<ul>
+<li><a href="#声明变量">声明变量</a></li>
+<li><a href="#变量赋值">变量赋值</a></li>
+<li><a href="#隐式声明">隐式声明</a></li>
+<li><a href="#强制声明变量-取消隐式声明变量">强制声明变量（取消隐式声明变量）</a>
+<ul>
+<li><a href="#方法一-在过程的外面添加-option-explicit-代码">方法一，在过程的外面添加<code>Option Explicit</code>代码</a></li>
+<li><a href="#方法二-选择-工具-选项-弹出选项对话框-选中-强制声明变量-如下图">方法二，选择“工具”&ndash;“选项”，弹出选项对话框。选中“强制声明变量”，如下图</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#常量">常量</a>
+<ul>
+<li><a href="#声明常量">声明常量</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="变量">变量</h2>
+
+<p>值可以变化的量就是变量。变量主要是用来保存程序运行过程中需要的临时保存值或对象。</p>
+
+<h3 id="声明变量">声明变量</h3>
+
+<p>变量都是保存在内存中的，要想使用变量，首先需要在内存中申请一块区域用来保存变量的值。声明变量就可以申请内存区域。那么如何声明变量呢？<br />
+声明变量的语法格式如下：<br />
+<code>Dim 变量名 As 数据类型</code></p>
+
+<p>Dim语句主要用于声明变量并分配储存空间。其主要目的是告知用户该变量为自定义变量，声明后程序会自动记录该变量的类型等信息。</p>
+
+<p>变量名命名要求</p>
+
+<ol>
+<li>变量必须以字母或汉字开头（日语假名，汉语也是可以的），不能包含空格、句号、感叹号、@、&amp;、$和#等特殊符号，最长不能超过255个字符（一个汉字计2个字符）。</li>
+<li>不区分大小写。</li>
+<li>使用的名称不能与VBA本身的函数和关键字相同。</li>
+</ol>
+
+<p><strong>注意：</strong> VBA本身的函数和关键字就不介绍了。请参考。</p>
+
+<p>数据类型将会在下一节介绍。</p>
+
+<p>例1，声明变量a，b。过程名是varTest，关于过程的讲解会在以后的教程中详细说明，现在你就将其理解成VBA的执行单位，里面可以包含代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;声明变量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+
+    <span class="c">&#39;声明变量b，是String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例2，声明不合法的变量1a，_b,VBE编辑器提示编译错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;变量1a不合法，因为数字开头
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">1a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+
+    <span class="c">&#39;变量_b不合法，因为下划线_开头
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">_b</span> <span class="ow">As</span> <span class="kt">String</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>VBE编辑器提示编译错误如下图。</p>
+
+<p><img src="/images/vba/003-1-compile1.PNG" alt="编译错误" title="编译错误" /></p>
+
+<h3 id="变量赋值">变量赋值</h3>
+
+<p>声明变量只是定义了一个变量，但是还没有值。变量赋值其实就是将指定的数值、字符串、表达式等通过赋值符号“=”赋给指定的变量名。<br />
+变量赋值的格式：<br />
+<code>变量名 = 变量值</code></p>
+
+<p>例3，声明变量a,b,c并赋值。最后在立即窗口打印变量的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;声明变量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;声明变量b，是String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="c">&#39;声明变量c，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c</span> <span class="ow">As</span> <span class="kt">Integer</span>
+
+    <span class="c">&#39;给变量a赋值为整数100
+</span><span class="c"></span>    <span class="n">a</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="c">&#39;给变量a赋值为字符串hello World
+</span><span class="c"></span>    <span class="n">b</span> <span class="o">=</span> <span class="s">&#34;hello World&#34;</span>
+    <span class="c">&#39;给变量c赋值为变量a和100相加，也就是200
+</span><span class="c"></span>    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">100</span>
+
+    <span class="c">&#39;在立即窗口打印变量a，b，c的值
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">a</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">b</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">c</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+
+<p><img src="/images/vba/003-1-compile2.PNG" alt="立即窗口运行结果" title="立即窗口运行结果" /></p>
+
+<h3 id="隐式声明">隐式声明</h3>
+
+<p>隐式声明是指在使用一个变量之前，并没有声明该变量。使用该变量时，vba会自动创建该变量，变量会被自动分配一个数据类型Variant，可以保存数字、字符串和其他信息类型。与隐式声明相对，上面所讲的Dim语句声明变量也称为显式声明变量。</p>
+
+<p>TypeName函数可以显示变量的类型。Variant类型的数据返回Empty。</p>
+
+<p>例4，显式声明变量a,b，隐式声明变量c</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;声明变量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;声明变量b，是String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">Integer
+String
+Empty</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="强制声明变量-取消隐式声明变量">强制声明变量（取消隐式声明变量）</h3>
+
+<p>虽然隐式声明很方便，但是随着你写的程序的增大，会越来越发现隐式声明变量带来的错误难以排查。如何才能避免隐式声明的变量呢？有两种方法。推荐方法一。</p>
+
+<h4 id="方法一-在过程的外面添加-option-explicit-代码">方法一，在过程的外面添加<code>Option Explicit</code>代码</h4>
+
+<p>例5，在varTest过程的外面，添加<code>Option Explicit</code>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Explicit</span>
+
+<span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;声明变量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;声明变量b，是String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于c是隐式声明的变量，运行出现编译错误。</p>
+
+<p><img src="/images/vba/003-1-compile1.PNG" alt="编译错误" title="编译错误" /></p>
+
+<p>如果添加上变量c的声明，编译错误就会消失。修改后的代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Explicit</span>
+
+<span class="k">Sub</span> <span class="nf">varTest</span><span class="p">()</span>
+    <span class="c">&#39;声明变量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;声明变量b，是String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="c">&#39;声明变量c，是Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c</span> <span class="ow">As</span> <span class="kt">Variant</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">TypeName</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">Integer
+String
+Empty</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="方法二-选择-工具-选项-弹出选项对话框-选中-强制声明变量-如下图">方法二，选择“工具”&ndash;“选项”，弹出选项对话框。选中“强制声明变量”，如下图</h4>
+
+<p><img src="/images/vba/003-1-compile3.PNG" alt="强制声明变量" title="强制声明变量" /></p>
+
+<h2 id="常量">常量</h2>
+
+<p>与变量相对应的就是常量，值不可以变化的量就是常量。常量的值一旦声明后就不可以更改。</p>
+
+<h3 id="声明常量">声明常量</h3>
+
+<p>声明常量的语法格式如下：<br />
+<code>Const 常量名 As 数据类型=常量值</code></p>
+
+<p>Const语句声明常量并设置其值。</p>
+
+<p>常量名的命名要求和变量的命名要求一样，请参考变量命名要求。</p>
+
+<p>可以将常量声明为以下数据类型之一: Boolean、 Byte、 Integer、 Long、 Currency、 Single、 Double、 Date、 String或Variant。数据类型详细将会在下一节介绍。</p>
+
+<p>例6，声明常量a，b，pi，并在立即窗口打印出来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">constTest</span><span class="p">()</span>
+    <span class="c">&#39;声明常量a，是Integer类型
+</span><span class="c"></span>    <span class="k">Const</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="o">=</span><span class="n">100</span>
+
+    <span class="c">&#39;声明常量b，是String类型
+</span><span class="c"></span>    <span class="k">Const</span> <span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span><span class="o">=</span><span class="s">&#34;hello world&#34;</span>
+
+    <span class="c">&#39;声明常量pi，是Single类型
+</span><span class="c"></span>    <span class="k">Const</span> <span class="n">pi</span> <span class="ow">As</span> <span class="k">Single</span> <span class="o">=</span> <span class="n">3</span><span class="p">.</span><span class="n">14</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">a</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">b</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">pi</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"> 100
+hello world
+ 3.14</code></pre></td></tr></table>
+</div>
+</div>
+<p>可在一个语句中声明多个常量。 若要指定数据类型，必须为每个常量包括数据类型。</p>
+
+<p>例7，在一个语句中声明常量a，b，pi，并在立即窗口打印出来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">constTest</span><span class="p">()</span>
+
+    <span class="c">&#39;声明常量a，是Integer类型。声明常量b，是String类型。声明常量pi，是Single类型
+</span><span class="c"></span>    <span class="k">Const</span> <span class="n">a</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="o">=</span><span class="n">100</span><span class="p">,</span><span class="n">b</span> <span class="ow">As</span> <span class="kt">String</span><span class="o">=</span><span class="s">&#34;hello world&#34;</span><span class="p">,</span><span class="n">pi</span> <span class="ow">As</span> <span class="k">Single</span> <span class="o">=</span> <span class="n">3</span><span class="p">.</span><span class="n">14</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">a</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">b</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">pi</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"> 100
+hello world
+ 3.14</code></pre></td></tr></table>
+</div>
+</div>
+<p>声明常量还有可以省略数据类型。也就是<code>As 数据类型</code>是可以省略的。</p>
+
+<p>例8，在一个语句中声明常量a，b，pi（省略数据类型），并在立即窗口打印出来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">constTest</span><span class="p">()</span>
+
+    <span class="c">&#39;声明常量a，b，pi（省略数据类型）
+</span><span class="c"></span>    <span class="k">Const</span> <span class="n">a</span><span class="o">=</span><span class="n">100</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="s">&#34;hello world&#34;</span><span class="p">,</span><span class="n">pi</span><span class="o">=</span><span class="n">3</span><span class="p">.</span><span class="n">14</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">a</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">b</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">pi</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"> 100
+hello world
+ 3.14</code></pre></td></tr></table>
+</div>
+</div>
+<p>vba语言本身定义了很多常量，在以后的学习过程中会一一介绍。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel/">excel</a>
+          <a href="/tags/vba%E6%95%99%E7%A8%8B/">vba教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B028-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">
+            <span class="next-text nav-default">Python教程028 匿名函数</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

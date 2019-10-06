@@ -6,10 +6,19 @@
     <description>Recent content in Categories on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 05 Oct 2019 06:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 09:00:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vba</title>
+      <link>https://inuwashi123.github.io/categories/vba/</link>
+      <pubDate>Sun, 06 Oct 2019 09:00:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/categories/vba/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>python</title>
@@ -17,15 +26,6 @@
       <pubDate>Sat, 05 Oct 2019 06:09:44 +0900</pubDate>
       
       <guid>https://inuwashi123.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vba</title>
-      <link>https://inuwashi123.github.io/categories/vba/</link>
-      <pubDate>Mon, 30 Sep 2019 06:09:44 +0900</pubDate>
-      
-      <guid>https://inuwashi123.github.io/categories/vba/</guid>
       <description></description>
     </item>
     
