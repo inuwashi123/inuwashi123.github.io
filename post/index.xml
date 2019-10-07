@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Oct 2019 07:00:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Oct 2019 06:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程029 迭代器</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B029-%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+      <pubDate>Tue, 08 Oct 2019 06:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B029-%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+      <description>迭代(Iteration),迭代器协议,迭代器(Iterator),可迭代对象(Iterable) 迭代(Iteration)：用简单的话讲，</description>
+    </item>
     
     <item>
       <title>PowerShell快速入门02-PowerShell自带的帮助信息</title>
