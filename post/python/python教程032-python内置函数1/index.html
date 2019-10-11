@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程032 python内置函数1 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="函数和方法 首先来区别下函数和方法概念。在其他语言中，函数和方法概念是一样的，python是有区别的。 函数：指的是第一个参数不是self的函数" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B032-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B01/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程032 python内置函数1" />
+<meta property="og:description" content="函数和方法 首先来区别下函数和方法概念。在其他语言中，函数和方法概念是一样的，python是有区别的。 函数：指的是第一个参数不是self的函数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B032-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B01/" />
+<meta property="article:published_time" content="2019-10-11T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-11T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程032 python内置函数1">
+<meta itemprop="description" content="函数和方法 首先来区别下函数和方法概念。在其他语言中，函数和方法概念是一样的，python是有区别的。 函数：指的是第一个参数不是self的函数">
+
+
+<meta itemprop="datePublished" content="2019-10-11T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-11T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2147">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程032 python内置函数1"/>
+<meta name="twitter:description" content="函数和方法 首先来区别下函数和方法概念。在其他语言中，函数和方法概念是一样的，python是有区别的。 函数：指的是第一个参数不是self的函数"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程032 python内置函数1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-11 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2147 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#函数和方法">函数和方法</a>
+<ul>
+<li><a href="#abs-x">abs(x)</a></li>
+<li><a href="#all-iterable">all(iterable)</a></li>
+<li><a href="#any-iterable">any(iterable)</a></li>
+<li><a href="#ascii-x">ascii(x)</a></li>
+<li><a href="#bin-x">bin(x)</a></li>
+<li><a href="#bool-x">bool(x)</a></li>
+<li><a href="#breakpoint-args-kws">breakpoint(*args, **kws)</a></li>
+<li><a href="#bytearray">bytearray</a></li>
+<li><a href="#bytes">bytes</a></li>
+<li><a href="#callable-object">callable(object)</a></li>
+<li><a href="#chr-x">chr(x)</a></li>
+<li><a href="#classmethod-function">classmethod(function)</a></li>
+<li><a href="#compile-source-filename-mode-flags-dont-inherit">compile(source, filename, mode[, flags[, dont_inherit]])</a></li>
+<li><a href="#complex-real-imag">complex([real[, imag]])</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="函数和方法">函数和方法</h2>
+
+<p>首先来区别下函数和方法概念。在其他语言中，函数和方法概念是一样的，python是有区别的。</p>
+
+<p>函数：指的是第一个参数不是self的函数，不在类中定义的函数。</p>
+
+<p>方法：指是的第一个参数是self的函数。
+​</p>
+
+<table>
+<thead>
+<tr>
+<th>内置函数</th>
+<th align="left">内置函数</th>
+<th align="left">内置函数</th>
+<th align="left">内置函数</th>
+<th align="left">内置函数</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>abs()</td>
+<td align="left">delattr()</td>
+<td align="left">hash()</td>
+<td align="left">memoryview()</td>
+<td align="left">set()</td>
+</tr>
+
+<tr>
+<td>all()</td>
+<td align="left">dict()</td>
+<td align="left">help()</td>
+<td align="left">min()</td>
+<td align="left">setattr()</td>
+</tr>
+
+<tr>
+<td>any()</td>
+<td align="left">dir()</td>
+<td align="left">hex()</td>
+<td align="left">next()</td>
+<td align="left">slice()</td>
+</tr>
+
+<tr>
+<td>ascii()</td>
+<td align="left">divmod()</td>
+<td align="left">id()</td>
+<td align="left">object()</td>
+<td align="left">sorted()</td>
+</tr>
+
+<tr>
+<td>bin()</td>
+<td align="left">enumerate()</td>
+<td align="left">input()</td>
+<td align="left">oct()</td>
+<td align="left">staticmethod()</td>
+</tr>
+
+<tr>
+<td>bool()</td>
+<td align="left">eval()</td>
+<td align="left">int()</td>
+<td align="left">open()</td>
+<td align="left">str()</td>
+</tr>
+
+<tr>
+<td>breakpoint()</td>
+<td align="left">exec()</td>
+<td align="left">isinstance()</td>
+<td align="left">ord()</td>
+<td align="left">sum()</td>
+</tr>
+
+<tr>
+<td>bytearray()</td>
+<td align="left">filter()</td>
+<td align="left">issubclass()</td>
+<td align="left">pow()</td>
+<td align="left">super()</td>
+</tr>
+
+<tr>
+<td>bytes()</td>
+<td align="left">float()</td>
+<td align="left">iter()</td>
+<td align="left">print()</td>
+<td align="left">tuple()</td>
+</tr>
+
+<tr>
+<td>callable()</td>
+<td align="left">format()</td>
+<td align="left">len()</td>
+<td align="left">property()</td>
+<td align="left">type()</td>
+</tr>
+
+<tr>
+<td>chr()</td>
+<td align="left">frozenset()</td>
+<td align="left">list()</td>
+<td align="left">range()</td>
+<td align="left">vars()</td>
+</tr>
+
+<tr>
+<td>classmethod()</td>
+<td align="left">getattr()</td>
+<td align="left">locals()</td>
+<td align="left">repr()</td>
+<td align="left">zip()</td>
+</tr>
+
+<tr>
+<td>compile()</td>
+<td align="left">globals()</td>
+<td align="left">map()</td>
+<td align="left">reversed()</td>
+<td align="left">__import__()</td>
+</tr>
+
+<tr>
+<td>complex()</td>
+<td align="left">hasattr()</td>
+<td align="left">max()</td>
+<td align="left">round()</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="abs-x">abs(x)</h3>
+
+<p>返回绝对值，参数x可以是整数，浮点数，复数。如果参数是复数，则返回复数的模。将复数的实部与虚部的平方和的正的平方根的值称为该复数的模。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">13.2</span><span class="p">)</span>
+<span class="mf">13.2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="mi">3j</span><span class="p">)</span> <span class="c1">#4*4 + 3*3=25,再计算25的平方根。</span>
+<span class="mf">5.0</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="all-iterable">all(iterable)</h3>
+
+<p>迭代对象iterable的所有元素不为0、&rdquo;、False或者空iterable，返回True，否则返回False。注意：空元组、空列表返回值为True。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="nb">all</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span>  <span class="c1"># 列表list</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">))</span> <span class="c1"># 元组tuple</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>       <span class="c1"># 列表list，存在一个为0的元素</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>      <span class="c1"># 列表list，存在0和&#39;&#39;的元素</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   <span class="c1"># 列表list，存在False元素</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">([])</span>                 <span class="c1"># 空列表</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">all</span><span class="p">(())</span>                 <span class="c1"># 空元组</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="any-iterable">any(iterable)</h3>
+
+<p>迭代对象iterable里面的元素只有一个为true时，返回true。否则false。元素除了是 0、’’、FALSE外都算TRUE。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">any</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span> <span class="c1"># 列表list，存在一个为空的元素</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">any</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>      <span class="c1"># 列表list,元素全为0,&#39;&#39;,false</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">any</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>      <span class="c1"># 元组tuple，元素全为0,&#39;&#39;,false</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">any</span><span class="p">([])</span>                  <span class="c1"># 空列表</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">any</span><span class="p">(())</span>                  <span class="c1"># 空元组</span>
+<span class="bp">False</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="ascii-x">ascii(x)</h3>
+
+<p>类似repr()函数, 返回一个表示对象的字符串, 但是对于字符串中的非ASCII字符则返回通过epr()函数使用\x, \u或\U编码的字符。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">ascii</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="s2">&#34;&#39;hello&#39;&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ascii</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="s1">&#39;123&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ascii</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="s1">&#39;[1, 2]&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ascii</span><span class="p">(</span><span class="s1">&#39;中国&#39;</span><span class="p">)</span>
+<span class="s2">&#34;&#39;</span><span class="se">\\</span><span class="s2">u4e2d</span><span class="se">\\</span><span class="s2">u56fd&#39;&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="bin-x">bin(x)</h3>
+
+<p>将整数x转换为二进制字符串(0b开头的)。如果x不为Python中int类型，x必须包含方法<strong>index</strong>()并且返回值为integer。返回值是str类型。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="s1">&#39;0b11&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">bin</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+<span class="s1">&#39;-0b1010&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)))</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果不想要前缀“0b”的话, 可以用以下的方式。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">format</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s1">&#39;#b&#39;</span><span class="p">),</span> <span class="n">format</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;0b1110&#39;</span><span class="p">,</span> <span class="s1">&#39;1110&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s1">&#39;{14:#b}&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;{14:b}&#39;</span>
+<span class="p">(</span><span class="s1">&#39;0b1110&#39;</span><span class="p">,</span> <span class="s1">&#39;1110&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="bool-x">bool(x)</h3>
+
+<p>用于将给定参数转换为布尔类型，如果没有参数，返回False。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="nb">bool</span><span class="p">()</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="breakpoint-args-kws">breakpoint(*args, **kws)</h3>
+
+<p>使得函数被调用时，让执行切换到调试器。相应的调试器不一定是Python自己的pdb，可以是之前被设为首选调试器的任何调试器。</p>
+
+<h3 id="bytearray">bytearray</h3>
+
+<p>请参照<a href="http://">Python基础教程010 bytearray</a></p>
+
+<h3 id="bytes">bytes</h3>
+
+<p>请参照<a href="http://">Python基础教程010 bytearray</a></p>
+
+<h3 id="callable-object">callable(object)</h3>
+
+<p>检查对象object是否可调用。如果返回True，object仍然可能调用失败；但如果返回False，调用对象ojbect绝对不会成功。对于函数,  lambda匿名函数, 类, 以及实现了<strong>call</strong>方法的类实例, 它都返回True。</p>
+
+<p>例子1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">la</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">callable</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># 函数返回 True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">callable</span><span class="p">(</span><span class="n">la</span><span class="p">))</span> <span class="c1"># lambda匿名函数返回 True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例子2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span> <span class="c1"># 类</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">callable</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="c1"># 类返回 True</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">callable</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="c1"># 没有实现 __call__, 返回False</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例子3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">():</span>
+        <span class="k">pass</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">callable</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="c1"># 实现了 __call__, 返回True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="chr-x">chr(x)</h3>
+
+<p>用一个范围在１～1,114,111 (0x10FFFF in base 16)整数作参数，返回一个对应的字符。x可以是10进制也可以是16进制的形式的数字。超出范围，抛出ValueError异常。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="k">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mh">0x30</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x31</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x61</span><span class="p">)</span> <span class="p">)</span> <span class="c1"># 十六进制</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="n">a</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">49</span><span class="p">),</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span> <span class="p">)</span> <span class="c1"># 十进制</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="n">a</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="classmethod-function">classmethod(function)</h3>
+
+<p>用来指定一个类的方法为类方法。classmethod修饰符对应的函数不需要实例化，不需要self参数，但第一个参数需要是表示自身类的cls参数，可以来调用类的属性，类的方法，实例化对象等。当然，类的实例也可以调用classmethod。可简写为@classmethod。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">func2</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;func2&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="p">()</span><span class="o">.</span><span class="n">func1</span><span class="p">()</span> <span class="c1"># 调用 foo 方法</span>
+
+<span class="n">A</span><span class="o">.</span><span class="n">func2</span><span class="p">()</span> <span class="c1">#不需要实例化</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">func2</span>
+<span class="mi">1</span>
+<span class="n">foo</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="compile-source-filename-mode-flags-dont-inherit">compile(source, filename, mode[, flags[, dont_inherit]])</h3>
+
+<p>将source编译为代码或者AST对象。代码对象能够通过exec()或者eval()进行求值。<br />
+参数source：字符串,二进制字符或者AST（Abstract Syntax Trees）对象。<br />
+参数filename：代码文件名称，如果不是从文件读取代码则传递一些可辨认的值。<br />
+参数mode：指定编译代码的种类。可以指定为&rsquo;exec&rsquo;,&lsquo;eval&rsquo;,&lsquo;single&rsquo;。<br />
+参数flag和dont_inherit：可选参数。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;3*4+5&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">eval</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">17</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">code</span> <span class="o">=</span> <span class="s2">&#34;for i in range(0, 10): print(i)&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cmpcode</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cmpcode</span>
+<span class="o">&lt;</span><span class="n">code</span> <span class="nb">object</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span> <span class="n">at</span> <span class="mh">0x10141e0b0</span><span class="p">,</span> <span class="nb">file</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">exec</span> <span class="n">cmpcode</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="err">……</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="complex-real-imag">complex([real[, imag]])</h3>
+
+<p>创建一个值为real + imag * j的复数或者转化一个字符串或数为复数。如果第一个参数为字符串，则不需要指定第二个参数。<br />
+参数real: int, long, float或字符串；<br />
+参数imag: int, long, float。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#数字</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">0j</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">)</span> <span class="c1">#当做字符串处理</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">0j</span><span class="p">)</span>
+<span class="c1"># 注意：这个地方在&#34;+&#34;号两边不能有空格，也就是不能写成&#34;1 + 2j&#34;，应该是&#34;1+2j&#34;，否则会报错</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="s2">&#34;1+2j&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2j</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B031-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/">
+            <span class="next-text nav-default">Python教程031 高阶函数</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
