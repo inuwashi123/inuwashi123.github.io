@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 12 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程034 python内置函数3</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B034-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B03/</link>
+      <pubDate>Sun, 13 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B034-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B03/</guid>
+      <description>open() 用于打开一个文件，创建一个file对象，相关的方法才可以调用它进行读写。如果打开失败，返回OSError异常。 open(file, mode=&#39;r&#39;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None) 参数说明： file</description>
+    </item>
     
     <item>
       <title>Python教程033 python内置函数2</title>
