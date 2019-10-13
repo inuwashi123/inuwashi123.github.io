@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程033 python内置函数2 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="delattr(object, name) 删除对象的属性。delattr(x, &amp;lsquo;foobar&amp;rsquo;) 相当于del x.foobar dict() 用于创建一个字典。 dict函数语法： 1 2 3 dict(**kwarg) dict(mapping, **kwarg) dict(iterable, **kwarg) 参数说明： **kwargs &amp;ndash; 关键字参数。 mapping &amp;ndash;" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B033-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B02/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程033 python内置函数2" />
+<meta property="og:description" content="delattr(object, name) 删除对象的属性。delattr(x, &lsquo;foobar&rsquo;) 相当于del x.foobar dict() 用于创建一个字典。 dict函数语法： 1 2 3 dict(**kwarg) dict(mapping, **kwarg) dict(iterable, **kwarg) 参数说明： **kwargs &ndash; 关键字参数。 mapping &ndash;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B033-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B02/" />
+<meta property="article:published_time" content="2019-10-12T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-12T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程033 python内置函数2">
+<meta itemprop="description" content="delattr(object, name) 删除对象的属性。delattr(x, &lsquo;foobar&rsquo;) 相当于del x.foobar dict() 用于创建一个字典。 dict函数语法： 1 2 3 dict(**kwarg) dict(mapping, **kwarg) dict(iterable, **kwarg) 参数说明： **kwargs &ndash; 关键字参数。 mapping &ndash;">
+
+
+<meta itemprop="datePublished" content="2019-10-12T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-12T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3466">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程033 python内置函数2"/>
+<meta name="twitter:description" content="delattr(object, name) 删除对象的属性。delattr(x, &lsquo;foobar&rsquo;) 相当于del x.foobar dict() 用于创建一个字典。 dict函数语法： 1 2 3 dict(**kwarg) dict(mapping, **kwarg) dict(iterable, **kwarg) 参数说明： **kwargs &ndash; 关键字参数。 mapping &ndash;"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程033 python内置函数2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-12 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3466 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#delattr-object-name">delattr(object, name)</a></li>
+<li><a href="#dict">dict()</a></li>
+<li><a href="#dir">dir()</a></li>
+<li><a href="#divmod-a-b">divmod(a, b)</a></li>
+<li><a href="#enumerate-iterable-start-0">enumerate(iterable, start=0)</a></li>
+<li><a href="#eval-expression-globals-locals">eval(expression[, globals[, locals]])</a></li>
+<li><a href="#exec-object-globals-locals">exec(object[, globals[, locals]])</a></li>
+<li><a href="#float-x">float([x])</a></li>
+<li><a href="#format-value-format-spec">format(value[, format_spec])</a></li>
+<li><a href="#frozenset">frozenset()</a></li>
+<li><a href="#getattr-object-name-default">getattr(object, name[, default])</a></li>
+<li><a href="#hasattr-object-name">hasattr(object, name)</a></li>
+<li><a href="#hash-object">hash(object)</a></li>
+<li><a href="#hex">hex()</a></li>
+<li><a href="#id-object">id(object)</a></li>
+<li><a href="#input-prompt">input([prompt])</a></li>
+<li><a href="#int-x-int-x-base-10">int([x]) int(x, base=10)</a></li>
+<li><a href="#isinstance-object-classinfo">isinstance(object, classinfo)</a></li>
+<li><a href="#issubclass-class-classinfo">issubclass(class, classinfo)</a></li>
+<li><a href="#iter-object-sentinel">iter(object[, sentinel])</a></li>
+<li><a href="#len">len()</a></li>
+<li><a href="#list-iterable">list([iterable])</a></li>
+<li><a href="#locals">locals()</a></li>
+<li><a href="#max-iterable-key-default-或max-arg1-arg2-args-key">max(iterable, *[, key, default])或max(arg1, arg2, *args[, key])</a></li>
+<li><a href="#memoryview">memoryview()</a></li>
+<li><a href="#min-iterable-key-default-或min-arg1-arg2-args-key">min(iterable, *[, key, default])或min(arg1, arg2, *args[, key])</a></li>
+<li><a href="#next-iterator-default">next(iterator[, default])</a></li>
+<li><a href="#object">object()</a></li>
+<li><a href="#oct-x">oct(x)</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="delattr-object-name">delattr(object, name)</h2>
+
+<p>删除对象的属性。delattr(x, &lsquo;foobar&rsquo;) 相当于del x.foobar</p>
+
+<h2 id="dict">dict()</h2>
+
+<p>用于创建一个字典。</p>
+
+<p>dict函数语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">dict</span><span class="p">(</span><span class="o">**</span><span class="n">kwarg</span><span class="p">)</span>  
+<span class="nb">dict</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span>  
+<span class="nb">dict</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>参数说明：<br />
+**kwargs &ndash; 关键字参数。<br />
+mapping &ndash; 元素的容器。<br />
+iterable &ndash; 可迭代对象。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="nb">dict</span><span class="p">()</span> <span class="c1">#创建空字典</span>
+<span class="p">{}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span> <span class="c1">#传入关键字</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="s1">&#39;t&#39;</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span> <span class="c1">#映射函数方式来构造字典</span>
+<span class="p">{</span><span class="s1">&#39;three&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dict</span><span class="p">([(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span> <span class="c1">#可迭代对象方式来构造字典</span>
+<span class="p">{</span><span class="s1">&#39;three&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="dir">dir()</h2>
+
+<p>函数不带参数时，返回当前范围内的变量、方法和定义的类型列表；带参数时，返回参数的属性、方法列表。如果参数包含方法<strong>dir</strong>()，该方法将被调用。如果参数不包含<strong>dir</strong>()，该方法将最大限度地收集参数信息。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="nb">dir</span><span class="p">()</span> <span class="c1"># 获得当前模块的属性列表</span>
+<span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;arr&#39;</span><span class="p">,</span> <span class="s1">&#39;myslice&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">([])</span> <span class="c1"># 查看列表的方法</span>
+<span class="p">[</span><span class="s1">&#39;__add__&#39;</span><span class="p">,</span> <span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__contains__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delitem__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delslice__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getitem__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getslice__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__iadd__&#39;</span><span class="p">,</span> <span class="s1">&#39;__imul__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__len__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__mul__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reversed__&#39;</span><span class="p">,</span> <span class="s1">&#39;__rmul__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setitem__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setslice__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;append&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;extend&#39;</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="s1">&#39;reverse&#39;</span><span class="p">,</span> <span class="s1">&#39;sort&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="divmod-a-b">divmod(a, b)</h2>
+
+<p>分别取商和余数，返回值是元组。<br />
+对于整数来说，相当于<code>(a // b, a % b)</code>。<br />
+对于浮点数来说，相当于<code>(q, a % b)</code>。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="enumerate-iterable-start-0">enumerate(iterable, start=0)</h2>
+
+<p>返回enumerate对象。iterable必须是序列、迭代器或其他支持迭代的对象。enumerate()返回的迭代器的<strong>next</strong>()方法返回一个包含计数（默认为0）和通过迭代iterable获得的值的元组。start指定从那个数字开始，默认为0。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,]</span>
+<span class="n">e</span>  <span class="o">=</span>  <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__next__</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__next__</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">enumerate</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="eval-expression-globals-locals">eval(expression[, globals[, locals]])</h2>
+
+<p>函数用来执行一个字符串表达式，并返回表达式的值。</p>
+
+<p>参数<br />
+expression &ndash; 表达式。<br />
+globals &ndash; 变量作用域，全局命名空间，如果被提供，则必须是一个字典对象。<br />
+locals &ndash; 变量作用域，局部命名空间，如果被提供，可以是任何映射对象。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;a+1&#34;</span><span class="p">))</span>   <span class="c1"># 执行结果为：11</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+<span class="n">g</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;a+1&#34;</span><span class="p">,</span><span class="n">g</span><span class="p">))</span> <span class="c1"># 执行结果为：5</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">c</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">g</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">}</span>
+<span class="n">t</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;a+b+c&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">t</span><span class="p">))</span> <span class="c1"># 执行的结果为：116</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="exec-object-globals-locals">exec(object[, globals[, locals]])</h2>
+
+<p>执行储存在字符串或文件中的Python语句，相比于eval，exec可以执行更复杂的Python代码。返回值永远为None。</p>
+
+<p>参数<br />
+object：必选参数，表示需要被指定的Python代码。它必须是字符串或code对象。如果object是一个字符串，该字符串会先被解析为一组Python语句，然后再执行（除非发生语法错误）。如果object是一个code对象，那么它只是被简单的执行。<br />
+globals：可选参数，表示全局命名空间（存放全局变量），如果被提供，则必须是一个字典对象。<br />
+locals：可选参数，表示当前局部命名空间（存放局部变量），如果被提供，可以是任何映射对象。如果该参数被忽略，那么它将会取与globals相同的值。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">z = 30
+</span><span class="s2">sum = x + y + z
+</span><span class="s2">print(sum)
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="k">exec</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">exec</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+    <span class="k">exec</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+<span class="n">func</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">60</span>
+<span class="mi">33</span>
+<span class="mi">34</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="float-x">float([x])</h2>
+
+<p>函数用于将整数或字符串转换成浮点数。
+如果参数是字符串，它应该包含一个十进制数字，可以选择在前面加一个符号，也可以选择嵌入空白。可选符号可以是“+”或“-”。“+”符号对生成的值没有影响。参数也可以是表示NaN（非数字）或正无穷大或负无穷大的字符串。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;+1.23&#39;</span><span class="p">)</span>
+<span class="mf">1.23</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;   -12345</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">12345.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-003&#39;</span><span class="p">)</span>
+<span class="mf">0.001</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;+1E6&#39;</span><span class="p">)</span>
+<span class="mf">1000000.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-Infinity&#39;</span><span class="p">)</span>
+<span class="o">-</span><span class="n">inf</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="format-value-format-spec">format(value[, format_spec])</h2>
+
+<p>依照format_spec格式来格式化value。format_spec的解释将取决于值value参数的类型。<code>format(value, format_spec)</code>相当于 <code>type(value).__format__(value, format_spec)</code> 。其中，type(value)意味着使用value的type类的<strong>format</strong>()方法。</p>
+
+<h2 id="frozenset">frozenset()</h2>
+
+<p>创建一个不可修改的集合。set和frozenset最本质的区别是前者是可变的，后者是不可变的。当集合对象会被改变时（例如删除，添加元素），只能使用set，一般来说使用fronzet的地方都可以使用set。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">frozenset</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="getattr-object-name-default">getattr(object, name[, default])</h2>
+
+<p>返回对象的属性的值。name必须是字符串例如，getattr（x，&rsquo;foobar&rsquo;）相当于x.foobar。如果命名属性不存在，则返回default（如果提供），否则将引发attributeError。</p>
+
+<h2 id="hasattr-object-name">hasattr(object, name)</h2>
+
+<p>如果字符串是对象某个属性的名称，则结果True；否则为False。</p>
+
+<h2 id="hash-object">hash(object)</h2>
+
+<p>返回对象的哈希值（如果有）。哈希值是整数。它们用于在字典查找期间快速比较字典键。不同类型的值，具有相同的哈希值（int 1和float 1.0,具有相同的hash值）。可哈希的即不可变数据类型，不可哈希即可变数据类型。</p>
+
+<h2 id="hex">hex()</h2>
+
+<p>将整数转换为前缀为“0x”的小写十六进制字符串。如果x不是int对象，它必须定义一个返回整数的<strong>index</strong>()方法。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hex</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="s1">&#39;0xff&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">hex</span><span class="p">(</span><span class="o">-</span><span class="mi">42</span><span class="p">)</span>
+<span class="s1">&#39;-0x2a&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="id-object">id(object)</h2>
+
+<p>返回对象的“标识”。这是一个整数，它保证在这个对象的生存期内是唯一的和不变的。生命周期不重叠的两个对象可能具有相同的id（）值。不同的解释器，实现是不一样的。Cpython解释器中的id返回的是对象的内存地址。</p>
+
+<h2 id="input-prompt">input([prompt])</h2>
+
+<p>接受一个标准输入数据，返回为string类型。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;input:&#34;</span><span class="p">)</span>
+<span class="nb">input</span><span class="p">:</span><span class="mi">123</span> <span class="c1"># 输入整数</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;int&#39;</span><span class="o">&gt;</span> <span class="c1"># 整型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;input:&#34;</span><span class="p">)</span>
+<span class="nb">input</span><span class="p">:</span><span class="s2">&#34;runoob&#34;</span> <span class="c1"># 正确，字符串表达式</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;str&#39;</span><span class="o">&gt;</span> <span class="c1"># 字符串</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="int-x-int-x-base-10">int([x]) int(x, base=10)</h2>
+
+<p>返回一个由数字或字符串x构造的整数，如果没有给定参数，则返回0。如果x定义了<strong>int</strong>(),int(x)返回x。如果x定义了<strong>trunc</strong>(),则返回x.__trunc__()。对于浮点数，返回整数部分。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">int</span><span class="p">(</span><span class="s2">&#34;1000&#34;</span><span class="p">)</span>           <span class="c1"># 1000</span>
+<span class="nb">int</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>    <span class="c1"># 64</span>
+<span class="nb">int</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 4</span>
+<span class="nb">int</span><span class="p">()</span>                 <span class="c1"># 0</span>
+<span class="nb">int</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>              <span class="c1"># 3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>注意</strong><br />
+oct，hex，bin函数返回值是字符串。<br />
+int函数返回值是数值。</p>
+
+<h2 id="isinstance-object-classinfo">isinstance(object, classinfo)</h2>
+
+<p>来判断一个对象是否是一个已知的类型，类似type()。isinstance()会认为子类是一种父类类型，考虑继承关系。classinfo参数可以是一个Tuple，元素可以是重复的。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="nb">int</span><span class="p">)</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span><span class="nb">isinstance</span> <span class="p">(</span><span class="n">a</span><span class="p">,(</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">list</span><span class="p">,</span><span class="nb">str</span><span class="p">))</span> <span class="c1"># 是元组中的一个返回True,str类型有两个。</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="issubclass-class-classinfo">issubclass(class, classinfo)</h2>
+
+<p>用于判断参数class是否是类型参数classinfo的子类。类本身也会返回True。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">A</span><span class="p">))</span> <span class="c1"># 返回True</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">))</span> <span class="c1"># 返回True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="iter-object-sentinel">iter(object[, sentinel])</h2>
+
+<p>返回迭代器对象。根据第二个参数的存在，第一个参数的解释非常不同。<br />
+如果没有第二个参数sentinel，object必须是支持迭代协议的集合对象（__iter__方法），或者必须支持序列协议（__getItem__方法，整数参数从0开始）。否则，抛出TypeError异常。
+如果给出了第二个参数sentinel，那么object必须是可调用对象。在这种情况下创建的迭代器将调用对象，每次调用其__next__()时都不带参数；如果返回的值等于sentinel，则将引发StopIteration，否则将返回该值。
+例如，利用第二个参数创建一个阅读器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mydata.db&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">process_block</span><span class="p">(</span><span class="n">block</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="len">len()</h2>
+
+<p>返回对象（字符、字节，列表、元组、range对象，set，frozen set，字典等）长度或项目个数。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;runoob&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#字符串长度</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="c1">#列表元素个数</span>
+<span class="mi">5</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="list-iterable">list([iterable])</h2>
+
+<p>用于将元组或字符串转换为列表。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">aTuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;Google&#39;</span><span class="p">,</span> <span class="s1">&#39;Runoob&#39;</span><span class="p">,</span> <span class="s1">&#39;Taobao&#39;</span><span class="p">)</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">aTuple</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;列表元素 : &#34;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+<span class="nb">str</span><span class="o">=</span><span class="s2">&#34;Hello World&#34;</span>
+<span class="n">list2</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;列表元素 : &#34;</span><span class="p">,</span> <span class="n">list2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">列表元素</span> <span class="p">:</span> <span class="p">[</span><span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;Google&#39;</span><span class="p">,</span> <span class="s1">&#39;Runoob&#39;</span><span class="p">,</span> <span class="s1">&#39;Taobao&#39;</span><span class="p">]</span>
+<span class="err">列表元素</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="locals">locals()</h2>
+
+<p>以字典类型返回当前位置的全部局部变量。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="k">def</span> <span class="nf">runoob</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span> <span class="c1"># 两个局部变量：arg、z</span>
+<span class="o">...</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">...</span> <span class="k">print</span> <span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">runoob</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;arg&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span> <span class="c1"># 返回一个名字/值对的字典</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="max-iterable-key-default-或max-arg1-arg2-args-key">max(iterable, *[, key, default])或max(arg1, arg2, *args[, key])</h2>
+
+<p>返回给定参数的最大值，参数可以为序列。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span> <span class="p">(</span><span class="s2">&#34;max(80, 100, 1000) : &#34;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&#34;max(-80, -20, -10) : &#34;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">max</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">:</span> <span class="mi">1000</span>
+<span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="o">-</span><span class="mi">10</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="memoryview">memoryview()</h2>
+
+<p>返回对象obj的内存查看对象。所谓内存查看对象，就是对象符合缓冲区协议的对象，为了给别的代码使用缓冲区里的数据，而不必拷贝，就可以直接使用</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">memoryview</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;aabc&#39;</span><span class="p">))</span>      <span class="c1"># &lt;memory at 0x00000185CCC95408&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">memoryview</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;abc&#39;</span><span class="p">)))</span> <span class="c1"># [97, 98, 99]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="min-iterable-key-default-或min-arg1-arg2-args-key">min(iterable, *[, key, default])或min(arg1, arg2, *args[, key])</h2>
+
+<p>返回给定参数的最小值，参数可以为序列。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;min(80, 100, 1000) : &#34;</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;min(-80, -20, -10) : &#34;</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">min</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">:</span> <span class="mi">80</span>
+<span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="o">-</span><span class="mi">80</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="next-iterator-default">next(iterator[, default])</h2>
+
+<p>通过调用迭代器的<strong>next</strong>()方法，返回迭代器的下一个项目。如果给定默认值，则在迭代器耗尽时返回，否则将引发StopIteration异常。</p>
+
+<h2 id="object">object()</h2>
+
+<p>返回一个新的无特征对象。对象是所有类的父类。它具有所有Python类实例通用的方法。此函数不接受任何参数。object没有<strong>dict</strong>属性，因此不能将任意属性分配给对象类的实例。</p>
+
+<h2 id="oct-x">oct(x)</h2>
+
+<p>将整数转换为以“0o”为前缀的八进制字符串。如果x不是int对象，它必须定义一个返回整数的<strong>index</strong>()方法。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">oct</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="s1">&#39;0o10&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">oct</span><span class="p">(</span><span class="o">-</span><span class="mi">56</span><span class="p">)</span>
+<span class="s1">&#39;-0o70&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B032-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B01/">
+            <span class="next-text nav-default">Python教程032 python内置函数1</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

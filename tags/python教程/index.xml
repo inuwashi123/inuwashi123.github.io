@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 11 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 12 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程033 python内置函数2</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B033-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B02/</link>
+      <pubDate>Sat, 12 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B033-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B02/</guid>
+      <description>delattr(object, name) 删除对象的属性。delattr(x, &amp;lsquo;foobar&amp;rsquo;) 相当于del x.foobar dict() 用于创建一个字典。 dict函数语法： 1 2 3 dict(**kwarg) dict(mapping, **kwarg) dict(iterable, **kwarg) 参数说明： **kwargs &amp;ndash; 关键字参数。 mapping &amp;ndash;</description>
+    </item>
     
     <item>
       <title>Python教程032 python内置函数1</title>
