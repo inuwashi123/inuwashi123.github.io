@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程035 模块module 与 包package - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="模块与包 除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B035-%E6%A8%A1%E5%9D%97module-%E4%B8%8E-%E5%8C%85package/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程035 模块module 与 包package" />
+<meta property="og:description" content="模块与包 除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B035-%E6%A8%A1%E5%9D%97module-%E4%B8%8E-%E5%8C%85package/" />
+<meta property="article:published_time" content="2019-10-14T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-14T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程035 模块module 与 包package">
+<meta itemprop="description" content="模块与包 除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py">
+
+
+<meta itemprop="datePublished" content="2019-10-14T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-14T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3437">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程035 模块module 与 包package"/>
+<meta name="twitter:description" content="模块与包 除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程035 模块module 与 包package</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-14 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3437 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#模块与包">模块与包</a></li>
+<li><a href="#import语句-from-import语句">import语句，from&hellip;import语句</a></li>
+<li><a href="#重命名模块-子包-对象">重命名模块/子包/对象</a></li>
+<li><a href="#常规包-regular-packages">常规包(regular packages)</a></li>
+<li><a href="#命名空间包-namespace-packages">命名空间包(namespace packages)</a></li>
+<li><a href="#模块的-file-属性">模块的 <strong>file</strong>属性</a></li>
+<li><a href="#包引用顺序">包引用顺序</a></li>
+<li><a href="#if-name-main-的解析">if __name__ == &lsquo;__main__&lsquo;: 的解析</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="模块与包">模块与包</h2>
+
+<p>除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py文件就是模块。模块的名字就是该文件的名字（不包含后缀）。</p>
+
+<p>Python 中（至少）有三类模块：<br />
+1.使用 Python 编写的模块（.py)；<br />
+2.使用 C 编写的动态加载模块（.dll，.pyd，.so，.sl 等）；<br />
+3.使用 C 编写并链接到解释器的模块，要获取此列表，输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="s1">&#39;_ast&#39;</span><span class="p">,</span> <span class="s1">&#39;_codecs&#39;</span><span class="p">,</span> <span class="s1">&#39;_collections&#39;</span><span class="p">,</span> <span class="s1">&#39;_functools&#39;</span><span class="p">,</span> <span class="s1">&#39;_imp&#39;</span><span class="p">,</span> <span class="s1">&#39;_io&#39;</span><span class="p">,</span> <span class="s1">&#39;_locale&#39;</span><span class="p">,</span> <span class="s1">&#39;_operator&#39;</span><span class="p">,</span> <span class="s1">&#39;_signal&#39;</span><span class="p">,</span> <span class="s1">&#39;_sre&#39;</span><span class="p">,</span> <span class="s1">&#39;_stat&#39;</span><span class="p">,</span> <span class="s1">&#39;_string&#39;</span><span class="p">,</span> <span class="s1">&#39;_symtable&#39;</span><span class="p">,</span> <span class="s1">&#39;_thread&#39;</span><span class="p">,</span> <span class="s1">&#39;_tracemalloc&#39;</span><span class="p">,</span> <span class="s1">&#39;_warnings&#39;</span><span class="p">,</span> <span class="s1">&#39;_weakref&#39;</span><span class="p">,</span> <span class="s1">&#39;atexit&#39;</span><span class="p">,</span> <span class="s1">&#39;builtins&#39;</span><span class="p">,</span> <span class="s1">&#39;errno&#39;</span><span class="p">,</span> <span class="s1">&#39;faulthandler&#39;</span><span class="p">,</span> <span class="s1">&#39;gc&#39;</span><span class="p">,</span> <span class="s1">&#39;itertools&#39;</span><span class="p">,</span> <span class="s1">&#39;marshal&#39;</span><span class="p">,</span> <span class="s1">&#39;posix&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,</span> <span class="s1">&#39;sys&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;xxsubtype&#39;</span><span class="p">,</span> <span class="s1">&#39;zipimport&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>除了模块，还有包的概念。可以将包视为文件系统上的目录，将模块视为目录中的文件。与文件系统目录一样，包是按层次结构组织的，包本身可能包含子包以及模块。</p>
+
+<p>重要的是要记住所有包都是模块，但并非所有模块都是包。换句话说，包只是一种特殊的模块。具体来说，任何包含<strong>path</strong>属性的模块都被视为包。</p>
+
+<p>所有模块都有一个名称。子包名称与其父包名称用句点分开，类似于Python的标准属性访问语法。例如A.B.C,A是B的父包，B是C的父包。</p>
+
+<p>import语句不是调用机制唯一的方法。importlib.import_module()和内置__import __()等函数也可用于调用导入机制。</p>
+
+<h2 id="import语句-from-import语句">import语句，from&hellip;import语句</h2>
+
+<p>通过导入，一个模块中的Python代码可以访问另一个模块中的代码。 import语句是调用导入机制的最常用方法。import语句进行两个操作;它搜索命名模块，然后将搜索结果绑定到本地。 import语句的搜索实际上是调用__import __()函数。 __import __()的返回值用于执行import语句的名称绑定操作。</p>
+
+<p>首次导入模块时，Python会搜索模块，如果找到，它会创建一个模块对象，并对其进行初始化。如果找不到指定的模块，则引发ModuleNotFoundError。</p>
+
+<p>用import或者from&hellip;import来导入相应的模块。有以下几种形式。
+将整个包(package)导入，格式为：<code>import &lt;package&gt;</code><br />
+将整个模块(module)导入，格式为：<code>import &lt;module&gt;</code><br />
+从某个包中导入模块/子包/对象，格式为：<code>from &lt;package&gt; import module or subpackage or object&gt;</code><br />
+从某个模块中导入对象,格式为：<code>from &lt;module&gt; import &lt;object&gt;</code><br />
+从某个模块中导入多个对象,格式为：<code>from &lt;module&gt; import &lt;object1&gt;,&lt;object2&gt;,&lt;object3&gt;</code><br />
+将某个模块中的全部对象导入，格式为： <code>from &lt;module&gt; import *</code></p>
+
+<p><code>from &lt;module&gt; import *</code> 可以导入像sayhi这样公用的名字，但不会导入<strong>version</strong>，因为它是以双下划线开始的特殊属性。不建议使用from import * ，有不可预知的风险</p>
+
+<h2 id="重命名模块-子包-对象">重命名模块/子包/对象</h2>
+
+<p>格式为：<br />
+<code>from &lt;package&gt; import &lt;module or subpackage or object&gt; as myname</code></p>
+
+<p>例如：
+<code>import sys as systemModule</code></p>
+
+<h2 id="常规包-regular-packages">常规包(regular packages)</h2>
+
+<p>Python定义了两种类型的包，常规包(regular packages)和命名空间包(namespace packages)。 常规包是Python 3.2及更早版本中存在的传统包。 常规包通常为包含<strong>init</strong>.py文件的目录。 导入常规包时，将隐式执行此<strong>init</strong>.py文件，并且它定义的对象将绑定到包命名空间中。__init__.py文件可以包含Python代码，并且Python将在导入模块时向模块添加一些其他属性。</p>
+
+<p>例如，以下文件系统布局定义了一个包含三个子包的顶级父包parent：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">─</span><span class="n">parent</span>
+    <span class="err">│─</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="err">│</span>
+    <span class="err">├─</span><span class="n">one</span>
+    <span class="err">│───</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="err">│</span>
+    <span class="err">├─</span><span class="n">three</span>
+    <span class="err">│───</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="err">│</span>
+    <span class="err">└─</span><span class="n">two</span>
+    <span class="err">│───</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>导入parent.one将隐式执行parent/__ init__.py和parent/one/ __init__.py。 随后导入的parent.two或parent.three将分别执行parent/two/__init__.py和parent/three/__init__.py。</p>
+
+<p>import module 时，模块中所有的代码将被执行（类对象，函数对象将被创建，不会被调用），import package时，init.py文件中的代码也将被执行。</p>
+
+<h2 id="命名空间包-namespace-packages">命名空间包(namespace packages)</h2>
+
+<p>不包含<strong>init</strong>.py文件的目录，是命名空间包(namespace packages)。这一特性是在 Python 3.3 被引入的。</p>
+
+<p>比如下面的目录结构：
+.<br />
+├── configs<br />
+│   └── config.py<br />
+├── depends<br />
+├── tools<br />
+    └──<strong>init</strong>.py<br />
+│   └── tool.py<br />
+如果要在tools/tool.py导入configs/config.py中的内容，在Python 3(3.3及之后) 中就可以直接使用from configs.config import * 来导入，Python 3.3以前就不可以，如果一定要这样做，就需要给configs文件夹下加入<strong>init</strong>.py才可以。</p>
+
+<p>但是所谓的命名空间包提出的本意却不是说为了导入没有<strong>init</strong>.py 的文件夹的 Python 模块，而是利用命名空间包这个技术来导入目录分散的代码。</p>
+
+<p>假设你有Python代码的两个不同的目录如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">foo</span><span class="o">-</span><span class="n">package</span><span class="o">/</span>  
+    <span class="n">spam</span><span class="o">/</span>  
+        <span class="n">blah</span><span class="o">.</span><span class="n">py</span>  
+
+<span class="n">bar</span><span class="o">-</span><span class="n">package</span><span class="o">/</span>  
+    <span class="n">spam</span><span class="o">/</span>  
+        <span class="n">grok</span><span class="o">.</span><span class="n">py</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>在这2个目录里，都有着共同的命名空间spam。在任何一个目录里都没有<strong>init</strong>.py 文件。这时候再导入这两个包的时候：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;foo-package&#39;</span><span class="p">,</span> <span class="s1">&#39;bar-package&#39;</span><span class="p">])</span>
+<span class="kn">import</span> <span class="nn">spam.blah</span>
+<span class="kn">import</span> <span class="nn">spam.grok</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>两个不同的包目录被合并到一起，你可以导入spam.blah和spam.grok，并且它们能够工作。
+在这里工作的机制被称为命名空间包的一个特征。从本质上讲，命名空间包是一种特殊的封装设计，为合并不同的目录的代码到一个共同的命名空间。</p>
+
+<p>命名空间包的关键是确保顶级目录中没有<strong>init</strong>.py文件来作为共同的命名空间。缺失<strong>init</strong>.py文件使得在导入包的时候会发生有趣的事情：这并没有产生错误，解释器创建了一个由所有包含匹配包名的目录组成的列表。特殊的包命名空间模块被创建，只读的目录列表副本被存储在其<strong>path</strong> 变量中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spam</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">spam</span><span class="o">.</span><span class="n">__path__</span>
+<span class="n">_NamespacePath</span><span class="p">([</span><span class="s1">&#39;foo-package/spam&#39;</span><span class="p">,</span> <span class="s1">&#39;bar-package/spam&#39;</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>上面 configs 的例子其<strong>path</strong>变量如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">configs</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="n">__path__</span>
+<span class="n">_NamespacePath</span><span class="p">([</span><span class="s1">&#39;/project/configs&#39;</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在定位包的子组件时，目录<strong>path</strong>将被用到(例如, 当导入 spam.grok 或者 spam.blah 的时候或者 configs.config).
+一个包是否被作为一个包命名空间的主要方法是检查其<strong>file</strong> 属性。如果没有，那包是个命名空间。这也可以由其字符表现形式中的 namespace 这个词体现出来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="vm">__file__</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">module</span> <span class="s1">&#39;configs&#39;</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__file__&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">other</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">other</span><span class="o">.</span><span class="vm">__file__</span>
+<span class="s1">&#39;/other/__init__.py&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">other</span>
+<span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;other&#39;</span> <span class="kn">from</span> <span class="s1">&#39;/other/__init__.py&#39;</span><span class="o">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="模块的-file-属性">模块的 <strong>file</strong>属性</h2>
+
+<p>导入模块时，可以通过模块的<strong>file</strong>属性查看模块所在磁盘的路径位置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">requests</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">requests</span><span class="o">.</span><span class="vm">__file__</span>
+<span class="s1">&#39;D:</span><span class="se">\\</span><span class="s1">Programs</span><span class="se">\\</span><span class="s1">Anaconda3</span><span class="se">\\</span><span class="s1">envs</span><span class="se">\\</span><span class="s1">py_test</span><span class="se">\\</span><span class="s1">lib</span><span class="se">\\</span><span class="s1">site-packages</span><span class="se">\\</span><span class="s1">requests</span><span class="se">\\</span><span class="s1">__init__.py&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="包引用顺序">包引用顺序</h2>
+
+<p>解释器会按照sys.path列表的顺序来查找被引入的包或模块名字。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pprint</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">Python35-32</span><span class="se">\\</span><span class="s1">python35.zip&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">Python35-32</span><span class="se">\\</span><span class="s1">DLLs&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">Python35-32</span><span class="se">\\</span><span class="s1">lib&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">Python35-32&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;C:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">Python35-32</span><span class="se">\\</span><span class="s1">lib</span><span class="se">\\</span><span class="s1">site-packages&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>优先加载当前工作目录下的模块，如果你的项目中使用了与内建模块中同名的包或模块名，就会遇到没有xx属性之类的报错提示。</p>
+
+<p>你可以操作sys.path，使得其他路径文件加入到Path中，使之能被解释器发现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 当前目录没有hi模块，报错找不到模块</span>
+<span class="kn">import</span> <span class="nn">hi</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于找不到hi模块，会报错如下，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="ne">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="n">hi</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>将hi模块加入到path中，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># hi模块所在位置： /data/hi.py</span>
+<span class="c1"># 将hi所在模块加入sys.path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;/data&#34;</span><span class="p">)</span>
+
+<span class="c1"># 可以正常工作了</span>
+<span class="kn">import</span> <span class="nn">hi</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>另外一种加载模块的方法：如果你的模块不在sys.path，还可以使用 imp 模块中的方法 imp.load_source</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">imp</span>
+<span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&#34;hi&#34;</span><span class="p">,</span> <span class="s2">&#34;C://data/hi.py&#34;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">hi</span>
+<span class="c1"># 可以自己指定模块的名字，相当与 import hi as h2</span>
+<span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&#34;h2&#34;</span><span class="p">,</span> <span class="s2">&#34;C://data/hi.py&#34;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">h2</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="if-name-main-的解析">if __name__ == &lsquo;__main__&lsquo;: 的解析</h2>
+
+<p>通过上面的讲解，我们知道Python文件既可以拿来执行，也可以用来作为模块使用import导入。当Python解析器读取一个源文件时它会执行所有的代码。在执行代码前会定义一些特殊的变量。如果解析器运行的模块(源文件)作为主程序，它将会把<strong>name</strong>变量设置成”__main__”。如果只是引入其他的模块,<strong>name</strong>变量将会设置成模块的名字，通常为模块文件名，不带路径或者文件扩展名。</p>
+
+<p>在代码下方添加if __name__ == &lsquo;__main__&lsquo;:  的主要原因是有时你需要你写的模块既可以直接的执行,还可以被当做模块导入到其他模块中去.通过检查是不是主函数,可以让你的代码只在它作为主程序运行时执行,而当其他人调用你的模块中的函数的时候不必执行。简单来说就是，方便我们代码复用，也可以测试模块。</p>
+
+<p>举例说明：创建一个using_name.py文件,内容如下。<br />
+<code>print(__name__)</code></p>
+
+<p>通过python命令直接运行，python using_name.py<br />
+运行结果是<strong>main</strong>。</p>
+
+<p>在Python的交互模式下运行，结果是using_name。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">using_name</span>
+<span class="n">using_name</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>修改using_name.py，如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;run  itself&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;imported from another module&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过python命令直接运行，python using_name.py<br />
+运行结果是run  itself。</p>
+
+<p>在Python的交互模式下运行，结果是imported from another module。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">using_name</span>
+<span class="n">imported</span> <span class="kn">from</span> <span class="nn">another</span> <span class="nn">module</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B034-python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B03/">
+            <span class="next-text nav-default">Python教程034 python内置函数3</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

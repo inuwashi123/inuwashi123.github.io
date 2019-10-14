@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 13 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程035 模块module 与 包package</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B035-%E6%A8%A1%E5%9D%97module-%E4%B8%8E-%E5%8C%85package/</link>
+      <pubDate>Mon, 14 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B035-%E6%A8%A1%E5%9D%97module-%E4%B8%8E-%E5%8C%85package/</guid>
+      <description>模块与包 除了交互式编写python代码在Python解释器执行之外，还可以将代码写入后缀为py的文件。然后通过python命令编译执行。py</description>
     </item>
     
     <item>
