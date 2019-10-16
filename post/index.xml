@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vba快速入门04-数据类型</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A804-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Wed, 16 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A804-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description>VBA数据类型 与其它的编程语言一样，VBA也有它自己的数据类型。数据类型是对同一类数据的统称，如文本、日期、数值等。VBA里的数据类型有：字</description>
+    </item>
     
     <item>
       <title>Python教程036 面向对象编程 类与实例</title>
