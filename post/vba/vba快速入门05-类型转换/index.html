@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门05-类型转换 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="类型转换函数 每个函数都将表达式强制转换为特定的数据类型。 类型转换函数名 返回值 参数的范围 CBool Boolean 任何有效的字符串或数值型表达式。 CByte Byte 0 到 255. CCur Currency -922,337,203,685,477.5808 到" /><meta name="keywords" content="vba, 宏, 类型转换" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A805-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门05-类型转换" />
+<meta property="og:description" content="类型转换函数 每个函数都将表达式强制转换为特定的数据类型。 类型转换函数名 返回值 参数的范围 CBool Boolean 任何有效的字符串或数值型表达式。 CByte Byte 0 到 255. CCur Currency -922,337,203,685,477.5808 到" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A805-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" />
+<meta property="article:published_time" content="2019-10-17T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-17T09:09:44+09:00" />
+<meta itemprop="name" content="vba快速入门05-类型转换">
+<meta itemprop="description" content="类型转换函数 每个函数都将表达式强制转换为特定的数据类型。 类型转换函数名 返回值 参数的范围 CBool Boolean 任何有效的字符串或数值型表达式。 CByte Byte 0 到 255. CCur Currency -922,337,203,685,477.5808 到">
+
+
+<meta itemprop="datePublished" content="2019-10-17T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-17T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="5496">
+
+
+
+<meta itemprop="keywords" content="excel vba," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门05-类型转换"/>
+<meta name="twitter:description" content="类型转换函数 每个函数都将表达式强制转换为特定的数据类型。 类型转换函数名 返回值 参数的范围 CBool Boolean 任何有效的字符串或数值型表达式。 CByte Byte 0 到 255. CCur Currency -922,337,203,685,477.5808 到"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门05-类型转换</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-17 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 5496 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#类型转换函数">类型转换函数</a>
+<ul>
+<li><a href="#cbool">CBool</a></li>
+<li><a href="#cbyte">CByte</a></li>
+<li><a href="#cdate">CDate</a></li>
+<li><a href="#cdbl">CDbl</a></li>
+<li><a href="#cint">CInt</a></li>
+<li><a href="#clng">CLng</a></li>
+<li><a href="#csng">CSng</a></li>
+<li><a href="#cstr">CStr</a></li>
+<li><a href="#cvar">CVar</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="类型转换函数">类型转换函数</h2>
+
+<p>每个函数都将表达式强制转换为特定的数据类型。</p>
+
+<table>
+<thead>
+<tr>
+<th>类型转换函数名</th>
+<th>返回值</th>
+<th>参数的范围</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CBool</td>
+<td>Boolean</td>
+<td>任何有效的字符串或数值型表达式。</td>
+</tr>
+
+<tr>
+<td>CByte</td>
+<td>Byte</td>
+<td>0 到 255.</td>
+</tr>
+
+<tr>
+<td>CCur</td>
+<td>Currency</td>
+<td>-922,337,203,685,477.5808 到 922,337,203,685,477.5807。</td>
+</tr>
+
+<tr>
+<td>CDate</td>
+<td>Date</td>
+<td>任何有效的日期表达式。</td>
+</tr>
+
+<tr>
+<td>CDbl</td>
+<td>Double</td>
+<td>负值为 -1.79769313486231E308 到 -4.94065645841247E-324；正值为 4.94065645841247E-324 到 1.79769313486232E308。</td>
+</tr>
+
+<tr>
+<td>CDec</td>
+<td>Decimal</td>
+<td>零缩放数（即数字中没有小数位）为79,228,162,514,264,337,593,543,950,335。 有28个小数位的数字的范围为7.9228162514264337593543950335。 最小的非零数字为0.0000000000000000000000000001。</td>
+</tr>
+
+<tr>
+<td>CInt</td>
+<td>Integer</td>
+<td>-32,768 到 32,767；分数会四舍五入。</td>
+</tr>
+
+<tr>
+<td>CLng</td>
+<td>Long</td>
+<td>-2,147,483,648 到 2,147,483,647；分数会四舍五入。</td>
+</tr>
+
+<tr>
+<td>CLngLng</td>
+<td>LongLong</td>
+<td>-9,223,372,036,854,775,808 至 9,223,372,036,854,775,807，分数四舍五入。 （仅在 64 位平台上有效。）</td>
+</tr>
+
+<tr>
+<td>CLngPtr</td>
+<td>LongPtr</td>
+<td>32 位系统上为 -2,147,483,648 到 2,147,483,647，64 位系统上为 -9,223,372,036,854,775,808 到 9,223,372,036,854,775,807；32 位系统和 64 位系统分数都四舍五入。</td>
+</tr>
+
+<tr>
+<td>CSng</td>
+<td>Single</td>
+<td>负值为 -3.402823E38 到 -1.401298E-45；正值为 1.401298E-45 到 3.402823E38。</td>
+</tr>
+
+<tr>
+<td>CStr</td>
+<td>String</td>
+<td>CStr 的返回值取决于expression参数。</td>
+</tr>
+
+<tr>
+<td>CVar</td>
+<td>Variant</td>
+<td>和“Double”**** 针对数值型的范围相同。 和“字符串”**** 针对非数值型的范围相同。</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果传递给函数的参数超出转换目标数据类型的范围，则会发生错误。</p>
+
+<p>下面只介绍常用的几种数据类型转换，没有介绍的稍微了解下就行了。</p>
+
+<h3 id="cbool">CBool</h3>
+
+<p><code>CBool(表达式)</code><br />
+CBool函数将表达式转换为Boolean。 如果该表达式计算结果为非零值，则CBool将返回True，否则，返回False。</p>
+
+<p>例1，各种类型转换为Boolean</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="c">&#39; Byte类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">10</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">65535</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="n">10</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;0&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;12&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="p">#</span><span class="n">1</span><span class="o">/</span><span class="n">1</span><span class="o">/</span><span class="n">1900</span><span class="p">#</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">17</span><span class="o">/</span><span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Boolean类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>数字形式的String类型能够转换为Boolean类型,如上例中的&rdquo;0&rdquo;和&rdquo;12&rdquo;。
+非数字形式的String类型不能转换为Boolean类型，提示类型错误。</p>
+
+<p>例2，非数字形式的String类型转换为Boolean</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34; &#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;a&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CBool</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行test过程的后的错误如下：</p>
+
+<p><img src="/images/vba/005-1-TypeError1.PNG" alt="类型转换错误" title="类型转换错误" /></p>
+
+<h3 id="cbyte">CByte</h3>
+
+<p><code>CByte(表达式)</code><br />
+CByte函数将表达式转换为Byte。</p>
+
+<p>例3，各种类型转换为Byte</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="c">&#39; Boolean类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="n">10</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 10
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;0&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;12&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="p">#</span><span class="n">1</span><span class="o">/</span><span class="n">1</span><span class="o">/</span><span class="n">1900</span><span class="p">#</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="p">#</span><span class="n">1</span><span class="o">/</span><span class="n">2</span><span class="o">/</span><span class="n">1900</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 2
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 3
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Byte类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CByte</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Byte类型的范围是0到255，Integer，Long，Single，Double等超出这个范围时就会报错。Date类型转换为Byte类型时，是从1899年12/31日开始的，上面的#1/1/1900#会转换为2，#1/2/1900#会转换为3。</p>
+
+<p>数字形式的String类型是可以转换为Byte类型的，但字面量必须是0-255，如&rdquo;123&rdquo;,&ldquo;12&rdquo;,&ldquo;9&rdquo;都可以。</p>
+
+<h3 id="cdate">CDate</h3>
+
+<p><code>CDate(表达式)</code><br />
+CDate函数将表达式转换为Date类型。</p>
+
+<p>例4，各种类型转换为Date</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 1899/12/29
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 1900/04/09
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 1900/01/11
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 2:24:00
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="n">10</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 1900/01/09 2:24:00
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;February 12, 1969&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;4:35:47 PM&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 1969/02/12
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 16:35:47
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 1900/09/11
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0:00:00
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>表达式必须是有效的日期格式才可以，否则会引起类型转换错误。</p>
+
+<p>例5，String类型转换为Date</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="c">&#39; String类型转换为Date类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;abc&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34; &#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 不是有效的日期格式，报错
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDate</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 不是有效的日期格式，报错
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行test过程的后的错误如下：</p>
+
+<p><img src="/images/vba/005-1-TypeError1.PNG" alt="类型转换错误" title="类型转换错误" /></p>
+
+<h3 id="cdbl">CDbl</h3>
+
+<p><code>CDbl(表达式)</code><br />
+CDbl函数将表达式转换为Double类型。</p>
+
+<p>例6，各种类型转换为Double</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 -1
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 0.100000001490116
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 43726
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;1234567&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 123
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 1234567
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Double类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CDbl</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="cint">CInt</h3>
+
+<p><code>CInt(表达式)</code><br />
+CInt函数将表达式转换为Integer类型。</p>
+
+<p>例7，各种类型转换为Integer类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 -1
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 -103
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;12&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 123
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Integer类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CInt</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="clng">CLng</h3>
+
+<p><code>CLng(表达式)</code><br />
+CLng函数将表达式转换为Long类型。</p>
+
+<p>例8，各种类型转换为Long类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 -1
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">0</span><span class="p">#</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 43726
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;1234567&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 123
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 1234567
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Long类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CLng</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="csng">CSng</h3>
+
+<p><code>CSng(表达式)</code><br />
+CSng函数将表达式转换为Single类型。</p>
+
+<p>例9，各种类型转换为Single类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 -1
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">123456789</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="n">10</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 1.234568E+08
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 -10
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 43726
+</span><span class="c"></span>
+    <span class="c">&#39; String类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="s">&#34;1234567&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 123
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 1234567
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Single类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CSng</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="cstr">CStr</h3>
+
+<p><code>CStr(表达式)</code><br />
+CStr函数将表达式转换为String类型。</p>
+
+<p>例10，各种类型转换为String类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 True
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 100
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 12
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">123456789</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="n">10</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 123456789
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 -10
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 1899/12/31
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 2019/09/18
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">100</span><span class="p">.</span><span class="n">89</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 0.1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 100.89
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果是字符串 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为String类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">Variant</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">Variant</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">Empty</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果是空字符串
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="k">CStr</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果是空字符串
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="cvar">CVar</h3>
+
+<p><code>CVar(表达式)</code><br />
+CVar函数将表达式转换为Variant类型。</p>
+
+<p>例11，各种类型转换为Variant类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">test</span><span class="p">()</span>
+
+    <span class="c">&#39; Boolean类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">a1</span> <span class="ow">As</span> <span class="kt">Boolean</span><span class="p">,</span> <span class="n">a2</span> <span class="ow">As</span> <span class="kt">Boolean</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="k">False</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c">&#39; 结果 False
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c">&#39; 结果 True
+</span><span class="c"></span>
+    <span class="c">&#39; Double类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">b1</span> <span class="ow">As</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">As</span> <span class="kt">Double</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">100</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c">&#39; 结果 100
+</span><span class="c"></span>
+    <span class="c">&#39; Integer类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">c1</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">12</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c">&#39; 结果 12
+</span><span class="c"></span>
+    <span class="c">&#39; Long类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">d1</span> <span class="ow">As</span> <span class="kt">Long</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">As</span> <span class="kt">Long</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">123456789</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="n">10</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c">&#39; 结果 123456789
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c">&#39; 结果 -10
+</span><span class="c"></span>
+    <span class="c">&#39; Date类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">e1</span> <span class="ow">As</span> <span class="kt">Date</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">As</span> <span class="kt">Date</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="p">#</span><span class="n">12</span><span class="o">/</span><span class="n">31</span> <span class="n">1899</span><span class="p">#</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="p">#</span><span class="n">9</span><span class="o">/</span><span class="n">18</span> <span class="n">2019</span><span class="p">#</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="c">&#39; 结果 1899/12/31
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="c">&#39; 结果 2019/09/18
+</span><span class="c"></span>
+    <span class="c">&#39; Single类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">f1</span> <span class="ow">As</span> <span class="k">Single</span><span class="p">,</span> <span class="n">f2</span> <span class="ow">As</span> <span class="k">Single</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">0</span><span class="p">.</span><span class="n">1</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">100</span><span class="p">.</span><span class="n">89</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span> <span class="c">&#39; 结果 0.1
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="c">&#39; 结果 100.89
+</span><span class="c"></span>
+    <span class="c">&#39; Byte类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">g1</span> <span class="ow">As</span> <span class="kt">Byte</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">As</span> <span class="kt">Byte</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">0</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">255</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="c">&#39; 结果 0
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span> <span class="c">&#39; 结果 255
+</span><span class="c"></span>
+    <span class="c">&#39; Variant类型转换为Variant类型
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">h1</span> <span class="ow">As</span> <span class="kt">String</span><span class="p">,</span> <span class="n">h2</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="s">&#34;&#34;</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="s">&#34;a&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="c">&#39; 结果是空字符串
+</span><span class="c"></span>    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">CVar</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="c">&#39; 结果 a
+</span><span class="c"></span><span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>参考地址：
+<a href="https://docs.microsoft.com/zh-cn/office/vba/language/concepts/getting-started/type-conversion-functions">https://docs.microsoft.com/zh-cn/office/vba/language/concepts/getting-started/type-conversion-functions</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel-vba/">excel vba</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A804-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+            <span class="next-text nav-default">vba快速入门04-数据类型</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
