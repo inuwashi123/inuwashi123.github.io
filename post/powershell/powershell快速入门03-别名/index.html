@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>PowerShell快速入门03-别名 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="PowerShell 支持别名。别名允许具有其他 Shell 经验的用户使用其已知的常见命令名称在 PowerShell 中执行类似操作。例如，cmd.exe和Linux shell中的cd命令都" /><meta name="keywords" content="内置别名, 别名, alias" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%88%AB%E5%90%8D/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="PowerShell快速入门03-别名" />
+<meta property="og:description" content="PowerShell 支持别名。别名允许具有其他 Shell 经验的用户使用其已知的常见命令名称在 PowerShell 中执行类似操作。例如，cmd.exe和Linux shell中的cd命令都" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%88%AB%E5%90%8D/" />
+<meta property="article:published_time" content="2019-10-18T07:00:44+09:00" />
+<meta property="article:modified_time" content="2019-10-18T07:00:44+09:00" />
+<meta itemprop="name" content="PowerShell快速入门03-别名">
+<meta itemprop="description" content="PowerShell 支持别名。别名允许具有其他 Shell 经验的用户使用其已知的常见命令名称在 PowerShell 中执行类似操作。例如，cmd.exe和Linux shell中的cd命令都">
+
+
+<meta itemprop="datePublished" content="2019-10-18T07:00:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-18T07:00:44&#43;09:00" />
+<meta itemprop="wordCount" content="4742">
+
+
+
+<meta itemprop="keywords" content="PowerShell教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerShell快速入门03-别名"/>
+<meta name="twitter:description" content="PowerShell 支持别名。别名允许具有其他 Shell 经验的用户使用其已知的常见命令名称在 PowerShell 中执行类似操作。例如，cmd.exe和Linux shell中的cd命令都"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">PowerShell快速入门03-别名</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-18 </span>
+        <div class="post-category">
+            <a href="/categories/powershell/"> PowerShell </a>
+            </div>
+          <span class="more-meta"> 约 4742 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#查看别名">查看别名</a></li>
+<li><a href="#内置别名的规则">内置别名的规则</a></li>
+<li><a href="#创建别名">创建别名</a></li>
+<li><a href="#删除别名">删除别名</a></li>
+<li><a href="#导出别名到文件">导出别名到文件</a></li>
+<li><a href="#导入别名文件">导入别名文件</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>PowerShell 支持别名。别名允许具有其他 Shell 经验的用户使用其已知的常见命令名称在 PowerShell 中执行类似操作。例如，cmd.exe和Linux shell中的cd命令都是表示改变路径，PowerShell也可以使用cd命令，cd命令是Set-Location命令的别名。</p>
+
+<p>别名功能可帮助用户迅速使用PowerShell。有些Cmdlet有多个别名，Get-ChildItem的别名是ls 和 dir，这两个别名来源于unix 的shell和windows的cmd。</p>
+
+<p>PowerShell不单内置了很多别名，还允许新建自己的别名，下面会一一进行介绍。</p>
+
+<h2 id="查看别名">查看别名</h2>
+
+<p>Get-Alias命令显示与别名相关联的PowerShell命令的真实名称。</p>
+
+<p><code>Get-Alias cls</code>的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-output" data-lang="output"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-output" data-lang="output">CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Alias           cd -&gt; Set-Location</code></pre></td></tr></table>
+</div>
+</div>
+<p>Get-Alias命令后面不跟任何参数(也就是<code>Get-Alias</code>)，则可以查看所有别名。</p>
+
+<p>备注： <code>ls alias:</code>或者 <code>dir alias:</code>也可以查看所有别名</p>
+
+<p>输出的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-output" data-lang="output"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-output" data-lang="output">CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Alias           % -&gt; ForEach-Object
+Alias           ? -&gt; Where-Object
+Alias           ac -&gt; Add-Content
+Alias           asnp -&gt; Add-PSSnapin
+Alias           cat -&gt; Get-Content
+Alias           cd -&gt; Set-Location
+Alias           CFS -&gt; ConvertFrom-String                          3.1.0.0    Microsoft.PowerShell.Utility
+Alias           chdir -&gt; Set-Location
+Alias           clc -&gt; Clear-Content
+Alias           clear -&gt; Clear-Host
+Alias           clhy -&gt; Clear-History
+Alias           cli -&gt; Clear-Item
+Alias           clp -&gt; Clear-ItemProperty
+Alias           cls -&gt; Clear-Host
+Alias           clv -&gt; Clear-Variable
+Alias           cnsn -&gt; Connect-PSSession
+Alias           compare -&gt; Compare-Object
+Alias           copy -&gt; Copy-Item
+Alias           cp -&gt; Copy-Item
+Alias           cpi -&gt; Copy-Item
+Alias           cpp -&gt; Copy-ItemProperty
+Alias           curl -&gt; Invoke-WebRequest
+Alias           cvpa -&gt; Convert-Path
+Alias           dbp -&gt; Disable-PSBreakpoint
+Alias           del -&gt; Remove-Item
+Alias           diff -&gt; Compare-Object
+Alias           dir -&gt; Get-ChildItem
+Alias           dnsn -&gt; Disconnect-PSSession
+Alias           ebp -&gt; Enable-PSBreakpoint
+Alias           echo -&gt; Write-Output
+Alias           epal -&gt; Export-Alias
+Alias           epcsv -&gt; Export-Csv
+Alias           epsn -&gt; Export-PSSession
+Alias           erase -&gt; Remove-Item
+Alias           etsn -&gt; Enter-PSSession
+Alias           exsn -&gt; Exit-PSSession
+Alias           fc -&gt; Format-Custom
+Alias           fhx -&gt; Format-Hex                                  3.1.0.0    Microsoft.PowerShell.Utility
+Alias           fl -&gt; Format-List
+Alias           foreach -&gt; ForEach-Object
+Alias           ft -&gt; Format-Table
+Alias           fw -&gt; Format-Wide
+Alias           gal -&gt; Get-Alias
+Alias           gbp -&gt; Get-PSBreakpoint
+Alias           gc -&gt; Get-Content
+Alias           gcb -&gt; Get-Clipboard                               3.1.0.0    Microsoft.PowerShell.Management
+Alias           gci -&gt; Get-ChildItem
+Alias           gcm -&gt; Get-Command
+Alias           gcs -&gt; Get-PSCallStack
+Alias           gdr -&gt; Get-PSDrive
+Alias           ghy -&gt; Get-History
+Alias           gi -&gt; Get-Item
+Alias           gin -&gt; Get-ComputerInfo                            3.1.0.0    Microsoft.PowerShell.Management
+Alias           gjb -&gt; Get-Job
+Alias           gl -&gt; Get-Location
+Alias           gm -&gt; Get-Member
+Alias           gmo -&gt; Get-Module
+Alias           gp -&gt; Get-ItemProperty
+Alias           gps -&gt; Get-Process
+Alias           gpv -&gt; Get-ItemPropertyValue
+Alias           group -&gt; Group-Object
+Alias           gsn -&gt; Get-PSSession
+Alias           gsnp -&gt; Get-PSSnapin
+Alias           gsv -&gt; Get-Service
+Alias           gtz -&gt; Get-TimeZone                                3.1.0.0    Microsoft.PowerShell.Management
+Alias           gu -&gt; Get-Unique
+Alias           gv -&gt; Get-Variable
+Alias           gwmi -&gt; Get-WmiObject
+Alias           h -&gt; Get-History
+Alias           history -&gt; Get-History
+Alias           icm -&gt; Invoke-Command
+Alias           iex -&gt; Invoke-Expression
+Alias           ihy -&gt; Invoke-History
+Alias           ii -&gt; Invoke-Item
+Alias           ipal -&gt; Import-Alias
+Alias           ipcsv -&gt; Import-Csv
+Alias           ipmo -&gt; Import-Module
+Alias           ipsn -&gt; Import-PSSession
+Alias           irm -&gt; Invoke-RestMethod
+Alias           ise -&gt; powershell_ise.exe
+Alias           iwmi -&gt; Invoke-WmiMethod
+Alias           iwr -&gt; Invoke-WebRequest
+Alias           kill -&gt; Stop-Process
+Alias           lp -&gt; Out-Printer
+Alias           ls -&gt; Get-ChildItem
+Alias           man -&gt; help
+Alias           md -&gt; mkdir
+Alias           measure -&gt; Measure-Object
+Alias           mi -&gt; Move-Item
+Alias           mount -&gt; New-PSDrive
+Alias           move -&gt; Move-Item
+Alias           mp -&gt; Move-ItemProperty
+Alias           mv -&gt; Move-Item
+Alias           nal -&gt; New-Alias
+Alias           ndr -&gt; New-PSDrive
+Alias           ni -&gt; New-Item
+Alias           nmo -&gt; New-Module
+Alias           npssc -&gt; New-PSSessionConfigurationFile
+Alias           nsn -&gt; New-PSSession
+Alias           nv -&gt; New-Variable
+Alias           ogv -&gt; Out-GridView
+Alias           oh -&gt; Out-Host
+Alias           popd -&gt; Pop-Location
+Alias           ps -&gt; Get-Process
+Alias           pushd -&gt; Push-Location
+Alias           pwd -&gt; Get-Location
+Alias           r -&gt; Invoke-History
+Alias           rbp -&gt; Remove-PSBreakpoint
+Alias           rcjb -&gt; Receive-Job
+Alias           rcsn -&gt; Receive-PSSession
+Alias           rd -&gt; Remove-Item
+Alias           rdr -&gt; Remove-PSDrive
+Alias           ren -&gt; Rename-Item
+Alias           ri -&gt; Remove-Item
+Alias           rjb -&gt; Remove-Job
+Alias           rm -&gt; Remove-Item
+Alias           rmdir -&gt; Remove-Item
+Alias           rmo -&gt; Remove-Module
+Alias           rni -&gt; Rename-Item
+Alias           rnp -&gt; Rename-ItemProperty
+Alias           rp -&gt; Remove-ItemProperty
+Alias           rsn -&gt; Remove-PSSession
+Alias           rsnp -&gt; Remove-PSSnapin
+Alias           rujb -&gt; Resume-Job
+Alias           rv -&gt; Remove-Variable
+Alias           rvpa -&gt; Resolve-Path
+Alias           rwmi -&gt; Remove-WmiObject
+Alias           sajb -&gt; Start-Job
+Alias           sal -&gt; Set-Alias
+Alias           saps -&gt; Start-Process
+Alias           sasv -&gt; Start-Service
+Alias           sbp -&gt; Set-PSBreakpoint
+Alias           sc -&gt; Set-Content
+Alias           scb -&gt; Set-Clipboard                               3.1.0.0    Microsoft.PowerShell.Management
+Alias           select -&gt; Select-Object
+Alias           set -&gt; Set-Variable
+Alias           shcm -&gt; Show-Command
+Alias           si -&gt; Set-Item
+Alias           sl -&gt; Set-Location
+Alias           sleep -&gt; Start-Sleep
+Alias           sls -&gt; Select-String
+Alias           sort -&gt; Sort-Object
+Alias           sp -&gt; Set-ItemProperty
+Alias           spjb -&gt; Stop-Job
+Alias           spps -&gt; Stop-Process
+Alias           spsv -&gt; Stop-Service
+Alias           start -&gt; Start-Process
+Alias           stz -&gt; Set-TimeZone                                3.1.0.0    Microsoft.PowerShell.Management
+Alias           sujb -&gt; Suspend-Job
+Alias           sv -&gt; Set-Variable
+Alias           swmi -&gt; Set-WmiInstance
+Alias           tee -&gt; Tee-Object
+Alias           trcm -&gt; Trace-Command
+Alias           type -&gt; Get-Content
+Alias           wget -&gt; Invoke-WebRequest
+Alias           where -&gt; Where-Object
+Alias           wjb -&gt; Wait-Job
+Alias           write -&gt; Write-Output</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="内置别名的规则">内置别名的规则</h2>
+
+<p>别名不仅仅是为了实现与其他命令 shell 的名称兼容，内置的大多数别名都是为了实现简洁性而设计的。较短的名称更容易键入，但如果你不知道它们所指的是什么，则难以理解。</p>
+
+<p>PowerShell别名尝试兼顾清晰度和简洁性。 PowerShell为常见名词和谓词使用一组标准的别名。
+示例缩写：</p>
+
+<table>
+<thead>
+<tr>
+<th>名词或谓词</th>
+<th>缩写</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Get</td>
+<td>g</td>
+</tr>
+
+<tr>
+<td>Set</td>
+<td>s</td>
+</tr>
+
+<tr>
+<td>Item</td>
+<td>i</td>
+</tr>
+
+<tr>
+<td>Location</td>
+<td>l</td>
+</tr>
+
+<tr>
+<td>Command</td>
+<td>cm</td>
+</tr>
+
+<tr>
+<td>Alias</td>
+<td>al</td>
+</tr>
+</tbody>
+</table>
+
+<p>了解简写名称后，这些别名是可以理解的。</p>
+
+<table>
+<thead>
+<tr>
+<th>Cmdlet名称</th>
+<th>别名</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Get-Item</td>
+<td>gi</td>
+</tr>
+
+<tr>
+<td>Set-Item</td>
+<td>si</td>
+</tr>
+
+<tr>
+<td>Get-Location</td>
+<td>gl</td>
+</tr>
+
+<tr>
+<td>Set-Location</td>
+<td>sl</td>
+</tr>
+
+<tr>
+<td>Get-Command</td>
+<td>gcm</td>
+</tr>
+
+<tr>
+<td>Get-Alias</td>
+<td>gal</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="创建别名">创建别名</h2>
+
+<p>可以使用Set-Alias cmdlet创建自己的别名。 例如，为Get-Help命令创建别名gh是<code>Set-Alias -Name gh -Value Get-Help</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Set-Alias</span> <span class="n">-Name</span> <span class="n">gh</span> <span class="n">-Value</span> <span class="nb">Get-Help</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">gh</span>
+
+<span class="n">トピック</span>
+    <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">のヘルプ</span> <span class="n">システム</span>
+
+<span class="n">概要</span>
+    <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">のコマンドレットと概念に関するヘルプを表示します</span><span class="err">。</span>
+
+<span class="n">詳細説明</span>
+    <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">ヘルプでは</span><span class="err">、</span><span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">コマンドレット</span><span class="err">、</span>
+    <span class="n">関数</span><span class="err">、</span><span class="n">スクリプト</span><span class="err">、</span><span class="n">およびモジュールと</span><span class="err">、</span><span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">言語の</span>
+    <span class="n">要素などの概念について説明します</span><span class="err">。</span>
+
+    <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">にヘルプ</span> <span class="n">ファイルが含まれていなくても</span><span class="err">、</span><span class="n">オンラインでヘルプ</span> <span class="n">トピックを</span>
+    <span class="n">参照できます</span><span class="err">。</span><span class="n">また</span><span class="err">、</span><span class="nb">Update-Help</span> <span class="n">コマンドレットを使用してヘルプ</span> <span class="n">ファイルを</span>
+    <span class="n">コンピューターにダウンロードし</span><span class="err">、</span><span class="nb">Get-Help</span> <span class="n">コマンドレットを使用してコマンド</span> <span class="n">ラインで</span>
+    <span class="n">ヘルプ</span> <span class="n">トピックを表示できます</span><span class="err">。</span>
+
+    <span class="nb">Update-Help</span> <span class="n">コマンドレットを使用すると</span><span class="err">、</span><span class="n">更新されたヘルプ</span> <span class="n">ファイルをリリース時に</span>
+    <span class="n">ダウンロードして</span><span class="err">、</span><span class="n">ローカルのヘルプ</span> <span class="n">コンテンツが古くならないようにすることもできます</span><span class="err">。</span>
+
+    <span class="n">ヘルプ</span> <span class="n">ファイルがない場合は</span><span class="err">、</span><span class="nb">Get-Help</span> <span class="n">を実行すると</span><span class="err">、</span><span class="n">コマンドレット</span><span class="err">、</span><span class="n">関数</span><span class="err">、</span>
+    <span class="n">およびスクリプトについて</span><span class="err">、</span><span class="n">自動生成されたヘルプが表示されます</span><span class="err">。</span>
+
+
+  <span class="n">オンライン</span> <span class="n">ヘルプ</span>
+    <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">のオンライン</span> <span class="n">ヘルプは</span><span class="err">、</span><span class="n">TechNet</span> <span class="n">ライブラリにあります</span><span class="err">。</span>
+    <span class="n">まずは</span><span class="err">、</span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">108518</span> <span class="n">を参照してください</span><span class="err">。</span>
+
+    <span class="n">任意のコマンドレッドまたは関数のオンライン</span> <span class="n">ヘルプを表示するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="p">&lt;</span><span class="n">コマンドレット名</span><span class="p">&gt;</span> <span class="n">-Online</span>
+
+  <span class="nb">UPDATE-HELP</span>
+    <span class="n">コンピューターにヘルプ</span> <span class="n">ファイルをダウンロードしてインストールするには</span><span class="err">、</span><span class="n">次の手順を実行します</span><span class="err">。</span>
+
+       <span class="n">1</span><span class="p">.[</span><span class="n">管理者として実行</span><span class="p">]</span> <span class="n">オプションを使用して</span> <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">を起動します</span><span class="err">。</span>
+       <span class="n">2</span><span class="p">.</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+          <span class="nb">Update-Help</span>
+
+    <span class="n">ヘルプ</span> <span class="n">ファイルがインストールされたら</span><span class="err">、</span><span class="nb">Get-Help</span> <span class="n">コマンドレットを使用して</span><span class="err">、</span>
+    <span class="n">ヘルプ</span> <span class="n">トピックを表示できます</span><span class="err">。</span><span class="n">また</span><span class="err">、</span><span class="nb">Update-Help</span> <span class="n">コマンドレットを使用すると</span><span class="err">、</span>
+    <span class="n">ローカルのヘルプ</span> <span class="n">ファイルが常に最新の状態で保たれるように</span><span class="err">、</span><span class="n">更新された</span>
+    <span class="n">ヘルプ</span> <span class="n">ファイルをダウンロードできます</span><span class="err">。</span>
+
+    <span class="nb">Update-Help</span> <span class="n">コマンドレットの詳細を確認するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+       <span class="nb">Get-Help</span> <span class="nb">Update-Help</span> <span class="n">-Online</span>
+
+    <span class="n">または</span><span class="err">、</span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">210614</span> <span class="n">を参照してください</span><span class="err">。</span>
+
+
+  <span class="nb">GET-HELP</span>
+    <span class="nb">Get-Help</span> <span class="n">コマンドレットを実行すると</span><span class="err">、</span><span class="n">コンピューターに保存されているヘルプ</span> <span class="n">ファイルのコンテンツから</span><span class="err">、</span>
+    <span class="n">コマンド</span> <span class="n">ラインにヘルプが表示されます</span><span class="err">。</span><span class="n">ヘルプ</span> <span class="n">ファイルがない場合に</span> <span class="nb">Get-Help</span> <span class="n">を実行すると</span><span class="err">、</span>
+    <span class="n">コマンドレットと関数について基本的なヘルプが表示されます</span><span class="err">。</span><span class="n">また</span><span class="err">、</span><span class="nb">Get-Help</span> <span class="n">を使用して</span><span class="err">、</span>
+    <span class="n">コマンドレットと関数についてオンライン</span> <span class="n">ヘルプを表示することもできます</span><span class="err">。</span>
+
+    <span class="n">コマンドレットのヘルプを表示するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="p">&lt;</span><span class="n">コマンドレット名</span><span class="p">&gt;</span>
+
+    <span class="n">オンライン</span> <span class="n">ヘルプを表示するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="p">&lt;</span><span class="n">コマンドレット名</span><span class="p">&gt;</span> <span class="n">-Online</span>
+
+    <span class="n">概念説明のトピックのタイトルは</span> <span class="s2">&#34;About_&#34;</span> <span class="n">で始まります</span><span class="err">。</span>
+    <span class="n">概念または言語要素のヘルプを表示するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="n">About_</span><span class="p">&lt;</span><span class="n">トピック名</span><span class="p">&gt;</span>
+
+    <span class="n">すべてのヘルプ</span> <span class="n">ファイルで単語や語句を検索するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="p">&lt;</span><span class="n">検索用語</span><span class="p">&gt;</span>
+
+    <span class="nb">Get-Help</span> <span class="n">コマンドレットの詳細を確認するには</span><span class="err">、</span><span class="n">次のように入力します</span><span class="err">。</span>
+
+        <span class="nb">Get-Help</span> <span class="nb">Get-Help</span> <span class="n">-Online</span>
+
+    <span class="n">または</span><span class="err">、</span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">113316</span> <span class="n">を参照してください</span><span class="err">。</span>
+
+
+  <span class="n">例</span><span class="err">:</span>
+      <span class="n">Save-Help</span>              <span class="err">:</span> <span class="n">インターネットからヘルプ</span> <span class="n">ファイルをダウンロードして</span><span class="err">、</span>
+                               <span class="n">ファイル共有に保存します</span><span class="err">。</span>
+      <span class="nb">Update-Help</span>            <span class="err">:</span> <span class="n">インターネットまたはファイル共有からヘルプ</span> <span class="n">ファイルを</span>
+                               <span class="n">ダウンロードしてインストールします</span><span class="err">。</span>
+      <span class="nb">Get-Help</span> <span class="nb">Get-Process</span>   <span class="err">:</span> <span class="nb">Get-Process</span> <span class="n">コマンドレットに関するヘルプを表示します</span><span class="err">。</span>
+      <span class="nb">Get-Help</span> <span class="nb">Get-Process</span> <span class="n">-Online</span>
+                             <span class="err">:</span> <span class="nb">Get-Process</span> <span class="n">コマンドレットのオンライン</span> <span class="n">ヘルプを開きます</span><span class="err">。</span>
+      <span class="n">Help</span> <span class="nb">Get-Process</span>       <span class="err">:</span> <span class="nb">Get-Process</span> <span class="n">に関するヘルプを</span> <span class="n">1</span> <span class="n">ページずつ表示します</span><span class="err">。</span>
+      <span class="nb">Get-Process</span> <span class="p">-?</span>         <span class="err">:</span> <span class="nb">Get-Process</span> <span class="n">コマンドレットに関するヘルプを表示します</span><span class="err">。</span>
+      <span class="nb">Get-Help</span> <span class="n">About_Modules</span> <span class="err">:</span> <span class="n">Windows</span> <span class="n">PowerShell</span> <span class="n">モジュールに関するヘルプを表示します</span><span class="err">。</span>
+      <span class="nb">Get-Help</span> <span class="n">remoting</span>      <span class="err">:</span> <span class="n">ヘルプ</span> <span class="n">トピックで</span> <span class="s2">&#34;リモート処理&#34;</span> <span class="n">という単語を検索します</span><span class="err">。</span>
+
+  <span class="n">関連項目</span><span class="err">:</span>
+      <span class="n">about_Updatable_Help</span>
+      <span class="nb">Get-Help</span>
+      <span class="n">Save-Help</span>
+      <span class="nb">Update-Help</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>前面介绍的内置的别名有一部分是不可以更改的，如果尝试更改，你将收到一个错误，该错误说明别名无法进行修改。因为这些内置的别名是只读的，不许更改。例如，内置别名gi是只读的，不可以更改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span><span class="p">&gt;</span> <span class="nb">Set-Alias</span> <span class="n">-Name</span> <span class="n">gi</span> <span class="n">-Value</span> <span class="nb">Get-Item</span>
+<span class="nb">Set-Alias</span> <span class="err">:</span> <span class="k">Alias</span> <span class="n">is</span> <span class="n">not</span> <span class="n">writeable</span> <span class="n">because</span> <span class="k">alias</span> <span class="n">gi</span> <span class="n">is</span> <span class="nb">read-only</span> <span class="n">or</span> <span class="n">constant</span> <span class="n">and</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">written</span> <span class="n">to</span><span class="p">.</span>
+<span class="n">At</span> <span class="n">line</span><span class="err">:</span><span class="n">1</span> <span class="n">char</span><span class="err">:</span><span class="n">10</span>
+<span class="p">+</span> <span class="nb">Set-Alias</span>  <span class="p">&lt;&lt;&lt;&lt;</span> <span class="n">-Name</span> <span class="n">gi</span> <span class="n">-Value</span> <span class="nb">Get-Item</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>内置别名cat是可读写的，可以更改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Get-Alias</span> <span class="n">cat</span>
+
+<span class="n">CommandType</span>     <span class="n">Name</span>                                               <span class="n">Version</span>    <span class="n">Source</span>
+<span class="p">-----------</span>     <span class="p">----</span>                                               <span class="p">-------</span>    <span class="p">------</span>
+<span class="k">Alias</span>           <span class="n">cat</span> <span class="p">-&gt;</span> <span class="nb">Get-Content</span>
+
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Set-Alias</span> <span class="n">-name</span> <span class="n">ca</span> <span class="n">-value</span> <span class="nb">Get-Content</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">ca</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="n">hello</span><span class="p">.</span><span class="n">txt</span>
+<span class="n">hello</span> <span class="n">content</span><span class="p">.</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="删除别名">删除别名</h2>
+
+<p>别名不用删除，自定义的别名在powershell退出时会自动清除。powershell内置别名（诸如ls,dir,fl等）不会清除。如果你非得手工删除别名。请使用<code>del Alias:别名</code>。例如删除自定义get-help的别名gh，<code>del Alias:gh</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">del</span> <span class="k">alias</span><span class="err">:</span><span class="n">gh</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">gh</span>
+<span class="n">gh</span> <span class="err">:</span> <span class="n">用語</span> <span class="s1">&#39;gh&#39;</span> <span class="n">は</span><span class="err">、</span><span class="n">コマンドレット</span><span class="err">、</span><span class="n">関数</span><span class="err">、</span><span class="n">スクリプト</span> <span class="n">ファイル</span><span class="err">、</span><span class="n">または操作可能なプログラムの名前として認識されません</span><span class="err">。</span><span class="n">名</span>
+<span class="n">前が正しく記述されていることを確認し</span><span class="err">、</span><span class="n">パスが含まれている場合はそのパスが正しいことを確認してから</span><span class="err">、</span><span class="n">再試行してください</span><span class="err">。</span>
+<span class="n">発生場所</span> <span class="n">行</span><span class="err">:</span><span class="n">1</span> <span class="n">文字</span><span class="err">:</span><span class="n">1</span>
+<span class="p">+</span> <span class="n">gh</span>
+<span class="p">+</span> <span class="p">~~</span>
+    <span class="p">+</span> <span class="n">CategoryInfo</span>          <span class="err">:</span> <span class="n">ObjectNotFound</span><span class="err">:</span> <span class="p">(</span><span class="n">gh</span><span class="err">:</span><span class="n">String</span><span class="p">)</span> <span class="p">[],</span> <span class="n">CommandNotFoundException</span>
+    <span class="p">+</span> <span class="n">FullyQualifiedErrorId</span> <span class="err">:</span> <span class="n">CommandNotFoundException</span>
+
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="导出别名到文件">导出别名到文件</h2>
+
+<p>可以使用Export-Alias将别名导出到文件，需要时再通过Import-Alias导入。默认情况下，Import-Alias会把内置和自定义的别名输出到文件。例如，输出所有的别名到alias.ps1文件，并利用别名命令ca查看文件内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Export-Alias</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="k">alias</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">ca</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="k">alias</span><span class="p">.</span><span class="n">ps1</span>
+<span class="c"># エイリアス ファイル</span>
+<span class="c"># エクスポート ユーザー: pwtest</span>
+<span class="c"># 日付/時刻: 2019年9月26日 15:41:50</span>
+<span class="c"># コンピューター: pwtest-PC</span>
+<span class="s2">&#34;foreach&#34;</span><span class="p">,</span><span class="s2">&#34;ForEach-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;%&#34;</span><span class="p">,</span><span class="s2">&#34;ForEach-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;where&#34;</span><span class="p">,</span><span class="s2">&#34;Where-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;?&#34;</span><span class="p">,</span><span class="s2">&#34;Where-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ac&#34;</span><span class="p">,</span><span class="s2">&#34;Add-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;clc&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;cli&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;clp&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;clv&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;compare&#34;</span><span class="p">,</span><span class="s2">&#34;Compare-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;cpi&#34;</span><span class="p">,</span><span class="s2">&#34;Copy-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;cpp&#34;</span><span class="p">,</span><span class="s2">&#34;Copy-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;cvpa&#34;</span><span class="p">,</span><span class="s2">&#34;Convert-Path&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;dbp&#34;</span><span class="p">,</span><span class="s2">&#34;Disable-PSBreakpoint&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;diff&#34;</span><span class="p">,</span><span class="s2">&#34;Compare-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ebp&#34;</span><span class="p">,</span><span class="s2">&#34;Enable-PSBreakpoint&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;epal&#34;</span><span class="p">,</span><span class="s2">&#34;Export-Alias&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;epcsv&#34;</span><span class="p">,</span><span class="s2">&#34;Export-Csv&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;fc&#34;</span><span class="p">,</span><span class="s2">&#34;Format-Custom&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;fl&#34;</span><span class="p">,</span><span class="s2">&#34;Format-List&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ft&#34;</span><span class="p">,</span><span class="s2">&#34;Format-Table&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;fw&#34;</span><span class="p">,</span><span class="s2">&#34;Format-Wide&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gal&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Alias&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gbp&#34;</span><span class="p">,</span><span class="s2">&#34;Get-PSBreakpoint&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gc&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gci&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ChildItem&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gcm&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Command&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gdr&#34;</span><span class="p">,</span><span class="s2">&#34;Get-PSDrive&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gcs&#34;</span><span class="p">,</span><span class="s2">&#34;Get-PSCallStack&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ghy&#34;</span><span class="p">,</span><span class="s2">&#34;Get-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gi&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gl&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gm&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Member&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gmo&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Module&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gp&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gpv&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ItemPropertyValue&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gps&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;group&#34;</span><span class="p">,</span><span class="s2">&#34;Group-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gsv&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Service&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gu&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Unique&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gv&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;iex&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-Expression&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ihy&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ii&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ipmo&#34;</span><span class="p">,</span><span class="s2">&#34;Import-Module&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ipal&#34;</span><span class="p">,</span><span class="s2">&#34;Import-Alias&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ipcsv&#34;</span><span class="p">,</span><span class="s2">&#34;Import-Csv&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;measure&#34;</span><span class="p">,</span><span class="s2">&#34;Measure-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;mi&#34;</span><span class="p">,</span><span class="s2">&#34;Move-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;mp&#34;</span><span class="p">,</span><span class="s2">&#34;Move-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;nal&#34;</span><span class="p">,</span><span class="s2">&#34;New-Alias&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ndr&#34;</span><span class="p">,</span><span class="s2">&#34;New-PSDrive&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ni&#34;</span><span class="p">,</span><span class="s2">&#34;New-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;nv&#34;</span><span class="p">,</span><span class="s2">&#34;New-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;nmo&#34;</span><span class="p">,</span><span class="s2">&#34;New-Module&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;oh&#34;</span><span class="p">,</span><span class="s2">&#34;Out-Host&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rbp&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-PSBreakpoint&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rdr&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-PSDrive&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ri&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rni&#34;</span><span class="p">,</span><span class="s2">&#34;Rename-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rnp&#34;</span><span class="p">,</span><span class="s2">&#34;Rename-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rp&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rmo&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Module&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rv&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rvpa&#34;</span><span class="p">,</span><span class="s2">&#34;Resolve-Path&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sal&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Alias&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sasv&#34;</span><span class="p">,</span><span class="s2">&#34;Start-Service&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sbp&#34;</span><span class="p">,</span><span class="s2">&#34;Set-PSBreakpoint&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sc&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;select&#34;</span><span class="p">,</span><span class="s2">&#34;Select-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;si&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sl&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sleep&#34;</span><span class="p">,</span><span class="s2">&#34;Start-Sleep&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sort&#34;</span><span class="p">,</span><span class="s2">&#34;Sort-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sp&#34;</span><span class="p">,</span><span class="s2">&#34;Set-ItemProperty&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;saps&#34;</span><span class="p">,</span><span class="s2">&#34;Start-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;start&#34;</span><span class="p">,</span><span class="s2">&#34;Start-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;spps&#34;</span><span class="p">,</span><span class="s2">&#34;Stop-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;spsv&#34;</span><span class="p">,</span><span class="s2">&#34;Stop-Service&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;sv&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;tee&#34;</span><span class="p">,</span><span class="s2">&#34;Tee-Object&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;write&#34;</span><span class="p">,</span><span class="s2">&#34;Write-Output&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;irm&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-RestMethod&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;iwr&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-WebRequest&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;asnp&#34;</span><span class="p">,</span><span class="s2">&#34;Add-PSSnapIn&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gsnp&#34;</span><span class="p">,</span><span class="s2">&#34;Get-PSSnapIn&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gwmi&#34;</span><span class="p">,</span><span class="s2">&#34;Get-WmiObject&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;iwmi&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-WMIMethod&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ogv&#34;</span><span class="p">,</span><span class="s2">&#34;Out-GridView&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ise&#34;</span><span class="p">,</span><span class="s2">&#34;powershell_ise.exe&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rsnp&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-PSSnapin&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;rwmi&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-WMIObject&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;swmi&#34;</span><span class="p">,</span><span class="s2">&#34;Set-WMIInstance&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;shcm&#34;</span><span class="p">,</span><span class="s2">&#34;Show-Command&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;trcm&#34;</span><span class="p">,</span><span class="s2">&#34;Trace-Command&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;wget&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-WebRequest&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;curl&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-WebRequest&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;lp&#34;</span><span class="p">,</span><span class="s2">&#34;Out-Printer&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;cat&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;cd&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;clear&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-Host&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;cp&#34;</span><span class="p">,</span><span class="s2">&#34;Copy-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;h&#34;</span><span class="p">,</span><span class="s2">&#34;Get-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;history&#34;</span><span class="p">,</span><span class="s2">&#34;Get-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;kill&#34;</span><span class="p">,</span><span class="s2">&#34;Stop-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;ls&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ChildItem&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;man&#34;</span><span class="p">,</span><span class="s2">&#34;help&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;mount&#34;</span><span class="p">,</span><span class="s2">&#34;New-PSDrive&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;md&#34;</span><span class="p">,</span><span class="s2">&#34;mkdir&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;mv&#34;</span><span class="p">,</span><span class="s2">&#34;Move-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;popd&#34;</span><span class="p">,</span><span class="s2">&#34;Pop-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;ps&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Process&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;pushd&#34;</span><span class="p">,</span><span class="s2">&#34;Push-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;pwd&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;r&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rm&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rmdir&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;echo&#34;</span><span class="p">,</span><span class="s2">&#34;Write-Output&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;cls&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-Host&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;chdir&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Location&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;copy&#34;</span><span class="p">,</span><span class="s2">&#34;Copy-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;del&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;dir&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ChildItem&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;erase&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;move&#34;</span><span class="p">,</span><span class="s2">&#34;Move-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rd&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;ren&#34;</span><span class="p">,</span><span class="s2">&#34;Rename-Item&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;set&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Variable&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;type&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;icm&#34;</span><span class="p">,</span><span class="s2">&#34;Invoke-Command&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;clhy&#34;</span><span class="p">,</span><span class="s2">&#34;Clear-History&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;gjb&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rcjb&#34;</span><span class="p">,</span><span class="s2">&#34;Receive-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rjb&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;sajb&#34;</span><span class="p">,</span><span class="s2">&#34;Start-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;spjb&#34;</span><span class="p">,</span><span class="s2">&#34;Stop-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;wjb&#34;</span><span class="p">,</span><span class="s2">&#34;Wait-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;sujb&#34;</span><span class="p">,</span><span class="s2">&#34;Suspend-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rujb&#34;</span><span class="p">,</span><span class="s2">&#34;Resume-Job&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;npssc&#34;</span><span class="p">,</span><span class="s2">&#34;New-PSSessionConfigurationFile&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;ipsn&#34;</span><span class="p">,</span><span class="s2">&#34;Import-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;epsn&#34;</span><span class="p">,</span><span class="s2">&#34;Export-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;cnsn&#34;</span><span class="p">,</span><span class="s2">&#34;Connect-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;dnsn&#34;</span><span class="p">,</span><span class="s2">&#34;Disconnect-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;nsn&#34;</span><span class="p">,</span><span class="s2">&#34;New-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;gsn&#34;</span><span class="p">,</span><span class="s2">&#34;Get-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rsn&#34;</span><span class="p">,</span><span class="s2">&#34;Remove-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;etsn&#34;</span><span class="p">,</span><span class="s2">&#34;Enter-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;rcsn&#34;</span><span class="p">,</span><span class="s2">&#34;Receive-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;ReadOnly, AllScope&#34;</span>
+<span class="s2">&#34;exsn&#34;</span><span class="p">,</span><span class="s2">&#34;Exit-PSSession&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;AllScope&#34;</span>
+<span class="s2">&#34;sls&#34;</span><span class="p">,</span><span class="s2">&#34;Select-String&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;CFS&#34;</span><span class="p">,</span><span class="s2">&#34;ConvertFrom-String&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;fhx&#34;</span><span class="p">,</span><span class="s2">&#34;Format-Hex&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;gcb&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Clipboard&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;gin&#34;</span><span class="p">,</span><span class="s2">&#34;Get-ComputerInfo&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;gtz&#34;</span><span class="p">,</span><span class="s2">&#34;Get-TimeZone&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;scb&#34;</span><span class="p">,</span><span class="s2">&#34;Set-Clipboard&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;stz&#34;</span><span class="p">,</span><span class="s2">&#34;Set-TimeZone&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="s2">&#34;ca&#34;</span><span class="p">,</span><span class="s2">&#34;Get-Content&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="s2">&#34;None&#34;</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="导入别名文件">导入别名文件</h2>
+
+<p>既然能导出别名文件，那么肯定能导入别名文件。通过Import-Alias命令来导入别名文件。但是导入时可能会有异常，提示别名已经存在无法导入，这时候需要添加-force参数，强制导入就可以了。</p>
+
+<p>例如，新开启一个PowerShell命令行界面，这时没有别名ca。导入刚才导出的别名文件alias.ps1后，可以使用ca。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">ca</span>
+<span class="n">ca</span> <span class="err">:</span> <span class="n">用語</span> <span class="s1">&#39;ca&#39;</span> <span class="n">は</span><span class="err">、</span><span class="n">コマンドレット</span><span class="err">、</span><span class="n">関数</span><span class="err">、</span><span class="n">スクリプト</span> <span class="n">ファイル</span><span class="err">、</span><span class="n">または操作可能なプログラムの名前として認識されません</span><span class="err">。</span><span class="n">名</span>
+<span class="n">前が正しく記述されていることを確認し</span><span class="err">、</span><span class="n">パスが含まれている場合はそのパスが正しいことを確認してから</span><span class="err">、</span><span class="n">再試行してください</span><span class="err">。</span>
+<span class="n">発生場所</span> <span class="n">行</span><span class="err">:</span><span class="n">1</span> <span class="n">文字</span><span class="err">:</span><span class="n">1</span>
+<span class="p">+</span> <span class="n">ca</span>
+<span class="p">+</span> <span class="p">~~</span>
+    <span class="p">+</span> <span class="n">CategoryInfo</span>          <span class="err">:</span> <span class="n">ObjectNotFound</span><span class="err">:</span> <span class="p">(</span><span class="n">ca</span><span class="err">:</span><span class="n">String</span><span class="p">)</span> <span class="p">[],</span> <span class="n">CommandNotFoundException</span>
+    <span class="p">+</span> <span class="n">FullyQualifiedErrorId</span> <span class="err">:</span> <span class="n">CommandNotFoundException</span>
+
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Import-Alias</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="k">alias</span><span class="p">.</span><span class="n">ps1</span>
+<span class="nb">Import-Alias</span> <span class="err">:</span> <span class="n">名前</span> <span class="s1">&#39;foreach&#39;</span> <span class="n">のエイリアスが既に存在するため</span><span class="err">、</span><span class="n">このエイリアスは使用できません</span><span class="err">。</span>
+<span class="n">発生場所</span> <span class="n">行</span><span class="err">:</span><span class="n">1</span> <span class="n">文字</span><span class="err">:</span><span class="n">1</span>
+<span class="p">+</span> <span class="nb">Import-Alias</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="k">alias</span><span class="p">.</span><span class="n">ps1</span>
+<span class="p">+</span> <span class="p">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+    <span class="p">+</span> <span class="n">CategoryInfo</span>          <span class="err">:</span> <span class="n">ResourceExists</span><span class="err">:</span> <span class="p">(</span><span class="k">foreach</span><span class="err">:</span><span class="n">String</span><span class="p">)</span> <span class="p">[</span><span class="nb">Import-Alias</span><span class="p">],</span> <span class="n">SessionStateException</span>
+    <span class="p">+</span> <span class="n">FullyQualifiedErrorId</span> <span class="err">:</span> <span class="n">AliasAlreadyExists</span><span class="p">,</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">PowerShell</span><span class="p">.</span><span class="n">Commands</span><span class="p">.</span><span class="n">ImportAliasCommand</span>
+<span class="err">……</span>
+<span class="err">……</span>
+
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="nb">Import-Alias</span> <span class="n">-Force</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="k">alias</span><span class="p">.</span><span class="n">ps1</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span> <span class="n">ca</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="n">hello</span><span class="p">.</span><span class="n">txt</span>
+<span class="n">hello</span> <span class="n">content</span><span class="p">.</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">pwtest</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>参考资料：<br />
+<a href="https://docs.microsoft.com/zh-cn/powershell/scripting/learn/using-familiar-command-names?view=powershell-7">https://docs.microsoft.com/zh-cn/powershell/scripting/learn/using-familiar-command-names?view=powershell-7</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/powershell%E6%95%99%E7%A8%8B/">PowerShell教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A805-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+            <span class="next-text nav-default">vba快速入门05-类型转换</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
