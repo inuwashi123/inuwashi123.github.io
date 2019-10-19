@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>PowerShell快速入门04-执行外部命令和脚本文件 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="在Windows的CMD提示符上面，我们可以执行一些外部命令。比如，输入notepad并回车，将打开记事本。输入ping www.baidu." /><meta name="keywords" content="cmd, 外部命令, 脚本文件" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A804-%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="PowerShell快速入门04-执行外部命令和脚本文件" />
+<meta property="og:description" content="在Windows的CMD提示符上面，我们可以执行一些外部命令。比如，输入notepad并回车，将打开记事本。输入ping www.baidu." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A804-%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6/" />
+<meta property="article:published_time" content="2019-10-19T10:00:44+09:00" />
+<meta property="article:modified_time" content="2019-10-19T10:00:44+09:00" />
+<meta itemprop="name" content="PowerShell快速入门04-执行外部命令和脚本文件">
+<meta itemprop="description" content="在Windows的CMD提示符上面，我们可以执行一些外部命令。比如，输入notepad并回车，将打开记事本。输入ping www.baidu.">
+
+
+<meta itemprop="datePublished" content="2019-10-19T10:00:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-19T10:00:44&#43;09:00" />
+<meta itemprop="wordCount" content="2169">
+
+
+
+<meta itemprop="keywords" content="PowerShell教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PowerShell快速入门04-执行外部命令和脚本文件"/>
+<meta name="twitter:description" content="在Windows的CMD提示符上面，我们可以执行一些外部命令。比如，输入notepad并回车，将打开记事本。输入ping www.baidu."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">PowerShell快速入门04-执行外部命令和脚本文件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-19 </span>
+        <div class="post-category">
+            <a href="/categories/powershell/"> PowerShell </a>
+            </div>
+          <span class="more-meta"> 约 2169 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#执行外部命令">执行外部命令</a></li>
+<li><a href="#执行外部脚本文件">执行外部脚本文件</a>
+<ul>
+<li><a href="#执行批处理文件">执行批处理文件</a></li>
+<li><a href="#执行vbs脚本文件">执行VBS脚本文件</a></li>
+</ul></li>
+<li><a href="#执行本身脚本文件-powershell文件-扩展名为-ps1">执行本身脚本文件(powershell文件，扩展名为“.ps1”)</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>在Windows的CMD提示符上面，我们可以执行一些外部命令。比如，输入notepad并回车，将打开记事本。输入<code>ping www.baidu.com</code>并回车，将查看本地电脑和百度网站之间的连接情况。Powershell能够像CMD一样很好的执行外部命令,功能更强大。所有在CMD中可以运行的外部命令都可以在PowerShell中运行。</p>
+
+<p>Powershell还能够执行批处理脚本（扩展名是.bat或.cmd文件），VBS脚本文件。当然了，肯定能执行PowerShell自身文件（扩展名是.ps1）。</p>
+
+<h2 id="执行外部命令">执行外部命令</h2>
+
+<p>PowerShell能够执行的命令非常多，只介绍几个比较常用的。</p>
+
+<p>通过netstat查看网络端口状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">netstat</span>
+
+<span class="n">Active</span> <span class="n">Connections</span>
+
+  <span class="n">Proto</span>  <span class="n">Local</span> <span class="n">Address</span>          <span class="n">Foreign</span> <span class="n">Address</span>        <span class="n">State</span>
+  <span class="n">TCP</span>    <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">100</span><span class="err">:</span><span class="n">3049</span>    <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">88</span><span class="err">:</span><span class="n">7575</span>       <span class="n">ESTABLISHED</span>
+  <span class="n">TCP</span>    <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">100</span><span class="err">:</span><span class="n">3052</span>    <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">88</span><span class="err">:</span><span class="n">7575</span>       <span class="n">ESTABLISHED</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过IPConfig查看自己的网络配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">ipconfig</span>
+
+<span class="n">Windows</span> <span class="n">IP</span> <span class="n">Configuration</span>
+
+<span class="n">Ethernet</span> <span class="n">adapter</span> <span class="n">Local</span> <span class="n">Area</span> <span class="n">Connection</span><span class="err">:</span>
+
+   <span class="n">Connection-specific</span> <span class="n">DNS</span> <span class="n">Suffix</span>  <span class="p">.</span> <span class="err">:</span> <span class="n">www</span><span class="p">.</span><span class="n">mossfly</span><span class="p">.</span><span class="n">com</span>
+   <span class="n">Link-local</span> <span class="n">IPv6</span> <span class="n">Address</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">:</span> <span class="n">fe80</span><span class="p">::</span><span class="n">b9dd</span><span class="err">:</span><span class="n">91e33</span><span class="err">:</span><span class="n">33f0</span><span class="err">:</span><span class="n">7885</span><span class="k">%</span><span class="n">10</span>
+   <span class="n">IPv4</span> <span class="n">Address</span><span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">100</span>
+   <span class="n">Subnet</span> <span class="n">Mask</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">:</span> <span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">252</span><span class="p">.</span><span class="n">0</span>
+   <span class="k">Default</span> <span class="n">Gateway</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="err">:</span> <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>route print查看路由信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">route</span> <span class="n">print</span>
+<span class="n">IPv4</span> <span class="n">Route</span> <span class="n">Table</span>
+<span class="p">===========================================================================</span>
+<span class="n">Active</span> <span class="n">Routes</span><span class="err">:</span>
+<span class="n">Network</span> <span class="n">Destination</span>        <span class="n">Netmask</span>          <span class="n">Gateway</span>       <span class="n">Interface</span>  <span class="n">Metric</span>
+          <span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>          <span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>     <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">1</span>   <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">100</span>     <span class="n">20</span>
+        <span class="n">192</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>        <span class="n">255</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span>         <span class="n">On-link</span>         <span class="n">192</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>    <span class="n">306</span>
+        <span class="n">192</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>  <span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span>         <span class="n">On-link</span>         <span class="n">192</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>    <span class="n">306</span>
+  <span class="n">192</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span>  <span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">255</span>         <span class="n">On-link</span>         <span class="n">192</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1</span>    <span class="n">306</span>
+     <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">0</span>    <span class="n">255</span><span class="p">.</span><span class="n">255</span><span class="p">.</span><span class="n">252</span><span class="p">.</span><span class="n">0</span>         <span class="n">On-link</span>    <span class="n">192</span><span class="p">.</span><span class="n">168</span><span class="p">.</span><span class="n">140</span><span class="p">.</span><span class="n">100</span>    <span class="n">276</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>启动CMD控制台</p>
+
+<p>键入cmd或者cmd.exe,退出cmd可以通过命令exit。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">cmd</span>
+<span class="n">Microsoft</span> <span class="n">Windows</span> <span class="no">[Version 6.1.7601]</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">2009</span> <span class="n">Microsoft</span> <span class="n">Corporation</span><span class="p">.</span>  <span class="n">All</span> <span class="n">rights</span> <span class="n">reserved</span><span class="p">.</span>
+
+<span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span><span class="n">exit</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>启动外部程序记事本</p>
+
+<p>键入notepad或者notepad.exe,即可打开Windows自带的记事本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">notepad</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="执行外部脚本文件">执行外部脚本文件</h2>
+
+<h3 id="执行批处理文件">执行批处理文件</h3>
+
+<p>批处理是扩展名为”.bat”的文本文件，它可以包含任何cmd控制台能够处理的命令。当批处理文件被打开，Cmd控制台会逐行执行每条命令。那Powershell能够直接执行批处理吗？将下列命令保存为ping.bat</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bat" data-lang="bat"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bat" data-lang="bat"><span class="p">@</span><span class="k">echo</span> off
+<span class="k">echo</span> batch File Test
+<span class="k">pause</span>
+<span class="k">Dir</span> <span class="nv">%windir%</span>/system</code></pre></td></tr></table>
+</div>
+</div>
+<p>切换到ping.bat所在的目录，然后执行ping，结果如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="p">./</span><span class="n">ping</span>
+<span class="n">batch</span> <span class="n">File</span> <span class="n">Test</span>
+<span class="n">Press</span> <span class="n">any</span> <span class="n">key</span> <span class="n">to</span> <span class="k">continue</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+ <span class="n">Volume</span> <span class="k">in</span> <span class="n">drive</span> <span class="n">C</span> <span class="n">has</span> <span class="n">no</span> <span class="n">label</span><span class="p">.</span>
+ <span class="n">Volume</span> <span class="n">Serial</span> <span class="n">Number</span> <span class="n">is</span> <span class="n">4E9B-D846</span>
+
+ <span class="n">Directory</span> <span class="n">of</span> <span class="n">C</span><span class="err">:</span><span class="n">Windowssystem</span>
+
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>            <span class="n">69</span><span class="p">,</span><span class="n">584</span> <span class="n">avicap</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>           <span class="n">109</span><span class="p">,</span><span class="n">456</span> <span class="n">avifile</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>            <span class="n">32</span><span class="p">,</span><span class="n">816</span> <span class="n">COMMDLG</span><span class="p">.</span><span class="n">DLL</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">2</span><span class="p">,</span><span class="n">000</span> <span class="n">keyboard</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">42</span>             <span class="n">9</span><span class="p">,</span><span class="n">936</span> <span class="n">lzexpand</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>            <span class="n">73</span><span class="p">,</span><span class="n">376</span> <span class="n">mciavi</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>            <span class="n">25</span><span class="p">,</span><span class="n">264</span> <span class="n">mciseq</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>            <span class="n">28</span><span class="p">,</span><span class="n">160</span> <span class="n">mciwave</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>            <span class="n">68</span><span class="p">,</span><span class="n">992</span> <span class="n">MMSYSTEM</span><span class="p">.</span><span class="n">DLL</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">1</span><span class="p">,</span><span class="n">152</span> <span class="n">mmtask</span><span class="p">.</span><span class="n">tsk</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">2</span><span class="p">,</span><span class="n">032</span> <span class="n">mouse</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">21</span>           <span class="n">126</span><span class="p">,</span><span class="n">912</span> <span class="n">msvideo</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">42</span>            <span class="n">82</span><span class="p">,</span><span class="n">944</span> <span class="n">olecli</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>            <span class="n">24</span><span class="p">,</span><span class="n">064</span> <span class="n">OLESVR</span><span class="p">.</span><span class="n">DLL</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">5</span><span class="p">,</span><span class="n">120</span> <span class="n">SHELL</span><span class="p">.</span><span class="n">DLL</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">1</span><span class="p">,</span><span class="n">744</span> <span class="n">sound</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">25</span>             <span class="n">5</span><span class="p">,</span><span class="n">532</span> <span class="n">stdole</span><span class="p">.</span><span class="n">tlb</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">3</span><span class="p">,</span><span class="n">360</span> <span class="n">system</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">4</span><span class="p">,</span><span class="n">048</span> <span class="n">TIMER</span><span class="p">.</span><span class="n">DRV</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">06</span><span class="p">/</span><span class="n">11</span>  <span class="n">05</span><span class="err">:</span><span class="n">42</span>             <span class="n">9</span><span class="p">,</span><span class="n">008</span> <span class="n">ver</span><span class="p">.</span><span class="n">dll</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>             <span class="n">2</span><span class="p">,</span><span class="n">176</span> <span class="n">vga</span><span class="p">.</span><span class="n">drv</span>
+<span class="n">2009</span><span class="p">/</span><span class="n">07</span><span class="p">/</span><span class="n">14</span>  <span class="n">05</span><span class="err">:</span><span class="n">41</span>            <span class="n">12</span><span class="p">,</span><span class="n">704</span> <span class="n">WFWNET</span><span class="p">.</span><span class="n">DRV</span>
+              <span class="n">22</span> <span class="n">File</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>        <span class="n">700</span><span class="p">,</span><span class="n">380</span> <span class="n">bytes</span>
+               <span class="n">2</span> <span class="n">Dir</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="n">75</span><span class="p">,</span><span class="n">927</span><span class="p">,</span><span class="n">420</span><span class="p">,</span><span class="n">928</span> <span class="n">bytes</span> <span class="n">free</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="执行vbs脚本文件">执行VBS脚本文件</h3>
+
+<p>在powershell中执行VB脚本,需要使用cscript.exe。格式是<code>cscript.exe VBS文件名</code>。
+例如，将下列命令保存为test.vbs。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vbscript" data-lang="vbscript"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vbscript" data-lang="vbscript">Set wmi = GetObject(&#34;winmgmts:&#34;)
+Set collection = wmi.ExecQuery(&#34;select * from Win32_Process&#34;)
+For Each process in collection
+    WScript.Echo process.getObjectText_
+Next</code></pre></td></tr></table>
+</div>
+</div>
+<p>在powershell中执行test.vbs。test.vbs前面的.\表示是当前文件件路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">cscript</span><span class="p">.</span><span class="n">exe</span> <span class="p">.\</span><span class="n">test</span><span class="p">.</span><span class="n">vbs</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="执行本身脚本文件-powershell文件-扩展名为-ps1">执行本身脚本文件(powershell文件，扩展名为“.ps1”)</h2>
+
+<p>为了安全，PowerShell的默认安全设置（执行策略）禁用了执行脚本，如果执行脚本会提示错误。
+现有PowerShell文件test.ps1,内容为查看dir别名关联的Cmdlet，并执行dir查看当前文件夹的构成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="nb">get-alias</span> <span class="n">dir</span>
+<span class="n">dir</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在PowerShell命令行中执行ps1脚本比较简单，直接输入文件名就可以了。执行test.ps1的结果如下，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">test</span><span class="p">.</span><span class="n">ps1</span>
+<span class="p">.\</span><span class="n">test</span><span class="p">.</span><span class="n">ps1</span> <span class="err">:</span> <span class="n">このシステムではスクリプトの実行が無効になっているため</span><span class="err">、</span><span class="n">ファイル</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="n">test</span><span class="p">.</span><span class="n">ps1</span> <span class="n">を読</span>
+<span class="n">み込むことができません</span><span class="err">。</span><span class="n">詳細については</span><span class="err">、「</span><span class="n">about_Execution_Policies</span><span class="err">」</span><span class="p">(</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">135170</span><span class="p">)</span> <span class="n">を</span>
+<span class="n">参照してください</span><span class="err">。</span>
+<span class="n">発生場所</span> <span class="n">行</span><span class="err">:</span><span class="n">1</span> <span class="n">文字</span><span class="err">:</span><span class="n">1</span>
+<span class="p">+</span> <span class="p">.\</span><span class="n">test</span><span class="p">.</span><span class="n">ps1</span>
+<span class="p">+</span> <span class="p">~~~~~~~~~~</span>
+    <span class="p">+</span> <span class="n">CategoryInfo</span>          <span class="err">:</span> <span class="n">セキュリティ</span> <span class="n">エラー</span><span class="err">:</span> <span class="p">(</span><span class="err">:</span> <span class="p">)</span> <span class="p">[]</span><span class="err">、</span><span class="n">PSSecurityException</span>
+    <span class="p">+</span> <span class="n">FullyQualifiedErrorId</span> <span class="err">:</span> <span class="n">UnauthorizedAccess</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以更改PowerShell的安全设置（执行策略）来允许其可以运行ps1文件。Get-ExecutionPolicy命令是查看当前的执行策略，Set-ExecutionPolicy命令是设置当前的执行策略。执行Set-ExecutionPolicy命令的用户必须具有管理员权限。</p>
+
+<p>Windows 10默认的策略是Restricted，也就是不能执行脚本。将其修改为UnRestricted策略就可以。修改命令如下（请以管理员的方式运行PowerShell命令行）。会询问你是否修改策略，请输入Y来确认修改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span> <span class="nb">Get-ExecutionPolicy</span>
+<span class="n">Restricted</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span> <span class="nb">Set-ExecutionPolicy</span> <span class="n">-ExecutionPolicy</span> <span class="n">Unrestricted</span>
+
+<span class="n">実行ポリシーの変更</span>
+<span class="n">実行ポリシーは</span><span class="err">、</span><span class="n">信頼されていないスクリプトからの保護に役立ちます</span><span class="err">。</span><span class="n">実行ポリシーを変更すると</span><span class="err">、</span><span class="n">about_Execution_Policies</span>
+<span class="n">のヘルプ</span> <span class="n">トピック</span> <span class="p">(</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">go</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">fwlink</span><span class="p">/</span><span class="k">?</span><span class="n">LinkID</span><span class="p">=</span><span class="n">135170</span><span class="p">)</span>
+<span class="n">で説明されているセキュリティ上の危険にさらされる可能性があります</span><span class="err">。</span><span class="n">実行ポリシーを変更しますか</span><span class="p">?</span>
+<span class="no">[Y]</span> <span class="n">はい</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>  <span class="no">[A]</span> <span class="n">すべて続行</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="no">[N]</span> <span class="n">いいえ</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="no">[L]</span> <span class="n">すべて無視</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>  <span class="no">[S]</span> <span class="n">中断</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  <span class="p">[?]</span> <span class="n">ヘルプ</span> <span class="p">(</span><span class="n">既定値は</span> <span class="s2">&#34;N&#34;</span><span class="p">)</span><span class="err">:</span> <span class="n">Y</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span> <span class="nb">Get-ExecutionPolicy</span>
+<span class="n">Unrestricted</span>
+<span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>修改完策略后，重新启动PowerShell命令行，然后再执行test.ps1，这次就可以正常执行了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="n">PS</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">sso12</span><span class="p">\</span><span class="n">Desktop</span><span class="p">\</span><span class="n">temp</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">test</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="n">CommandType</span>     <span class="n">Name</span>                                               <span class="n">Version</span>    <span class="n">Source</span>
+<span class="p">-----------</span>     <span class="p">----</span>                                               <span class="p">-------</span>    <span class="p">------</span>
+<span class="k">Alias</span>           <span class="n">dir</span> <span class="p">-&gt;</span> <span class="nb">Get-ChildItem</span>
+
+<span class="n">LastWriteTime</span> <span class="err">:</span> <span class="n">2019</span><span class="p">/</span><span class="n">09</span><span class="p">/</span><span class="n">26</span> <span class="n">15</span><span class="err">:</span><span class="n">32</span><span class="err">:</span><span class="n">07</span>
+<span class="n">Length</span>        <span class="err">:</span> <span class="n">13778</span>
+<span class="n">Name</span>          <span class="err">:</span> <span class="n">a</span><span class="p">.</span><span class="n">txt</span>
+<span class="err">……</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>PowerShell的执行策略ExecutionPolicy共有7个。分别为AllSigned,Bypass,Default,RemoteSigned,Restricted,Undefined和Unrestricted。</p>
+
+<hr />
+
+<p>参考资料：<br />
+<a href="https://www.pstips.net/powershell-invoking-files-and-scripts.html">https://www.pstips.net/powershell-invoking-files-and-scripts.html</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/powershell%E6%95%99%E7%A8%8B/">PowerShell教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%88%AB%E5%90%8D/">
+            <span class="next-text nav-default">PowerShell快速入门03-别名</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
