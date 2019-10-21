@@ -6,10 +6,19 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程038 面向对象编程 继承</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B038-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%BB%A7%E6%89%BF/</link>
+      <pubDate>Mon, 21 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B038-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%BB%A7%E6%89%BF/</guid>
+      <description>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖。通过继承创建的新类称为</description>
+    </item>
     
     <item>
       <title>Python教程037 面向对象编程 访问控制</title>
