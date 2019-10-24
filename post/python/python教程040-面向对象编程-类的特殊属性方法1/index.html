@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="inuwashi" /><meta name="description" content="在前面已经介绍过init,__base__,__bases__,mro等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在创建对象时调用," /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+<meta name="author" content="inuwashi" /><meta name="description" content="在前面已经介绍过__init__,__base__,__bases__,__mro__等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Python教程040 面向对象编程 类的特殊属性(方法)1" />
-<meta property="og:description" content="在前面已经介绍过init,__base__,__bases__,mro等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在创建对象时调用," />
+<meta property="og:description" content="在前面已经介绍过__init__,__base__,__bases__,__mro__等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B040-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%951/" />
 <meta property="article:published_time" content="2019-10-23T09:09:44+09:00" />
 <meta property="article:modified_time" content="2019-10-23T09:09:44+09:00" />
 <meta itemprop="name" content="Python教程040 面向对象编程 类的特殊属性(方法)1">
-<meta itemprop="description" content="在前面已经介绍过init,__base__,__bases__,mro等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在创建对象时调用,">
+<meta itemprop="description" content="在前面已经介绍过__init__,__base__,__bases__,__mro__等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在">
 
 
 <meta itemprop="datePublished" content="2019-10-23T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-23T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="2022">
+<meta itemprop="wordCount" content="2098">
 
 
 
 <meta itemprop="keywords" content="python教程," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python教程040 面向对象编程 类的特殊属性(方法)1"/>
-<meta name="twitter:description" content="在前面已经介绍过init,__base__,__bases__,mro等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在创建对象时调用,"/>
+<meta name="twitter:description" content="在前面已经介绍过__init__,__base__,__bases__,__mro__等特殊属性，这节继续讲解一些特殊的类的属性方法。 __new__() 是在"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 2022 字 </span>
+          <span class="more-meta"> 约 2098 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -145,8 +145,8 @@
 <li>
 <ul>
 <li><a href="#new">__new__()</a></li>
-<li><a href="#析构函数-del">析构函数<strong>del</strong>()</a></li>
-<li><a href="#class-call">class.<strong>call</strong>()</a></li>
+<li><a href="#析构函数-del">析构函数__del__()</a></li>
+<li><a href="#class-call">class.__call__()</a></li>
 <li><a href="#instance-class-属性">instance.__class__属性</a></li>
 <li><a href="#class-subclasses">class.__subclasses__()</a></li>
 <li><a href="#操作对象属性的内置函数">操作对象属性的内置函数</a>
@@ -163,7 +163,7 @@
     <div class="post-content">
       
 
-<p>在前面已经介绍过<strong>init</strong>,__base__,__bases__,<strong>mro</strong>等特殊属性，这节继续讲解一些特殊的类的属性方法。</p>
+<p>在前面已经介绍过__init__,__base__,__bases__,__mro__等特殊属性，这节继续讲解一些特殊的类的属性方法。</p>
 
 <h2 id="new">__new__()</h2>
 
@@ -186,10 +186,10 @@
 <span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>  <span class="c1">#结果是输出 &#39;创建对象&#39;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><strong>new</strong>和<strong>init</strong>的不同<br />
-类创建对象时,若类中定义了<strong>init</strong>方法,但没定义<strong>new</strong>方法,会自动调用父类object的<strong>new</strong>方法通过系统的方式创建对象,对象一创建完会自动调用类中定义的<strong>init</strong>方法。</p>
+<p>__new__和__init__的不同<br />
+类创建对象时,若类中定义了__init__方法,但没定义__new__方法,会自动调用父类object的__new__方法通过系统的方式创建对象,对象一创建完会自动调用类中定义的__init__方法。</p>
 
-<p>(1)<strong>new</strong>方法是在创建对象时调用的;<strong>init</strong>方法是在对象一创建完就调用,而且只有通过系统的方法创建的对象才会执行<strong>init</strong>方法,object默认的<strong>new</strong>方法会先于<strong>init</strong>方法调用。</p>
+<p>(1)__new__方法是在创建对象时调用的;__init__方法是在对象一创建完就调用,而且只有通过系统的方法创建的对象才会执行__init__方法,object默认的__new__方法会先于__init__方法调用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -229,7 +229,7 @@
 <span class="mi">1</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>因为不是按照系统的方式创建对象,所以就不会调用<strong>init</strong>方法。</p>
+<p>因为不是按照系统的方式创建对象,所以就不会调用__init__方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -249,7 +249,7 @@
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1">#创建对象时调用</span>
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;创建对象&#39;</span><span class="p">)</span>
-        <span class="c1">#返回默认的父类object通过__new__方法创建的对象,即通过系统的方式创建的对象</span>
+        <span class="c1">#返回默认的父类object通过\_\_new\_\_方法创建的对象,即通过系统的方式创建的对象</span>
         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s1">&#39;对象一创建完就会调用&#39;</span>
@@ -271,7 +271,7 @@
 <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Dog</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000000000290B898</span><span class="o">&gt;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>(2)<strong>new</strong>方法的形参是类,而<strong>init</strong>方法的形参是对象</p>
+<p>(2)__new__方法的形参是类,而__init__方法的形参是对象</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -317,9 +317,9 @@
 <span class="err">狗</span></code></pre></td></tr></table>
 </div>
 </div>
-<h2 id="析构函数-del">析构函数<strong>del</strong>()</h2>
+<h2 id="析构函数-del">析构函数__del__()</h2>
 
-<p>__init\_()在对象被创建的时候进行调用，成为初始化函数。而对象被销毁的时候就会调用<strong>del</strong>()函数，成为析构函数。</p>
+<p>__init\_()在对象被创建的时候进行调用，成为初始化函数。而对象被销毁的时候就会调用__del__()函数，成为析构函数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -349,7 +349,7 @@
 <span class="err">我要被销毁了</span></code></pre></td></tr></table>
 </div>
 </div>
-<h2 id="class-call">class.<strong>call</strong>()</h2>
+<h2 id="class-call">class.__call__()</h2>
 
 <p>当对象作为一个函数进行执行的时候，就会执行这个方法。</p>
 <div class="highlight"><div class="chroma">
@@ -596,7 +596,11 @@
           <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B041-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%952/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程041 面向对象编程 类的特殊属性(方法)2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B039-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%A4%9A%E7%BB%A7%E6%89%BF/">
             <span class="next-text nav-default">Python教程039 面向对象编程 多继承</span>
             <span class="next-text nav-mobile">下一篇</span>
