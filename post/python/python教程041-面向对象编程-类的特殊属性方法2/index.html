@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="inuwashi" /><meta name="description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的dict只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class中dic" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+<meta name="author" content="inuwashi" /><meta name="description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的__dict__只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Python教程041 面向对象编程 类的特殊属性(方法)2" />
-<meta property="og:description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的dict只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class中dic" />
+<meta property="og:description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的__dict__只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B041-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E6%96%B9%E6%B3%952/" />
 <meta property="article:published_time" content="2019-10-24T09:09:44+09:00" />
 <meta property="article:modified_time" content="2019-10-24T09:09:44+09:00" />
 <meta itemprop="name" content="Python教程041 面向对象编程 类的特殊属性(方法)2">
-<meta itemprop="description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的dict只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class中dic">
+<meta itemprop="description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的__dict__只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class">
 
 
 <meta itemprop="datePublished" content="2019-10-24T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-24T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="3698">
+<meta itemprop="wordCount" content="3883">
 
 
 
 <meta itemprop="keywords" content="python教程," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python教程041 面向对象编程 类的特殊属性(方法)2"/>
-<meta name="twitter:description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的dict只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class中dic"/>
+<meta name="twitter:description" content="object.__dict__ 用于存储对象（可写）属性的字典或其他映射对象。每一层的__dict__只存储该层新增的属性。子类不需要重复存储父类中的属性。 关于class"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 3698 字 </span>
+          <span class="more-meta"> 约 3883 字 </span>
           <span class="more-meta"> 预计阅读 8 分钟 </span>
         
       </div>
@@ -146,7 +146,7 @@
 <ul>
 <li><a href="#object-dict">object.__dict__</a></li>
 <li><a href="#slots">__slots__</a></li>
-<li><a href="#dict-属性与-slots-属性关系"><strong>dict</strong>属性与<strong>slots</strong>属性关系</a></li>
+<li><a href="#dict-属性与-slots-属性关系">__dict__属性与__slots__属性关系</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -157,9 +157,9 @@
 
 <h2 id="object-dict">object.__dict__</h2>
 
-<p>用于存储对象（可写）属性的字典或其他映射对象。每一层的<strong>dict</strong>只存储该层新增的属性。子类不需要重复存储父类中的属性。</p>
+<p>用于存储对象（可写）属性的字典或其他映射对象。每一层的__dict__只存储该层新增的属性。子类不需要重复存储父类中的属性。</p>
 
-<p>关于class中<strong>dict</strong>的理解</p>
+<p>关于class中__dict__的理解</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -239,8 +239,8 @@
 <span class="err">添加属性后</span><span class="n">m的值</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;wuq&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;female&#39;</span><span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>由此可见,实例的<strong>dict</strong>仅存了与实例相关的实例属性和方法。类的<strong>dict</strong>则是和实例共享的变量,函数(方法,类属性)。
-如果实例没有添加自己独有的属性，那么实例的的<strong>dict</strong>相同，添加了独有的属性，实例的<strong>dict</strong>不相同。这样就使得每个实例的实例属性不会相互影响。</p>
+<p>由此可见,实例的__dict__仅存了与实例相关的实例属性和方法。类的__dict__则是和实例共享的变量,函数(方法,类属性)。
+如果实例没有添加自己独有的属性，那么实例的的__dict__相同，添加了独有的属性，实例的__dict__不相同。这样就使得每个实例的实例属性不会相互影响。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -300,9 +300,9 @@
 <span class="err">子类</span><span class="n">GirlFriends的值</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span><span class="s1">&#39;new_say_to_friend&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">GirlFriends</span><span class="o">.</span><span class="n">new_say_to_friend</span> <span class="n">at</span> <span class="mh">0x7f63587a02f0</span><span class="o">&gt;</span><span class="p">,</span><span class="s1">&#39;new_str&#39;</span><span class="p">:</span> <span class="s1">&#39;GirlFriends Class&#39;</span><span class="p">,</span>  <span class="s1">&#39;__init__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">GirlFriends</span><span class="o">.</span><span class="fm">__init__</span> <span class="n">at</span> <span class="mh">0x7f63587a0268</span><span class="o">&gt;</span><span class="p">,</span><span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><strong>注意</strong> 子类的<strong>dict</strong>并不包含其父类的属性。子类的<strong>dict</strong>中不包含父类的<strong>dict</strong>。</p>
+<p><strong>注意</strong> 子类的__dict__并不包含其父类的属性。子类的__dict__中不包含父类的__dict__。</p>
 
-<p>下面的例子看的更清楚，子类的<strong>dict</strong>中没有父类的<strong>dict</strong>属性。</p>
+<p>下面的例子看的更清楚，子类的__dict__中没有父类的__dict__属性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -447,7 +447,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">stu</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>  <span class="c1">#输出50</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><strong>slots</strong>是一个类变量，<strong>slots</strong>属性可以赋值一个包含类属性名的字符串元组，或者是可迭代变量，或者是一个字符串，只要在类定义的时候，使用<strong>slots</strong>=aTuple来定义该属性就可以了。<strong>slots</strong>变量，用来限制class实例能添加的属性。</p>
+<p>__slots__是一个类变量，__slots__属性可以赋值一个包含类属性名的字符串元组，或者是可迭代变量，或者是一个字符串，只要在类定义的时候，使用__slots__=aTuple来定义该属性就可以了。__slots__变量，用来限制class实例能添加的属性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -485,7 +485,7 @@
 <span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Student&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;score&#39;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><strong>slots</strong>定义的属性仅对当前类实例起作用，对继承的子类是不起作用的。除非在子类中也定义<strong>slots</strong>，这样，子类实例允许定义的属性就是自身的<strong>slots</strong>加上父类的<strong>slots</strong>。</p>
+<p>__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的。除非在子类中也定义__slots__，这样，子类实例允许定义的属性就是自身的__slots__加上父类的__slots__。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -599,17 +599,17 @@
  <span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;UniversityStudent&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;score&#39;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>使用时<strong>slots</strong>时需要注意的几点：</p>
+<p>使用时__slots__时需要注意的几点：</p>
 
 <ol>
-<li>当一个类的父类没有定义<strong>slots</strong>属性，父类中的<strong>dict</strong>属性总是可以访问到的，所以只在子类中定义<strong>slots</strong>属性，而不在父类中定义是没有意义的。</li>
-<li>如果定义了<strong>slots</strong>属性，还是想在之后添加新的变量，就需要把<strong>dict</strong>字符串添加到<strong>slots</strong>的元组里。</li>
-<li>定义了<strong>slots</strong>属性，还会消失的一个属性是<strong>weakref</strong>，这样就不支持实例的weak reference，如果还是想用这个功能，同样，可以把<strong>weakref</strong>字符串添加到元组里。</li>
-<li><strong>slots</strong>功能是通过descriptor实现的，会为每一个变量创建一个descriptor。</li>
-<li><strong>slots</strong>的功能只影响定义它的类，因此，子类需要重新定义<strong>slots</strong>才能有它的功能。</li>
+<li>当一个类的父类没有定义__slots__属性，父类中的__dict__属性总是可以访问到的，所以只在子类中定义__slots__属性，而不在父类中定义是没有意义的。</li>
+<li>如果定义了__slots__属性，还是想在之后添加新的变量，就需要把__dict__字符串添加到__slots__的元组里。</li>
+<li>定义了__slots__属性，还会消失的一个属性是__weakref__，这样就不支持实例的weak reference，如果还是想用这个功能，同样，可以把__weakref__字符串添加到元组里。</li>
+<li>__slots__功能是通过descriptor实现的，会为每一个变量创建一个descriptor。</li>
+<li>__slots__的功能只影响定义它的类，因此，子类需要重新定义__slots__才能有它的功能。</li>
 </ol>
 
-<p>.使用<strong>slots</strong>好处:节省内存</p>
+<p>.使用__slots__好处:节省内存</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -667,14 +667,14 @@
 <span class="err">有</span><span class="vm">__slots__</span> <span class="err">属性的</span><span class="n">test2的值</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">member</span> <span class="s1">&#39;name&#39;</span> <span class="n">of</span> <span class="s1">&#39;test2&#39;</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span> <span class="s1">&#39;__slots__&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s1">&#39;__init__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">test2</span><span class="o">.</span><span class="fm">__init__</span> <span class="n">at</span> <span class="mh">0x7f2d007241e0</span><span class="o">&gt;</span><span class="p">}</span>  </code></pre></td></tr></table>
 </div>
 </div>
-<p>上述代码可以看到，python为对象a分配了56 Byte的内存，而为对象b分配了48 Byte的内存，总共节省了8 Byte的内存空间。通过<strong>dict</strong>的属性值就能看出，含有<strong>slots</strong>属性的类去除了一些属性(例如<strong>dict</strong>,__weakref__)来节省内存。</p>
+<p>上述代码可以看到，python为对象a分配了56 Byte的内存，而为对象b分配了48 Byte的内存，总共节省了8 Byte的内存空间。通过__dict__的属性值就能看出，含有__slots__属性的类去除了一些属性(例如__slots__,__weakref__)来节省内存。</p>
 
-<h2 id="dict-属性与-slots-属性关系"><strong>dict</strong>属性与<strong>slots</strong>属性关系</h2>
+<h2 id="dict-属性与-slots-属性关系">__dict__属性与__slots__属性关系</h2>
 
-<p>通常每一个实例x都会有一个<strong>dict</strong>属性，用来记录实例中所有的属性和方法，也是通过这个字典，可以让实例绑定任意的属性。而<strong>slots</strong>属性作用就是，当类C有比较少的变量，而且拥有<strong>slots</strong>属性时，类C的实例就没有<strong>dict</strong>属性，而是把变量的值存在一个固定的地方。如果试图访问一个<strong>slots</strong>中没有的属性，实例就会报错。这样操作有什么好处呢？<strong>slots</strong>属性虽然令实例失去了绑定任意属性的便利，但是因为每一个实例没有<strong>dict</strong>属性，却能有效节省每一个实例的内存消耗，有利于生成小而精干的实例。</p>
+<p>通常每一个实例x都会有一个__dict__属性，用来记录实例中所有的属性和方法，也是通过这个字典，可以让实例绑定任意的属性。而__slots__属性作用就是，当类C有比较少的变量，而且拥有__slots__属性时，类C的实例就没有__dict__属性，而是把变量的值存在一个固定的地方。如果试图访问一个__slots__中没有的属性，实例就会报错。这样操作有什么好处呢？__slots__属性虽然令实例失去了绑定任意属性的便利，但是因为每一个实例没有__dict__属性，却能有效节省每一个实例的内存消耗，有利于生成小而精干的实例。</p>
 
 <p>为什么需要这样的设计呢？<br />
-在一个实际的企业级应用中，当一个类生成上百万个实例时，即使一个实例节省几十个字节都可以节省一大笔内存，这种情况就值得使用<strong>slots</strong>属性。</p>
+在一个实际的企业级应用中，当一个类生成上百万个实例时，即使一个实例节省几十个字节都可以节省一大笔内存，这种情况就值得使用__slots__属性。</p>
 
 <p>设计类的继承关系时，通常，主线都是单一继承下来的。但是，如果需要“混入”额外的功能，通过多重继承就可以实现。这种设计通常称之为MixIn。与传统的类继承有所不同。通常mixin并不作为任何类的基类，也不关心与什么类一起使用，而是在运行时动态的同其他零散的类一起组合使用。Mixin类似于java中的interface，interface并不包含实现，而Mixin包含实现。</p>
 
