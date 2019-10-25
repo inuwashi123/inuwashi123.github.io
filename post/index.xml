@@ -6,10 +6,19 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程042 面向对象编程 元类</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B042-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%85%83%E7%B1%BB/</link>
+      <pubDate>Fri, 25 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B042-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%85%83%E7%B1%BB/</guid>
+      <description>介绍元类之前，先来复习下类。 Python的一切皆为对象。类也不除外，也是对象。既然是对象就能将它赋值给变量，为它增加属性，将它作为函数参数进</description>
+    </item>
     
     <item>
       <title>Python教程041 面向对象编程 类的特殊属性(方法)2</title>
