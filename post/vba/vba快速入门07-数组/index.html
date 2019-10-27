@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门07-数组 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="数组 我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解" /><meta name="keywords" content="vba, 数组" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A807-%E6%95%B0%E7%BB%84/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门07-数组" />
+<meta property="og:description" content="数组 我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A807-%E6%95%B0%E7%BB%84/" />
+<meta property="article:published_time" content="2019-10-27T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-27T09:09:44+09:00" />
+<meta itemprop="name" content="vba快速入门07-数组">
+<meta itemprop="description" content="数组 我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解">
+
+
+<meta itemprop="datePublished" content="2019-10-27T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-27T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="4608">
+
+
+
+<meta itemprop="keywords" content="excel vba," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门07-数组"/>
+<meta name="twitter:description" content="数组 我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门07-数组</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-27 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 4608 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#数组">数组</a>
+<ul>
+<li><a href="#声明静态数组">声明静态数组</a></li>
+<li><a href="#声明动态数组">声明动态数组</a></li>
+<li><a href="#数组赋值和取值">数组赋值和取值</a></li>
+<li><a href="#数组的开始索引设置">数组的开始索引设置</a></li>
+<li><a href="#redim-preserve-动态数组的保存">ReDim Preserve&ndash;动态数组的保存</a></li>
+<li><a href="#多维数组">多维数组</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="数组">数组</h2>
+
+<p>我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解决了这个问题。数组就是同类型多个变量的集合，也是变量，数组是有顺序的。数组既然也是变量，数组也应当要先声明，后赋值使用。VBA中的数组分为静态数组和动态数组。</p>
+
+<p>指定了数组的大小是静态数组（也叫固定数组）。没有指定大小，并在程序运行时大小可以更改的数组是动态数组。</p>
+
+<h3 id="声明静态数组">声明静态数组</h3>
+
+<p>静态数组语法如下：
+<code>Dim 数组名(start to end) As 数据类型</code></p>
+
+<p>其中start和end是索引值，必须是整数，表示静态数组的开始和结束。
+索引值start可以省略，默认是0。省略时，声明语法变为<code>Dim 数组名(end) As 数据类型</code>。</p>
+
+<p>start是数组的上界，end是数组的下界。</p>
+
+<p>例1，声明静态数组变量intA，strB。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+
+    <span class="c">&#39;数组intA表示学生成绩，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">(</span><span class="n">2</span> <span class="k">To</span> <span class="n">5</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="声明动态数组">声明动态数组</h3>
+
+<p>动态数组语法如下：
+<code>Dim 数组名() As 数据类型</code><br />
+<code>ReDim 数组名() As 数据类型</code></p>
+
+<p>空括号代表的就是数组长度是可以变化的，不是固定写死的。当确定了数组的长度之后，使用ReDim来重新定义数组。</p>
+
+<p>例2，声明动态数组变量intA，strB。根据学生数来定义数组的大小。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="n">nums</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输入数字4，以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">学生数：4</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="数组赋值和取值">数组赋值和取值</h3>
+
+<p>数组赋值格式如下：
+<code>数组名(i)= 数组的值</code></p>
+
+<p>数组取值格式如下：
+<code>变量 = 数组名(i)</code></p>
+
+<p>数组的赋值和取值都是通过小括号加上数字来实现的。i是索引值，必须是整数。</p>
+
+<p>例3，声明静态数组变量intA，strB。intA数组的索引数字是2到5，共有四个。strB数组的索引是0到3，也有四个。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">(</span><span class="n">2</span> <span class="k">To</span> <span class="n">5</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">90</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;B&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例4，声明动态数组变量intA，strB。根据学生数来定义数组的大小。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="n">nums</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输入数字4，以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">学生数：4</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="数组的开始索引设置">数组的开始索引设置</h3>
+
+<p>数组的索引默认是从0开始。实际上，是可以更改的。第0个数字，一般不好理解，我们可以将其设置为从1开始。<br />
+<code>Option Base 1</code> 可以设置数组从1开始。<code>Option Base 1</code>语句和前面介绍的<code>Option Explicit</code>类似，必须放置在过程的外面。</p>
+
+<p>例5，静态数组的起始索引强制为从1开始，strB(0)会出错，因为索引超出错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Base</span> <span class="n">1</span>
+
+<span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">(</span><span class="n">2</span> <span class="k">To</span> <span class="n">5</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">90</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;B&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行后的错误如下：</p>
+
+<p><img src="/images/vba/007-1-IndexOverError1.PNG" alt="数组索引超出范围的错误" title="数组索引超出范围的错误" /></p>
+
+<p>删除strB(0)的赋值语句，就不会出现错误了。修改如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Base</span> <span class="n">1</span>
+
+<span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">(</span><span class="n">2</span> <span class="k">To</span> <span class="n">5</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价，共有4个数据
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">90</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例6，动态数组的起始索引强制为从1开始，strB(0)会出错，因为索引超出错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Base</span> <span class="n">1</span>
+
+<span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="n">nums</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输入数字4，以上程序的运行后的错误如下：</p>
+
+<p><img src="/images/vba/005-1-IndexOverError1.PNG" alt="数组索引超出范围的错误" title="数组索引超出范围的错误" /></p>
+
+<p>删除intA(0)和strB(0)的赋值语句，就不会出现错误了。修改如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Option</span> <span class="n">Base</span> <span class="n">1</span>
+
+<span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="n">nums</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输入数字4，以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">学生数：4</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="redim-preserve-动态数组的保存">ReDim Preserve&ndash;动态数组的保存</h3>
+
+<p>ReDim语句更改动态数组。但是，每次这么做时，数组中的现有值都会丢失。 我们通过例4来看下。</p>
+
+<p>例7，声明动态数组变量intA，strB。根据学生数来定义数组的大小。先输入三个学生的数据，过后再输入另外三个学生的数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="c">&#39;先输入三个学生的数据，也就是输入3。nums1变为3
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">nums1</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums1</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一次学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums1</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生成绩：&#34;</span> <span class="o">&amp;</span> <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生评价：&#34;</span> <span class="o">&amp;</span> <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+
+    <span class="c">&#39;再输入三个学生的数据，因为我想保存之前的三个学生的数据，所以输入6.nums2变为6
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">nums2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums2</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第二次学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums2</span>
+
+    <span class="c">&#39;根据nums2数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">80</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">90</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">6</span><span class="p">)</span> <span class="o">=</span> <span class="n">100</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">6</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A-&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生成绩：&#34;</span> <span class="o">&amp;</span> <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生评价：&#34;</span> <span class="o">&amp;</span> <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">第一次学生数：3
+第一位学生成绩：50
+第一位学生评价：C
+第二次学生数：6
+第一位学生成绩：0
+第一位学生评价：</code></pre></td></tr></table>
+</div>
+</div>
+<p>为啥第二次Redim之后，数组intA的前三个值都小时呢？这是因为Redim每次都会重置数组，第二次Redim时，已经保存在数组里面的前三项丢失了。
+如何在第二次Redim时能保住已经存在数组里面的值呢？使用ReDim Preserve可在保留数组中现有值的情况下扩展数组。</p>
+
+<p>将例4中的第二次Redim语句修改为ReDim Preserve，看看结果如何？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="c">&#39;先输入三个学生的数据，也就是输入3。nums1变为3
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">nums1</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums1</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一次学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums1</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生成绩：&#34;</span> <span class="o">&amp;</span> <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生评价：&#34;</span> <span class="o">&amp;</span> <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+
+    <span class="c">&#39;再输入三个学生的数据，因为我想保存之前的三个学生的数据，所以输入6.nums2变为6
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">nums2</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums2</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入大于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第二次学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums2</span>
+
+    <span class="c">&#39;根据nums2数来生成数组  Preserve关键字是重点。不会清空数组，保护已经存在的值
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">Preserve</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">Preserve</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">80</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">90</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">6</span><span class="p">)</span> <span class="o">=</span> <span class="n">100</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">6</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A-&#34;</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生成绩：&#34;</span> <span class="o">&amp;</span> <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;第一位学生评价：&#34;</span> <span class="o">&amp;</span> <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行好的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">第一次学生数：3
+第一位学生成绩：50
+第一位学生评价：C
+第二次学生数：6
+第一位学生成绩：50
+第一位学生评价：C</code></pre></td></tr></table>
+</div>
+</div>
+<p>超出动态数组的范围时，也会报索引超出的错误，错误号码是9。</p>
+
+<p>例8，声明动态数组intA，strB。输入小与3的学生数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="c">&#39;数组intA表示学生成绩
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;数组strB表示学生的总评价
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">()</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="k">Dim</span> <span class="n">nums</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="c">&#39;InputBox函数是弹出一个输入对话框，让你来输入一个数字。
+</span><span class="c"></span>    <span class="c">&#39;int函数是将输入的数字转换为整型。
+</span><span class="c"></span>    <span class="n">nums</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="n">InputBox</span><span class="p">(</span><span class="s">&#34;请输入小于3的学生数&#34;</span><span class="p">))</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;学生数：&#34;</span> <span class="o">&amp;</span> <span class="n">nums</span>
+
+    <span class="c">&#39;根据nums数来生成数组
+</span><span class="c"></span>    <span class="k">ReDim</span> <span class="n">intA</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="k">ReDim</span> <span class="n">strB</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">50</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">60</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">70</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A+&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输入数字2，
+以上程序的运行后的错误如下：</p>
+
+<p><img src="/images/vba/005-1-IndexOverError1.PNG" alt="数组索引超出范围的错误" title="数组索引超出范围的错误" /></p>
+
+<h3 id="多维数组">多维数组</h3>
+
+<p>vba支持多维数组，上面介绍的都是一维数组。多维数组的定义格式同一维类似，只是括号中多了逗号。格式如下：<br />
+<code>Dim 数组名(start1 to end1,start2 to end2,start3 to end3,……) As 数据类型</code></p>
+
+<p>例9，声明二维数组变量intA，三维数组变量strB。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+
+    <span class="c">&#39;二维数组intA。第一维是2到3，有2个数据。
+</span><span class="c"></span>    <span class="c">&#39;第一维是3到4，有2个数据。
+</span><span class="c"></span>    <span class="c">&#39;共有2*2=4个数据。
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">intA</span><span class="p">(</span><span class="n">2</span> <span class="k">To</span> <span class="n">3</span><span class="p">,</span><span class="n">3</span> <span class="k">to</span> <span class="n">4</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">Integer</span>
+
+    <span class="c">&#39;三维数组strB。第一维是0到1，有2个数据。
+</span><span class="c"></span>    <span class="c">&#39;第一维是0到2，有3个数据。
+</span><span class="c"></span>    <span class="c">&#39;共有2*3=6个数据。
+</span><span class="c"></span>    <span class="k">Dim</span> <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">)</span> <span class="ow">As</span> <span class="kt">String</span>
+
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">1</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">2</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">3</span>
+    <span class="n">intA</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">4</span>
+
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;A&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;B&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;C&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;D&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;E&#34;</span>
+    <span class="n">strB</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">)</span> <span class="o">=</span> <span class="s">&#34;F&#34;</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel-vba/">excel vba</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A806-%E8%BF%90%E7%AE%97%E7%AC%A6/">
+            <span class="next-text nav-default">vba快速入门06-运算符</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

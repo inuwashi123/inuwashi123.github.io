@@ -6,10 +6,28 @@
     <description>Recent content in vba on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 27 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/vba/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vba快速入门07-数组</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A807-%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sun, 27 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A807-%E6%95%B0%E7%BB%84/</guid>
+      <description>数组 我们前面已经学习了常量和变量，用来保存程序运行过程中需要值。常量，变量都只能保存一个值，并不能保存一组同样类型的值。数组的出现就很好地解</description>
+    </item>
+    
+    <item>
+      <title>vba快速入门06-运算符</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A806-%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Sat, 26 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A806-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>运算符 类型 说明 运算符 算术运算符 用于执行数学计算的运算符。 *运算符 ^运算符 /运算符 \运算符 Mod运算符 +运算符 -运算符 比较运算符 用于执行比较的</description>
+    </item>
     
     <item>
       <title>vba快速入门05-类型转换</title>

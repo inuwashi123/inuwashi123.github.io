@@ -10,21 +10,56 @@
   
   <url>
     <loc>https://inuwashi123.github.io/categories/</loc>
-    <lastmod>2019-10-25T09:09:44+09:00</lastmod>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/tags/excel-vba/</loc>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/</loc>
-    <lastmod>2019-10-25T09:09:44+09:00</lastmod>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/post/</loc>
-    <lastmod>2019-10-25T09:09:44+09:00</lastmod>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/tags/</loc>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/categories/vba/</loc>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A807-%E6%95%B0%E7%BB%84/</loc>
+    <lastmod>2019-10-27T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A806-%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
+    <lastmod>2019-10-26T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,13 +80,6 @@
   
   <url>
     <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B042-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E5%85%83%E7%B1%BB/</loc>
-    <lastmod>2019-10-25T09:09:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://inuwashi123.github.io/tags/</loc>
     <lastmod>2019-10-25T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -116,20 +144,6 @@
   <url>
     <loc>https://inuwashi123.github.io/post/powershell/powershell%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A803-%E5%88%AB%E5%90%8D/</loc>
     <lastmod>2019-10-18T07:00:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://inuwashi123.github.io/tags/excel-vba/</loc>
-    <lastmod>2019-10-17T09:09:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://inuwashi123.github.io/categories/vba/</loc>
-    <lastmod>2019-10-17T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
