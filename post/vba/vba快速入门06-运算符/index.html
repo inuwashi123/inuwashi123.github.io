@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-26T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-26T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="5137">
+<meta itemprop="wordCount" content="5007">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/vba/"> vba </a>
             </div>
-          <span class="more-meta"> 约 5137 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+          <span class="more-meta"> 约 5007 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
         
       </div>
     </header>
@@ -253,7 +253,7 @@
 </tr>
 
 <tr>
-<td></td>
+<td>\</td>
 <td>整除</td>
 <td>整除运算</td>
 <td>a = 10 / 3 结果a等于3</td>
@@ -788,17 +788,67 @@ A &lt; B &lt; E &lt; Z &lt; a &lt; b &lt; e &lt; z &lt; À &lt; Ê &lt; Ø &lt; 
 <p>And 逻辑与运算符,用于对两个表达式执行逻辑与运算。<br />
 <code>result = expression1 And expression2</code></p>
 
-<p>如果expression1和expression2都是True，那么result是True。如果其中有一个表达式是False，那么result是False。如下表所示：<br />
-If expression1 is | And expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-True | False | False
-True | Null | Null
-False | True | False
-False | False | False
-False | Null | False
-Null | True | Null
-Null | False | False
-Null | Null | Null</p>
+<p>如果expression1和expression2都是True，那么result是True。如果其中有一个表达式是False，那么result是False。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If expression1 is</th>
+<th>And expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>Null</td>
+<td>Null</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>Null</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>True</td>
+<td>Null</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>Null</td>
+<td>Null</td>
+</tr>
+</tbody>
+</table>
 
 <p>如果expression1和expression2都是数值表达式，那么And会对表达式相同位置的位进行按位比较。如下表所示：<br />
 If bit in expression1 is | And bit in expression2 is | The result is
@@ -834,26 +884,111 @@ If bit in expression1 is | And bit in expression2 is | The result is
 <p>Or 逻辑或运算,用于对两个表达式执行逻辑或运算。<br />
 <code>result = expression1 Or expression2</code></p>
 
-<p>如果expression1或者expression2都是True，那么result是True，否则是False。如下表所示：<br />
-If expression1 is | And expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-True | True | True
-True | False | True
-True | NULL | True
-False | True | True
-False | False | False
-False | NULL | NULL
-NULL | True | True
-NULL | False | NULL
-NULL | NULL | NULL</p>
+<p>如果expression1或者expression2都是True，那么result是True，否则是False。如下表所示：</p>
 
-<p>如果expression1和expression2都是数值表达式，那么Or会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression1 is | And bit in expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-0 | 0 | 0
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 1</p>
+<table>
+<thead>
+<tr>
+<th>If expression1 is</th>
+<th>And expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>NULL</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+
+<tr>
+<td>NULL</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>NULL</td>
+<td>False</td>
+<td>NULL</td>
+</tr>
+
+<tr>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果expression1和expression2都是数值表达式，那么Or会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression1 is</th>
+<th>And bit in expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 
 <p>例10，Or运算符</p>
 <div class="highlight"><div class="chroma">
@@ -890,11 +1025,28 @@ True | False
 False | True
 NULL | NULL</p>
 
-<p>如果expression都是数值表达式，那么Or会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression is | The result is
-&mdash;|&mdash;
-0 | 1
-1 | 0</p>
+<p>如果expression都是数值表达式，那么Or会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
 
 <p>例11，Not运算符</p>
 <div class="highlight"><div class="chroma">
@@ -922,21 +1074,81 @@ If bit in expression is | The result is
 <p>Xor 逻辑异或运算,用于对两个表达式执行逻辑异或运算。
 <code>[ result = ] expression1 Xor expression2</code></p>
 
-<p>如果有且只有一个表达式的值为True，则result为True。 但是，只要有一个表达式为Null，则result也为Null。如下表所示：<br />
-If expression1 is | And expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-True | True | False
-True | False | True
-False | True | True
-False | False | False</p>
+<p>如果有且只有一个表达式的值为True，则result为True。 但是，只要有一个表达式为Null，则result也为Null。如下表所示：</p>
 
-<p>如果expression1和expression2都是数值表达式，那么Xor会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression1 is | And bit in expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-0 | 0 | 0
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 0</p>
+<table>
+<thead>
+<tr>
+<th>If expression1 is</th>
+<th>And expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果expression1和expression2都是数值表达式，那么Xor会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression1 is</th>
+<th>And bit in expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
 
 <p>例12，Xor运算符</p>
 <div class="highlight"><div class="chroma">
@@ -966,21 +1178,81 @@ If bit in expression1 is | And bit in expression2 is | The result is
 <p>Eqv 逻辑等价运算符,用于对两个表达式执行逻辑等价运算。<br />
 <code>result = expression1 Eqv expression2</code></p>
 
-<p>如果expression1或expression2是Null，那么result是Null。如果expression1和expression2都不是Null，并且expression1和expression2的表达式结果是一样的，那么result是True，否则是False。如下表所示：<br />
-If expression1 is | And expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-True | True | True
-True | False | False
-False | True | False
-False | False | True</p>
+<p>如果expression1或expression2是Null，那么result是Null。如果expression1和expression2都不是Null，并且expression1和expression2的表达式结果是一样的，那么result是True，否则是False。如下表所示：</p>
 
-<p>如果expression1和expression2都是数值表达式，那么And会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression1 is | And bit in expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-0 | 0 | 1
-0 | 1 | 0
-1 | 0 | 0
-1 | 1 | 1</p>
+<table>
+<thead>
+<tr>
+<th>If expression1 is</th>
+<th>And expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果expression1和expression2都是数值表达式，那么And会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression1 is</th>
+<th>And bit in expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 
 <p>例13，Eqv运算符</p>
 <div class="highlight"><div class="chroma">
@@ -1008,26 +1280,111 @@ If bit in expression1 is | And bit in expression2 is | The result is
 <p>Imp 逻辑隐含运算,用于对两个表达式执行逻辑隐含。<br />
 <code>result = expression1 Imp expression2</code></p>
 
-<p>结果，如下表所示：<br />
-If expression1 is | And expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-True | True | True
-True | False | False
-True | Null | Null
-False | True | True
-False | False | True
-False | Null | True
-Null | True | True
-Null | False | Null
-Null | Null | Null</p>
+<p>结果，如下表所示：</p>
 
-<p>如果expression1和expression2都是数值表达式，那么Imp会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression1 is | And bit in expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-0 | 0 | 1
-0 | 1 | 1
-1 | 0 | 0
-1 | 1 | 1</p>
+<table>
+<thead>
+<tr>
+<th>If expression1 is</th>
+<th>And expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>True</td>
+<td>Null</td>
+<td>Null</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>Null</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>True</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>False</td>
+<td>Null</td>
+</tr>
+
+<tr>
+<td>Null</td>
+<td>Null</td>
+<td>Null</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果expression1和expression2都是数值表达式，那么Imp会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression1 is</th>
+<th>And bit in expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 
 <p>例14，Imp运算符</p>
 <div class="highlight"><div class="chroma">
