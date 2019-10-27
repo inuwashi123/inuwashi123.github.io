@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-26T09:09:44&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-26T09:09:44&#43;09:00" />
-<meta itemprop="wordCount" content="5007">
+<meta itemprop="wordCount" content="4992">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/vba/"> vba </a>
             </div>
-          <span class="more-meta"> 约 5007 字 </span>
+          <span class="more-meta"> 约 4992 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
         
       </div>
@@ -384,7 +384,7 @@
 </tr>
 
 <tr>
-<td></td>
+<td>\</td>
 <td>整除</td>
 </tr>
 
@@ -850,13 +850,43 @@ A &lt; B &lt; E &lt; Z &lt; a &lt; b &lt; e &lt; z &lt; À &lt; Ê &lt; Ø &lt; 
 </tbody>
 </table>
 
-<p>如果expression1和expression2都是数值表达式，那么And会对表达式相同位置的位进行按位比较。如下表所示：<br />
-If bit in expression1 is | And bit in expression2 is | The result is
-&mdash;|&mdash;|&mdash;
-0 | 0 | 0
-0 | 1 | 0
-1 | 0 | 0
-1 | 1 | 1</p>
+<p>如果expression1和expression2都是数值表达式，那么And会对表达式相同位置的位进行按位比较。如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If bit in expression1 is</th>
+<th>And bit in expression2 is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 
 <p>例9，And运算符</p>
 <div class="highlight"><div class="chroma">
@@ -1018,12 +1048,33 @@ If bit in expression1 is | And bit in expression2 is | The result is
 <p>Not 逻辑非运算,用于对表达式执行逻辑非运算。<br />
 <code>result = Not expression</code></p>
 
-<p>结果如下表所示：<br />
-If expression is | The result is
-&mdash;|&mdash;
-True | False
-False | True
-NULL | NULL</p>
+<p>结果如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th>If expression is</th>
+<th>The result is</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>True</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td>False</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
 
 <p>如果expression都是数值表达式，那么Or会对表达式相同位置的位进行按位比较。如下表所示：</p>
 
