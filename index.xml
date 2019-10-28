@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程043 面向对象编程 装饰器</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B043-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
+      <pubDate>Mon, 28 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B043-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E8%A3%85%E9%A5%B0%E5%99%A8/</guid>
+      <description>装饰器 代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。本质上，decorator就是一个返回函数的高阶函数。 定义一个</description>
     </item>
     
     <item>
