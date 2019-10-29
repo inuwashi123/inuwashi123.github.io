@@ -6,10 +6,19 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程044 面向对象编程 类的内置装饰器</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B044-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E5%86%85%E7%BD%AE%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
+      <pubDate>Tue, 29 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B044-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E5%86%85%E7%BD%AE%E8%A3%85%E9%A5%B0%E5%99%A8/</guid>
+      <description>内置的装饰器和普通的装饰器原理是一样的，只不过返回的不是函数，而是类对象。内置的装饰器有@property，@staticmethod，@c</description>
+    </item>
     
     <item>
       <title>Python教程043 面向对象编程 装饰器</title>
