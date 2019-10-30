@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 29 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程045 面向对象编程 Descriptor</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B045-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-descriptor/</link>
+      <pubDate>Wed, 30 Oct 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B045-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-descriptor/</guid>
+      <description>Descriptor python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等</description>
     </item>
     
     <item>

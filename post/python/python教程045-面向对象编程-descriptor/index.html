@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程045 面向对象编程 Descriptor - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="Descriptor python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B045-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-descriptor/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程045 面向对象编程 Descriptor" />
+<meta property="og:description" content="Descriptor python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B045-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-descriptor/" />
+<meta property="article:published_time" content="2019-10-30T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-10-30T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程045 面向对象编程 Descriptor">
+<meta itemprop="description" content="Descriptor python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等">
+
+
+<meta itemprop="datePublished" content="2019-10-30T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-30T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3949">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程045 面向对象编程 Descriptor"/>
+<meta name="twitter:description" content="Descriptor python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程045 面向对象编程 Descriptor</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-30 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3949 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#descriptor">Descriptor</a></li>
+<li><a href="#descriptor定义">Descriptor定义</a></li>
+<li><a href="#descriptor-protocol-协议">Descriptor Protocol（协议）</a></li>
+<li><a href="#descriptor调用方法">Descriptor调用方法</a></li>
+<li><a href="#descriptor注意事项">descriptor注意事项</a></li>
+<li><a href="#基于descriptor实现的功能">基于Descriptor实现的功能</a>
+<ul>
+<li><a href="#property">property</a></li>
+<li><a href="#函数和方法-绑定与非绑定">函数和方法，绑定与非绑定</a></li>
+<li><a href="#super">super</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="descriptor">Descriptor</h2>
+
+<p>python在2.2版本中引入了descriptor功能，引入了一些新的概念，比如classmethod, staticmethod, super,Property等，这些新功能都是基于descriptor而实现的。</p>
+
+<p>Descriptor代码示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">RevealAccess</span><span class="p">:</span>
+    <span class="s2">&#34;&#34;&#34;创建一个Descriptor类，用来打印出访问它的操作信息&#34;&#34;&#34;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initval</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">initval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Retrieving&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">val</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Updating&#39;</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+
+<span class="c1">#使用Descriptor</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1">#生成一个Descriptor实例，赋值给类MyClass的x属性</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">RevealAccess</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;var &#34;x&#34;&#39;</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#普通类属性</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">MyClass</span><span class="o">.</span><span class="n">x</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Retrieving</span> <span class="n">var</span> <span class="s2">&#34;x&#34;</span>
+<span class="mi">10</span>
+<span class="n">Updating</span> <span class="n">var</span> <span class="s2">&#34;x&#34;</span>
+<span class="mi">5</span>
+<span class="n">Retrieving</span> <span class="n">var</span> <span class="s2">&#34;x&#34;</span>
+<span class="mi">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="descriptor定义">Descriptor定义</h2>
+
+<p>descriptor可以说是一个绑定了特定访问方法的类属性，这些访问方法是重写了descriptor protocol中的三个方法，分别是<strong>get</strong>, __set__, <strong>del</strong>方法。如果三个中任一一个方法在对象中定义了，就说这个对象是一个descriptor对象，可以把这个对象赋值给其它属性。descriptor protocol可以看成是一个有三个方法的接口。</p>
+
+<p>默认的查找属性的顺序
+例如，对于操作a.x，会一个查找链从a.__dict[&lsquo;x&rsquo;]（实例的字典），再到type(a).__dict__[&lsquo;x&rsquo;]（类的字典），再到type(a)的父类的字典等等。代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;dir(a)的值: &#34;</span><span class="p">,</span><span class="nb">dir</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;dir(A)的值: &#34;</span><span class="p">,</span><span class="nb">dir</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;type(a)的值: &#34;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;dir(type(a))的值: &#34;</span><span class="p">,</span><span class="nb">dir</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="c1">#dir(type(a))与dir(A)结果是一样的</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">dir</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="err">的值</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="err">的值</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="err">的值</span><span class="p">:</span>  <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">A</span><span class="s1">&#39;&gt;</span>
+<span class="nb">dir</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="err">的值</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看出类和实例的字典属性的值的内容是不一样的，因为实例中有绑定属性x的存在。type(a)返回就是实例a的类型，类A。
+如果这个需要被查找的属性是一个定义了descriptor协议方法的对象，那么python就不会按照默认的查找方式，而是调用descriptor协议中定义的方法去做处理。</p>
+
+<h2 id="descriptor-protocol-协议">Descriptor Protocol（协议）</h2>
+
+<p>有下面这三个方法<br />
+object.<strong>get</strong>(self, instance, owner)：return value<br />
+object.<strong>set</strong>(self, instance, value)：return None<br />
+object.<strong>delete</strong>(self, instance)： return None</p>
+
+<p>只要对象重写任何上面的一个方法，对象就被看作是descriptor，就可以不去采用默认的查找属性的顺序。
+如果一个对象同时定义了<strong>get</strong>,__set<strong>方法，被看作是data descriptor；只定义了</strong>get__，被称为non-data descriptor。注意 ，descriptor的实例是一定类属性（class attribute)。</p>
+
+<h2 id="descriptor调用方法">Descriptor调用方法</h2>
+
+<p>可以直接使用descriptor实例进行方法调用，如d.__get__(obj)。
+一般是在属性访问的时候自动被调用，例如obj.d是在obj实例的字典属性中查找d变量，如果d定义了<strong>get</strong>方法和<strong>set</strong>方法，是一个data descriptor，则根据上面提到的优先级，会自动去调用 d.__get__(obj)。</p>
+
+<p>下面的代码展示了简单的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Des</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">init_value</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __get__&#39;</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __set__&#39;</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+        <span class="n">prin</span><span class="p">(</span><span class="s1">&#39;call __delete__&#39;</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Widget</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Des</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">Widget</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">w</span><span class="o">.</span><span class="n">t</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="s1">&#39;call __get__&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Widget</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02868570</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Widget</span><span class="s1">&#39;&gt;)</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;int&#39;</span><span class="o">&gt;</span>
+<span class="p">(</span><span class="s1">&#39;call __set__&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Widget</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02868570</span><span class="o">&gt;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;call __get__&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Widget</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02868570</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Widget</span><span class="s1">&#39;&gt;)</span>
+<span class="mi">1</span> <span class="p">(</span><span class="s1">&#39;call __get__&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Widget</span><span class="s1">&#39;&gt;)</span>
+<span class="p">(</span><span class="s1">&#39;call __delete__&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Widget</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02868570</span><span class="o">&gt;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从输出结果可以看到，对于这个三个特殊函数，形参instance是descriptor实例所在的类的实例（w）， 而形参owner就是这个类（widget）
+w.t等价于 Pro.<strong>get</strong>(t, w, Widget).而Widget.t等价于 Pro.<strong>get</strong>(t, None, Widget)</p>
+
+<h2 id="descriptor注意事项">descriptor注意事项</h2>
+
+<p>需要注意的是， descriptor的实例一定是类的属性，因此使用的时候需要自行区分实例。比如下面这个例子，保证属性不超过一定的阈值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MaxValDes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inti_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">inti_val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_val</span> <span class="o">=</span> <span class="n">max_val</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_val</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Widget</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">MaxValDes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s1">&#39;inited w0&#39;</span><span class="p">,</span> <span class="n">w0</span><span class="o">.</span><span class="n">a</span>
+    <span class="n">w0</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">123</span>
+    <span class="k">print</span> <span class="s1">&#39;after set w0&#39;</span><span class="p">,</span><span class="n">w0</span><span class="o">.</span><span class="n">a</span>
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s1">&#39;inited w1&#39;</span><span class="p">,</span> <span class="n">w1</span><span class="o">.</span><span class="n">a</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inited</span> <span class="n">w0</span> <span class="mi">0</span>
+<span class="n">after</span> <span class="nb">set</span> <span class="n">w0</span> <span class="mi">10</span>
+<span class="n">inited</span> <span class="n">w1</span> <span class="mi">10</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，对w0.a的赋值符合预期，但是w1.a的值却不是0，而是同w0.a一样。这就是因为，a是类Widget的类属性， Widget的实例并没有&rsquo;a&rsquo;这个属性，可以通过<strong>dict</strong>查看。
+那么要怎么修改才符合预期呢，看下面的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MaxValDes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">max_val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr</span> <span class="o">=</span> <span class="n">attr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_val</span> <span class="o">=</span> <span class="n">max_val</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">]</span>
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_val</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Widget</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">MaxValDes</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">MaxValDes</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s1">&#39;inited w0&#39;</span><span class="p">,</span> <span class="n">w0</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">w0</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">w0</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">123</span>
+    <span class="n">w0</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">123</span>
+    <span class="k">print</span> <span class="s1">&#39;after set w0&#39;</span><span class="p">,</span><span class="n">w0</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">w0</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s1">&#39;inited w1&#39;</span><span class="p">,</span> <span class="n">w1</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">w1</span><span class="o">.</span><span class="n">b</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">inited</span> <span class="n">w0</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">after</span> <span class="nb">set</span> <span class="n">w0</span> <span class="mi">10</span> <span class="mi">12</span>
+<span class="n">inited</span> <span class="n">w0</span> <span class="mi">0</span> <span class="mi">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，运行结果比较符合预期，w0、w1两个实例互不干扰。上面的代码中有两点需要注意：<br />
+第一：第7、10行都是通过instance.<strong>dict</strong>来取值、赋值，而不是调用getattr、setattr，否则会递归调用，死循环。<br />
+第二：现在类和类的实例都拥有‘a’属性，不过w0.a调用的是类属性‘a&rsquo;.</p>
+
+<h2 id="基于descriptor实现的功能">基于Descriptor实现的功能</h2>
+
+<p>descriptor协议是简单而又强大的，一些新特性就是利用descriptor功能封装成一个独立的函数调用，如:<br />
+Property<br />
+绑定和非绑定方法<br />
+静态方法<br />
+类方法<br />
+super</p>
+
+<h3 id="property">property</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">getX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;get x&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__x</span>
+
+    <span class="k">def</span> <span class="nf">setX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;set x&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__x</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">delX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;del x&#39;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__x</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getX</span><span class="p">,</span> <span class="n">setX</span><span class="p">,</span> <span class="n">delX</span><span class="p">,</span> <span class="s2">&#34;This is &#39;x&#39; property.&#34;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># set x 1</span>
+<span class="n">c</span><span class="o">.</span><span class="n">x</span>      <span class="c1"># get x</span>
+<span class="k">del</span> <span class="n">c</span><span class="o">.</span><span class="n">x</span>  <span class="c1"># del x</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">set</span> <span class="n">x</span> <span class="mi">1</span>
+<span class="n">get</span> <span class="n">x</span>
+<span class="k">del</span> <span class="n">x</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>调用proprety()是一种创建data descriptor的一种简洁的方式，函数结构如下：<br />
+property(fget=None, fset=None, fdel=None, doc=None) #返回的是property对象，可以赋值给某属性，propety方法有四个参数，只要对没有进行赋值的参数进行访问就会报错。<br />
+c 是 C 的一个实例, x是C中定义的一个property属性：<br />
+当你引用c.x时, python调用 fget 方法取值给你.
+当你为c.x赋值: x.attrib=value 时, python调用 fset方法, 并且value值做为fset方法的参数,
+当你执行del c.x 时, python调用fdel方法,
+当你传过去的名为 doc 的参数即为该属性的文档字符串.</p>
+
+<p>又如，我们定义一个只读property属性：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Rect</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">heigth</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heigth</span> <span class="o">=</span> <span class="n">heigth</span>
+
+    <span class="k">def</span> <span class="nf">getArea</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">heigth</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getArea</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;area of the rectangle&#39;</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>  <span class="c1"># 6</span>
+<span class="n">a</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">del</span> <span class="n">a</span><span class="o">.</span><span class="n">area</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>只需要传入fget参数就可以，运行如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">6</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">12</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t set attribute</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>属性area为只读，任何重新绑定和删除的操作都会报错。这是因为我们只定义了fget方法。</p>
+
+<p>properties所做的事情与那些特殊方法<strong>getattr</strong>, __setattr__, \_delattr__ 等是极其相似的,不过同样的工作它干起来更简单更快捷。</p>
+
+<p>关于property()方法的几点声明：<br />
+1.property()函数的四个参数，应该为methods（带self参数的那种），而不是function。<br />
+2.当你使用类去访问属性的时候，property设置的函数是不会被调用的。只有用实例去访问才会调用。</p>
+
+<h3 id="函数和方法-绑定与非绑定">函数和方法，绑定与非绑定</h3>
+
+<p>Python的面向对象特性是基于函数的，函数的实现是需要使用到non-data descriptor的功能。<br />
+在类定义中，方法是由def或者lambda声明的。和一般函数不同的是，方法的第一个参数是self对象。<br />
+为了支持方法的调用，在访问方法属性的时候，functions使用相应的<strong>get</strong>方法。这就意味着所有的函数都是non-data descriptor，用于根据类或者对象的调用来返回unbound或者bound的方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+      <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">retunr</span> <span class="n">x</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">D</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">]</span>
+<span class="o">&lt;</span><span class="n">function</span> <span class="n">f</span> <span class="n">at</span> <span class="mh">0x02164A30</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">D</span><span class="o">.</span><span class="n">f</span>
+<span class="o">&lt;</span><span class="n">unbound</span> <span class="n">method</span> <span class="n">D</span><span class="o">.</span><span class="n">f</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">d</span><span class="o">.</span><span class="n">f</span>
+<span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">D</span><span class="o">.</span><span class="n">f</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">D</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x021B1070</span><span class="o">&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">D</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">d</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">D</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Traceback</span>
+<span class="ne">TypeError</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到方法在字典中存放的类型其实是函数对象，bound和unbound方法是两个不同的类型。内部的实现其实是一个同一个对象，不同的是这个对象的im_self属性是否被赋值，或者是设为None。</p>
+
+<h3 id="super">super</h3>
+
+<p>在支持多继承的语言中，讨论谁是父类，感觉意义不大，尤其是像之类mro的菱形问题，父类是谁就更说不清了。需要强调的是super不会返回父类，它返回的是代理对象。代理对象就是利用委托（delegation）使用别的对象的方法来实现功能的对象。
+super返回的是一个定制了<strong>getattribute</strong>方法的对象，是一个代理对象，它可以访问MRO中的方法。形式如下：<br />
+super(cls, instance-or-subclass).method(*args, **kw)
+可以转化为：<br />
+right-method-in-the-MRO-applied-to(instance-or-subclass, *args, **kw)
+需要注意的是，第二个参数instnce-or-subclass可以是第一个参数的实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+      <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;instance of </span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+      <span class="k">pass</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
+      <span class="k">pass</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">print</span> <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span>
+<span class="o">&lt;</span><span class="n">bound</span> <span class="n">methond</span> <span class="n">D</span><span class="o">.</span><span class="fm">__repr__</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">instance</span> <span class="n">of</span> <span class="n">D</span><span class="o">&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">print</span> <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span>
+<span class="o">&lt;</span><span class="n">unbound</span> <span class="n">methond</span> <span class="n">D</span><span class="o">.</span><span class="n">__repr</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">print</span> <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+ <span class="o">&lt;</span><span class="n">instance</span> <span class="n">of</span> <span class="n">D</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span><span class="k">print</span> <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+<span class="n">Traceback</span>
+<span class="ne">TypeError</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果返回了非绑定的方法，调用的时候需要加上第一个self参数。
+通过descriptor的实现，可以说super也是一个non-data descriptor类。也就是实现了<strong>get</strong>(self, obj, objtyp=None)的类。假设descr是C类的一个descriptor，C.descr实现上调用的是descr.__get__(None, C)；如果是实例来调用，c.descr调用的是descr.__get__(c, type&copy;)。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B044-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E7%B1%BB%E7%9A%84%E5%86%85%E7%BD%AE%E8%A3%85%E9%A5%B0%E5%99%A8/">
+            <span class="next-text nav-default">Python教程044 面向对象编程 类的内置装饰器</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
