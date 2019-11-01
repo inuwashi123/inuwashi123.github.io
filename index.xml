@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 31 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程047 面向对象编程 枚举类Enum</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B047-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E6%9E%9A%E4%B8%BE%E7%B1%BBenum/</link>
+      <pubDate>Fri, 01 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B047-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E6%9E%9A%E4%B8%BE%E7%B1%BBenum/</guid>
+      <description>内置枚举类Enum 使用内置的枚举类Enum，需要引入enum模块。 例如： 1 2 3 4 5 6 7 8 from enum import Enum #Enum函数新建枚举Month Month = Enum(&amp;#39;Month&amp;#39;, (&amp;#39;Jan&amp;#39;, &amp;#39;Feb&amp;#39;, &amp;#39;Mar&amp;#39;,</description>
     </item>
     
     <item>

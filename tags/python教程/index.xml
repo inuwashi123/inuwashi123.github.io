@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 31 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程047 面向对象编程 枚举类Enum</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B047-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E6%9E%9A%E4%B8%BE%E7%B1%BBenum/</link>
+      <pubDate>Fri, 01 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B047-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E6%9E%9A%E4%B8%BE%E7%B1%BBenum/</guid>
+      <description>内置枚举类Enum 使用内置的枚举类Enum，需要引入enum模块。 例如： 1 2 3 4 5 6 7 8 from enum import Enum #Enum函数新建枚举Month Month = Enum(&amp;#39;Month&amp;#39;, (&amp;#39;Jan&amp;#39;, &amp;#39;Feb&amp;#39;, &amp;#39;Mar&amp;#39;,</description>
+    </item>
     
     <item>
       <title>Python教程046 面向对象编程 实例属性访问方法</title>
