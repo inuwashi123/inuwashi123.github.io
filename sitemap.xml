@@ -10,48 +10,62 @@
   
   <url>
     <loc>https://inuwashi123.github.io/categories/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/post/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/categories/python/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B048-%E5%A4%9A%E7%BA%BF%E7%A8%8B1/</loc>
-    <lastmod>2019-11-02T09:09:44+09:00</lastmod>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B050-%E5%A4%9A%E7%BA%BF%E7%A8%8B-timer%E7%B1%BBsemaphore%E7%B1%BBlocal%E7%B1%BBbarrier%E7%B1%BB/</loc>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/tags/</loc>
+    <lastmod>2019-11-04T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B049-%E5%A4%9A%E7%BA%BF%E7%A8%8B-lock%E7%B1%BBrlock%E7%B1%BBcondition%E7%B1%BBevent%E7%B1%BB/</loc>
+    <lastmod>2019-11-03T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B048-%E5%A4%9A%E7%BA%BF%E7%A8%8B1/</loc>
     <lastmod>2019-11-02T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

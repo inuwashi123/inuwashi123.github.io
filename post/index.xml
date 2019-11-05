@@ -6,10 +6,28 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 02 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程050 多线程 Timer类 Semaphore类 local类 Barrier类</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B050-%E5%A4%9A%E7%BA%BF%E7%A8%8B-timer%E7%B1%BBsemaphore%E7%B1%BBlocal%E7%B1%BBbarrier%E7%B1%BB/</link>
+      <pubDate>Mon, 04 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B050-%E5%A4%9A%E7%BA%BF%E7%A8%8B-timer%E7%B1%BBsemaphore%E7%B1%BBlocal%E7%B1%BBbarrier%E7%B1%BB/</guid>
+      <description>Timer定时器 Timer（定时器）是Thread的派生类，用于在指定时间后调用一个方法。 构造方法： Timer(interval, function, args=[], kwargs={}) interval: 指定的时间 function: 要执行的方法 args/kwargs: 方法</description>
+    </item>
+    
+    <item>
+      <title>Python教程049 多线程 Lock类 Rlock类 Condition类 Event类</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B049-%E5%A4%9A%E7%BA%BF%E7%A8%8B-lock%E7%B1%BBrlock%E7%B1%BBcondition%E7%B1%BBevent%E7%B1%BB/</link>
+      <pubDate>Sun, 03 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B049-%E5%A4%9A%E7%BA%BF%E7%A8%8B-lock%E7%B1%BBrlock%E7%B1%BBcondition%E7%B1%BBevent%E7%B1%BB/</guid>
+      <description>Lock类、Rlock类 如果多个线程共同对某个数据修改，则可能出现不可预料的结果，为了保证数据的正确性，需要对多个线程进行同步。使用Thre</description>
+    </item>
     
     <item>
       <title>Python教程048 多线程1</title>
