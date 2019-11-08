@@ -6,10 +6,28 @@
     <description>Recent content in vba on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Oct 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/vba/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vba快速入门09-循环控制语句</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A809-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/</link>
+      <pubDate>Wed, 06 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A809-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/</guid>
+      <description>循环控制 所谓循环控制，即在循环执行一段代码，用于完成一些重复性任务。 VBA中的循环控制语句主要有3种： for循环 Do……loop循环 whil</description>
+    </item>
+    
+    <item>
+      <title>vba快速入门08-条件判断语句</title>
+      <link>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A808-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5/</link>
+      <pubDate>Tue, 05 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A808-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5/</guid>
+      <description>If条件判断语句 VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行</description>
+    </item>
     
     <item>
       <title>vba快速入门07-数组</title>

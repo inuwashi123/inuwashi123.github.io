@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程052 多进程2 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="terminate() 强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B052-%E5%A4%9A%E8%BF%9B%E7%A8%8B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程052 多进程2" />
+<meta property="og:description" content="terminate() 强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B052-%E5%A4%9A%E8%BF%9B%E7%A8%8B2/" />
+<meta property="article:published_time" content="2019-11-08T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-08T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程052 多进程2">
+<meta itemprop="description" content="terminate() 强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么">
+
+
+<meta itemprop="datePublished" content="2019-11-08T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-08T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3143">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程052 多进程2"/>
+<meta name="twitter:description" content="terminate() 强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程052 多进程2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-08 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3143 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#进程同步-锁">进程同步(锁)</a></li>
+<li><a href="#队列queue">队列Queue</a></li>
+<li><a href="#管道pipe">管道Pipe</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>terminate()<br />
+强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么也将不会被释放，进而导致死锁。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="k">class</span> <span class="nc">MyProcess</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processname</span><span class="p">):</span>
+        <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">processname</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">运行结束&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">p1</span><span class="o">=</span><span class="n">MyProcess</span><span class="p">(</span><span class="s1">&#39;子进程1&#39;</span><span class="p">)</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>       <span class="c1">#关闭进程,不会立即关闭,所以is_alive立刻查看的结果可能还是存活</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span> <span class="c1">#结果为True</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;开始&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span> <span class="c1">#结果为False</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">True</span>
+<span class="err">开始</span>
+<span class="bp">False</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="进程同步-锁">进程同步(锁)</h2>
+
+<p>进程直接的内存空间是隔离的，不共享数据。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">100</span>
+<span class="k">def</span> <span class="nf">work</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">n</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;子进程内: &#39;</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">work</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;主进程内: &#39;</span><span class="p">,</span><span class="n">n</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">主进程内</span><span class="p">:</span>  <span class="mi">100</span>
+<span class="err">子进程内</span><span class="p">:</span>  <span class="mi">0</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>虽然进程之间数据不共享,但是共享同一套文件系统,所以访问同一个文件,或同一个打印终端,是没有问题的,而共享带来的是竞争，竞争带来的结果就是错乱，如何控制，就是加锁处理
+进程锁multiprocessing.Lock()</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;a+&#39;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;The number is </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="s2">&#34;file.txt&#34;</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>加锁可以保证多个进程修改同一块数据时，同一时间只能有一个任务可以进行修改，即串行的修改，没错，速度是慢了，但牺牲了速度却保证了数据安全。<br />
+虽然可以用文件共享数据实现进程间通信，但问题是：<br />
+1.效率低（共享数据基于文件，而文件是硬盘上的数据）<br />
+2.需要自己加锁处理<br />
+因此我们最好找寻一种解决方案能够兼顾：1、效率高（多个进程共享一块内存的数据）2、帮我们处理好锁问题。这就是mutiprocessing模块为我们提供的基于消息的IPC通信机制：队列和管道。
+1 队列和管道都是将数据存放于内存中
+2 队列又是基于（管道+锁）实现的，可以让我们从复杂的锁问题中解脱出来，我们应该尽量避免使用共享数据，尽可能使用消息传递和队列，避免处理复杂的同步和锁问题，而且在进程数目增多时，往往可以获得更好的可获展性。
+​</p>
+
+<h2 id="队列queue">队列Queue</h2>
+
+<p>构造函数<br />
+Queue([maxsize]):
+maxsize:队列中允许最大项数，省略则无大小限制。
+创建共享的进程队列，Queue是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。底层就是以管道和锁定的方式实现。</p>
+
+<p>方法介绍：<br />
+put(obj[, block[, timeout]])<br />
+obj:插入的数据对象<br />
+block:可选参数，默认是True。<br />
+timeout:可选参数，默认是None。</p>
+
+<p>将obj放入队列。如果block为True（默认值），timeout为None（默认值），则根据需要阻止，直到可用插槽可用。如果timeout为正数，则最多会阻塞timeout制定的秒数。如果在此时间内没有可用插槽，会抛出queue.Full异常。否则（block为false），如果空闲插槽立即可用，则将项目放入队列，否则会抛出queue.Full异常（在这种情况下，timeout将被忽略）。</p>
+
+<p>put_nowait(obj):<br />
+相当于q.put(obj,False)</p>
+
+<p>get([block[, timeout]])<br />
+block:可选参数，默认是True。<br />
+timeout:可选参数，默认是None。<br />
+从队列中移除并返回移除的项目。如果block为True（默认值），timeout为None（默认值），则根据需要阻止，直到有数据。如果timeout为正数，则最多会阻塞timeout制定的秒数。如果在该时间内没有可用数据项，会抛出queue.Empty异常。否则（block为false），如果有数据项立即可用，则返回该项，否则引发queue.empty异常（在这种情况下，timeout将被忽略）。</p>
+
+<p>get_nowait():<br />
+相当于q.getFalse)</p>
+
+<p>empty():<br />
+队列为空则返回True，该结果不可靠，比如在返回True的过程中，如果队列中又加入了项目。</p>
+
+<p>full()：<br />
+调用此方法时队列已满则返回True，该结果不可靠，比如在返回True的过程中，如果队列中的项目被取走。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span><span class="n">Queue</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">q</span><span class="o">=</span><span class="n">Queue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">#put ,get ,put_nowait,get_nowait,full,empty</span>
+<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">full</span><span class="p">())</span> <span class="c1">#满了</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">())</span> <span class="c1">#空了</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">True</span>
+<span class="mi">3</span>
+<span class="mi">3</span>
+<span class="mi">3</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>qsize():<br />
+返回队列中目前项目的正确数量，结果也不可靠，理由同q.empty()和q.full()一样。</p>
+
+<p>join_thread()：<br />
+连接队列的后台线程。此方法只能用于在调用q.close()方法之后，等待所有队列项被消耗。默认情况下，此方法由不是q的原始创建者的所有进程调用。调用q.cancel_join_thread方法可以禁止这种行为</p>
+
+<p>cancel_join_thread():<br />
+不会在进程退出时自动连接后台线程。可以防止join_thread()方法阻塞。</p>
+
+<p>close():<br />
+关闭队列，防止队列中加入更多数据。调用此方法，后台线程将继续写入那些已经入队列但尚未写入的数据，但将在此方法完成时马上关闭。如果q被垃圾收集，将调用此方法。关闭队列不会在队列使用者中产生任何类型的数据结束信号或异常。例如，如果某个使用者正在被阻塞在get()操作上，关闭生产者中的队列不会导致get()方法返回错误。</p>
+
+<h2 id="管道pipe">管道Pipe</h2>
+
+<p>构造函数：<br />
+Pipe([duplex]):<br />
+dumplex:默认管道是全双工的，如果将duplex射成False，conn1只能用于接收，conn2只能用于发送。
+在进程之间创建一条管道，并返回元组（conn1,conn2）,其中conn1，conn2表示管道两端的连接对象，强调一点：必须在产生Process对象之前产生管道。</p>
+
+<p>主要方法：<br />
+conn1.recv():<br />
+接收conn2.send(obj)发送的对象。如果没有消息可接收，recv方法会一直阻塞。如果连接的另外一端已经关闭，那么recv方法会抛出EOFError。</p>
+
+<p>conn1.send(obj):<br />
+通过连接发送对象。obj是与序列化兼容的任意对象</p>
+
+<p>其他方法：<br />
+conn1.close():<br />
+关闭连接。如果conn1被垃圾回收，将自动调用此方法</p>
+
+<p>conn1.fileno():<br />
+返回连接使用的整数文件描述符</p>
+
+<p>conn1.poll([timeout]):<br />
+如果连接上的数据可用，返回True。timeout指定等待的最长时限。如果省略此参数，方法将立即返回结果。如果将timeout射成None，操作将无限期地等待数据到达。</p>
+
+<p>conn1.recv_bytes([maxlength]):<br />
+接收c.send_bytes()方法发送的一条完整的字节消息。maxlength指定要接收的最大字节数。如果进入的消息，超过了这个最大值，将引发IOError异常，并且在连接上无法进行进一步读取。如果连接的另外一端已经关闭，再也不存在任何数据，将引发EOFError异常。</p>
+
+<p>conn.send_bytes(buffer [, offset [, size]])：<br />
+通过连接发送字节数据缓冲区，buffer是支持缓冲区接口的任意对象，offset是缓冲区中的字节偏移量，而size是要发送字节数。结果数据以单条消息的形式发出，然后调用c.recv_bytes()函数进行接收</p>
+
+<p>conn1.recv_bytes_into(buffer [, offset]):<br />
+接收一条完整的字节消息，并把它保存在buffer对象中，该对象支持可写入的缓冲区接口（即bytearray对象或类似的对象）。offset指定缓冲区中放置消息处的字节位移。返回值是收到的字节数。如果消息长度大于可用的缓冲区空间，将引发BufferTooShort异常。</p>
+
+<p>基于管道实现进程间通信（与队列的方式是类似的，队列就是管道加锁实现的）</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span><span class="n">Pipe</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span><span class="nn">os</span>
+<span class="k">def</span> <span class="nf">consumer</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">p</span>
+    <span class="n">left</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">baozi</span><span class="o">=</span><span class="n">right</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> 收到包子:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">baozi</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
+            <span class="n">right</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">break</span>
+
+<span class="k">def</span> <span class="nf">producer</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">p</span>
+    <span class="n">right</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+        <span class="n">left</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># time.sleep(1)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">left</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">Pipe</span><span class="p">()</span>
+
+    <span class="n">c1</span><span class="o">=</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">consumer</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">((</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">),</span><span class="s1">&#39;c1&#39;</span><span class="p">))</span>
+    <span class="n">c1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="n">seq</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">producer</span><span class="p">(</span><span class="n">seq</span><span class="p">,(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">))</span>
+
+    <span class="n">right</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">left</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">c1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;主进程&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">0</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">1</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">2</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">3</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">4</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">6</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">7</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">8</span>
+<span class="n">c1</span> <span class="err">收到包子</span><span class="p">:</span><span class="mi">9</span>
+<span class="err">主进程</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B051-%E5%A4%9A%E8%BF%9B%E7%A8%8B1/">
+            <span class="next-text nav-default">Python教程051 多进程1</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

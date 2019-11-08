@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>vba快速入门08-条件判断语句 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="If条件判断语句 VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行" /><meta name="keywords" content="vba, 宏" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A808-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="vba快速入门08-条件判断语句" />
+<meta property="og:description" content="If条件判断语句 VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A808-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5/" />
+<meta property="article:published_time" content="2019-11-05T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-05T09:09:44+09:00" />
+<meta itemprop="name" content="vba快速入门08-条件判断语句">
+<meta itemprop="description" content="If条件判断语句 VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行">
+
+
+<meta itemprop="datePublished" content="2019-11-05T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-05T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3027">
+
+
+
+<meta itemprop="keywords" content="excel vba," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vba快速入门08-条件判断语句"/>
+<meta name="twitter:description" content="If条件判断语句 VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">vba快速入门08-条件判断语句</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-05 </span>
+        <div class="post-category">
+            <a href="/categories/vba/"> vba </a>
+            </div>
+          <span class="more-meta"> 约 3027 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#if条件判断语句">If条件判断语句</a>
+<ul>
+<li><a href="#if-then-end-if">If&hellip;Then&hellip;End If</a></li>
+<li><a href="#if-then-else-end-if">If&hellip;Then&hellip;Else&hellip;End If</a></li>
+<li><a href="#if-then-elseif-then-end-if">If&hellip;Then&hellip;ElseIf&hellip;Then&hellip;End If</a></li>
+</ul></li>
+<li><a href="#if语句的嵌套">If语句的嵌套</a></li>
+<li><a href="#select-case条件判断语句">Select Case条件判断语句</a>
+<ul>
+<li><a href="#有else的select-case条件判断语句">有Else的Select Case条件判断语句</a></li>
+<li><a href="#没有else的select-case条件判断语句">没有Else的Select Case条件判断语句</a></li>
+<li><a href="#case子句中使用多个表达式或范围">Case子句中使用多个表达式或范围</a></li>
+</ul></li>
+<li><a href="#select-case语句的嵌套">Select Case语句的嵌套</a></li>
+<li><a href="#if语句和select-case语句混合使用">If语句和Select Case语句混合使用</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="if条件判断语句">If条件判断语句</h2>
+
+<p>VBA中的流程控制分为两种，其一是条件结构式的，即根据条件判断的结果去选择性执行相应的语句（块）；另一种是循环，即循环地执行语句（块）。本节介绍第一种。</p>
+
+<p>If 语句有三种形式：</p>
+
+<ol>
+<li>If&hellip;Then&hellip;End If</li>
+<li>If&hellip;Then&hellip;Else&hellip;End If</li>
+<li>If&hellip;Then&hellip;ElseIf&hellip;Then&hellip;End If</li>
+</ol>
+
+<h3 id="if-then-end-if">If&hellip;Then&hellip;End If</h3>
+
+<p>格式如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">If</span> <span class="n">逻辑表达式</span> <span class="k">Then</span>
+    <span class="c">&#39; 如果逻辑表达式为真，则执行这里的语句或语句块
+</span><span class="c"></span><span class="k">End</span> <span class="k">If</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例1，判断日期2/13/1995和现在日期的大小，如果小于现在的日期，myDate变量赋值为现在的日期。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">FixDate</span><span class="p">()</span>
+    <span class="n">myDate</span> <span class="o">=</span> <span class="p">#</span><span class="n">2</span><span class="o">/</span><span class="n">13</span><span class="o">/</span><span class="n">1995</span><span class="p">#</span>
+    <span class="k">If</span> <span class="n">myDate</span> <span class="o">&lt;</span> <span class="n">Now</span> <span class="k">Then</span>
+        <span class="n">myDate</span> <span class="o">=</span> <span class="n">Now</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果Then后面只有一条语句的话，例如上面的<code>myDate = Now</code>,那么If语句和Then后面的语句放在一行当中。格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">If</span> <span class="n">逻辑表达式</span> <span class="k">Then</span> <span class="c">&#39;如果逻辑表达式为真，则执行这里的语句
+</span><span class="c"></span><span class="k">End</span> <span class="k">If</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>所以，例1可以修改成如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">FixDate</span><span class="p">()</span>
+    <span class="n">myDate</span> <span class="o">=</span> <span class="p">#</span><span class="n">2</span><span class="o">/</span><span class="n">13</span><span class="o">/</span><span class="n">1995</span><span class="p">#</span>
+    <span class="k">If</span> <span class="n">myDate</span> <span class="o">&lt;</span> <span class="n">Now</span> <span class="k">Then</span> <span class="n">myDate</span> <span class="o">=</span> <span class="n">Now</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例2，判断日期2/13/1995和现在日期的大小，如果小于现在的日期，myDate变量赋值为现在的日期并打印。Then后面是语句块，不能写在一行内。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">FixDate</span><span class="p">()</span>
+    <span class="n">myDate</span> <span class="o">=</span> <span class="p">#</span><span class="n">2</span><span class="o">/</span><span class="n">13</span><span class="o">/</span><span class="n">1995</span><span class="p">#</span>
+    <span class="k">If</span> <span class="n">myDate</span> <span class="o">&lt;</span> <span class="n">Now</span> <span class="k">Then</span>
+        <span class="n">myDate</span> <span class="o">=</span> <span class="n">Now</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="n">myDate</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="if-then-else-end-if">If&hellip;Then&hellip;Else&hellip;End If</h3>
+
+<p>格式如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">If</span> <span class="n">逻辑表达式</span> <span class="k">Then</span>
+    <span class="c">&#39; 如果逻辑表达式为真，则执行这里的语句或语句块
+</span><span class="c"></span><span class="k">Else</span>
+    <span class="c">&#39; 否则（即逻辑表达式为假），则执行这里的语句或语句块
+</span><span class="c"></span><span class="k">End</span> <span class="k">If</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例3，判断日期2/13/1995和现在日期的大小，如果小于现在的日期，myDate变量赋值为现在的日期并打印。如果大于现在的日期，则打印。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">FixDate</span><span class="p">()</span>
+    <span class="n">myDate</span> <span class="o">=</span> <span class="p">#</span><span class="n">2</span><span class="o">/</span><span class="n">13</span><span class="o">/</span><span class="n">1995</span><span class="p">#</span>
+    <span class="k">If</span> <span class="n">myDate</span> <span class="o">&lt;</span> <span class="n">Now</span> <span class="k">Then</span>
+        <span class="n">myDate</span> <span class="o">=</span> <span class="n">Now</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;日期2/13/1995小于日期&#34;</span> <span class="o">&amp;</span> <span class="n">myDate</span>
+    <span class="k">Else</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;日期2/13/1995大于日期&#34;</span> <span class="o">&amp;</span> <span class="n">myDate</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">日期2/13/1995小于日期2019/09/17 9:56:05</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果将myDate修改为比2019/09/17 9:56:05大的日期时，将执行else语句。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">FixDate</span><span class="p">()</span>
+    <span class="n">myDate</span> <span class="o">=</span> <span class="p">#</span><span class="n">2</span><span class="o">/</span><span class="n">13</span><span class="o">/</span><span class="n">2020</span><span class="p">#</span>
+    <span class="k">If</span> <span class="n">myDate</span> <span class="o">&lt;</span> <span class="n">Now</span> <span class="k">Then</span>
+        <span class="n">myDate</span> <span class="o">=</span> <span class="n">Now</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;日期2/13/2020小于日期&#34;</span> <span class="o">&amp;</span> <span class="n">myDate</span>
+    <span class="k">Else</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;日期2/13/2020大于日期&#34;</span> <span class="o">&amp;</span> <span class="n">myDate</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">日期2/13/2020大于日期2019/09/17 9:56:05</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="if-then-elseif-then-end-if">If&hellip;Then&hellip;ElseIf&hellip;Then&hellip;End If</h3>
+
+<p>格式如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">If</span> <span class="n">逻辑表达式1</span> <span class="k">Then</span>
+    <span class="c">&#39; 逻辑表达式1为真，则执行这里的语句
+</span><span class="c"></span><span class="k">ElseIf</span> <span class="n">逻辑表达式2</span> <span class="k">Then</span>
+    <span class="c">&#39; 逻辑表达式2为真，则执行这里的语句
+</span><span class="c"></span>    <span class="err">……</span>
+<span class="k">Else</span>
+    <span class="c">&#39; 逻辑表达式1，2……，都返回了假，则执行这里的语句
+</span><span class="c"></span><span class="k">End</span> <span class="k">If</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>elseIf语句可以有多个。</p>
+
+<p>例4，根据学生的成绩给出评价。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">59</span>
+
+    <span class="k">If</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">90</span> <span class="k">Then</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+    <span class="k">ElseIf</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">70</span> <span class="k">Then</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">ElseIf</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">60</span> <span class="k">Then</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">Else</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;差&#34;</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">差</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="if语句的嵌套">If语句的嵌套</h2>
+
+<p>If语句里面还可以有If语句，形成If语句嵌套。每个嵌套的If语句必须具有匹配的End If语句。</p>
+
+<p>例5，根据学生的成绩给出评价,在大于90分的判断上面又加了个If判断，形成If语句的嵌套。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">100</span>
+
+    <span class="k">If</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">90</span> <span class="k">Then</span>
+        <span class="k">If</span> <span class="n">intA</span> <span class="o">=</span> <span class="n">100</span> <span class="k">Then</span>
+            <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;天才&#34;</span>
+        <span class="k">Else</span>                     <span class="c">&#39;这个else语句和If intA = 100是一对的
+</span><span class="c"></span>            <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+        <span class="k">End</span> <span class="k">If</span>
+    <span class="k">ElseIf</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">70</span> <span class="k">Then</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">ElseIf</span> <span class="n">intA</span> <span class="o">&gt;=</span> <span class="n">60</span> <span class="k">Then</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">Else</span>
+        <span class="n">debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;差&#34;</span>
+    <span class="k">End</span> <span class="k">If</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">天才</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="select-case条件判断语句">Select Case条件判断语句</h2>
+
+<p>Select Case语句在功能与If语句非常相似。执行几组语句之一，具体取决于表达式的值。
+有两种形式。</p>
+
+<ol>
+<li>有Else的Select Case条件判断语句</li>
+<li>没有Else的Select Case条件判断语句</li>
+</ol>
+
+<h3 id="有else的select-case条件判断语句">有Else的Select Case条件判断语句</h3>
+
+<p>格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Select</span> <span class="k">Case</span> <span class="n">测试表达式</span>
+    <span class="k">Case</span> <span class="n">表达式1</span>
+        <span class="c">&#39; 如果测试表达式等于表达式1，则执行这里的语句
+</span><span class="c"></span>    <span class="k">Case</span> <span class="n">表达式2</span>
+        <span class="c">&#39; 如果测试表达式等于表达式2，则执行这里的语句
+</span><span class="c"></span>    <span class="k">Case</span> <span class="n">表达式3</span>
+        <span class="c">&#39; 如果测试表达式等于表达式3，则执行这里的语句
+</span><span class="c"></span>    <span class="c">&#39; 后面可以有更多的Case
+</span><span class="c"></span>    <span class="k">Case</span> <span class="k">else</span>
+        <span class="c">&#39; 前面所有的表达式都不满足时，则执行这里的语句
+</span><span class="c"></span><span class="k">End</span> <span class="k">Select</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>测试表达式是任何数值表达式或字符串表达式。</p>
+
+<p>例6，把例4的If……elseIf……形式改成Select Case语句的形式。在“Case 表达式” 中间有个Is。这个是用于表达式判断时候用的格式，这样才能够起到类似于If……elseIf……的作用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">59</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">intA</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">90</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">70</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">60</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">Case</span> <span class="k">Else</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;差&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">差</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="没有else的select-case条件判断语句">没有Else的Select Case条件判断语句</h3>
+
+<p>格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Select</span> <span class="k">Case</span> <span class="n">测试表达式</span>
+    <span class="k">Case</span> <span class="n">表达式1</span>
+        <span class="c">&#39; 如果测试表达式等于表达式1，则执行这里的语句
+</span><span class="c"></span>    <span class="k">Case</span> <span class="n">表达式2</span>
+        <span class="c">&#39; 如果测试表达式等于表达式2，则执行这里的语句
+</span><span class="c"></span>    <span class="k">Case</span> <span class="n">表达式3</span>
+        <span class="c">&#39; 如果测试表达式等于表达式3，则执行这里的语句
+</span><span class="c"></span>    <span class="c">&#39; 后面可以有更多的Case
+</span><span class="c"></span><span class="k">End</span> <span class="k">Select</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例7，intA是59，没有满足条件的Case语句。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">59</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">intA</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">90</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">70</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">60</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="case子句中使用多个表达式或范围">Case子句中使用多个表达式或范围</h3>
+
+<p>例8，Case语句为数字使用多个表达式和范围。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">Number</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">Number</span> <span class="o">=</span> <span class="n">8</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">Number</span>
+    <span class="k">Case</span> <span class="n">1</span> <span class="k">To</span> <span class="n">5</span>     <span class="c">&#39; 范围1到5
+</span><span class="c"></span>        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;Between 1 and 5&#34;</span>
+    <span class="k">Case</span> <span class="n">6</span><span class="p">,</span> <span class="n">7</span><span class="p">,</span> <span class="n">8</span>    <span class="c">&#39; 多个表达式。表达式6，表达式7和表达式8
+</span><span class="c"></span>        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;Between 6 and 8&#34;</span>
+    <span class="k">Case</span> <span class="n">9</span> <span class="k">To</span> <span class="n">10</span>    <span class="c">&#39; 范围9到10
+</span><span class="c"></span>        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;Greater than 8&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">Between 6 and 8</code></pre></td></tr></table>
+</div>
+</div>
+<p>例9，Case语句为字符串使用多个表达式和范围。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">letter</span> <span class="ow">As</span> <span class="kt">String</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="s">&#34;E&#34;</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">letter</span>
+    <span class="k">Case</span> <span class="s">&#34;A&#34;</span> <span class="k">To</span> <span class="s">&#34;C&#34;</span>    <span class="c">&#39; 范围A到C
+</span><span class="c"></span>        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;Between A and C&#34;</span>
+    <span class="k">Case</span> <span class="s">&#34;D&#34;</span><span class="p">,</span> <span class="s">&#34;E&#34;</span>   <span class="c">&#39; 多个表达式。表达式D和表达式E
+</span><span class="c"></span>        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;Between D and E&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">Between D and E</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="select-case语句的嵌套">Select Case语句的嵌套</h2>
+
+<p>Select Case语句里面还可以有Select Case语句，形成Select Case语句嵌套。每个嵌套的Select Case语句必须具有匹配的End Select语句。</p>
+
+<p>例10，根据学生的成绩给出评价,在大于90分的判断上面又加了个Select Case判断，形成Select Case语句的嵌套。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">100</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">intA</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">90</span>
+        <span class="k">Select</span> <span class="k">Case</span> <span class="n">intA</span>
+            <span class="k">Case</span> <span class="n">100</span>
+                <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;天才&#34;</span>
+            <span class="k">Case</span> <span class="k">Else</span>
+                <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+        <span class="k">End</span> <span class="k">Select</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">70</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">60</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">Case</span> <span class="k">Else</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;差&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上程序的运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-result" data-lang="result">天才</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="if语句和select-case语句混合使用">If语句和Select Case语句混合使用</h2>
+
+<p>Select Case的嵌套一般用的比较少。上面例10可以将内层的Select Case语句改成If语句，比较容易理解。</p>
+
+<p>例10，根据学生的成绩给出评价,在大于90分的判断上面又加了个Select Case判断，形成Select Case语句的嵌套。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vb" data-lang="vb"><span class="k">Sub</span> <span class="nf">Test</span><span class="p">()</span>
+    <span class="k">Dim</span> <span class="n">intA</span> <span class="ow">As</span> <span class="kt">Integer</span>
+    <span class="n">intA</span> <span class="o">=</span> <span class="n">100</span>
+
+    <span class="k">Select</span> <span class="k">Case</span> <span class="n">intA</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">90</span>
+        <span class="k">If</span> <span class="n">intA</span> <span class="o">=</span> <span class="n">100</span> <span class="k">Then</span>
+            <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;天才&#34;</span>
+        <span class="k">Else</span>
+            <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;优秀&#34;</span>
+        <span class="k">End</span> <span class="k">If</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">70</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;良好&#34;</span>
+    <span class="k">Case</span> <span class="ow">Is</span> <span class="o">&gt;=</span> <span class="n">60</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;一般&#34;</span>
+    <span class="k">Case</span> <span class="k">Else</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Print</span> <span class="s">&#34;差&#34;</span>
+    <span class="k">End</span> <span class="k">Select</span>
+<span class="k">End</span> <span class="k">Sub</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>参考资料：<a href="https://docs.microsoft.com/zh-cn/office/vba/language/reference/user-interface-help/Select-Case-statement">https://docs.microsoft.com/zh-cn/office/vba/language/reference/user-interface-help/Select-Case-statement</a></p>
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/excel-vba/">excel vba</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/vba/vba%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A809-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">vba快速入门09-循环控制语句</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B050-%E5%A4%9A%E7%BA%BF%E7%A8%8B-timer%E7%B1%BBsemaphore%E7%B1%BBlocal%E7%B1%BBbarrier%E7%B1%BB/">
+            <span class="next-text nav-default">Python教程050 多线程 Timer类 Semaphore类 local类 Barrier类</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

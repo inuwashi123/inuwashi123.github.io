@@ -6,10 +6,28 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 04 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 08 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程052 多进程2</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B052-%E5%A4%9A%E8%BF%9B%E7%A8%8B2/</link>
+      <pubDate>Fri, 08 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B052-%E5%A4%9A%E8%BF%9B%E7%A8%8B2/</guid>
+      <description>terminate() 强制终止进程p，不会进行任何清理操作，如果p创建了子进程，该子进程就成了僵尸进程，使用该方法需要特别小心这种情况。如果p还保存了一个锁那么</description>
+    </item>
+    
+    <item>
+      <title>Python教程051 多进程1</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B051-%E5%A4%9A%E8%BF%9B%E7%A8%8B1/</link>
+      <pubDate>Thu, 07 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B051-%E5%A4%9A%E8%BF%9B%E7%A8%8B1/</guid>
+      <description>一、概述 Python既支持多线程,又支持多进程。python中的多线程其实并不是真正的多线程，如果想要充分地使用多核CPU的资源，在pyth</description>
+    </item>
     
     <item>
       <title>Python教程050 多线程 Timer类 Semaphore类 local类 Barrier类</title>
