@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程053 多进程3 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="进程池 多进程是实现并发的手段之一，需要注意的问题是： ・一个操作系统不可能无限开启进程，通常有几个核就开几个进程 ・进程开启过多，效率反而会下降" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B053-%E5%A4%9A%E8%BF%9B%E7%A8%8B3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程053 多进程3" />
+<meta property="og:description" content="进程池 多进程是实现并发的手段之一，需要注意的问题是： ・一个操作系统不可能无限开启进程，通常有几个核就开几个进程 ・进程开启过多，效率反而会下降" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B053-%E5%A4%9A%E8%BF%9B%E7%A8%8B3/" />
+<meta property="article:published_time" content="2019-11-09T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-09T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程053 多进程3">
+<meta itemprop="description" content="进程池 多进程是实现并发的手段之一，需要注意的问题是： ・一个操作系统不可能无限开启进程，通常有几个核就开几个进程 ・进程开启过多，效率反而会下降">
+
+
+<meta itemprop="datePublished" content="2019-11-09T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-09T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2247">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程053 多进程3"/>
+<meta name="twitter:description" content="进程池 多进程是实现并发的手段之一，需要注意的问题是： ・一个操作系统不可能无限开启进程，通常有几个核就开几个进程 ・进程开启过多，效率反而会下降"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程053 多进程3</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-09 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2247 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#进程池">进程池</a>
+<ul>
+<li><a href="#构造函数">构造函数</a></li>
+<li><a href="#方法介绍">方法介绍</a></li>
+<li><a href="#其他方法-了解部分">其他方法（了解部分）</a></li>
+<li><a href="#apply方法与apply-async的区别">apply方法与apply_async的区别</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="进程池">进程池</h2>
+
+<p>多进程是实现并发的手段之一，需要注意的问题是：
+・一个操作系统不可能无限开启进程，通常有几个核就开几个进程
+・进程开启过多，效率反而会下降（开启进程是需要占用系统资源的）</p>
+
+<p>例如当被操作对象数目不大时，可以直接利用multiprocessing中的Process动态成生多个进程，十几个还好，但如果是上百个，上千个。。手动的去限制进程数量却又太过繁琐，此时可以发挥进程池的功效。我们就可以通过维护一个进程池Pool来控制进程数目。</p>
+
+<p>Pool可以提供指定数量的进程，供用户调用，当有新的请求提交到pool中时，如果池还没有满，那么就会创建一个新的进程用来执行该请求；但如果池中的进程数已经达到规定最大值，那么该请求就会等待，直到池中有进程结束，就重用进程池中的进程。</p>
+
+<h3 id="构造函数">构造函数</h3>
+
+<p>Pool([processes[, initializer[, initargs[, maxtasksperchild[, context]]]]])<br />
+processes:要创建的进程数，如果省略，将默认使用os.cpu_count()的值<br />
+initializer：如果初始值设定项不是None，则每个工作进程在启动时都将调用initializer(*initargs)。<br />
+initargs：是要传给initializer的参数组<br />
+maxtasksperchild：是工作进程在退出并替换为新的工作进程之前可以完成的任务数，用于释放未使用的资源。默认的maxtasksperchild为none，这意味着工作进程将和进程池生命周期一样长。<br />
+context：用于指定启动工作进程的上下文。通常使用上下文对象的pool()或multiprocessing.pool()方法创建池。</p>
+
+<p>创建进程池。返回一个进程池（Pool）对象。</p>
+
+<h3 id="方法介绍">方法介绍</h3>
+
+<p>apply(func [, args [, kwargs]]):<br />
+func表示执行此任务的方法<br />
+args、kwds分别表func的位置参数和关键字参数<br />
+在一个池工作进程中使用参数args和kwargs来调用func,然后返回结果。需要强调的是：此操作并不会在所有池工作进程中执行func函数。如果要通过不同参数并发地执行func函数，必须从不同线程调用p.apply()函数或者使用p.apply_async()。apply是阻塞。</p>
+
+<p>apply_async(func[, args[, kwds[, callback[, error_callback]]]]):<br />
+func表示执行此任务的方法<br />
+args、kwds分别表func的位置参数和关键字参数<br />
+callback表示一个单参数的方法，当有结果返回时，callback方法会被调用，参数即为任务执行后的结果</p>
+
+<p>在一个池工作进程中使用参数args和kwargs来调用func,然后返回结果。此方法的结果是AsyncResult类的实例，callback是可调用对象，接收输入参数。当func的结果变为可用时，将传递给callback。callback禁止执行任何阻塞操作，否则将接收其他异步操作中的结果。apply_async是异步阻塞的。</p>
+
+<p>close():<br />
+关闭进程池，防止进一步操作。如果所有操作持续挂起，它们将在工作进程终止前完成。</p>
+
+<p>join():<br />
+等待所有工作进程退出。此方法只能在close()或teminate()之后调用。</p>
+
+<h3 id="其他方法-了解部分">其他方法（了解部分）</h3>
+
+<p>方法apply_async()和map_async（）的返回值是AsyncResul的实例obj。实例具有以下方法.</p>
+
+<p>obj.get():<br />
+返回结果，如果有必要则等待结果到达。timeout是可选的。如果在指定时间内还没有到达，将引发一场。如果远程操作中引发了异常，它将在调用此方法时再次被引发。</p>
+
+<p>ready():<br />
+如果调用完成，返回True</p>
+
+<p>successful():<br />
+如果调用完成且没有引发异常，返回True，如果在结果就绪之前调用此方法，引发异常</p>
+
+<p>wait([timeout]):<br />
+等待结果变为可用。</p>
+
+<p>terminate()：<br />
+立即终止所有工作进程，同时不执行任何清理或结束任何挂起工作。如果p被垃圾回收，将自动调用此函数</p>
+
+<h3 id="apply方法与apply-async的区别">apply方法与apply_async的区别</h3>
+
+<p>apply方法是阻塞的。等待当前子进程执行完毕后，再执行下一个子进程。apply_async是非阻塞的，多个子进程同时执行。</p>
+
+<p>例如：同步调用apply</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+<span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;子进程 </span><span class="si">%s</span><span class="s1"> 开始&#39;</span> <span class="o">%</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> run&#39;</span> <span class="o">%</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;子进程 </span><span class="si">%s</span><span class="s1"> 结束&#39;</span> <span class="o">%</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;开始执行主进程&#34;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#进程池中从无到有创建三个进程,以后一直是这三个进程在执行任务</span>
+    <span class="n">res_l</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;开始执行三个子进程&#34;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">work</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+        <span class="n">res_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res_l</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;主进程执行结束&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">开始执行主进程</span>
+<span class="err">开始执行三个子进程</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]</span>
+<span class="err">主进程执行结束</span>
+<span class="mi">15041</span> <span class="n">run</span>
+<span class="mi">15041</span> <span class="n">run</span>
+<span class="mi">15041</span> <span class="n">run</span>
+<span class="mi">15042</span> <span class="n">run</span>
+<span class="mi">15042</span> <span class="n">run</span>
+<span class="mi">15042</span> <span class="n">run</span>
+<span class="mi">15040</span> <span class="n">run</span>
+<span class="mi">15040</span> <span class="n">run</span>
+<span class="mi">15040</span> <span class="n">run</span>
+<span class="mi">15040</span> <span class="n">run</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从上面可以看出，创建了3个进程，PID分别是15040，15041，15042。由于是apply同步调用，所以是依次执行子进程的。先执行15041，再执行15042，最后执行的是15040。</p>
+
+<p>例如，异步调用apply_async</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">time</span>
+<span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> run&#39;</span> <span class="o">%</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">Pool</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#进程池中从无到有创建三个进程,以后一直是这三个进程在执行任务</span>
+    <span class="n">res_l</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">work</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,))</span> <span class="c1">#同步运行,阻塞、直到本次任务执行完毕拿到res</span>
+        <span class="n">res_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">res_l</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">())</span> <span class="c1">#使用get来获取apply_aync的结果,如果是apply,则没有get方法,因为apply是同步执行,立刻获取结果,也根本无需get</span>
+
+<span class="c1">#异步apply_async用法：如果使用异步提交的任务，主进程需要使用join，等待进程池内任务都处理完，然后可以用get收集结果，否则，主进程结束，进程池可能还没来得及执行，也就跟着一起结束了</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B054-%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81gil/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程054 全局解释器锁GIL</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B052-%E5%A4%9A%E8%BF%9B%E7%A8%8B2/">
+            <span class="next-text nav-default">Python教程052 多进程2</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

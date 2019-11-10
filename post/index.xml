@@ -6,10 +6,28 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 10 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程054 全局解释器锁GIL</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B054-%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81gil/</link>
+      <pubDate>Sun, 10 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B054-%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81gil/</guid>
+      <description>GIL 线程全局锁(Global Interpreter Lock),即Python为了保证线程安全而采取的独立线程运行的限制,说白了就是一个核只能在同一时间运行一个线程</description>
+    </item>
+    
+    <item>
+      <title>Python教程053 多进程3</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B053-%E5%A4%9A%E8%BF%9B%E7%A8%8B3/</link>
+      <pubDate>Sat, 09 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B053-%E5%A4%9A%E8%BF%9B%E7%A8%8B3/</guid>
+      <description>进程池 多进程是实现并发的手段之一，需要注意的问题是： ・一个操作系统不可能无限开启进程，通常有几个核就开几个进程 ・进程开启过多，效率反而会下降</description>
+    </item>
     
     <item>
       <title>Python教程052 多进程2</title>
