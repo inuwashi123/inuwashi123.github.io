@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程056 协程与生成器1 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程056 协程与生成器1" />
+<meta property="og:description" content="把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/" />
+<meta property="article:published_time" content="2019-11-12T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-12T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程056 协程与生成器1">
+<meta itemprop="description" content="把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://">
+
+
+<meta itemprop="datePublished" content="2019-11-12T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-12T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2731">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程056 协程与生成器1"/>
+<meta name="twitter:description" content="把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程056 协程与生成器1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-12 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2731 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#把生成器当成协程">把生成器当成协程</a></li>
+<li><a href="#生成器中的yield关键字">生成器中的yield关键字</a></li>
+<li><a href="#协程中的yield关键字">协程中的yield关键字</a></li>
+<li><a href="#生成器如何进化成协程">生成器如何进化成协程</a></li>
+<li><a href="#用作协程的生成器的基本行为">用作协程的生成器的基本行为</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="把生成器当成协程">把生成器当成协程</h2>
+
+<p>Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”<a href="https://www.python.org/dev/peps/pep-0342/">https://www.python.org/dev/peps/pep-0342/</a> 这个提案为生成器对象添加了额外的方法和功能，其中最值得关注的是 .send() 方法。 与<strong>next</strong>() 方法一样，.send() 方法致使生成器前进到下一个 yield 语句。不 过，.send() 方法还允许使用生成器的客户把数据发给自己，即不管传给 .send() 方法 什么参数，那个参数都会成为生成器函数定义体中对应的 yield 表达式的值。也就是 说，.send() 方法允许在客户代码和生成器之间双向交换数据。而<strong>next</strong>() 方法只 允许客户从生成器中获取数据。
+这是一项重要的“改进”，甚至改变了生成器的本性：像这样使用的话，生成器就变身为协程。</p>
+
+<p>在 PyCon US 2009 期间举办的一场著名的课程中 <a href="http://www.dabeaz.com/coroutines/">http://www.dabeaz.com/coroutines/</a>，David Beazley（可能是 Python 社区中在协程方面 最多产的作者和演讲者）提醒道：<br />
+.生成器用于生成供迭代的数据<br />
+.协程是数据的消费者<br />
+.不能把这两个概念混为一谈<br />
+.协程与迭代无关。虽然在协程中会使用yield产出值，但这与迭代无关。</p>
+
+<h2 id="生成器中的yield关键字">生成器中的yield关键字</h2>
+
+<p>yield给出了两个释义：产出和让步。对于Python生成器中的yield来说，这两个含义都成立。yield item这行代码会产出一个值，提供给next(&hellip;)的调 用方；此外，还会作出让步，暂停执行生成器，让调用方继续工作，直到需要使用另一个值时再调用 next()。调用方会从生成器中拉取值。</p>
+
+<h2 id="协程中的yield关键字">协程中的yield关键字</h2>
+
+<p>从句法上看，协程与生成器类似，都是定义体中包含yield关键字的函数。可是，在协程中，yield通常出现在表达式的右边（例如，datum = yield），可以产出值，也可以不产出——如果 yield 关键字后面没有表达式，那么生成器产出 None。协程可能会从调用方接收数据，不过调用方把数据提供给协程使用的是 .send(datum) 方法，而不是 next(&hellip;) 函数。通常，调用方会把值推送给协程。 yield 关键字甚至还可以不接收或传出数据。不管数据如何流动，yield都是一种流程控制工具，使用它可以实现协作式多任务：协程可以把控制器让步给中心调度程序，从而激活其他的协程。</p>
+
+<p>从根本上把 yield 视作控制流程的方式，这样就好理解协程了。</p>
+
+<h2 id="生成器如何进化成协程">生成器如何进化成协程</h2>
+
+<p>协程的底层架构在“PEP 342—Coroutines via Enhanced Generators”<a href="https://www.python.org/dev/peps/pep-0342/">https://www.python.org/dev/peps/pep-0342/</a>中定义，并在 Python 2.5（2006 年）实现了。自此之后，yield 关键字可以在表达式中使用，而且生成器 API 中增加了 .send(value) 方法。生成器的调用方可以使用 .send(&hellip;) 方法发送数据，发送的数据 会成为生成器函数中 yield 表达式的值。因此，生成器可以作为协程使用。协程是指一 个过程，这个过程与调用方协作，产出由调用方提供的值。</p>
+
+<p>除了 .send(&hellip;) 方法，PEP 342还添加了.throw(&hellip;)和.close()方法：.throw(&hellip;)的作用是让调用方抛出异常，在生成器中处理；.close()的作用是终止生成器。</p>
+
+<h2 id="用作协程的生成器的基本行为">用作协程的生成器的基本行为</h2>
+
+<p>示例 可能是协程最简单的使用演示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">simple_coroutine</span><span class="p">():</span> <span class="c1"># 协程使用生成器函数定义：定义体中有 yield 关键字。</span>
+  <span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; coroutine started&#39;</span><span class="p">)</span>
+  <span class="o">...</span>     <span class="c1"># yield 在表达式中使用；如果协程只需从客户那里接收数据，那么产出的值是 None ——这个值是隐式指定的，</span>
+  <span class="o">...</span>     <span class="c1"># 因为 yield 关键字右边没有表达式。</span>
+  <span class="o">...</span>     <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span>  
+  <span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; coroutine received:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+  <span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro</span> <span class="o">=</span> <span class="n">simple_coroutine</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro</span>  <span class="c1"># 与创建生成器的方式一样，调用函数得到生成器对象。</span>
+<span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="n">simple_coroutine</span> <span class="n">at</span> <span class="mh">0x100c2be10</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">my_coro</span><span class="p">)</span>  <span class="c1"># 首先要调用 next(...) 函数，因为生成器还没启动，没在 yield 语句处暂停，所以一 开始无法发送数据。</span>
+<span class="o">-&gt;</span> <span class="n">coroutine</span> <span class="n">started</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># 调用这个方法后，yield表达式会计算出42；现在，协程会恢复，一直运行到下一个yield表达式，或者终止。</span>
+<span class="o">-&gt;</span> <span class="n">coroutine</span> <span class="n">received</span><span class="p">:</span> <span class="mi">42</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>  <span class="c1"># 这里，控制权流动到协程定义体的末尾，导致生成器像往常一样抛出 StopIteration 异常。</span>
+<span class="o">...</span>
+<span class="ne">StopIteration</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>协程可以身处四个状态中的一个。当前状态可以使用 inspect.getgeneratorstate(&hellip;) 函数确定，该函数会返回下述字符串中的一个。 &lsquo;GEN_CREATED&rsquo;
+等待开始执行。</p>
+
+<p>&lsquo;GEN_RUNNING&rsquo;
+解释器正在执行。</p>
+
+<p>&lsquo;GEN_SUSPENDED&rsquo;
+在 yield 表达式处暂停。</p>
+
+<p>&lsquo;GEN_CLOSED&rsquo;
+执行结束。</p>
+
+<p>因为 send 方法的参数会成为暂停的 yield 表达式的值，所以，仅当协程处于暂停状态时 才能调用 send 方法，例如 my_coro.send(42)。不过，如果协程还没激活（即，状态是 &lsquo;GEN_CREATED&rsquo;），情况就不同了。因此，始终要调用 next(my_coro) 激活协程——也 可以调用 my_coro.send(None)，效果一样。 如果创建协程对象后立即把 None 之外的值发给它，会出现下述错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro</span> <span class="o">=</span> <span class="n">simple_coroutine</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">1729</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t send non-None value to a just-started generator</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最先调用 next(my_coro) 函数这一步通常称为“预激”（prime）协程（即，让协程向前执 行到第一个 yield 表达式，准备好作为活跃的协程使用）。</p>
+
+<p>下面举个产出多个值的例子，以便更好地理解协程的行为。</p>
+
+<p>示例 产出两个值的协程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">simple_coro2</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; Started: a =&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">b</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">a</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; Received: b =&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">c</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; Received: c =&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro2</span> <span class="o">=</span> <span class="n">simple_coro2</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getgeneratorstate</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">my_coro2</span><span class="p">)</span> <span class="c1"># ❶</span>
+<span class="s1">&#39;GEN_CREATED&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">my_coro2</span><span class="p">)</span> <span class="c1"># ❷</span>
+<span class="o">-&gt;</span> <span class="n">Started</span><span class="p">:</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">14</span> <span class="mi">14</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">my_coro2</span><span class="p">)</span> <span class="c1"># ❸</span>
+<span class="s1">&#39;GEN_SUSPENDED&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span> <span class="c1"># ❹</span>
+<span class="o">-&gt;</span> <span class="n">Received</span><span class="p">:</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_coro2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span> <span class="c1"># ➎</span>
+<span class="o">-&gt;</span> <span class="n">Received</span><span class="p">:</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+ <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">StopIteration</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">my_coro2</span><span class="p">)</span> <span class="c1"># ➏</span>
+<span class="s1">&#39;GEN_CLOSED&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>❶ inspect.getgeneratorstate 函数指明，处于 GEN_CREATED 状态（即协程未启 动）。<br />
+❷ 向前执行协程到第一个 yield 表达式，打印 -&gt; Started: a = 14 消息，然后产出 a 的值，并且暂停，等待为 b 赋值。<br />
+❸ getgeneratorstate 函数指明，处于 GEN_SUSPENDED 状态（即协程在 yield 表达式 处暂停）。<br />
+❹ 把数字 28 发给暂停的协程；计算 yield 表达式，得到 28，然后把那个数绑定给 b。 打印 -&gt; Received: b = 28 消息，产出 a + b 的值（42），然后协程暂停，等待为 c 赋值。<br />
+❺ 把数字 99 发给暂停的协程；计算 yield 表达式，得到 99，然后把那个数绑定给 c。 打印 -&gt; Received: c = 99 消息，然后协程终止，导致生成器对象抛出 StopIteration 异常。<br />
+❻ getgeneratorstate 函数指明，处于 GEN_CLOSED 状态（即协程执行结束）。</p>
+
+<p>关键的一点是，协程在 yield 关键字所在的位置暂停执行。前面说过，在赋值语句中，= 右边的代码在赋值之前执行。因此，对于 b = yield a 这行代码来说，等到客户端代码 再激活协程时才会设定 b 的值。</p>
+
+<p>simple_coro2 协程的执行过程分为 3 个阶段，如图 所示<br />
+(1) 调用 next(my_coro2)，打印第一个消息，然后执行 yield a，产出数字 14。<br />
+(2) 调用 my_coro2.send(28)，把 28 赋值给 b，打印第二个消息，然后执行 yield a + b，产出数字 42。<br />
+(3) 调用 my_coro2.send(99)，把 99 赋值给 c，打印第三个消息，协程终止。</p>
+
+<p>Python-Coroutine.PNG</p>
+
+<p>执行simple_coro2 协程的3个阶段（注意，各个阶段都在yield表达式中结束，而且下一个阶段都从那一行代码开始，然后再把yield表达式的值赋给变量）</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B057-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A82/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程057 协程与生成器2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/">
+            <span class="next-text nav-default">Python教程055 协程演变的历史</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

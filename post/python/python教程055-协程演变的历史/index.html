@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程055 协程演变的历史 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="https://www.jianshu.com/p/8cd05a23822e 关于 Python 协程的历史课 根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程055 协程演变的历史" />
+<meta property="og:description" content="https://www.jianshu.com/p/8cd05a23822e 关于 Python 协程的历史课 根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/" />
+<meta property="article:published_time" content="2019-11-11T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-11T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程055 协程演变的历史">
+<meta itemprop="description" content="https://www.jianshu.com/p/8cd05a23822e 关于 Python 协程的历史课 根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程">
+
+
+<meta itemprop="datePublished" content="2019-11-11T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-11T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3841">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程055 协程演变的历史"/>
+<meta name="twitter:description" content="https://www.jianshu.com/p/8cd05a23822e 关于 Python 协程的历史课 根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程055 协程演变的历史</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-11 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3841 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#关于-python-协程的历史课">关于 Python 协程的历史课</a>
+<ul>
+<li><a href="#python-2-2-引入生成器">Python 2.2 引入生成器</a></li>
+<li><a href="#python-2-5-引入生成器send-方法">Python 2.5 引入生成器send()方法</a></li>
+<li><a href="#python-3-3-引入yield-from">Python 3.3 引入yield from</a></li>
+<li><a href="#python-3-4-引入asyncio模块">Python 3.4 引入asyncio模块</a></li>
+<li><a href="#python-3-5-引入async-await关键字-types-coroutine修饰器">Python 3.5 引入async/await关键字，types.coroutine修饰器</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p><a href="https://www.jianshu.com/p/8cd05a23822e">https://www.jianshu.com/p/8cd05a23822e</a></p>
+
+<h2 id="关于-python-协程的历史课">关于 Python 协程的历史课</h2>
+
+<p>根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程序”。从技术的角度来说，“协程就是你可以暂停执行的函数”。如果你把它理解成“就像生成器一样”，那么你就想对了。</p>
+
+<h3 id="python-2-2-引入生成器">Python 2.2 引入生成器</h3>
+
+<p>退回到 Python 2.2，生成器第一次在PEP 255中提出（那时也把它成为迭代器，因为它实现了迭代器协议）。主要是受到Icon编程语言的启发，生成器允许创建一个在计算下一个值时不会浪费内存空间的迭代器。例如你想要自己实现一个 range() 函数，你可以用立即计算的方式创建一个整数列表：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">eager_range</span><span class="p">(</span><span class="n">up_to</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;生成一个0到up_to大小的列表&#34;&#34;&#34;</span>
+    <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">up_to</span><span class="p">:</span>
+        <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">sequence</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>然而这里存在的问题是，如果你想创建从0到1,000,000这样一个很大的序列，你不得不创建能容纳1,000,000个整数的列表。但是当加入了生成器之后，你可以不用创建完整的序列，你只需要能够每次保存一个整数的内存即可。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lazy_range</span><span class="p">(</span><span class="n">up_to</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;创建一个生成器，返回0到up_to的值&#34;&#34;&#34;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">up_to</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">index</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>让函数遇到 yield 表达式时暂停执行,并且能够在后面重新执行，这对于减少内存使用、生成无限序列非常有用。</p>
+
+<p>生成器在其生命周期中，会有如下四个状态<br />
+GEN_CREATED # 等待开始执行<br />
+GEN_RUNNING # 解释器正在执行（只有在多线程应用中才能看到这个状态）<br />
+GEN_SUSPENDED # 在yield表达式处暂停<br />
+GEN_CLOSED # 执行结束</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getgeneratorstate</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">num</span>
+        <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>
+    <span class="n">gen</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># 手动关闭/结束生成器</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">getgeneratorstate</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">GEN_CREATED</span>
+<span class="mi">0</span>
+<span class="n">GEN_SUSPENDED</span>
+<span class="mi">1</span>
+<span class="n">GEN_CLOSED</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="python-2-5-引入生成器send-方法">Python 2.5 引入生成器send()方法</h3>
+
+<p>通过上面的介绍，我们知道生成器为我们引入了暂停函数执行（yield）的功能。如果可以利用生成器“暂停”的部分，添加“将东西发送回生成器”的功能，那么 Python 突然就有了协程的概念（当然这里的协程仅限于 Python 中的概念）。将东西发送回暂停了的生成器这一特性通过 PEP 342添加到了 Python 2.5。PEP 342 为生成器引入了send()方法。这让我们不仅可以暂停生成器，而且能够传递值到生成器暂停的地方。发送的值赋值给了yield表达式，例如下面的变量jump。还是以我们的range()为例，你可以让序列向前或向后跳过几个值：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">jumping_range</span><span class="p">(</span><span class="n">up_to</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;创建一个生成器，返回0到up_to的值
+</span><span class="s2">       send方法传递的参数，将改变生成器的所生成数值循序
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">up_to</span><span class="p">:</span>
+        <span class="n">jump</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">index</span>
+        <span class="k">if</span> <span class="n">jump</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">jump</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="n">jump</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">iterator</span> <span class="o">=</span> <span class="n">jumping_range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>     <span class="c1"># 输出 0</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">iterator</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>   <span class="c1"># 通过send方法发送数字2给变量jump，输出 2</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>     <span class="c1"># 变量jump是None，设置jump等于1，输出 3</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">iterator</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># 通过send方法发送数字-1给变量jump，输出 2</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>              <span class="c1"># 输出 3, 4</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从语法上来看，协程和生成器类似，都是定义体中包含yield关键字的函数。<br />
+yield在协程中的用法：<br />
+.在协程中yield通常出现在表达式的右边，例如：datum = yield,可以产出值，也可以不产出&ndash;如果yield关键字后面没有表达式，那么生成器产出None.<br />
+.协程可能从调用方接受数据，调用方是通过send(datum)的方式把数据提供给协程使用，而不是next(&hellip;)函数，通常调用方会把值推送给协程。<br />
+.协程可以把控制器让给中心调度程序，从而激活其他的协程</p>
+
+<p>所以总体上在协程中把yield看做是控制流程的方式。</p>
+
+<h3 id="python-3-3-引入yield-from">Python 3.3 引入yield from</h3>
+
+<p>在Python 3.3中，通过PEP 380添加了yield from，这一特性让你能够从迭代器（生成器刚好也是迭代器）中返回任何值，从而可以以干净利索的方式重构生成器。yield from后面必须是迭代器(生成器也是迭代器)</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">lazy_range</span><span class="p">(</span><span class="n">up_to</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;创建一个生成器，返回0到up_to的值&#34;&#34;&#34;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">gratuitous_refactor</span><span class="p">():</span>
+        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">up_to</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">index</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="kn">from</span> <span class="nn">gratuitous_refactor</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>yield from通过让重构变得简单，也让你能够将生成器串联起来，使返回值可以在调用栈中上下浮动，而不需对编码进行过多改动。</p>
+
+<p>我们可以用一个使用yield和一个使用yield from的例子来对比看下。</p>
+
+<p>使用yield</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字符串</span>
+<span class="n">astr</span><span class="o">=</span><span class="s1">&#39;ABC&#39;</span>
+<span class="c1"># 列表</span>
+<span class="n">alist</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1"># 字典</span>
+<span class="n">adict</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;wangbm&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+<span class="c1"># 生成器</span>
+<span class="n">agen</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">i</span>
+
+<span class="n">new_list</span><span class="o">=</span><span class="n">gen</span><span class="p">(</span><span class="n">astr</span><span class="p">,</span> <span class="n">alist</span><span class="p">,</span> <span class="n">adict</span><span class="err">，</span> <span class="n">agen</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">new_list</span><span class="p">))</span>
+<span class="c1">#输出结果 [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, 1, 2, 3, &#39;name&#39;, &#39;age&#39;, 4, 5, 6, 7]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用yield from</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 字符串</span>
+<span class="n">astr</span><span class="o">=</span><span class="s1">&#39;ABC&#39;</span>
+<span class="c1"># 列表</span>
+<span class="n">alist</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1"># 字典</span>
+<span class="n">adict</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;wangbm&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+<span class="c1"># 生成器</span>
+<span class="n">agen</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="kn">from</span> <span class="nn">item</span>
+
+<span class="n">new_list</span><span class="o">=</span><span class="n">gen</span><span class="p">(</span><span class="n">astr</span><span class="p">,</span> <span class="n">alist</span><span class="p">,</span> <span class="n">adict</span><span class="p">,</span> <span class="n">agen</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">new_list</span><span class="p">))</span>
+<span class="c1">#输出结果 [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, 1, 2, 3, &#39;name&#39;, &#39;age&#39;, 4, 5, 6, 7]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从上面的例子，可见yield from item的作用相当于下面的代码块。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+    <span class="k">yield</span> <span class="n">i</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>总结<br />
+Python 2.2 中的生成器让代码执行过程可以暂停。Python 2.5中可以将值返回给暂停的生成器，这使得Python中协程的概念成为可能。加上Python 3.3 中的 yield from，可以以干净利索的方式重构生成器。</p>
+
+<h3 id="python-3-4-引入asyncio模块">Python 3.4 引入asyncio模块</h3>
+
+<p>什么是事件循环？<br />
+事件循环提供一种循环机制，让你可以“在A发生时，执行B”。基本上来说事件循环就是监听当有什么发生时，同时事件循环也关心这件事并执行相应的代码。Python 3.4 以后通过标准库 asyncio获得了事件循环的特性。</p>
+
+<p>asyncio 的形式出现的事件循环之间，Python 3.4 通过并发编程的形式已经对异步编程有了足够的支持。异步编程简单来说就是代码执行的顺序在程序运行前是未知的（因此才称为异步而非同步）。并发编程是代码的执行不依赖于其他部分，即便是全都在同一个线程内执行（并发不是并行）。例如，下面 Python 3.4 的代码分别以异步和并发的函数调用实现按秒倒计时。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="nd">@asyncio.coroutine</span>
+<span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;T-minus&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+        <span class="k">yield</span> <span class="kn">from</span> <span class="nn">asyncio.sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">countdown</span><span class="p">(</span><span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">countdown</span><span class="p">(</span><span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))]</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Python 3.4 中，asyncio.coroutine 修饰器用来标记作为协程的函数，这里的协程是和asyncio及其事件循环一起使用的。这赋予了 Python 第一个对于协程的明确定义：实现了PEP 342添加到生成器中的这一方法的对象，并通过[collections.abc.Coroutine这一抽象基类]表征的对象。这意味着突然之间所有实现了协程接口的生成器，即便它们并不是要以协程方式应用，都符合这一定义。为了修正这一点，asyncio 要求所有要用作协程的生成器必须由asyncio.coroutine修饰。</p>
+
+<p>有了对协程明确的定义，你可以对任何asyncio.Future对象使用yield from，从而将其传递给事件循环，暂停协程的执行来等待某些事情的发生（ future 对象并不重要，只是asyncio细节的实现）。一旦 future 对象获取了事件循环，它会一直在那里监听，直到完成它需要做的一切。当 future 完成自己的任务之后，事件循环会察觉到，暂停并等待在那里的协程会通过send()方法获取future对象的返回值并开始继续执行。</p>
+
+<p>以上面的代码为例。事件循环启动每一个 countdown() 协程，一直执行到遇见其中一个协程的 yield from 和 asyncio.sleep() 。这样会返回一个 asyncio.Future对象并将其传递给事件循环，同时暂停这一协程的执行。事件循环会监控这一future对象，直到倒计时1秒钟之后（同时也会检查其它正在监控的对象，比如像其它协程）。1秒钟的时间一到，事件循环会选择刚刚传递了future对象并暂停了的 countdown() 协程，将future对象的结果返回给协程，然后协程可以继续执行。这一过程会一直持续到所有的  countdown() 协程执行完毕，事件循环也被清空。稍后我会给你展示一个完整的例子，用来说明协程/事件循环之类的这些东西究竟是如何运作的，但是首先我想要解释一下async和await。</p>
+
+<h3 id="python-3-5-引入async-await关键字-types-coroutine修饰器">Python 3.5 引入async/await关键字，types.coroutine修饰器</h3>
+
+<p>在 Python 3.4 中，用于异步编程并被标记为协程的函数看起来是这样的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># This also works in Python 3.5.</span>
+<span class="nd">@asyncio.coroutine</span>
+<span class="k">def</span> <span class="nf">py34_coro</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="kn">from</span> <span class="nn">stuff</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Python 3.5添加了types.coroutine修饰器(是由async def函数创建)，也可以像 asyncio.coroutine一样将生成器标记为协程。Python3.5中的async相当于Python3.4的asyncio.coroutine，await相当于yield from 。上面的函数，在3.5中的写法如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">async</span> <span class="k">def</span> <span class="nf">py35_coro</span><span class="p">():</span>
+    <span class="n">await</span> <span class="n">stuff</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>虽然 async 和 types.coroutine 的关键作用在于巩固了协程的定义，但是它将协程从一个简单的接口变成了一个实际的类型，也使得一个普通生成器和用作协程的生成器之间的差别变得更加明确（inspect.iscoroutine() 函数 甚至明确规定必须使用 async 的方式定义才行）。</p>
+
+<p>你将发现不仅仅是 async，Python 3.5 还引入 await 表达式（只能用于async def中）。虽然await的使用和yield from很像，但await可以接受的对象却是不同的。await 当然可以接受协程，因为协程的概念是所有这一切的基础。但是当你使用 await 时，其接受的对象必须是awaitable 对象：必须是定义了<strong>await</strong>()方法且这一方法必须返回一个不是协程的迭代器。协程本身也被认为是 awaitable 对象（这也是collections.abc.Coroutine 继承 collections.abc.Awaitable的原因）。这一定义遵循 Python 将大部分语法结构在底层转化成方法调用的传统，就像 a + b 实际上是a.__add__(b) 或者 b.__radd__(a)。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程056 协程与生成器1</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B054-%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81gil/">
+            <span class="next-text nav-default">Python教程054 全局解释器锁GIL</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

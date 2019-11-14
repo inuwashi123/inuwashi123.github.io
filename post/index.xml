@@ -6,10 +6,46 @@
     <description>Recent content in Posts on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 14 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程058 asyncio</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B058-asyncio/</link>
+      <pubDate>Thu, 14 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B058-asyncio/</guid>
+      <description>asyncio asyncio是用来编写并发代码的库，使用async/await语法。被用作多个提供高性能Python异步框架的基础，包括网络和网站服务，</description>
+    </item>
+    
+    <item>
+      <title>Python教程057 协程与生成器2</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B057-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A82/</link>
+      <pubDate>Wed, 13 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B057-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A82/</guid>
+      <description>示例 定义一个计算移动平均值的协程 1 2 3 4 5 6 7 8 9 def averager(): total = 0.0 count = 0 average = None while True: ➊ term = yield average ➋ total += term count += 1 average = total/count ➊ 这个无限循环表明，只要调用方不断</description>
+    </item>
+    
+    <item>
+      <title>Python教程056 协程与生成器1</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/</link>
+      <pubDate>Tue, 12 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/</guid>
+      <description>把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://</description>
+    </item>
+    
+    <item>
+      <title>Python教程055 协程演变的历史</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/</link>
+      <pubDate>Mon, 11 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/</guid>
+      <description>https://www.jianshu.com/p/8cd05a23822e 关于 Python 协程的历史课 根据维基百科给出的定义，“协程 是为非抢占式多任务产生子程序的计算机程序组件，协程允许不同入口点在不同位置暂停或开始执行程</description>
+    </item>
     
     <item>
       <title>Python教程054 全局解释器锁GIL</title>
