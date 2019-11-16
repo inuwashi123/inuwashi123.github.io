@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程060 正则表达式2 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="一、元字符 正则表达式中的特殊字符被称作元字符，常用的元字符如下： .(英文输入法下的点) (英文输入法下的点) 在默认模式下，它匹配除换行符以外的" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B060-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程060 正则表达式2" />
+<meta property="og:description" content="一、元字符 正则表达式中的特殊字符被称作元字符，常用的元字符如下： .(英文输入法下的点) (英文输入法下的点) 在默认模式下，它匹配除换行符以外的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B060-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F2/" />
+<meta property="article:published_time" content="2019-11-16T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-16T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程060 正则表达式2">
+<meta itemprop="description" content="一、元字符 正则表达式中的特殊字符被称作元字符，常用的元字符如下： .(英文输入法下的点) (英文输入法下的点) 在默认模式下，它匹配除换行符以外的">
+
+
+<meta itemprop="datePublished" content="2019-11-16T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-16T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="4016">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程060 正则表达式2"/>
+<meta name="twitter:description" content="一、元字符 正则表达式中的特殊字符被称作元字符，常用的元字符如下： .(英文输入法下的点) (英文输入法下的点) 在默认模式下，它匹配除换行符以外的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程060 正则表达式2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-16 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 4016 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#一-元字符">一、元字符</a>
+<ul>
+<li><a href="#英文输入法下的点">.(英文输入法下的点)</a></li>
+<li><a href="#w">\w</a></li>
+<li><a href="#s">\s</a></li>
+<li><a href="#d">\d</a></li>
+<li><a href="#b">\b</a></li>
+<li><a href="#toc_6">^</a></li>
+<li><a href="#toc_7">$</a></li>
+<li><a href="#toc_8"></a></li>
+<li><a href="#a">\A</a></li>
+<li><a href="#z">\Z</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="一-元字符">一、元字符</h2>
+
+<p>正则表达式中的特殊字符被称作元字符，常用的元字符如下：</p>
+
+<h3 id="英文输入法下的点">.(英文输入法下的点)</h3>
+
+<p>(英文输入法下的点) 在默认模式下，它匹配除换行符以外的任何1个字符。如果指定了dotall标志，与任何1个字符（包括换行符）匹配。</p>
+
+<p>“.“的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234.&#39;</span><span class="p">)</span>
+<span class="n">item</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>  <span class="c1">#输出1234@，@就是元字符.的作用</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>“.“的用法 dotall标志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;test1234
+</span><span class="s1">@gmail.com或13076879876电话&#39;&#39;&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234..&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+<span class="n">pattern2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234..&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;DOTALL标志:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;无DOTALL标志:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">DOTALL标志</span><span class="p">:</span> <span class="mi">1234</span>
+<span class="err">@</span>
+<span class="err">无</span><span class="n">DOTALL标志</span><span class="p">:</span> <span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>带有DOTALL标志的匹配的结果是1234加上换行符和@，换行符和@就是匹配模式..的作用。
+不带有DOTALL标志的匹配的结果是空，因为1234后面的.是不能匹配换行符的。</p>
+
+<h3 id="w">\w</h3>
+
+<p>字符串(也就是Unicode)模式：
+匹配数字、字母、下划线和其他文字字符（可以匹配汉字）。如果使用了ASCII标志，只能匹配数字0-9，下划线，小写字母a-z，大写字母A-Z。相当于[a-zA-Z0-9<em>]。
+字节(也就是ASCII)模式：
+相当于[a-zA-Z0-9</em>]。如果使用了LOCALE标志，则匹配当前区域设置中被视为字母数字的字符和下划线。</p>
+
+<p>“\w”的用法： 字符串Unicode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\w&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\w&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">ASCII</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;无ASCII标志:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;ASCII标志:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">无</span><span class="n">ASCII标志</span><span class="p">:</span> <span class="mi">9876</span><span class="err">电</span>
+<span class="n">ASCII标志</span><span class="p">:</span> <span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>“\w”的用法： 字节Bytes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;test1234@gmail.com&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;123\w&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;1234\w&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>  <span class="c1">#输出b&#39;1234&#39;。\w匹配数字4.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出None。@不是[a-zA-Z0-9_]范围内的，\w不匹配，没有匹配结果。</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="s">\s</h3>
+
+<p>字符串(也就是Unicode)模式：
+匹配Unicode空白字符（包括[\t\n\r\f\v]以及许多其他字符，例如许多语言中排版规则强制使用的不间断空格）。如果使用ASCII标志，则仅匹配[\t\n\r\f\v]。其中\t是横向制表符，\n是换行，\r是回车，\v是纵向制表符，\f是换页。</p>
+
+<p>字节(也就是ASCII)模式：
+匹配ASCII字符集中被视为空白的字符；这相当于[\t\n\r\f\v]。</p>
+
+<p>“\s”的用法： 字符串Unicode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876 电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\s\w&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\s\w&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">ASCII</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;无ASCII标志:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;ASCII标志:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">无</span><span class="n">ASCII标志</span><span class="p">:</span> <span class="mi">9876</span> <span class="err">电</span>
+<span class="n">ASCII标志</span><span class="p">:</span> <span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>pattern1中，\s匹配了一个空格，\w匹配了&rsquo;电&rsquo;这个字。
+pattern2中，由于使用了ASCII标志，虽然\s匹配了一个空格，但\w是不能匹配&rsquo;电&rsquo;这个字。</p>
+
+<p>“\s”的用法： 字节Bytes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;test123 4@gmail.com&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;123\s\w&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;123\s\w\w&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>  <span class="c1">#输出b&#39;123 4&#39;。\s匹配空格。\w匹配数字4.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出None。@不是[a-zA-Z0-9_]范围内的，第二个\w不匹配，没有匹配结果。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="sa">b</span><span class="s1">&#39;123 4&#39;</span>
+<span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="d">\d</h3>
+
+<p>字符串(也就是Unicode)模式：
+匹配任何Unicode十进制数字（即Unicode字符类别[nd]中的任何字符）。这包括[0-9]和许多其他数字字符。如果使用ASCII标志，则仅匹配[0-9]。</p>
+
+<p>字节(也就是ASCII)模式：
+匹配任何十进制数字；这相当于[0-9]。</p>
+
+<p>“\d”的用法： 字符串Unicode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876１电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\d&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\d&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">ASCII</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;无ASCII标志:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;ASCII标志:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">无</span><span class="n">ASCII标志</span><span class="p">:</span> <span class="mi">9876１</span>
+<span class="n">ASCII标志</span><span class="p">:</span> <span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>pattern1中，\d匹配了一个日语输入法下的全角数字１。
+pattern2中，由于使用了ASCII标志，\d不能匹配日语输入法下的全角数字１。</p>
+
+<p>“\d”的用法： 字节Bytes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;test1234@gmail.com&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;123\d&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rb</span><span class="s1">&#39;1234\d&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>  <span class="c1">#输出b&#39;1234&#39;。\d匹配数字4.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出None。@不是[a-zA-Z0-9_]范围内的，\d不匹配，没有匹配结果。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="sa">b</span><span class="s1">&#39;1234&#39;</span>
+<span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="b">\b</h3>
+
+<p>匹配单词的开始或结束。</p>
+
+<p>“\b”的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test 1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;gmail\b&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;gmai\b&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>  <span class="c1">#gmail是完整的单词，和gmail\b是相匹配的。</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#gmai不是一个完整的单词，和gmail\b是不相匹配的。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">gmail</span>
+<span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="toc_6">^</h3>
+
+<p>匹配字符串的开始。如果使用MULTILINE标志，称之为多行模式，则匹配每行。
+^\d表示必须以数字开头。</p>
+
+<p>“^”的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string1</span> <span class="o">=</span> <span class="s1">&#39;test 1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">string2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;test 1234@gmail.com或
+</span><span class="s1">13076879876电话&#39;&#39;&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^test&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^130&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string1</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;无MULTILINE标志:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;MULTILINE标志:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="o">.</span><span class="n">group</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">无</span><span class="n">MULTILINE标志</span><span class="p">:</span> <span class="n">test</span>
+<span class="n">MULTILINE标志</span><span class="p">:</span> <span class="mi">130</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="toc_7">$</h3>
+
+<p>匹配字符串的结尾或字符串结尾处的换行符之前。在多行模式下(使用MULTILINE标志)，匹配每行的换行符之前。foo同时匹配“foo”和“foobar”，而正则表达式foo$只匹配“foo”。更有趣的是，在“foo1\nfoo2\n”中搜索foo.$通常与“foo2”匹配，但在多行模式下匹配“foo1”；在“foo\n”中搜索单个$将找到两个（空）匹配项：一个位于换行符之前，一个位于字符串末尾。
+\d$表示必须以数字结束。</p>
+
+<p>“$”的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+<span class="n">string2</span> <span class="o">=</span> <span class="s1">&#39;foobar&#39;</span>
+<span class="n">string3</span> <span class="o">=</span> <span class="s1">&#39;foo1</span><span class="se">\n</span><span class="s1">foo2</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">string4</span> <span class="o">=</span> <span class="s1">&#39;foo</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;foo$&#39;</span><span class="p">)</span>
+<span class="n">pattern3</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;foo.$&#39;</span><span class="p">)</span>
+<span class="n">pattern4</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;foo.$&#39;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="n">pattern5</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$&#39;</span><span class="p">)</span>
+
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string1</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string2</span><span class="p">)</span>
+<span class="n">item3</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string1</span><span class="p">)</span>
+<span class="n">item4</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string2</span><span class="p">)</span>
+
+<span class="n">item5</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern3</span><span class="p">,</span><span class="n">string3</span><span class="p">)</span>
+<span class="n">item6</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern4</span><span class="p">,</span><span class="n">string3</span><span class="p">)</span>
+<span class="n">item7</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern5</span><span class="p">,</span><span class="n">string4</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo匹配foo的结果:&#34;</span><span class="p">,</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo匹配foobar的结果:&#34;</span><span class="p">,</span><span class="n">item2</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo$匹配foo的结果:&#34;</span><span class="p">,</span><span class="n">item3</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo$匹配foobar的结果:&#34;</span><span class="p">,</span><span class="n">item4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo.$匹配foo1</span><span class="se">\\</span><span class="s2">nfoo2</span><span class="se">\\</span><span class="s2">n的结果:&#34;</span><span class="p">,</span><span class="n">item5</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;foo.$匹配foo1</span><span class="se">\\</span><span class="s2">nfoo2</span><span class="se">\\</span><span class="s2">n的结果(MULTILINE标志):&#34;</span><span class="p">,</span><span class="n">item6</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;$匹配foo</span><span class="se">\\</span><span class="s2">n的结果:&#34;</span><span class="p">,</span><span class="n">item7</span><span class="p">)</span>   <span class="c1">#findall方法，返回的值是个列表，并且返回字符串中所有匹配的字符串。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">foo匹配foo的结果</span><span class="p">:</span> <span class="n">foo</span>
+<span class="n">foo匹配foobar的结果</span><span class="p">:</span> <span class="n">foo</span>
+<span class="n">foo</span><span class="err">$匹配</span><span class="n">foo的结果</span><span class="p">:</span> <span class="n">foo</span>
+<span class="n">foo</span><span class="err">$匹配</span><span class="n">foobar的结果</span><span class="p">:</span> <span class="bp">None</span>
+<span class="n">foo</span><span class="o">.</span><span class="err">$匹配</span><span class="n">foo1</span>\<span class="n">nfoo2</span>\<span class="n">n的结果</span><span class="p">:</span> <span class="n">foo2</span>
+<span class="n">foo</span><span class="o">.</span><span class="err">$匹配</span><span class="n">foo1</span>\<span class="n">nfoo2</span>\<span class="n">n的结果</span><span class="p">(</span><span class="n">MULTILINE标志</span><span class="p">):</span> <span class="n">foo1</span>
+<span class="err">$匹配</span><span class="n">foo</span>\<span class="n">n的结果</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="toc_8"></h3>
+
+<p>（特殊）转义字符。如果需要匹配的内容含有元字符本身的，需要使用转义字符进行转义。</p>
+
+<p>&ldquo;\&ldquo;的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876$电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876\$电话&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;9876$&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">9876</span><span class="err">$电话</span>
+<span class="bp">None</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="a">\A</h3>
+
+<p>匹配字符串的开头。</p>
+
+<p>&ldquo;\A&rdquo;的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876$电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\A&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\At&#39;</span><span class="p">)</span>
+<span class="n">pattern3</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\Ae&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern3</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item3</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span>
+<span class="p">[]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>注意，item1和item3的区别。item1是找到一个匹配结果，[&ldquo;]也就是字符串开头。item3是没有匹配结果,[]是空。</p>
+
+<h3 id="z">\Z</h3>
+
+<p>匹配字符串的结尾。</p>
+
+<p>&ldquo;\Z&rdquo;的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876$电话&#39;</span>
+<span class="n">pattern1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\Z&#39;</span><span class="p">)</span>
+<span class="n">pattern2</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;话\Z&#39;</span><span class="p">)</span>
+<span class="n">pattern3</span><span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;电\Z&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern1</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern2</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">pattern3</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item3</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;话&#39;</span><span class="p">]</span>
+<span class="p">[]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>注意，item1和item3的区别。item1是找到一个匹配结果，[&ldquo;]也就是字符串结果。item3是没有匹配结果,[]是空。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B059-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F1/">
+            <span class="next-text nav-default">Python教程059 正则表达式1</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

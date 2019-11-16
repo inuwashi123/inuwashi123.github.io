@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程059 正则表达式1 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。re模块使Python语言拥有全部的正则表达式功能。 要想使" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B059-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程059 正则表达式1" />
+<meta property="og:description" content="正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。re模块使Python语言拥有全部的正则表达式功能。 要想使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B059-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F1/" />
+<meta property="article:published_time" content="2019-11-15T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-15T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程059 正则表达式1">
+<meta itemprop="description" content="正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。re模块使Python语言拥有全部的正则表达式功能。 要想使">
+
+
+<meta itemprop="datePublished" content="2019-11-15T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-15T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3806">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程059 正则表达式1"/>
+<meta name="twitter:description" content="正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。re模块使Python语言拥有全部的正则表达式功能。 要想使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程059 正则表达式1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-15 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3806 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#re模块属性">re模块属性</a></li>
+<li><a href="#常用的正则表达式处理函数">常用的正则表达式处理函数</a>
+<ul>
+<li><a href="#re-match-pattern-string-flags-0">re.match(pattern, string, flags=0)</a></li>
+<li><a href="#fullmatch-pattern-string-flags-0">fullmatch(pattern, string, flags=0)</a></li>
+<li><a href="#search-pattern-string-flags-0">search(pattern, string, flags=0)</a></li>
+<li><a href="#findall-pattern-string-flags-0">findall(pattern, string, flags=0)</a></li>
+<li><a href="#finditer-pattern-string-flags-0">finditer(pattern, string, flags=0)</a></li>
+<li><a href="#sub-pattern-repl-string-count-0-flags-0">sub(pattern, repl, string, count=0, flags=0)</a></li>
+<li><a href="#subn-pattern-repl-string-count-0-flags-0">subn(pattern, repl, string, count=0, flags=0)</a></li>
+<li><a href="#split-pattern-string-maxsplit-0-flags-0">split(pattern, string, maxsplit=0, flags=0)</a></li>
+<li><a href="#compile-pattern-flags-0">compile(pattern, flags=0)</a></li>
+<li><a href="#escape-pattern">escape(pattern)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。re模块使Python语言拥有全部的正则表达式功能。</p>
+
+<p>要想使用正则表达式，首先需要导入re模块。
+import re</p>
+
+<h2 id="re模块属性">re模块属性</h2>
+
+<p>re.__all__<br />
+返回一个包含re函数名的列表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">__all__</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="s1">&#39;fullmatch&#39;</span><span class="p">,</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">,</span> <span class="s1">&#39;subn&#39;</span><span class="p">,</span> <span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="s1">&#39;findall&#39;</span><span class="p">,</span> <span class="s1">&#39;compile&#39;</span><span class="p">,</span> <span class="s1">&#39;purge&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;escape&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;ASCII&#39;</span><span class="p">,</span> <span class="s1">&#39;IGNORECASE&#39;</span><span class="p">,</span> <span class="s1">&#39;LOCALE&#39;</span><span class="p">,</span> <span class="s1">&#39;MULTILINE&#39;</span><span class="p">,</span> <span class="s1">&#39;DOTALL&#39;</span><span class="p">,</span> <span class="s1">&#39;VERBOSE&#39;</span><span class="p">,</span> <span class="s1">&#39;UNICODE&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;finditer&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>re.__version__<br />
+返回re的版本</p>
+
+<h2 id="常用的正则表达式处理函数">常用的正则表达式处理函数</h2>
+
+<h3 id="re-match-pattern-string-flags-0">re.match(pattern, string, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>判断pattern是否在string开始位置，如果有，返回匹配的对象，否则返回None。请注意，即使在多行模式下，re.match（）也只能在字符串的开头匹配，而不能在每行的开头匹配。</p>
+
+<p>可以使用group(num) 或 groups() 匹配对象函数来获取匹配的结果。</p>
+
+<p>&ldquo;match&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>  <span class="c1">#输出匹配对象Match object</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出None</span>
+<span class="k">if</span> <span class="n">item1</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&#34;item1.group() : &#34;</span><span class="p">,</span> <span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">prin</span><span class="p">(</span><span class="s2">&#34;No match!!&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">_sre</span><span class="o">.</span><span class="n">SRE_Match</span> <span class="nb">object</span><span class="p">;</span> <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">match</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="o">&gt;</span>
+<span class="bp">None</span>
+<span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="p">:</span>  <span class="n">test</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="fullmatch-pattern-string-flags-0">fullmatch(pattern, string, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>判断pattern是否是string的全部，如果是，返回匹配的对象，否则返回None</p>
+
+<p>&ldquo;fullmatch&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test1234@gmail.com&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test1234&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>  <span class="c1">#输出匹配对象Match object</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出None</span>
+<span class="k">if</span> <span class="n">item1</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&#34;item1.group() : &#34;</span><span class="p">,</span> <span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">prin</span><span class="p">(</span><span class="s2">&#34;No match!!&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">_sre</span><span class="o">.</span><span class="n">SRE_Match</span> <span class="nb">object</span><span class="p">;</span> <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="n">match</span><span class="o">=</span><span class="s1">&#39;test1234@gmail.com&#39;</span><span class="o">&gt;</span>
+<span class="bp">None</span>
+<span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="p">:</span>  <span class="n">test1234</span><span class="nd">@gmail.com</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="search-pattern-string-flags-0">search(pattern, string, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>判断string里面是否包含pattern，如果有，返回匹配的对象，否则返回None</p>
+
+<p>可以使用group(num) 或 groups() 匹配对象函数来获取匹配的结果。</p>
+
+<p>&ldquo;search&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="n">item3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;5678&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>  <span class="c1">#输出匹配对象Match object。结果是&#39;test&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  <span class="c1">#输出匹配对象Match object。结果是&#39;1234&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item3</span><span class="p">)</span>  <span class="c1">#输出None</span>
+<span class="k">if</span> <span class="n">item1</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&#34;item1.group() : &#34;</span><span class="p">,</span> <span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">prin</span><span class="p">(</span><span class="s2">&#34;No match!!&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">_sre</span><span class="o">.</span><span class="n">SRE_Match</span> <span class="nb">object</span><span class="p">;</span> <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">match</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">_sre</span><span class="o">.</span><span class="n">SRE_Match</span> <span class="nb">object</span><span class="p">;</span> <span class="n">span</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">match</span><span class="o">=</span><span class="s1">&#39;1234&#39;</span><span class="o">&gt;</span>
+<span class="bp">None</span>
+<span class="n">item1</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="p">:</span>  <span class="n">test</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="findall-pattern-string-flags-0">findall(pattern, string, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>查找string中全部匹配pattern的项，返回一个列表。</p>
+
+<p>&ldquo;findall&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或12076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item1</span><span class="p">))</span> <span class="c1">#输出匹配对象的类型</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>  <span class="c1">#输出匹配对象列表。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="p">[</span><span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="finditer-pattern-string-flags-0">finditer(pattern, string, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>效果与findall相似，只不过finditer返回一个迭代器，拥有group方法（匹配的字符串）和span方法（匹配字符串的位置）</p>
+
+<p>&ldquo;finditer&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或12076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item1</span><span class="p">))</span> <span class="c1">#输出匹配对象的类型</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item1</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span><span class="n">i</span><span class="o">.</span><span class="n">span</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">callable_iterator</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="n">callable_iterator</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f1438c0fc18</span><span class="o">&gt;</span>
+<span class="mi">12</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="mi">12</span> <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="sub-pattern-repl-string-count-0-flags-0">sub(pattern, repl, string, count=0, flags=0)</h3>
+
+<p>pattern : 正则中的模式字符串。<br />
+repl : 替换的字符串，也可为一个函数。<br />
+string : 要被查找替换的原始字符串。<br />
+count : 模式匹配后替换的最大次数，默认 0 表示替换所有的匹配。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>判断string里面是否含有pattern，如果含有则使用repl替换，返回新字符串。不改变原有字符串。count定义替换的次数，如果不填写，默认替换字符串中全部匹配的项。</p>
+
+<p>&ldquo;sub&rdquo;的用法1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="s1">&#39;5678&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>  <span class="c1">#查找字符串&#39;test&#39;，并替换为&#39;5678&#39;</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>      <span class="c1">#查找字符串&#39;1234&#39;，并替换为&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">56781234</span><span class="nd">@gmail.com或13076879876电话</span>
+<span class="n">test</span><span class="nd">@gmail.com或13076879876电话</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&ldquo;sub&rdquo;的用法2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#定义乘以2的函数</span>
+<span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;value&gt;test)&#39;</span><span class="p">,</span><span class="n">double</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>      <span class="c1">#查找字符串&#39;test&#39;，并 * 2</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;value&gt;1234)&#39;</span><span class="p">,</span><span class="n">double</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>      <span class="c1">#查找字符串&#39;1234&#39;，并 * 2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">testtest1234</span><span class="nd">@gmail.com或13076879876电话</span>
+<span class="n">test12341234</span><span class="nd">@gmail.com或13076879876电话</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="subn-pattern-repl-string-count-0-flags-0">subn(pattern, repl, string, count=0, flags=0)</h3>
+
+<p>同sub函数，但是返回一个元组，包含修改后的字符串以及修改的次数。</p>
+
+<p>&ldquo;subn&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或13076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="s1">&#39;5678&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>  <span class="c1">#查找字符串&#39;test&#39;，并替换为&#39;5678&#39;</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;1234&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>      <span class="c1">#查找字符串&#39;1234&#39;，并替换为&#39;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="s1">&#39;56781234@gmail.com或13076879876电话&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;test@gmail.com或13076879876电话&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="split-pattern-string-maxsplit-0-flags-0">split(pattern, string, maxsplit=0, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+string:要匹配的字符串。<br />
+maxsplit:分隔次数，maxsplit=1 分隔一次，默认为 0，不限制次数。<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>以pattern作为分隔符给string进行分隔，返回一个列表。maxsplit定义最多分几次，不写默认全部进行分隔。</p>
+
+<p>&ldquo;split&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或12076879876电话&#39;</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>   <span class="c1">#查找字符串12，并分割全部。</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="n">string</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#查找字符串12，并分割，但分割1次</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;34@gmail.com或&#39;</span><span class="p">,</span> <span class="s1">&#39;076879876电话&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;34@gmail.com或12076879876电话&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="compile-pattern-flags-0">compile(pattern, flags=0)</h3>
+
+<p>pattern:匹配的正则表达式<br />
+flags:标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志</p>
+
+<p>预编译正则表达式。返回正则表达式对象。上面的方法都是在进行调用的时候开始编译正则表达式，如果查找条目较多，比如说5亿个数据，每次都编译的话，效率必然会受到影响。而使用compile函数则可以预编译正则表达式，这样就不必每次都编译正则表达式，提高效率。</p>
+
+<p>&ldquo;compile&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或12076879876电话&#39;</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;12&#39;</span><span class="p">)</span>
+<span class="n">item1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">string</span><span class="p">)</span>   <span class="c1">#查找字符串12，并分割全部。</span>
+<span class="n">item2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">string</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#查找字符串12，并分割，但分割1次</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">_sre</span><span class="o">.</span><span class="n">SRE_Pattern</span><span class="s1">&#39;&gt;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;12&#39;</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;34@gmail.com或&#39;</span><span class="p">,</span> <span class="s1">&#39;076879876电话&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;34@gmail.com或12076879876电话&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="escape-pattern">escape(pattern)</h3>
+
+<p>pattern:匹配的正则表达式。</p>
+
+<p>对字符串中的非字母数字进行转义，将字符串转义为python能够识别的正则表达式。</p>
+
+<p>用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">source</span><span class="o">=</span><span class="s1">&#39;qq14717287xx@qq.com&amp;10010/10086&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">source</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">qq14717287xx</span>\<span class="nd">@qq</span>\<span class="o">.</span><span class="n">com</span>\<span class="o">&amp;</span><span class="mi">10010</span>\<span class="o">/</span><span class="mi">10086</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&ldquo;escape&rdquo;的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;test1234@gmail.com或12076879876/13089762456电话&#39;</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+<span class="n">test1234</span><span class="nd">@gmail.com或12076879876</span><span class="o">/</span><span class="mi">13089762456</span><span class="err">电话</span>
+<span class="n">test1234</span>\<span class="nd">@gmail</span>\<span class="o">.</span><span class="n">com</span>\<span class="err">或</span><span class="mi">12076879876</span>\<span class="o">/</span><span class="mi">13089762456</span>\<span class="err">电</span>\<span class="err">话</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B060-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程060 正则表达式2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B058-asyncio/">
+            <span class="next-text nav-default">Python教程058 asyncio</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
