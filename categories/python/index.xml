@@ -6,10 +6,19 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 17 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 18 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程062 正则表达式4</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B062-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F4/</link>
+      <pubDate>Mon, 18 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B062-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F4/</guid>
+      <description>四、分支条件| 正则表达式也支持类似于OR的方式，使用“|”符号连接几个表达式，只要其中一个表达式匹配上就算匹配。 1 2 3 4 5 6 7 8 import re string = &amp;#</description>
+    </item>
     
     <item>
       <title>Python教程061 正则表达式3</title>
