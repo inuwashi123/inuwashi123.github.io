@@ -6,10 +6,19 @@
     <description>Recent content in python教程 on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 19 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程063 正则表达式5</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B063-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F5/</link>
+      <pubDate>Tue, 19 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B063-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F5/</guid>
+      <description>九、断言 我们想要使用一些匹配规则作为位置，只匹配前面或者后面的内容，那应该怎么实现呢？这就要说道断言了，断言指定了一个位置。有以下几种形式。</description>
+    </item>
     
     <item>
       <title>Python教程062 正则表达式4</title>
