@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://inuwashi123.github.io/" />
 
-<meta property="og:updated_time" content="2019-11-21T09:09:44+09:00" />
+<meta property="og:updated_time" content="2019-11-23T09:09:44+09:00" />
 <meta itemprop="name" content="None - 记录在日本从事IT的所感所想。">
 <meta itemprop="description" content="记录在日从事IT工作历程。">
 
@@ -116,6 +116,52 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python/python%E6%95%99%E7%A8%8B057-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A82/">Python教程057 协程与生成器2</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-11-13 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+        <span class="more-meta"> 约 6607 字 </span>
+        <span class="more-meta"> 预计阅读 14 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      示例 定义一个计算移动平均值的协程 1 2 3 4 5 6 7 8 9 def averager(): total = 0.0 count = 0 average = None while True: ➊ term = yield average ➋ total += term count += 1 average = total/count ➊ 这个无限循环表明，只要调用方不断
+    </div>
+    <div class="read-more">
+      <a href="/post/python/python%E6%95%99%E7%A8%8B057-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A82/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/">Python教程056 协程与生成器1</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-11-12 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+        <span class="more-meta"> 约 2731 字 </span>
+        <span class="more-meta"> 预计阅读 6 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      把生成器当成协程 Python 2.2 引入了 yield 关键字实现的生成器函数，大约五年后，Python 2.5 实现了“PEP 342 — Coroutines via Enhanced Generators”https://
+    </div>
+    <div class="read-more">
+      <a href="/post/python/python%E6%95%99%E7%A8%8B056-%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A81/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/python/python%E6%95%99%E7%A8%8B055-%E5%8D%8F%E7%A8%8B%E6%BC%94%E5%8F%98%E7%9A%84%E5%8E%86%E5%8F%B2/">Python教程055 协程演变的历史</a></h1>
@@ -296,52 +342,6 @@
     </div>
     <div class="read-more">
       <a href="/post/python/python%E6%95%99%E7%A8%8B050-%E5%A4%9A%E7%BA%BF%E7%A8%8B-timer%E7%B1%BBsemaphore%E7%B1%BBlocal%E7%B1%BBbarrier%E7%B1%BB/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python/python%E6%95%99%E7%A8%8B049-%E5%A4%9A%E7%BA%BF%E7%A8%8B-lock%E7%B1%BBrlock%E7%B1%BBcondition%E7%B1%BBevent%E7%B1%BB/">Python教程049 多线程 Lock类 Rlock类 Condition类 Event类</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-03 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          </div>
-        <span class="more-meta"> 约 3405 字 </span>
-        <span class="more-meta"> 预计阅读 7 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Lock类、Rlock类 如果多个线程共同对某个数据修改，则可能出现不可预料的结果，为了保证数据的正确性，需要对多个线程进行同步。使用Thre
-    </div>
-    <div class="read-more">
-      <a href="/post/python/python%E6%95%99%E7%A8%8B049-%E5%A4%9A%E7%BA%BF%E7%A8%8B-lock%E7%B1%BBrlock%E7%B1%BBcondition%E7%B1%BBevent%E7%B1%BB/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python/python%E6%95%99%E7%A8%8B048-%E5%A4%9A%E7%BA%BF%E7%A8%8B1/">Python教程048 多线程1</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-02 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          </div>
-        <span class="more-meta"> 约 3359 字 </span>
-        <span class="more-meta"> 预计阅读 7 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      一、概述 运行一个程序时，默认会启动一个主线程，控制程序的运行，也成为控制线程或主线程。除了主线程之外，还可以新建子线程来处理程序，这就是多线
-    </div>
-    <div class="read-more">
-      <a href="/post/python/python%E6%95%99%E7%A8%8B048-%E5%A4%9A%E7%BA%BF%E7%A8%8B1/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程067 命名空间(namespace) - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="命名空间(namespace) 名称到对象的映射。命名空间是一个字典的实现，键为变量名，值是变量对应的值。各个命名空间是独立没有关系的，一个命" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B067-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4namespace/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程067 命名空间(namespace)" />
+<meta property="og:description" content="命名空间(namespace) 名称到对象的映射。命名空间是一个字典的实现，键为变量名，值是变量对应的值。各个命名空间是独立没有关系的，一个命" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B067-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4namespace/" />
+<meta property="article:published_time" content="2019-11-23T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-23T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程067 命名空间(namespace)">
+<meta itemprop="description" content="命名空间(namespace) 名称到对象的映射。命名空间是一个字典的实现，键为变量名，值是变量对应的值。各个命名空间是独立没有关系的，一个命">
+
+
+<meta itemprop="datePublished" content="2019-11-23T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-23T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="1854">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程067 命名空间(namespace)"/>
+<meta name="twitter:description" content="命名空间(namespace) 名称到对象的映射。命名空间是一个字典的实现，键为变量名，值是变量对应的值。各个命名空间是独立没有关系的，一个命"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程067 命名空间(namespace)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-23 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1854 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#命名空间-namespace">命名空间(namespace)</a>
+<ul>
+<li><a href="#分类">分类</a>
+<ul>
+<li><a href="#局部命名空间-local">局部命名空间(Local)</a></li>
+<li><a href="#全局命名空间-global">全局命名空间(Global)</a></li>
+<li><a href="#内置命名空间-built-in">内置命名空间(Built-in)</a></li>
+</ul></li>
+<li><a href="#生命周期">生命周期</a></li>
+<li><a href="#命名空间的访问">命名空间的访问</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="命名空间-namespace">命名空间(namespace)</h2>
+
+<p>名称到对象的映射。命名空间是一个字典的实现，键为变量名，值是变量对应的值。各个命名空间是独立没有关系的，一个命名空间中不能有重名，但是不同的命名空间可以重名而没有任何影响。命名空间也被叫做名称空间。</p>
+
+<h3 id="分类">分类</h3>
+
+<p>python程序执行期间会有2个或3个活动的命名空间（函数调用时有3个，函数调用结束后2个）。按照变量定义的位置，可以划分为以下3类：</p>
+
+<h4 id="局部命名空间-local">局部命名空间(Local)</h4>
+
+<p>每个函数所拥有的命名空间，记录了函数中定义的所有变量，包括函数的入参、内部定义的局部变量。</p>
+
+<h4 id="全局命名空间-global">全局命名空间(Global)</h4>
+
+<p>每个模块加载执行时创建的，记录了模块中定义的变量，包括模块中定义的函数、类、其他导入的模块、模块级的变量与常量。</p>
+
+<h4 id="内置命名空间-built-in">内置命名空间(Built-in)</h4>
+
+<p>python自带的内置命名空间，随着python解释器的启动而产生，包括异常类型、内置函数和特殊方法，可以代码中任意地方调用。</p>
+
+<p>一个模块的引入，函数的调用，类的定义都会引入命名空间，函数中的再定义函数，类中的成员函数定义会在局部namespace中再次引入局部namespace。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="c1"># filename: test.py</span>
+
+<span class="c1">#全局命名空间的变量对象s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span>
+
+<span class="c1">#全局命名空间的函数对象hello</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1">#局部命名空间的变量对象h</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1">#函数对象print是随Python解释器启动而来的，属于内置命名空间。</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s2">&#34; Tom&#34;</span><span class="p">)</span>  <span class="c1">#输出 Hello Tom</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>上面例子中,变量s和函数hello是test.py模块中定义的，属于全局命名空间。print函数是Python内置的，属于内置命名空间。函数hello里定义的变量h，属于局部命名空间。</p>
+
+<h3 id="生命周期">生命周期</h3>
+
+<p>Local（局部命名空间）在函数被调用时才被创建，但函数返回结果或抛出异常时被删除。（每一个递归函数都拥有自己的命名空间）。
+Global（全局命名空间）在模块被加载时创建，通常一直保留直到python解释器退出。
+Built-in（内置命名空间）在python解释器启动时创建，一直保留直到解释器退出。</p>
+
+<p>各命名空间创建顺序：python解释器启动 -&gt;创建内置命名空间 -&gt; 加载模块 -&gt; 创建全局命名空间 -&gt;函数被调用 -&gt;创建局部命名空间</p>
+
+<p>各命名空间销毁顺序：函数调用结束 -&gt; 销毁函数对应的局部命名空间 -&gt; python虚拟机（解释器）退出 -&gt;销毁全局命名空间 -&gt;销毁内置命名空间</p>
+
+<h3 id="命名空间的访问">命名空间的访问</h3>
+
+<p>1、通过builtins模块可以访问内置命名空间。它是随Python解释器而启动的，不需要import。</p>
+
+<p>打印内置命名空间所有的内置(异常类型、函数和特殊方法)</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">builtins</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">builtins</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ne">ArithmeticError</span>
+<span class="ne">AssertionError</span>
+<span class="ne">AttributeError</span>
+<span class="ne">BaseException</span>
+<span class="n">BlockingIOError</span>
+<span class="n">BrokenPipeError</span>
+<span class="n">BufferError</span>
+<span class="n">BytesWarning</span>
+<span class="n">ChildProcessError</span>
+<span class="n">ConnectionAbortedError</span>
+<span class="n">ConnectionError</span>
+<span class="n">ConnectionRefusedError</span>
+<span class="n">ConnectionResetError</span>
+<span class="ne">DeprecationWarning</span>
+<span class="ne">EOFError</span>
+<span class="bp">Ellipsis</span>
+<span class="ne">EnvironmentError</span>
+<span class="ne">Exception</span>
+<span class="bp">False</span>
+<span class="n">FileExistsError</span>
+<span class="n">FileNotFoundError</span>
+<span class="ne">FloatingPointError</span>
+<span class="ne">FutureWarning</span>
+<span class="ne">GeneratorExit</span>
+<span class="ne">IOError</span>
+<span class="ne">ImportError</span>
+<span class="ne">ImportWarning</span>
+<span class="ne">IndentationError</span>
+<span class="ne">IndexError</span>
+<span class="n">InterruptedError</span>
+<span class="n">IsADirectoryError</span>
+<span class="ne">KeyError</span>
+<span class="ne">KeyboardInterrupt</span>
+<span class="ne">LookupError</span>
+<span class="ne">MemoryError</span>
+<span class="n">ModuleNotFoundError</span>
+<span class="ne">NameError</span>
+<span class="bp">None</span>
+<span class="n">NotADirectoryError</span>
+<span class="bp">NotImplemented</span>
+<span class="ne">NotImplementedError</span>
+<span class="ne">OSError</span>
+<span class="ne">OverflowError</span>
+<span class="ne">PendingDeprecationWarning</span>
+<span class="n">PermissionError</span>
+<span class="n">ProcessLookupError</span>
+<span class="n">RecursionError</span>
+<span class="ne">ReferenceError</span>
+<span class="n">ResourceWarning</span>
+<span class="ne">RuntimeError</span>
+<span class="ne">RuntimeWarning</span>
+<span class="n">StopAsyncIteration</span>
+<span class="ne">StopIteration</span>
+<span class="ne">SyntaxError</span>
+<span class="ne">SyntaxWarning</span>
+<span class="ne">SystemError</span>
+<span class="ne">SystemExit</span>
+<span class="ne">TabError</span>
+<span class="n">TimeoutError</span>
+<span class="bp">True</span>
+<span class="ne">TypeError</span>
+<span class="ne">UnboundLocalError</span>
+<span class="ne">UnicodeDecodeError</span>
+<span class="ne">UnicodeEncodeError</span>
+<span class="ne">UnicodeError</span>
+<span class="ne">UnicodeTranslateError</span>
+<span class="ne">UnicodeWarning</span>
+<span class="ne">UserWarning</span>
+<span class="ne">ValueError</span>
+<span class="ne">Warning</span>
+<span class="ne">ZeroDivisionError</span>
+<span class="n">__build_class__</span>
+<span class="n">__debug__</span>
+<span class="vm">__doc__</span>
+<span class="nb">__import__</span>
+<span class="n">__loader__</span>
+<span class="vm">__name__</span>
+<span class="n">__package__</span>
+<span class="n">__spec__</span>
+<span class="nb">abs</span>
+<span class="nb">all</span>
+<span class="nb">any</span>
+<span class="n">ascii</span>
+<span class="nb">bin</span>
+<span class="nb">bool</span>
+<span class="nb">bytearray</span>
+<span class="nb">bytes</span>
+<span class="nb">callable</span>
+<span class="nb">chr</span>
+<span class="nb">classmethod</span>
+<span class="nb">compile</span>
+<span class="nb">complex</span>
+<span class="n">copyright</span>
+<span class="n">credits</span>
+<span class="nb">delattr</span>
+<span class="nb">dict</span>
+<span class="nb">dir</span>
+<span class="nb">divmod</span>
+<span class="nb">enumerate</span>
+<span class="nb">eval</span>
+<span class="k">exec</span>
+<span class="nb">exit</span>
+<span class="nb">filter</span>
+<span class="nb">float</span>
+<span class="n">format</span>
+<span class="nb">frozenset</span>
+<span class="nb">getattr</span>
+<span class="nb">globals</span>
+<span class="nb">hasattr</span>
+<span class="nb">hash</span>
+<span class="n">help</span>
+<span class="nb">hex</span>
+<span class="nb">id</span>
+<span class="nb">input</span>
+<span class="nb">int</span>
+<span class="nb">isinstance</span>
+<span class="nb">issubclass</span>
+<span class="nb">iter</span>
+<span class="nb">len</span>
+<span class="n">license</span>
+<span class="nb">list</span>
+<span class="nb">locals</span>
+<span class="nb">map</span>
+<span class="nb">max</span>
+<span class="n">memoryview</span>
+<span class="nb">min</span>
+<span class="nb">next</span>
+<span class="nb">object</span>
+<span class="nb">oct</span>
+<span class="nb">open</span>
+<span class="nb">ord</span>
+<span class="nb">pow</span>
+<span class="k">print</span>
+<span class="nb">property</span>
+<span class="n">quit</span>
+<span class="nb">range</span>
+<span class="nb">repr</span>
+<span class="nb">reversed</span>
+<span class="nb">round</span>
+<span class="nb">set</span>
+<span class="nb">setattr</span>
+<span class="nb">slice</span>
+<span class="nb">sorted</span>
+<span class="nb">staticmethod</span>
+<span class="nb">str</span>
+<span class="nb">sum</span>
+<span class="nb">super</span>
+<span class="nb">tuple</span>
+<span class="nb">type</span>
+<span class="nb">vars</span>
+<span class="nb">zip</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>2、全局 (模块级别)命名空间可以通过globals()内置函数来访问。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="c1"># filename: test.py</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1">#全局命名空间的变量对象s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span>
+
+<span class="c1">#全局命名空间的函数对象hello</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1">#局部命名空间的变量对象h</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1">#函数对象print是随Python解释器启动而来的，属于内置命名空间。</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="c1">#输出test.py的全局命名空间</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">globals</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;__spec__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+<span class="s1">&#39;__builtins__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;builtins&#39;</span> <span class="p">(</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="s1">&#39;__package__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/main.py&#39;</span><span class="p">,</span>
+<span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+<span class="s1">&#39;__name__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span>
+<span class="s1">&#39;__loader__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">_frozen_importlib</span><span class="o">.</span><span class="n">SourceFileLoader</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f9820b1e048</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="s1">&#39;sys&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;sys&#39;</span> <span class="p">(</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="s1">&#39;__cached__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+<span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello&#39;</span><span class="p">,</span>
+<span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">hello</span> <span class="n">at</span> <span class="mh">0x7f9820b4abf8</span><span class="o">&gt;</span><span class="p">}</span>
+
+<span class="err">模块的名字空间不仅仅包含模块级的变量和常量，还包括所有在模块中定义的函数和类。除此以外，它还包括了任何被导入到模块中的东西</span><span class="p">(</span><span class="err">例子中的</span><span class="n">sys模块</span><span class="p">)</span><span class="err">。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>3、局部命名空间可以locals()内置函数来访问。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="c1"># filename: test.py</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1">#全局命名空间的变量对象s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span>
+
+<span class="c1">#全局命名空间的函数对象hello</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1">#局部命名空间的变量对象h</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1">#输出hello函数的内部命名空间</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s2">&#34; Tom&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;h&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello Tom&#39;</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39; Tom&#39;</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B066-%E5%86%85%E7%BD%AE%E5%BC%82%E5%B8%B8%E7%B1%BB-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">
+            <span class="next-text nav-default">Python教程066 内置异常类 自定义异常</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
