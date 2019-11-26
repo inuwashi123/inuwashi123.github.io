@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程068 作用域(scope) - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="作用域(scope) 作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B068-%E4%BD%9C%E7%94%A8%E5%9F%9Fscope/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程068 作用域(scope)" />
+<meta property="og:description" content="作用域(scope) 作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B068-%E4%BD%9C%E7%94%A8%E5%9F%9Fscope/" />
+<meta property="article:published_time" content="2019-11-24T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-24T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程068 作用域(scope)">
+<meta itemprop="description" content="作用域(scope) 作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部">
+
+
+<meta itemprop="datePublished" content="2019-11-24T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-24T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="1750">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程068 作用域(scope)"/>
+<meta name="twitter:description" content="作用域(scope) 作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程068 作用域(scope)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-24 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1750 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#作用域-scope">作用域(scope)</a>
+<ul>
+<li><a href="#分类">分类</a></li>
+<li><a href="#命名空间与作用域的关系">命名空间与作用域的关系</a></li>
+<li><a href="#变量查找顺序">变量查找顺序</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="作用域-scope">作用域(scope)</h2>
+
+<p>作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部变量，则其作用域包含该代码块。 如果定义发生于函数代码块中，则其作用域会扩展到该函数所包含的任何代码块，除非有某个被包含代码块引入了对该名称的不同绑定。</p>
+
+<h3 id="分类">分类</h3>
+
+<p>只有函数、类、模块会产生作用域,if，whilr，for代码块没有作用域。作用域按照变量的定义位置可以划分为4类：<br />
+Local(函数内部)局部作用域<br />
+Enclosing（嵌套函数的外层函数内部）嵌套作用域（闭包）<br />
+Global（模块全局）全局作用域<br />
+Built-in（内建）内建作用域</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="c1"># filename: test.py</span>
+
+<span class="c1"># 变量对象s拥有全局作用域</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span>
+
+<span class="c1"># 变量对象a虽然处于if代码块中，但没有独自的作用域。变量对象a拥有全局作用域。</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># 变量对象c拥有类A的作用域</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="s2">&#34;class&#34;</span>
+
+<span class="c1"># 函数对象hello拥有全局作用域</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1"># 变量对象h拥有局部作用域</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1"># 函数对象print是随Python解释器启动而来的，拥有内建作用域。</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="c1"># 函数对象outer拥有全局作用域</span>
+<span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="c1"># 函数对象inner拥有嵌套作用域,函数内部能访问外层函数outer的变量args</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inner</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>     <span class="c1"># 输出 class</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s2">&#34; Tom&#34;</span><span class="p">)</span>  <span class="c1"># 输出 Hello Tom</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>       <span class="c1"># 输出 100</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">outer</span><span class="p">()</span>
+<span class="n">p</span><span class="p">()</span>     <span class="c1"># 输出 200</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="命名空间与作用域的关系">命名空间与作用域的关系</h3>
+
+<p>命名空间定义了在某个作用域内变量名和绑定值之间的对应关系，命名空间是键值对的集合，变量名与值是一一对应关系。作用域定义了命名空间中的变量能够在多大范围内起作用。</p>
+
+<p>命名空间在python解释器中是以字典的形式存在的，是以一种可以看得见摸得着的实体存在的。作用域是python解释器定义的一种规则，该规则确定了运行时变量查找的顺序，是一种形而上的虚的规定。</p>
+
+<h3 id="变量查找顺序">变量查找顺序</h3>
+
+<p>python解释器动态执行过程中，对遇到的变量进行解释时，是按照一条固定的作用域链查找解释的，又称为LEGB法则。
+其中L代表Local 局部作用域，E代表Enclosing 嵌套作用域，G代表Global 全局作用域，B代表Built-in 内建作用域。
+  python解释器查找变量时，会按照顺序依次查找局部作用域，嵌套作用域，全局作用域，内建作用域，在任意一个作用域中找到变量则停止查找，所有作用域查找完成没有找到对应的变量，则抛出 NameError: name &lsquo;xxxx&rsquo; is not defined的异常。</p>
+
+<p>在局部作用域中，可以看到局部作用域、嵌套作用域、全局作用域、内建作用域中所有定义的变量。</p>
+
+<p>在全局作用域中，可以看到全局作用域、内建作用域中的所有定义的变量，无法看到局部作用域中的变量。如果Python在这些名字空间找不到x，它将放弃查找并引发一个NameError异常，如，NameError: name &lsquo;x&rsquo; is not defined。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="c1"># filename: test.py</span>
+
+<span class="c1">#全局命名空间的变量对象s</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span>
+
+<span class="c1">#全局命名空间的函数对象hello</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1">#局部命名空间的变量对象h</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1">#函数对象print是随Python解释器启动而来的，属于内置命名空间。</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s2">&#34; Tom&#34;</span><span class="p">)</span>  <span class="c1">#输出 Hello Tom</span>
+<span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>       <span class="c1">#抛出异常。NameError: name &#39;h&#39; is not defined</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span> <span class="n">Tom</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">15</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>  
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;h&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>调用hello(&rdquo; Tom&rdquo;)时，需要打印变量h的值，h是在函数内部定义的局部变量，所以在hello函数的局部命名空间就找到了h。h的值是由变量s和变量name组成的，需要查找变量s和name。name是函数的形参，属于局部命名空间，调用时就传过来了它的值&rdquo; Tom&rdquo;。在hello局部命名空间是找不到变量s的值，那么就在全局变量空间test.py中查找，找到s的值是&rdquo;Hello&rdquo;，这样就打印出了hello的结果Hello Tom。
+调用print(h)时，所有的空间内都找不到变量h的值，所以抛出异常NameError: name &lsquo;h&rsquo; is not defined。</p>
+
+<p>比较以下例子有啥不同？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;lzl&#34;</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;eric&#34;</span>
+    <span class="n">f1</span><span class="p">()</span>
+<span class="n">f2</span><span class="p">()</span> <span class="c1">#输出lzl</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;lzl&#34;</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;eric&#34;</span>
+    <span class="k">return</span> <span class="n">f1</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">f2</span><span class="p">()</span>
+<span class="n">ret</span><span class="p">()</span> <span class="c1">#输出lzl</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;lzl&#34;</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;eric&#34;</span>
+    <span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f1</span>
+
+<span class="n">ret</span> <span class="o">=</span> <span class="n">f2</span><span class="p">()</span>
+<span class="n">ret</span><span class="p">()</span> <span class="c1">#eric</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B069-%E7%B1%BBexec%E5%92%8C-eval%E7%89%B9%E6%AE%8A%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程069 类exec()和 eval()特殊作用域</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B067-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4namespace/">
+            <span class="next-text nav-default">Python教程067 命名空间(namespace)</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

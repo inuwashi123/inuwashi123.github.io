@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程070 格式化字符串 %(百分号格式化字符串) - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="%-formatting 这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B070-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%99%BE%E5%88%86%E5%8F%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程070 格式化字符串 %(百分号格式化字符串)" />
+<meta property="og:description" content="%-formatting 这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B070-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%99%BE%E5%88%86%E5%8F%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
+<meta property="article:published_time" content="2019-11-26T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-26T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程070 格式化字符串 %(百分号格式化字符串)">
+<meta itemprop="description" content="%-formatting 这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。">
+
+
+<meta itemprop="datePublished" content="2019-11-26T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-26T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2091">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程070 格式化字符串 %(百分号格式化字符串)"/>
+<meta name="twitter:description" content="%-formatting 这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程070 格式化字符串 %(百分号格式化字符串)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-26 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2091 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#formatting">%-formatting</a></li>
+<li><a href="#格式语法">%格式语法</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="formatting">%-formatting</h2>
+
+<p>这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。</p>
+
+<p>格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。
+比如下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Hello, </span><span class="si">%s</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>  <span class="c1">#输出Hello, Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&ldquo;Hello, %s.&ldquo;为我们的模板。%s为第一个格式符，表示一个字符串。变量name的值Tom为替换%s的真实值。在模板和变量name之间，有一个%号分隔，它代表了格式化操作。</p>
+
+<p>整个&rdquo;Hello, %s.&rdquo; % name实际上构成一个字符串表达式。我们可以像一个正常的字符串那样，将它赋值给某个变量。比如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%s</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1">#输出Hello, Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>为了插入多个变量，您必须使用这些变量的元组。以下是你如何做到这一点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">56</span>
+<span class="c1">#变量name和age组成一个元组。</span>
+<span class="nb">str</span> <span class="o">=</span><span class="s2">&#34;Hello, </span><span class="si">%s</span><span class="s2">. You are </span><span class="si">%s</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1">#输出Hello, Tom. You are 56.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>我们还可以用词典来传递值。如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)s</span><span class="s2">. You are </span><span class="si">%(age)d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">56</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#输出Hello, Tom. You are 56.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，我们对两个格式符进行了命名。命名使用()括起来。每个命名对应词典的一个key。</p>
+
+<h2 id="格式语法">%格式语法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">格式：</span><span class="o">%</span><span class="p">[(</span><span class="n">name</span><span class="p">)][</span><span class="n">flags</span><span class="p">][</span><span class="n">width</span><span class="p">][</span><span class="o">.</span><span class="n">precision</span><span class="p">]</span><span class="n">typecode</span>
+
+<span class="p">(</span><span class="n">name</span><span class="p">)</span>   <span class="err">可选，用于选择指定的</span><span class="n">key</span>
+<span class="n">flags</span>    <span class="err">可选，可供选择的值有：</span>
+  <span class="o">+</span>     <span class="err">右对齐；正数前加正号，负数前加负号；</span>
+  <span class="o">-</span>     <span class="err">左对齐；正数前无符号，负数前加负号；</span>
+  <span class="err">空格</span>  <span class="err">右对齐；正数前加空格，负数前加负号；</span>
+  <span class="mi">0</span>     <span class="err">右对齐；正数前无符号，负数前加负号；用</span><span class="mi">0</span><span class="err">填充空白处</span>
+<span class="n">width</span>    <span class="err">可选，占有宽度</span>
+<span class="o">.</span><span class="n">precision</span>    <span class="err">可选，小数点后保留的位数，进行四舍五入计算。</span>
+<span class="n">typecode</span>     <span class="err">必选</span>
+  <span class="n">s</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__str__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">r</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__repr__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">c</span> <span class="p">:</span> <span class="err">如果是整数的话，将数字转换成其</span><span class="n">unicode对应的值</span><span class="err">，</span><span class="mi">10</span><span class="err">进制范围为</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1114111</span><span class="p">(</span><span class="n">py27则只支持0</span><span class="o">-</span><span class="mi">255</span><span class="p">)</span><span class="err">；如果是字符的话，将字符添加到指定位置</span>
+  <span class="n">o</span> <span class="p">:</span> <span class="err">将整数转换成八进制表示，并将其格式化到指定位置</span>
+  <span class="n">x</span> <span class="p">:</span> <span class="err">将整数转换成十六进制表示，并将其格式化到指定位置</span>
+  <span class="n">d</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成十进制表示，并将其格式化到指定位置</span>
+  <span class="n">e</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（小写</span><span class="n">e</span><span class="err">）</span>
+  <span class="n">E</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（大写</span><span class="n">E</span><span class="err">）</span>
+  <span class="n">f</span> <span class="p">:</span>  <span class="err">将整数、浮点数转换成浮点数表示，并将其格式化到指定位置（默认保留小数点后</span><span class="mi">6</span><span class="err">位）</span>
+  <span class="n">F</span> <span class="p">:</span> <span class="err">同上</span>
+  <span class="n">g</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">e</span><span class="err">；）</span>
+  <span class="n">G</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">E</span><span class="err">；）</span>
+  <span class="o">%</span> <span class="p">:</span> <span class="err">当字符串中存在格式化标志时，需要用</span> <span class="o">%%</span><span class="err">表示一个百分号</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例  %[(name)]typecode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#字典d，name和age是键。</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">56</span><span class="p">}</span>
+<span class="c1">#第一个格式化字符串的名字是name，第二个格式化字符串的名字是age。name和age必须和字典d的键名一一对应。负责会报找不到的错误。第一个格式化字符串的类型是s，表示调用对象的__str__方法显示。第二个是d，十进制显示。</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)s</span><span class="s2">. You are </span><span class="si">%(age)d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#输出Hello, Tom. You are 56.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例  %[flags][width]typecode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#字典d，name,age,money是键。</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">56</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">100</span><span class="p">}</span>
+<span class="c1">#+符号，右对齐；正数前加正号，负数前加负号</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)+10s</span><span class="s2">. You are </span><span class="si">%(age)+10d</span><span class="s2">. Money is </span><span class="si">%(money)+10d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="c1">#-符号，左对齐；正数前无符号，负数前加负号；</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)-10s</span><span class="s2">. You are </span><span class="si">%(age)-10d</span><span class="s2">. Money is </span><span class="si">%(money)-10d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span>
+<span class="c1">#空格符号，右对齐；正数前加空格，负数前加负号；</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name) 10s</span><span class="s2">. You are </span><span class="si">%(age) 10d</span><span class="s2">. Money is </span><span class="si">%(money) 10d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span>
+<span class="c1">#数组0符号，右对齐；正数前无符号，负数前加负号；用0填充空白处</span>
+<span class="n">str4</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)010s</span><span class="s2">. You are </span><span class="si">%(age)010d</span><span class="s2">. Money is </span><span class="si">%(money)010d</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str4</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span>        <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span>        <span class="o">+</span><span class="mf">56.</span> <span class="n">Money</span> <span class="ow">is</span>       <span class="o">-</span><span class="mf">100.</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">Tom</span>       <span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mi">56</span>        <span class="o">.</span> <span class="n">Money</span> <span class="ow">is</span> <span class="o">-</span><span class="mi">100</span>      <span class="o">.</span>
+<span class="n">Hello</span><span class="p">,</span>        <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span>         <span class="mf">56.</span> <span class="n">Money</span> <span class="ow">is</span>       <span class="o">-</span><span class="mf">100.</span>
+<span class="n">Hello</span><span class="p">,</span>        <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">0000000056.</span> <span class="n">Money</span> <span class="ow">is</span> <span class="o">-</span><span class="mf">000000100.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例  %[flags][width][.precision]typecode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#字典d，name,age,money是键。</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">56</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">100.99</span><span class="p">}</span>
+<span class="c1">#第二个格式化保留2位小数点后数字，第三个格式化保留3位小数点后数字，进行四舍五入计算</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)+10s</span><span class="s2">. You are </span><span class="si">%(age)+10.2f</span><span class="s2">. Money is </span><span class="si">%(money)+10.3f</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="c1">#第二个格式化保留2位小数点后数字，第三个格式化保留1位小数点后数字，进行四舍五入计算。-100.99转变为-101.0</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%(name)+10s</span><span class="s2">. You are </span><span class="si">%(age)+10.2f</span><span class="s2">. Money is </span><span class="si">%(money)+10.1f</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span>        <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span>     <span class="o">+</span><span class="mf">56.00</span><span class="o">.</span> <span class="n">Money</span> <span class="ow">is</span>   <span class="o">-</span><span class="mf">100.990</span><span class="o">.</span>
+<span class="n">Hello</span><span class="p">,</span>        <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span>     <span class="o">+</span><span class="mf">56.00</span><span class="o">.</span> <span class="n">Money</span> <span class="ow">is</span>     <span class="o">-</span><span class="mf">101.0</span><span class="o">.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例  %typecode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%c</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%c</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%o</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%x</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%e</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%E</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%F</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%g</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97000000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%G</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">97000000</span><span class="p">)</span>
+
+<span class="c1">#%%表示一个百分号</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%d%%</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="mi">50</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span>
+<span class="n">A</span>
+<span class="mi">141</span>
+<span class="mi">61</span>
+<span class="mi">97</span>
+<span class="mf">9.700000e+01</span>
+<span class="mf">9.700000E+01</span>
+<span class="mf">97.000000</span>
+<span class="mf">97.000000</span>
+<span class="mf">9.7e+07</span>
+<span class="mf">9.7E+07</span>
+<span class="mi">50</span><span class="o">%</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>为什么 %-formatting不好用？
+使用几个参数和更长的字符串，你的代码将很快变得不太容易阅读。容易出错。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&#34;Eric&#34;</span>
+<span class="n">last_name</span> <span class="o">=</span> <span class="s2">&#34;Idle&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">74</span>
+<span class="n">profession</span> <span class="o">=</span> <span class="s2">&#34;comedian&#34;</span>
+<span class="n">affiliation</span> <span class="o">=</span> <span class="s2">&#34;Monty Python&#34;</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">. You are </span><span class="si">%s</span><span class="s2">. You are </span><span class="si">%s</span><span class="s2">. You were a member of </span><span class="si">%s</span><span class="s2">.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">profession</span><span class="p">,</span> <span class="n">affiliation</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span> <span class="n">Eric</span> <span class="n">Idle</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">74.</span> <span class="n">You</span> <span class="n">are</span> <span class="n">comedian</span><span class="o">.</span> <span class="n">You</span> <span class="n">were</span> <span class="n">a</span> <span class="n">member</span> <span class="n">of</span> <span class="n">Monty</span> <span class="n">Python</span><span class="o">.</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B069-%E7%B1%BBexec%E5%92%8C-eval%E7%89%B9%E6%AE%8A%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+            <span class="next-text nav-default">Python教程069 类exec()和 eval()特殊作用域</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

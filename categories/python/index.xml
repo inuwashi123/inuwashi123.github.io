@@ -6,10 +6,37 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程070 格式化字符串 %(百分号格式化字符串)</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B070-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%99%BE%E5%88%86%E5%8F%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Tue, 26 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B070-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%99%BE%E5%88%86%E5%8F%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>%-formatting 这是Python第一代格式化字符串法方法，伴随着python语言的诞生(original generation)。请记住，不建议使用%格式。</description>
+    </item>
+    
+    <item>
+      <title>Python教程069 类exec()和 eval()特殊作用域</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B069-%E7%B1%BBexec%E5%92%8C-eval%E7%89%B9%E6%AE%8A%E4%BD%9C%E7%94%A8%E5%9F%9F/</link>
+      <pubDate>Mon, 25 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B069-%E7%B1%BBexec%E5%92%8C-eval%E7%89%B9%E6%AE%8A%E4%BD%9C%E7%94%A8%E5%9F%9F/</guid>
+      <description>类定义代码块以及传给exec()和eval()的参数的作用域是特殊情况。 类定义是可能使用并定义名称（变量）的可执行语句。 这些引用遵循正常的名</description>
+    </item>
+    
+    <item>
+      <title>Python教程068 作用域(scope)</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B068-%E4%BD%9C%E7%94%A8%E5%9F%9Fscope/</link>
+      <pubDate>Sun, 24 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B068-%E4%BD%9C%E7%94%A8%E5%9F%9Fscope/</guid>
+      <description>作用域(scope) 作用域是在一个定义范围内引用变量(名称)的能力。作用域 定义了一个代码块中变量(名称)的可见性。 如果代码块中定义了一个局部</description>
+    </item>
     
     <item>
       <title>Python教程067 命名空间(namespace)</title>
