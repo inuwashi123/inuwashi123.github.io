@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程074 解包 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="解包 将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B074-%E8%A7%A3%E5%8C%85/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程074 解包" />
+<meta property="og:description" content="解包 将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B074-%E8%A7%A3%E5%8C%85/" />
+<meta property="article:published_time" content="2019-12-01T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-12-01T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程074 解包">
+<meta itemprop="description" content="解包 将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对">
+
+
+<meta itemprop="datePublished" content="2019-12-01T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-12-01T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2673">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程074 解包"/>
+<meta name="twitter:description" content="解包 将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程074 解包</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-01 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2673 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#解包">解包</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="解包">解包</h2>
+
+<p>将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对象都支持解包，可迭代对象包括列表、元组、字典、集合、字符串、生成器等实现了<strong>next</strong>方法的一切对象。</p>
+
+<p>示例，列表解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">l</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出4</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，元组解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">t</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出4</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，字符串解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;abcd&#34;</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">s</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出b</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出c</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出d</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，集合解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span>  <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">s</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出4</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，字典解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出b</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出c</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出d</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>字典解包后，只会把字典的key取出来，value则丢掉了。</p>
+
+<p>示例，range解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#输出0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#输出3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果在解包过程中，遇到左边变量个数小于右边可迭代对象中元素的个数时该怎么办？<br />
+方法是在某个变量面前加一个星号，而且这个星号可以放在任意变量，每个变量都分配一个元素后，剩下的元素都分配给这个带星号的变量。</p>
+
+<p>示例，带星号列表解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">l</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[1, 2]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">l</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[2, 3]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="n">l</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[3, 4]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，带星号元组解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">t</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[1, 2]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">l</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[2, 3]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="n">l</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[3, 4]，解包后的类型是列表</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，带星号字符串解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;abcd&#34;</span>
+
+<span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[&#39;a&#39;, &#39;b&#39;]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出c</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出d</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[&#39;b&#39;, &#39;c&#39;]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出d</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出b</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[&#39;c&#39;, &#39;d&#39;]，解包后的类型是列表</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，带星号集合解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span>  <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+
+<span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[1, 2]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[2, 3]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出4</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="n">s</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[3, 4]，解包后的类型是列表</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，带星号字典解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+
+<span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[&#39;a&#39;, &#39;b&#39;]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出c</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出d</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[&#39;b&#39;, &#39;c&#39;]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出d</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="n">d</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出b</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[&#39;c&#39;, &#39;d&#39;]，解包后的类型是列表</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，带星号range解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="c1">#输出[0, 1]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="c1">#输出2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1">#输出3</span>
+
+<span class="n">a2</span><span class="p">,</span> <span class="o">*</span><span class="n">b2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1">#输出0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="c1">#输出[1, 2]，解包后的类型是列表</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1">#输出3</span>
+
+<span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">,</span> <span class="o">*</span><span class="n">c3</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span> <span class="c1">#输出0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b3</span><span class="p">)</span> <span class="c1">#输出1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1">#输出[2, 3]，解包后的类型是列表</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例，利用解包，读取文件内容。获取文件的第一行和最后一行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;use_python_to_profit.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="c1"># 注意，这会读取所有内容到内存中</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;first:&#39;</span><span class="p">,</span> <span class="n">first</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;last:&#39;</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>函数参数的解包<br />
+函数调用时，有时你可能会用到两个符号：星号*和双星号**。函数被调用的时候，使用星号*解包一个可迭代对象作为函数的参数。字典对象，可以使用两个星号，解包之后将作为关键字参数传递给函数</p>
+
+<p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1">#正常调用函数，必须传入三个参数，和形参a,b,c个数一只。</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">#输出1，2，3</span>
+
+<span class="c1">#带星号列表解包函数参数</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>  <span class="c1">#输出1，2，3</span>
+
+<span class="c1">#带星号元组解包函数参数</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>  <span class="c1">#输出1，2，3</span>
+
+<span class="c1">#带星号字符串解包函数参数</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="s2">&#34;abc&#34;</span><span class="p">)</span>  <span class="c1">#输出a b c</span>
+
+<span class="c1">#带星号字典解包函数参数</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>  <span class="c1">#输出a b c</span>
+
+<span class="c1">#字典对象，可以使用两个星号，解包之后将作为关键字参数传递给函数</span>
+<span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>  <span class="c1">#输出1 2 3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>看到了吗？和上面例子的区别是多了一个星号，结果完全不一样，原因是什么？ 答案是**符号作用的对象是字典对象，它会自动解包成关键字参数 key=value 的格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果字典对象中的 key 不是 a，b，c，会出现什么情况？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">:{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>
+<span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">:{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>
+<span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>总结一下，函数调用时，一个星号可作用于所有的可迭代对象，称为迭代器解包操作，作为位置参数传递给函数，两个星号只能作用于字典对象，称之为字典解包操作，作为关键字参数传递给函数。使用 *和 ** 的解包的好处是能节省代码量，使得代码看起来更优雅，不然你得这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>到这里，解包还没介绍完，因为 Python3.5，也就是 PEP 448 对解包操作做了进一步的扩展， 在 3.5 之前的版本，函数调用时，一个函数中解包操作只允许一个* 和 一个**。从 3.5 开始，在函数调用中，可以有任意多个解包操作，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Python 3.4 中 print 函数 不允许多个 * 操作</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+                    <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>再来看看 python3.5以上版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 可以使用任意多个解包操作</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从 3.5开始可以接受多个解包，于此同时，解包操作除了用在函数调用，还可以作用在表达式中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">}</span>
+<span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+<span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>新的语法使得我们的代码更加优雅了，例如拼接两个列表可以这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list2</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="o">*</span><span class="n">list1</span><span class="p">,</span> <span class="o">*</span><span class="n">list3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可不可以直接用+操作呢？不行，因为 list 类型无法与 range 对象 相加，你必须先将 list2强制转换为 list 对象才能做+操作，这个留给读者自行验证。
+再来看一个例子：如何优雅的合并两个字典</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;c&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="o">**</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">b</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在3.5之前的版本，你不得不写更多的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">copy</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>函数返回值的解包<br />
+函数中如果返回多个结果，可以利用解包进行接收。</p>
+
+<p>示例，有多个返回结果的函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">],(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">y</span><span class="p">),(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">res1</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="s1">&#39;fir&#39;</span><span class="p">,</span><span class="s1">&#39;sec&#39;</span><span class="p">,</span><span class="s1">&#39;thr&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res1</span><span class="p">)</span>     <span class="c1">#输出 ([&#39;x&#39;, &#39;fir&#39;], (&#39;y&#39;, &#39;sec&#39;), (&#39;z&#39;, &#39;thr&#39;))。没有解包。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fir</span> <span class="n">sec</span> <span class="n">thr</span>
+<span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;fir&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;sec&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;thr&#39;</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">],(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">y</span><span class="p">),(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">res1</span><span class="p">,</span><span class="n">res2</span><span class="p">,</span><span class="n">res3</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="s1">&#39;fir&#39;</span><span class="p">,</span><span class="s1">&#39;sec&#39;</span><span class="p">,</span><span class="s1">&#39;thr&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res1</span><span class="p">)</span>      <span class="c1">#输出 [&#39;x&#39;, &#39;fir&#39;]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res2</span><span class="p">)</span>      <span class="c1">#输出 (&#39;y&#39;, &#39;sec&#39;)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res3</span><span class="p">)</span>      <span class="c1">#输出 (&#39;z&#39;, &#39;thr&#39;)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fir</span> <span class="n">sec</span> <span class="n">thr</span>
+<span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;fir&#39;</span><span class="p">]</span>
+<span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;sec&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;thr&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>带星号解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">],(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">y</span><span class="p">),(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">res1</span><span class="p">,</span><span class="o">*</span><span class="n">res2</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="s1">&#39;fir&#39;</span><span class="p">,</span><span class="s1">&#39;sec&#39;</span><span class="p">,</span><span class="s1">&#39;thr&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res1</span><span class="p">)</span>  <span class="c1">#输出 [&#39;x&#39;, &#39;fir&#39;]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res2</span><span class="p">)</span>  <span class="c1">#输出 [(&#39;y&#39;, &#39;sec&#39;), (&#39;z&#39;, &#39;thr&#39;)]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fir</span> <span class="n">sec</span> <span class="n">thr</span>
+<span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;fir&#39;</span><span class="p">]</span>
+<span class="p">[(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;sec&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;thr&#39;</span><span class="p">)]</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B075-%E8%87%AA%E7%9C%81introspection1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程075 自省(introspection)1</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B073-%E6%A0%87%E6%B3%A8annotations/">
+            <span class="next-text nav-default">Python教程073 标注(annotations)</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

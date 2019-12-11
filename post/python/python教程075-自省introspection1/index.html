@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程075 自省(introspection)1 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html 自省(introspection) 是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B075-%E8%87%AA%E7%9C%81introspection1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程075 自省(introspection)1" />
+<meta property="og:description" content="https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html 自省(introspection) 是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B075-%E8%87%AA%E7%9C%81introspection1/" />
+<meta property="article:published_time" content="2019-12-03T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-12-03T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程075 自省(introspection)1">
+<meta itemprop="description" content="https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html 自省(introspection) 是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么">
+
+
+<meta itemprop="datePublished" content="2019-12-03T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-12-03T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3520">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程075 自省(introspection)1"/>
+<meta name="twitter:description" content="https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html 自省(introspection) 是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程075 自省(introspection)1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-03 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3520 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#自省-introspection">自省(introspection)</a></li>
+<li><a href="#python内置的自省函数">Python内置的自省函数</a>
+<ul>
+<li><a href="#模块-module">模块(module)</a></li>
+<li><a href="#类-class">类(class)</a></li>
+<li><a href="#实例-instance">实例(instance)</a></li>
+<li><a href="#内建函数和方法-built-in-functions-and-methods">内建函数和方法(built-in functions and methods)</a></li>
+<li><a href="#函数-function">函数(function)</a></li>
+<li><a href="#方法-method">方法(method)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p><a href="https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html">https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html</a></p>
+
+<h2 id="自省-introspection">自省(introspection)</h2>
+
+<p>是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么，以及祖宗是什么，子孙是什么&hellip;.(反射是java的说法，python叫自省)</p>
+
+<h2 id="python内置的自省函数">Python内置的自省函数</h2>
+
+<p>help([object])<br />
+如果说能够通过一个函数就能够学会Python，那这个函数一定就是help()。help函数的作用就是查看对象的帮组文档。如果你需要得到关于类似return操作符的帮助，需要在内部加上引号，help(&lsquo;return&rsquo;)</p>
+
+<p>callable(object)<br />
+检查对象object是否可调用。如果返回True，object仍然可能调用失败；但如果返回False，调用对象ojbect绝对不会成功。对于函数,  lambda匿名函数, 类, 以及实现了<strong>call</strong>方法的类实例, 它都返回True。</p>
+
+<p>delattr(object, name)<br />
+删除对象的属性。delattr(x, &lsquo;foobar&rsquo;) 相当于del x.foobar</p>
+
+<p>isinstance(object, classinfo)<br />
+来判断一个对象是否是一个已知的类型，类似type()。isinstance()会认为子类是一种父类类型，考虑继承关系。classinfo参数可以是一个Tuple，元素可以是重复的。</p>
+
+<p>issubclass(class, classinfo)<br />
+用于判断参数class是否是类型参数classinfo的子类。类本身也会返回True。</p>
+
+<p>dir([obj])<br />
+调用这个方法将返回包含obj大多数属性名的列表（会有一些特殊的属性不包含在内）。obj的默认值是当前的模块对象。</p>
+
+<p>hasattr(obj, attr)<br />
+这个方法用于检查obj是否有一个名为attr的值的属性，返回一个布尔值。</p>
+
+<p>getattr(obj, attr)<br />
+调用这个方法将返回obj中名为attr值的属性的值，例如如果attr为&rsquo;bar&rsquo;，则返回obj.bar。</p>
+
+<p>setattr(obj, attr, val)<br />
+调用这个方法将给obj的名为attr的值的属性赋值为val。例如如果attr为&rsquo;bar&rsquo;，则相当于obj.bar = val。</p>
+
+<p>例如，访问对象的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#coding: UTF-8</span>
+<span class="c1">#  导入sys和inspect模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span> <span class="k">pass</span> <span class="c1"># 函数，foo指向这个函数对象</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span> <span class="c1"># 类，Cat指向这个类对象</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;kitty&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#  实例方法，sayHi指向这个方法对象，使用  类或实例.sayHi访问</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;says Hi!&#39;</span><span class="p">)</span> <span class="c1"># 访问名为name的字段，使用  实例.name访问</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;kitty&#39;</span><span class="p">)</span>  <span class="c1"># cat是Cat类的实例对象</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c1"># 访问实例属性</span>
+<span class="n">cat</span><span class="o">.</span><span class="n">sayHi</span><span class="p">()</span> <span class="c1"># 调用实例方法</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">cat</span><span class="p">))</span>                   <span class="c1"># 获取实例的属性名，以列表形式返回</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>          <span class="c1"># 检查实例是否有这个属性</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;tiger&#39;</span><span class="p">)</span> <span class="c1"># 等同于: a.name = &#39;tiger&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">))</span>       <span class="c1"># 等同于: print(a.name)</span>
+
+<span class="nb">getattr</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s1">&#39;sayHi&#39;</span><span class="p">)()</span>           <span class="c1"># 等同于: cat.sayHi()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>访问对象的元数据<br />
+当你对一个你构造的对象使用dir()时，可能会发现列表中的很多属性并不是你定义的。这些属性一般保存了对象的元数据，比如类的<strong>name</strong>属性保存了类名。大部分这些属性都可以修改，不过改动它们意义并不是很大；修改其中某些属性如function.func_code还可能导致很难发现的问题，所以改改name什么的就好了，其他的属性不要在不了解后果的情况下修改。</p>
+
+<p>接下来列出特定对象的一些特殊属性。另外，Python的文档中有提到部分属性不一定会一直提供，下文中将以红色的星号*标记，使用前你可以先打开解释器确认一下。</p>
+
+<h3 id="模块-module">模块(module)</h3>
+
+<p>__doc__: 文档字符串。如果模块没有文档，这个值是None。<br />
+__name__: 始终是定义时的模块名；即使你使用import .. as 为它取了别名，或是赋值给了另一个变量名。<br />
+__dict__: 包含了模块里可用的属性名-属性的字典；也就是可以使用模块名.属性名访问的对象。<br />
+__file__: 包含了该模块的文件路径。需要注意的是内建的模块没有这个属性，访问它会抛出异常！</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">fnmatch</span> <span class="kn">as</span> <span class="nn">m</span>
+<span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Filename matching with shell patterns.</span>
+<span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="vm">__name__</span>                <span class="c1"># fnmatch</span>
+<span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="vm">__file__</span>                <span class="c1"># /usr/lib/python2.6/fnmatch.pyc</span>
+<span class="k">print</span> <span class="n">m</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># (&#39;fnmatchcase&#39;, &lt;function&gt;)&lt;/function&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="类-class">类(class)</h3>
+
+<p>__doc__: 文档字符串。如果类没有文档，这个值是None。<br />
+__name__: 始终是定义时的类名。<br />
+__dict__: 包含了类里可用的属性名-属性的字典；也就是可以使用类名.属性名访问的对象。<br />
+__module__: 包含该类的定义的模块名；需要注意，是字符串形式的模块名而不是模块对象。<br />
+__bases__: 直接父类对象的元组；但不包含继承树更上层的其他类，比如父类的父类。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;kitty&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;says Hi!&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>           <span class="c1"># None</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>          <span class="c1"># Cat</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>        <span class="c1"># __main__</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">)</span>         <span class="c1"># (&lt;class &#39;object&#39;&gt;,)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>          <span class="c1"># {&#39;__module__&#39;: &#39;__main__&#39;, ...}&lt;/type&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">None</span>
+<span class="n">Cat</span>
+<span class="n">__main__</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">object</span><span class="s1">&#39;&gt;,)</span>
+<span class="p">{</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">Cat</span><span class="o">.</span><span class="fm">__init__</span> <span class="n">at</span> <span class="mh">0x7fe1b0b1f0d0</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;sayHi&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">Cat</span><span class="o">.</span><span class="n">sayHi</span> <span class="n">at</span> <span class="mh">0x7fe1b0b1f158</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="s1">&#39;__dict__&#39;</span> <span class="n">of</span> <span class="s1">&#39;Cat&#39;</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="s1">&#39;__weakref__&#39;</span> <span class="n">of</span> <span class="s1">&#39;Cat&#39;</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="实例-instance">实例(instance)</h3>
+
+<p>实例是指类实例化以后的对象。</p>
+
+<p>__dict__: 包含了可用的属性名-属性字典。
+__class__: 该实例的类对象。对于类Cat，cat.__class__ == Cat 为 True。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;kitty&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;says Hi!&#39;</span><span class="p">)</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">Cat</span><span class="p">)</span> <span class="c1"># True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;kitty&#39;</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Cat</span><span class="s1">&#39;&gt;</span>
+<span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="内建函数和方法-built-in-functions-and-methods">内建函数和方法(built-in functions and methods)</h3>
+
+<p>根据定义，内建的(built-in)模块是指使用C写的模块，可以通过sys模块的builtin_module_names字段查看都有哪些模块是内建的。这些模块中的函数和方法可以使用的属性比较少，不过一般也不需要在代码中查看它们的信息。</p>
+
+<p>__doc__: 函数或方法的文档。<br />
+__name__: 函数或方法定义时的名字。<br />
+__self__: 仅方法可用，如果是绑定的(bound)，则指向调用该方法的类（如果是类方法）或实例（如果是实例方法），否则为None。<br />
+__module__: 函数或方法所在的模块名。</p>
+
+<p>abs是Python内置函数，用来返回数值的绝对值。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="nb">abs</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>     <span class="c1">#输出 Return the absolute value of the argument.</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">abs</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>    <span class="c1">#输出 abs</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">abs</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>  <span class="c1">#输出 builtins</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">abs</span><span class="o">.</span><span class="vm">__self__</span><span class="p">)</span>    <span class="c1">#输出 &lt;module &#39;builtins&#39; (built-in)&gt;</span>
+
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;打印参数的值&#34;&#34;&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>     <span class="c1">#输出 打印参数的值</span>
+<span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>    <span class="c1">#输出 func</span>
+<span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>  <span class="c1">#输出 __main__</span>
+<span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__self__</span><span class="p">)</span>    <span class="c1">#没有self属性，报错</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Return</span> <span class="n">the</span> <span class="n">absolute</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">argument</span><span class="o">.</span>
+<span class="nb">abs</span>
+<span class="n">builtins</span>
+<span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;builtins&#39;</span> <span class="p">(</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="err">打印参数的值</span>
+<span class="n">func</span>
+<span class="n">__main__</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">13</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__self__</span><span class="p">)</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;function&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__self__&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="函数-function">函数(function)</h3>
+
+<p>这里特指非内建的函数。注意，在类中使用def定义的是方法，方法与函数虽然有相似的行为，但它们是不同的概念。</p>
+
+<p>__doc__: 函数的文档。<br />
+__name__: 函数定义时的函数名。<br />
+__module__: 包含该函数定义的模块名；同样注意，是模块名而不是模块对象。<br />
+__dict__: 函数的可用属性。<br />
+不要忘了函数也是对象，可以使用函数.属性名访问属性（赋值时如果属性不存在将新增一个），或使用内置函数has/get/setattr()访问。不过，在函数中保存属性的意义并不大。<br />
+__defaults__: 这个属性保存了函数的参数默认值元组；因为默认值总是靠后的参数才有，所以不使用字典的形式也是可以与参数对应上的。<br />
+__code__: 这个属性指向一个该函数对应的code对象，code对象中定义了其他的一些特殊属性，将在下文中另外介绍。<br />
+__globals__: 这个属性指向定义函数时的全局命名空间。<br />
+__closure__: 这个属性仅当函数是一个闭包时有效，指向一个保存了所引用到的外部函数的变量cell的元组，如果该函数不是一个内部函数，则始终为None。这个属性也是只读的。</p>
+
+<p>下面的代码演示了<strong>closure</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#coding: UTF-8</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># 引用非全局的外部变量n，构造一个闭包</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">bar</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>            <span class="c1">#输出 None</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>      <span class="c1">#输出 &lt;class &#39;NoneType&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>           <span class="c1">#输出 foo</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>     <span class="c1">#输出 &lt;class &#39;str&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>         <span class="c1">#输出 __main__</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__module__</span><span class="p">))</span>   <span class="c1">#输出 &lt;class &#39;str&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>           <span class="c1">#输出 {}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">))</span>     <span class="c1">#输出 &lt;class &#39;dict&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">)</span>       <span class="c1">#输出 (100,)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">))</span> <span class="c1">#输出 &lt;class &#39;tuple&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__code__</span><span class="p">)</span>           <span class="c1">#输出 &lt;code object foo at 0x7fae1eb175d0, file &#34;main.py&#34;, line 1&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__code__</span><span class="p">))</span>     <span class="c1">#输出 &lt;class &#39;code&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">)</span>        <span class="c1">#输出 {&#39;__name__&#39;: &#39;__main__&#39;,...}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">))</span>  <span class="c1">#输出 &lt;class &#39;dict&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">)</span>        <span class="c1">#输出 None</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">))</span>  <span class="c1">#输出 &lt;class &#39;NoneType&#39;&gt;</span>
+<span class="n">closure</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">closure</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">)</span>    <span class="c1">#输出 (&lt;cell at 0x7fae1eb0f948: int object at 0x7fae1fe4a3e0&gt;,)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">closure</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">))</span>  <span class="c1">#输出 &lt;class &#39;tuple&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">None</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">NoneType</span><span class="s1">&#39;&gt;</span>
+<span class="n">foo</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+<span class="n">__main__</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+<span class="p">{}</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="mi">100</span><span class="p">,)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="n">code</span> <span class="nb">object</span> <span class="n">foo</span> <span class="n">at</span> <span class="mh">0x7fc089be45d0</span><span class="p">,</span> <span class="nb">file</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">code</span><span class="s1">&#39;&gt;</span>
+<span class="p">{</span><span class="s1">&#39;__name__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">_frozen_importlib_external</span><span class="o">.</span><span class="n">SourceFileLoader</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc089b7f438</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;__annotations__&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;__builtins__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">module</span> <span class="s1">&#39;builtins&#39;</span> <span class="p">(</span><span class="n">built</span><span class="o">-</span><span class="ow">in</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">:</span> <span class="s1">&#39;main.py&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">foo</span> <span class="n">at</span> <span class="mh">0x7fc089c50e18</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span>
+<span class="bp">None</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">NoneType</span><span class="s1">&#39;&gt;</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">cell</span> <span class="n">at</span> <span class="mh">0x7fc089bdcac8</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc08af173e0</span><span class="o">&gt;</span><span class="p">,)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">tuple</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由这个例子可以看到，遇到未知的对象使用dir()是一个很好的主意 ：）</p>
+
+<h3 id="方法-method">方法(method)</h3>
+
+<p>方法虽然不是函数，但可以理解为在函数外面加了一层外壳；拿到方法里实际的函数以后，就可以使用2.5节的属性了。</p>
+
+<p>__doc__: 与函数相同。<br />
+__name__: 与函数相同。<br />
+__module__: 与函数相同。<br />
+__func__: 使用这个属性可以拿到方法里实际的函数对象的引用。<br />
+__self__: 如果是绑定的(bound)，则指向调用该方法的类（如果是类方法）或实例（如果是实例方法），否则为None。
+im_class: 实际调用该方法的类，或实际调用该方法的实例的类。注意不是方法的定义所在的类，如果有继承关系的话。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;kitty&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;says Hi!&#39;</span><span class="p">)</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">sayHi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__func__</span><span class="p">)</span>          <span class="c1">#输出 &lt;function Cat.sayHi at 0x7f06100f51e0&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__func__</span><span class="p">))</span>    <span class="c1">#输出 &lt;class &#39;function&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__self__</span><span class="p">)</span>          <span class="c1">#输出 &lt;__main__.Cat object at 0x7f06100ff9b0&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__self__</span><span class="p">))</span>    <span class="c1">#输出 &lt;class &#39;__main__.Cat&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>         <span class="c1">#输出 &lt;class &#39;method&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span>   <span class="c1">#输出 &lt;class &#39;type&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">function</span> <span class="n">Cat</span><span class="o">.</span><span class="n">sayHi</span> <span class="n">at</span> <span class="mh">0x7f06100f51e0</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">function</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Cat</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f06100ff9b0</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Cat</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">method</span><span class="s1">&#39;&gt;</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">type</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里讨论的是一般的实例方法，另外还有两种特殊的方法分别是类方法(classmethod)和静态方法(staticmethod)。类方法还是方法，不过因为需要使用类名调用，所以他始终是绑定的；而静态方法可以看成是在类的命名空间里的函数（需要使用类名调用的函数），它只能使用函数的属性，不能使用方法的属性。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B076-%E8%87%AA%E7%9C%81introspection2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程076 自省(introspection)2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B074-%E8%A7%A3%E5%8C%85/">
+            <span class="next-text nav-default">Python教程074 解包</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

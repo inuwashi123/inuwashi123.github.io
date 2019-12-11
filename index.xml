@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Nov 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Dec 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,78 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程078 Pythonic代码风格编程</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B078-pythonic%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Tue, 10 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B078-pythonic%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BC%96%E7%A8%8B/</guid>
+      <description>Python之禅 this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。 import this</description>
+    </item>
+    
+    <item>
+      <title>Python教程077 Python编码规范</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B077-python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Sat, 07 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B077-python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/</guid>
+      <description>什么是PEP PEP 是Python增强提案(Python Enhancement Proposal)的缩写。社区通过PEP来给 Python语言建言献策，每个版本你所看到的</description>
+    </item>
+    
+    <item>
+      <title>Python教程076 自省(introspection)2</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B076-%E8%87%AA%E7%9C%81introspection2/</link>
+      <pubDate>Thu, 05 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B076-%E8%87%AA%E7%9C%81introspection2/</guid>
+      <description>生成器(generator) 生成器是调用一个生成器函数(generator function)返回的对象，多用于集合对象的迭代。 __iter__: 仅仅是一个可</description>
+    </item>
+    
+    <item>
+      <title>Python教程075 自省(introspection)1</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B075-%E8%87%AA%E7%9C%81introspection1/</link>
+      <pubDate>Tue, 03 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B075-%E8%87%AA%E7%9C%81introspection1/</guid>
+      <description>https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html 自省(introspection) 是指在运行时来判断一个对象的类型的能力。简单的说，就是用python的代码自己告诉这个对象是什么，有什么</description>
+    </item>
+    
+    <item>
+      <title>Python教程074 解包</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B074-%E8%A7%A3%E5%8C%85/</link>
+      <pubDate>Sun, 01 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B074-%E8%A7%A3%E5%8C%85/</guid>
+      <description>解包 将容器里面的元素逐个取出来放在其他地方，在英文里叫做Unpacking，这个过程就是解包。Python中的解包是自动完成的。任何可迭代对</description>
+    </item>
+    
+    <item>
+      <title>Python教程073 标注(annotations)</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B073-%E6%A0%87%E6%B3%A8annotations/</link>
+      <pubDate>Sat, 30 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B073-%E6%A0%87%E6%B3%A8annotations/</guid>
+      <description>函数标注 通过Python 3的PEP 3107引入的，函数参数和返回值都可以使用标注。用 : 类型 的形式指定函数的参数类型，用 -&amp;gt; 类型 的形式指定函数的</description>
+    </item>
+    
+    <item>
+      <title>Python教程072 格式化字符串 f-string</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B072-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-f-string/</link>
+      <pubDate>Fri, 29 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B072-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-f-string/</guid>
+      <description>f-string格式化字符串 自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格</description>
+    </item>
+    
+    <item>
+      <title>Python教程071 格式化字符串 str.format()方法</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B071-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-str.format%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Wed, 27 Nov 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B071-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-str.format%E6%96%B9%E6%B3%95/</guid>
+      <description>str.format()方法 在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语</description>
     </item>
     
     <item>

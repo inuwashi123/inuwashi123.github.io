@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程078 Pythonic代码风格编程 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="Python之禅 this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。 import this" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B078-pythonic%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BC%96%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程078 Pythonic代码风格编程" />
+<meta property="og:description" content="Python之禅 this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。 import this" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B078-pythonic%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%BC%96%E7%A8%8B/" />
+<meta property="article:published_time" content="2019-12-10T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-12-10T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程078 Pythonic代码风格编程">
+<meta itemprop="description" content="Python之禅 this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。 import this">
+
+
+<meta itemprop="datePublished" content="2019-12-10T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-12-10T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2825">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程078 Pythonic代码风格编程"/>
+<meta name="twitter:description" content="Python之禅 this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。 import this"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程078 Pythonic代码风格编程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-10 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2825 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#python之禅">Python之禅</a></li>
+</ul></li>
+<li><a href="#python之禅-tim-peters">Python之禅  Tim Peters</a></li>
+<li><a href="#优美胜于丑陋-python以编写优美的代码为目标">优美胜于丑陋（Python以编写优美的代码为目标）</a></li>
+<li><a href="#明了胜于晦涩-优美的代码应当是明了的-命名规范-风格相似">明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）</a></li>
+<li><a href="#简洁胜于复杂-优美的代码应当是简洁的-不要有复杂的内部实现">简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）</a></li>
+<li><a href="#复杂胜于凌乱-如果复杂不可避免-那代码间也不能有难懂的关系-要保持接口简洁">复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）</a></li>
+<li><a href="#扁平胜于嵌套-优美的代码应当是扁平的-不能有太多的嵌套">扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）</a></li>
+<li><a href="#间隔胜于紧凑-优美的代码有适当的间隔-不要奢望一行代码解决问题">间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）</a></li>
+<li><a href="#可读性很重要-优美的代码是可读的">可读性很重要（优美的代码是可读的）</a></li>
+<li><a href="#即便假借特例的实用性之名-也不可违背这些规则-这些规则至高无上">即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）</a></li>
+<li><a href="#不要包容所有错误-除非你确定需要这样做-精准地捕获异常-不写except-pass风格的代码">不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写except:pass风格的代码）</a></li>
+<li><a href="#当存在多种可能-不要尝试去猜测">当存在多种可能，不要尝试去猜测</a></li>
+<li><a href="#而是尽量找一种-最好是唯一一种明显的解决方案-如果不确定-就用穷举法">而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）</a></li>
+<li><a href="#虽然这并不容易-因为你不是-python-之父-这里的dutch是指guido">虽然这并不容易，因为你不是 Python 之父（这里的Dutch是指Guido）</a></li>
+<li><a href="#做也许好过不做-但不假思索就动手还不如不做-动手之前要细思量">做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）</a></li>
+<li><a href="#如果你无法向人描述你的方案-那肯定不是一个好方案-反之亦然-方案测评标准">如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）</a></li>
+<li><a href="#sum-15-maxnum-5-minnum-1-prod-120">sum = 15 maxNum = 5 minNum = 1 prod = 120</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="python之禅">Python之禅</h2>
+
+<p>this模块是一首关于python设计哲学的诗，import this后就会输出诗的内容。也叫《Python之禅》。</p>
+
+<p>import this执行后的结果如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">The</span> <span class="n">Zen</span> <span class="n">of</span> <span class="n">Python</span><span class="p">,</span> <span class="n">by</span> <span class="n">Tim</span> <span class="n">Peters</span>
+
+<span class="n">Beautiful</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">ugly</span><span class="o">.</span>
+<span class="n">Explicit</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">implicit</span><span class="o">.</span>
+<span class="n">Simple</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="nb">complex</span><span class="o">.</span>
+<span class="n">Complex</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">complicated</span><span class="o">.</span>
+<span class="n">Flat</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">nested</span><span class="o">.</span>
+<span class="n">Sparse</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">dense</span><span class="o">.</span>
+<span class="n">Readability</span> <span class="n">counts</span><span class="o">.</span>
+<span class="n">Special</span> <span class="n">cases</span> <span class="n">aren</span><span class="s1">&#39;t special enough to break the rules.</span>
+<span class="n">Although</span> <span class="n">practicality</span> <span class="n">beats</span> <span class="n">purity</span><span class="o">.</span>
+<span class="n">Errors</span> <span class="n">should</span> <span class="n">never</span> <span class="k">pass</span> <span class="n">silently</span><span class="o">.</span>
+<span class="n">Unless</span> <span class="n">explicitly</span> <span class="n">silenced</span><span class="o">.</span>
+<span class="n">In</span> <span class="n">the</span> <span class="n">face</span> <span class="n">of</span> <span class="n">ambiguity</span><span class="p">,</span> <span class="n">refuse</span> <span class="n">the</span> <span class="n">temptation</span> <span class="n">to</span> <span class="n">guess</span><span class="o">.</span>
+<span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">one</span><span class="o">--</span> <span class="ow">and</span> <span class="n">preferably</span> <span class="n">only</span> <span class="n">one</span> <span class="o">--</span><span class="n">obvious</span> <span class="n">way</span> <span class="n">to</span> <span class="n">do</span> <span class="n">it</span><span class="o">.</span>
+<span class="n">Although</span> <span class="n">that</span> <span class="n">way</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">obvious</span> <span class="n">at</span> <span class="n">first</span> <span class="n">unless</span> <span class="n">you</span><span class="s1">&#39;re Dutch.</span>
+<span class="n">Now</span> <span class="ow">is</span> <span class="n">better</span> <span class="n">than</span> <span class="n">never</span><span class="o">.</span>
+<span class="n">Although</span> <span class="n">never</span> <span class="ow">is</span> <span class="n">often</span> <span class="n">better</span> <span class="n">than</span> <span class="o">*</span><span class="n">right</span><span class="o">*</span> <span class="n">now</span><span class="o">.</span>
+<span class="n">If</span> <span class="n">the</span> <span class="n">implementation</span> <span class="ow">is</span> <span class="n">hard</span> <span class="n">to</span> <span class="n">explain</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s a bad idea.</span>
+<span class="n">If</span> <span class="n">the</span> <span class="n">implementation</span> <span class="ow">is</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">explain</span><span class="p">,</span> <span class="n">it</span> <span class="n">may</span> <span class="n">be</span> <span class="n">a</span> <span class="n">good</span> <span class="n">idea</span><span class="o">.</span>
+<span class="n">Namespaces</span> <span class="n">are</span> <span class="n">one</span> <span class="n">honking</span> <span class="n">great</span> <span class="n">idea</span> <span class="o">--</span> <span class="n">let</span><span class="s1">&#39;s do more of those!</span>
+<span class="sb">``</span>
+
+<span class="err">翻译成中文如下</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>python
+The Zen of Python, by Tim Peters</p>
+
+<h1 id="python之禅-tim-peters">Python之禅  Tim Peters</h1>
+
+<p>Beautiful is better than ugly.</p>
+
+<h1 id="优美胜于丑陋-python以编写优美的代码为目标">优美胜于丑陋（Python以编写优美的代码为目标）</h1>
+
+<p>Explicit is better than implicit.</p>
+
+<h1 id="明了胜于晦涩-优美的代码应当是明了的-命名规范-风格相似">明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）</h1>
+
+<p>Simple is better than complex.</p>
+
+<h1 id="简洁胜于复杂-优美的代码应当是简洁的-不要有复杂的内部实现">简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）</h1>
+
+<p>Complex is better than complicated.</p>
+
+<h1 id="复杂胜于凌乱-如果复杂不可避免-那代码间也不能有难懂的关系-要保持接口简洁">复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）</h1>
+
+<p>Flat is better than nested.</p>
+
+<h1 id="扁平胜于嵌套-优美的代码应当是扁平的-不能有太多的嵌套">扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）</h1>
+
+<p>Sparse is better than dense.</p>
+
+<h1 id="间隔胜于紧凑-优美的代码有适当的间隔-不要奢望一行代码解决问题">间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）</h1>
+
+<p>Readability counts.</p>
+
+<h1 id="可读性很重要-优美的代码是可读的">可读性很重要（优美的代码是可读的）</h1>
+
+<p>Special cases aren&rsquo;t special enough to break the rules.
+Although practicality beats purity.</p>
+
+<h1 id="即便假借特例的实用性之名-也不可违背这些规则-这些规则至高无上">即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）</h1>
+
+<p>Errors should never pass silently.
+Unless explicitly silenced.</p>
+
+<h1 id="不要包容所有错误-除非你确定需要这样做-精准地捕获异常-不写except-pass风格的代码">不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写except:pass风格的代码）</h1>
+
+<p>In the face of ambiguity, refuse the temptation to guess.</p>
+
+<h1 id="当存在多种可能-不要尝试去猜测">当存在多种可能，不要尝试去猜测</h1>
+
+<p>There should be one&ndash; and preferably only one &ndash;obvious way to do it.</p>
+
+<h1 id="而是尽量找一种-最好是唯一一种明显的解决方案-如果不确定-就用穷举法">而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）</h1>
+
+<p>Although that way may not be obvious at first unless you&rsquo;re Dutch.</p>
+
+<h1 id="虽然这并不容易-因为你不是-python-之父-这里的dutch是指guido">虽然这并不容易，因为你不是 Python 之父（这里的Dutch是指Guido）</h1>
+
+<p>Now is better than never.
+Although never is often better than <em>right</em> now.</p>
+
+<h1 id="做也许好过不做-但不假思索就动手还不如不做-动手之前要细思量">做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）</h1>
+
+<p>If the implementation is hard to explain, it&rsquo;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.</p>
+
+<h1 id="如果你无法向人描述你的方案-那肯定不是一个好方案-反之亦然-方案测评标准">如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）</h1>
+
+<p>Namespaces are one honking great idea &ndash; let&rsquo;s do more of those!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Pythonic比较难定义，你可以理解成符合python设计哲学的就是Pythonic。
+
+## pythonic简洁写法
+
+### 检查是否为空</pre></td></tr></table>
+</div>
+</div>
+<p>python
+s = &ldquo;hello&rdquo;
+L = [&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]
+t = (&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;)
+set = {&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;}
+d = {&lsquo;a&rsquo;:1, &lsquo;b&rsquo;:2, &lsquo;c&rsquo;:3}</p>
+
+<p>#推荐
+if s:
+    print(&ldquo;字符串s非空&rdquo;)
+if L:
+    print(&ldquo;列表L非空&rdquo;)
+if t:
+    print(&ldquo;元组t非空&rdquo;)
+if set:
+    print(&ldquo;集合set非空&rdquo;)
+if d:
+    print(&ldquo;字典d非空&rdquo;)
+#或者
+if not s:
+    print(&ldquo;字符串s空&rdquo;)
+else
+    print(&ldquo;字符串s非空&rdquo;)</p>
+
+<p>if not L:
+    print(&ldquo;列表L空&rdquo;)
+else
+    print(&ldquo;列表L非空&rdquo;)</p>
+
+<p>if not t:
+    print(&ldquo;元组t空&rdquo;)
+else
+    print(&ldquo;元组t非空&rdquo;)</p>
+
+<p>if not set:
+    print(&ldquo;集合set空&rdquo;)
+else
+    print(&ldquo;集合set非空&rdquo;)</p>
+
+<p>if not d:
+    print(&ldquo;字典d空&rdquo;)
+else
+    print(&ldquo;字典d非空&rdquo;)</p>
+
+<p>#不推荐
+if len(s) != 0:
+    print(&ldquo;字符串s非空&rdquo;)
+if len(L) != 0:
+    print(&ldquo;列表L非空&rdquo;)
+if len(t) != 0:
+    print(&ldquo;元组t非空&rdquo;)
+if len(set) != 0:
+    print(&ldquo;集合set非空&rdquo;)
+if len(d) != 0:
+    print(&ldquo;字典d非空&rdquo;)</p>
+
+<p>#不推荐
+if s != &ldquo;&rdquo;:
+    print(&ldquo;字符串s非空&rdquo;)
+if L != []:
+    print(&ldquo;列表L非空&rdquo;)
+if t != ():
+    print(&ldquo;元组t非空&rdquo;)
+if d != {}:
+    print(&ldquo;字典d非空&rdquo;)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 真值测试</pre></td></tr></table>
+</div>
+</div>
+<p>python
+s = &ldquo;hello&rdquo;
+L = [&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]
+t = (&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;)
+set = {&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;}
+d = {&lsquo;a&rsquo;:1, &lsquo;b&rsquo;:2, &lsquo;c&rsquo;:3}</p>
+
+<p>#推荐
+if s and L and t and set and d:
+    print(&lsquo;All True!&rsquo;)  #输出 All True!</p>
+
+<p>#不推荐
+if s != &ldquo; and len(L) &gt; 0 and len(t) &gt;0 and len(set) &gt; 0 and d != {}:
+    print(&lsquo;All True!&rsquo;) #输出 All True!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 字符串翻转</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+def reverse_str(s):
+    return s[::-1]</p>
+
+<p>#不推荐
+def reverse_str(s):
+    t = &ldquo;
+    for x in range(len(s)-1,-1,-1):
+        t += s[x]
+    return t</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 字符串列表的连接</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+strList = [&ldquo;Python&rdquo;, &ldquo;is&rdquo;, &ldquo;good&rdquo;]<br />
+res =  &lsquo; &lsquo;.join(strList) #Python is good</p>
+
+<p>#不推荐
+res = &ldquo;
+for s in strList:
+    res += s + &lsquo; &lsquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 链式比较</pre></td></tr></table>
+</div>
+</div>
+<p>python
+a = 3
+b = 1</p>
+
+<p>#推荐
+result = 1 &lt;= b &lt;= a &lt; 10</p>
+
+<p>#不推荐
+result = b &gt;= 1 and b &lt;= a and a &lt; 10</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 列表求和，最大值，最小值，乘积</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+numList = [1,2,3,4,5]
+sum = sum(numList)    #sum = 15
+maxNum = max(numList) #maxNum = 5
+minNum = min(numList) #minNum = 1
+from operator import mul
+prod = reduce(mul, numList, 1) #prod = 120 默认值传1以防空列表报错</p>
+
+<p>#不推荐
+sum = 0
+maxNum = -float(&lsquo;inf&rsquo;)
+minNum = float(&lsquo;inf&rsquo;)
+prod = 1
+for num in numList:
+    if num &gt; maxNum:
+        maxNum = num
+    if num &lt; minNum:
+        minNum = num
+    sum += num
+    prod *= num</p>
+
+<h1 id="sum-15-maxnum-5-minnum-1-prod-120">sum = 15 maxNum = 5 minNum = 1 prod = 120</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 列表推导式</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+l = [x*x for x in range(10) if x%3== 0]
+#结果 [0, 9, 36, 81]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"></pre></td>
+<td class="lntd">
+<pre class="chroma"></pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+l = []
+for x in range(10):
+    if x % 3 == 0:
+        l.append(x*x)
+#结果 [0, 9, 36, 81]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 字典的默认值</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+dic = {&lsquo;name&rsquo;:&lsquo;Tim&rsquo;, &lsquo;age&rsquo;:23}<br />
+dic[&lsquo;workage&rsquo;] = dic.get(&lsquo;workage&rsquo;,0) + 1
+#结果 {&lsquo;age&rsquo;: 23, &lsquo;workage&rsquo;: 1, &lsquo;name&rsquo;: &lsquo;Tim&rsquo;}</p>
+
+<p>#不推荐
+if &lsquo;workage&rsquo; in dic:
+    dic[&lsquo;workage&rsquo;] += 1
+else:
+    dic[&lsquo;workage&rsquo;] = 1
+#结果 {&lsquo;age&rsquo;: 23, &lsquo;workage&rsquo;: 1, &lsquo;name&rsquo;: &lsquo;Tim&rsquo;}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 使用zip创建键值对</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+keys = [&lsquo;Name&rsquo;, &lsquo;Sex&rsquo;, &lsquo;Age&rsquo;]
+values = [&lsquo;Tim&rsquo;, &lsquo;Male&rsquo;, 23]
+dic = dict(zip(keys, values))
+#结果{&lsquo;Age&rsquo;: 23, &lsquo;Name&rsquo;: &lsquo;Tim&rsquo;, &lsquo;Sex&rsquo;: &lsquo;Male&rsquo;}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"></pre></td>
+<td class="lntd">
+<pre class="chroma"></pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+dic = {}
+for i,e in enumerate(keys):
+    dic[e] = values[i]
+#结果{&lsquo;Age&rsquo;: 23, &lsquo;Name&rsquo;: &lsquo;Tim&rsquo;, &lsquo;Sex&rsquo;: &lsquo;Male&rsquo;}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 使用 in/not in 检查key是否存在于字典</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+if key in dictionary:
+    print(True)
+else
+    print False</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"></pre></td>
+<td class="lntd">
+<pre class="chroma"></pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+dictionary={}
+keys=dictionary.keys()
+for k in keys
+    if key==k
+        print(True)
+    break</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 使用 setdefault()初始化字典键值</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+dictionary={}
+dictionary.setdefault(&ldquo;key&rdquo;, []).append(&ldquo;list_item&rdquo;)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">字典调用setdefault方法时，首先检查key是否存在，如果存在该方法什么也不做，如果不存在setdefault就会创建该key，并把第二个参数[]作为key对应的值。</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+dictionary={}
+if &ldquo;key&rdquo; not in dictionary:
+dictionary[&ldquo;key&rdquo;] = []
+dictionary[&ldquo;key&rdquo;].append(&ldquo;list_item&rdquo;)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">尽管这段代码没有任何逻辑错误，但是我们可以使用setdefault来实现更Pyhonic的写法：
+
+### 使用defaultdict()初始化字典
+
+初始化一个字典时，如果初始情况下希望所有key对应的值都是某个默认的初始值，比如有一批用户的信用积分都初始为100，现在想给a用户增加10分</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+from collections import defaultdict
+d = defaultdict(lambda: 100)
+d[&lsquo;a&rsquo;] += 10</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"></pre></td>
+<td class="lntd">
+<pre class="chroma"></pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+d = {}
+if &lsquo;a&rsquo; not in d:
+    d[&lsquo;a&rsquo;] = 100
+d[&lsquo;a&rsquo;] += 10]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">### 使用iteritems()迭代大数据
+
+迭代大数据字典时，如果是使用items()方法，那么在迭代之前，迭代器迭代前需要把数据完整地加载到内存，这种方式不仅处理非常慢而且浪费内存.</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#不推荐
+d = {i: i * 2 for i in xrange(10000000)}
+for key, value in d.items():
+    print(&ldquo;{0} = {1}&rdquo;.format(key, value))</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">而使用 iteritem()方法替换items() ，最终实现的效果一样，但是消耗的内存降50%，为什么差距那么大呢？因为items()返回的是一个list，list在迭代的时候会预先把所有的元素加载到内存,而iteritem() 返回的一个迭代器(iterators)，迭代器在迭代的时候，迭代元素逐个的生成.</pre></td></tr></table>
+</div>
+</div>
+<p>python
+#推荐
+d = {i: i * 2 for i in xrange(10000000)}
+for key, value in d.iteritem():
+    print(&ldquo;{0} = {1}&rdquo;.format(key, value))
+```</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B077-python%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/">
+            <span class="next-text nav-default">Python教程077 Python编码规范</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

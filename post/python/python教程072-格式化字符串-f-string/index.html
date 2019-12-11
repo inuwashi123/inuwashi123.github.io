@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程072 格式化字符串 f-string - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="f-string格式化字符串 自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B072-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-f-string/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程072 格式化字符串 f-string" />
+<meta property="og:description" content="f-string格式化字符串 自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B072-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-f-string/" />
+<meta property="article:published_time" content="2019-11-29T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-29T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程072 格式化字符串 f-string">
+<meta itemprop="description" content="f-string格式化字符串 自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格">
+
+
+<meta itemprop="datePublished" content="2019-11-29T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-29T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="3363">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程072 格式化字符串 f-string"/>
+<meta name="twitter:description" content="f-string格式化字符串 自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程072 格式化字符串 f-string</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 3363 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#f-string格式化字符串">f-string格式化字符串</a>
+<ul>
+<li><a href="#f-string语法">f-string语法</a></li>
+<li><a href="#注意事项">注意事项</a>
+<ul>
+<li><a href="#引号">引号</a></li>
+<li><a href="#字典">字典</a></li>
+<li><a href="#大括号">大括号</a></li>
+<li><a href="#反斜杠">反斜杠</a></li>
+<li><a href="#lambda表达式">lambda表达式</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="f-string格式化字符串">f-string格式化字符串</h2>
+
+<p>自Python 3.6开始加入标准库。您可以在PEP 498中阅读所有内容。f-string,一种改进Python格式字符串的新方法。与其他格式化方式相比，它们不仅更易读，更简洁，不易出错，而且速度更快！</p>
+
+<p>f-string在形式上是以 f 或 F 修饰符引领的字符串（f&rsquo;xxx&rsquo; 或 F&rsquo;xxx&rsquo;），以大括号 {} 标明被替换的字段；f-string在本质上并不是字符串常量，而是一个在运行时运算求值的表达式。</p>
+
+<p>f-string在功能方面不逊于传统的%-formatting语句和str.format()函数，同时性能又优于二者，且使用起来也更加简洁明了，因此对于Python3.6及以后的版本，推荐使用f-string进行字符串格式化。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">44</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;Hello, {name}. You are {age}.&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># 输出Hello, Tom. You are 44.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用大写字母F也是有效的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Eric&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">74</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">F</span><span class="s2">&#34;Hello, {name}. You are {age}.&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># 输出Hello, Eric. You are 74.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于f-string是在运行时进行渲染的，因此可以将任何有效的Python表达式放入其中。这可以让你做一些漂亮的事情。
+你可以做一些非常简单的事情，就像这样：
+f&rdquo;{2 * 37}&rdquo; #输出 74</p>
+
+<p>你可以调用函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Eric&#34;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;{name.lower()} is funny.&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># 输出eric is funny.</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="f-string语法">f-string语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="s2">&#34;{{&#34;</span> <span class="o">|</span> <span class="s2">&#34;}}&#34;</span> <span class="o">|</span> <span class="s2">&#34;{&#34;</span> <span class="n">f_expression</span> <span class="p">[</span><span class="s2">&#34;!&#34;</span> <span class="n">conversion</span><span class="p">]</span> <span class="p">[</span><span class="s2">&#34;:&#34;</span> <span class="n">format_spec</span><span class="p">]</span> <span class="s2">&#34;}&#34;</span><span class="p">)</span><span class="o">*</span>  
+<span class="n">conversion</span>        <span class="p">::</span><span class="o">=</span>  <span class="s2">&#34;s&#34;</span> <span class="o">|</span> <span class="s2">&#34;r&#34;</span> <span class="o">|</span> <span class="s2">&#34;a&#34;</span>  
+<span class="n">format_spec</span>       <span class="p">::</span><span class="o">=</span>  <span class="p">(</span><span class="n">literal_char</span> <span class="o">|</span> <span class="n">NULL</span> <span class="o">|</span> <span class="n">replacement_field</span><span class="p">)</span><span class="o">*</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>花括号外部的字符串部分按字面处理，除了任何两个的花括号&rsquo;{{&lsquo;或&rsquo;}}&lsquo;替换为相应的单个花括号。单个开口花括号&rsquo;{&lsquo;标记替换字段，以Python表达式开头。在表达式之后，可能存在由感叹号&rsquo;!&lsquo;引入的转换字段。还可以附加格式说明符，由冒号&rsquo;：&rsquo;引入。替换字段以右侧括号&rsquo;}&lsquo;结尾。</p>
+
+<p>格式化字符串文字中的表达式被视为由括号括起来的常规Python表达式，但有一些例外。不允许使用空表达式，并且lambda表达式必须由显式括号括起来。表达式可以包含换行符（例如，在三引号字符串中），但它们不能包含注释。</p>
+
+<p>如果指定了转换，则在格式化之前转换计算表达式的结果。转换&rsquo;!s&rsquo;在结果上调用str()，&rsquo;!r&rsquo;调用repr()，&rsquo;!a&rsquo;调用ascii()。然后使用format()协议格式化结果。</p>
+
+<p>format_spec语法(同str.format()方法一样)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{[[</span><span class="n">fill</span><span class="p">]</span><span class="n">align</span><span class="p">][</span><span class="n">sign</span><span class="p">][</span><span class="c1">#][0][width][,][.precision][type]}</span>
+
+<span class="n">fill</span>  <span class="err">可选，可以是任何字符</span>
+<span class="n">align</span> <span class="err">可选，是对齐方式，可供选择的值有：</span>
+     <span class="s1">&#39;&lt;&#39;</span> <span class="err">左对齐</span>
+     <span class="s1">&#39;&gt;&#39;</span> <span class="err">右对齐</span>
+     <span class="s1">&#39;=&#39;</span> <span class="err">只对数字类型有效</span>
+     <span class="s1">&#39;^&#39;</span><span class="err">居中对齐</span>
+<span class="n">sign</span>  <span class="err">可选，是对齐方式，可供选择的值有：</span>
+     <span class="s1">&#39;+&#39;</span> <span class="err">表示正负数字都应使用符号。正数前加正号，负数前加负号；</span>
+     <span class="s1">&#39;-&#39;</span> <span class="err">表示符号只能用于负数（这是默认行为）。正数前无符号，负数前加负号；</span>
+     <span class="s1">&#39; &#39;</span> <span class="err">正数前加空格，负数前加负号；</span>
+<span class="c1">#    可选，用于转换。 对于不同类型，替代形式的定义不同。 此选项仅对integer，float，complex和Decimal类型有效。 对于整数，当使用二进制，八进制或十六进制输出时，此选项将前缀“0b”，“0o”或“0x”添加到输出值。 对于浮点数，复数和十进制，备用形式会导致转换结果始终包含小数点字符，即使后面没有数字也是如此。 通常，只有在跟随数字的情况下，这些转换的结果中才会出现小数点字符。 此外，对于“g”和“G”转换，不会从结果中删除尾随零。</span>
+<span class="n">width</span>    <span class="err">可选，数字宽度，表示总共输出多少位数字</span>
+<span class="o">.</span><span class="n">precision</span>    <span class="err">可选，小数点后保留的位数，进行四舍五入计算。</span>
+<span class="n">typecode</span>     <span class="err">可选</span>
+  <span class="n">s</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__str__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">r</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__repr__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">c</span> <span class="p">:</span> <span class="err">如果是整数的话，将数字转换成其</span><span class="n">unicode对应的值</span><span class="err">，</span><span class="mi">10</span><span class="err">进制范围为</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1114111</span><span class="p">(</span><span class="n">py27则只支持0</span><span class="o">-</span><span class="mi">255</span><span class="p">)</span><span class="err">；如果是字符的话，将字符添加到指定位置</span>
+  <span class="n">o</span> <span class="p">:</span> <span class="err">将整数转换成八进制表示，并将其格式化到指定位置</span>
+  <span class="n">x</span> <span class="p">:</span> <span class="err">将整数转换成十六进制表示，并将其格式化到指定位置</span>
+  <span class="n">d</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成十进制表示，并将其格式化到指定位置</span>
+  <span class="n">e</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（小写</span><span class="n">e</span><span class="err">）</span>
+  <span class="n">E</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（大写</span><span class="n">E</span><span class="err">）</span>
+  <span class="n">f</span> <span class="p">:</span>  <span class="err">将整数、浮点数转换成浮点数表示，并将其格式化到指定位置（默认保留小数点后</span><span class="mi">6</span><span class="err">位）</span>
+  <span class="n">F</span> <span class="p">:</span> <span class="err">同上</span>
+  <span class="n">g</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">e</span><span class="err">；）</span>
+  <span class="n">G</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">E</span><span class="err">；）</span>
+  <span class="o">%</span> <span class="p">:</span> <span class="err">百分比。将数字乘以</span><span class="mi">100</span><span class="err">，并以固定格式（“</span><span class="n">f</span><span class="err">”）显示，后跟百分号。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>格式化字符串文字的一些示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Fred&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&#34;He said his name is {name!r}.&#34;</span>
+<span class="s2">&#34;He said his name is &#39;Fred&#39;.&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&#34;He said his name is {repr(name)}.&#34;</span>  <span class="c1"># repr()等同于!r</span>
+<span class="s2">&#34;He said his name is &#39;Fred&#39;.&#34;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">value</span> <span class="o">=</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&#34;12.34567&#34;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&#34;result: {value:{width}.{precision}}&#34;</span>  <span class="c1"># 嵌套字段</span>
+<span class="s1">&#39;result:      12.35&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2017</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&#34;{today:%B </span><span class="si">%d</span><span class="s2">, %Y}&#34;</span>  <span class="c1"># 利用date的format specifier</span>
+<span class="s1">&#39;January 27, 2017&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="s2">&#34;{number:#0x}&#34;</span>  <span class="c1"># 利用整数的format specifier</span>
+<span class="s1">&#39;0x400&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你甚至可以使用带有f-string的类创建对象。想象一下你有以下类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Comedian</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="n">first_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">last_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&#34;{self.first_name} {self.last_name} is {self.age}.&#34;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&#34;{self.first_name} {self.last_name} is {self.age}. Surprise!&#34;</span>
+
+<span class="n">new_comedian</span> <span class="o">=</span> <span class="n">Comedian</span><span class="p">(</span><span class="s2">&#34;Eric&#34;</span><span class="p">,</span> <span class="s2">&#34;Idle&#34;</span><span class="p">,</span> <span class="s2">&#34;74&#34;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;{new_comedian}&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c1">#输出Eric Idle is 74.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>__str <strong>()和</strong>repr <strong>()方法处理对象如何呈现为字符串，因此您需要确保在类定义中包含至少一个这些方法。如果必须选择一个，请使用</strong>repr <strong>()，因为它可以代替</strong>str __()。
+__str <strong>()返回的字符串是对象的非正式字符串表示，应该可读。</strong>repr <strong>()返回的字符串是官方表示，应该是明确的。调用str()和repr()比直接使用</strong>str <strong>()和</strong>repr __()更好。</p>
+
+<p>默认情况下，f字符串将使用__str <strong>()，但如果包含转换标志!r，则可以确保它们使用</strong>repr __()：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="s2">&#34;{new_comedian}&#34;</span>
+<span class="c1">#输出 Eric Idle is 74.</span>
+<span class="n">f</span><span class="s2">&#34;{new_comedian!r}&#34;</span>
+<span class="c1">#输出 Eric Idle is 74. Surprise!</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>多行f-string</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="s2">&#34;Hi {name}. &#34;</span>
+        <span class="n">f</span><span class="s2">&#34;You are a {profession}. &#34;</span>
+        <span class="n">f</span><span class="s2">&#34;You were in {affiliation}.&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>  <span class="c1">#输出Hi Eric. You are a comedian. You were in Monty Python.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>但请记住，您没必要将f放在多行字符串的每一行的前面。以下代码也能work：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="s2">&#34;Hi {name}. &#34;</span>
+        <span class="s2">&#34;You are a {profession}. &#34;</span>
+        <span class="s2">&#34;You were in {affiliation}.&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>  <span class="c1">#输出Hi Eric. You are a {profession}. You were in {affiliation}.</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="注意事项">注意事项</h3>
+
+<h4 id="引号">引号</h4>
+
+<p>您可以在表达式中使用各种类型的引号。只要确保在表达式中使用的f-string外部没有使用相同类型的引号即可。
+以下写法都是正确的:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="s2">&#34;{&#39;Eric Idle&#39;}&#34;</span>  <span class="c1">#输出Eric Idle</span>
+<span class="n">f</span><span class="s2">&#34;&#39;Eric Idle&#39;&#34;</span>    <span class="c1">#输出&#39;Eric Idle&#39;</span>
+<span class="n">f</span><span class="s1">&#39;{&#34;Eric Idle&#34;}&#39;</span>  <span class="c1">#输出Eric Idle</span>
+<span class="n">f</span><span class="s1">&#39;&#34;Eric Idle&#34;&#39;</span>    <span class="c1">#输出&#34;Eric Idle&#34;</span>
+<span class="n">f</span><span class="s2">&#34;&#34;&#34;Eric Idle&#34;&#34;&#34;</span>  <span class="c1">#输出Eric Idle</span>
+<span class="n">f</span><span class="s1">&#39;&#39;&#39;Eric Idle&#39;&#39;&#39;</span>  <span class="c1">#输出Eric Idle</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="字典">字典</h4>
+
+<p>说到引号，注意你在使用字典的时候。如果要为字典的键使用单引号，请记住确保对包含键的f-string使用双引号。
+以下代码是有效的:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">comedian</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric Idle&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">74</span><span class="p">}</span>
+<span class="n">f</span><span class="s2">&#34;The comedian is {comedian[&#39;name&#39;]}, aged {comedian[&#39;age&#39;]}.&#34;</span>  <span class="c1">#输出The comedian is Eric Idle, aged 74.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>但是，以下代码就是一个语法错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="s1">&#39;The comedian is {comedian[&#39;</span><span class="n">name</span><span class="s1">&#39;]}, aged {comedian[&#39;</span><span class="n">age</span><span class="s1">&#39;]}.&#39;</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;ipython-input-40-cd7d8a3db23b&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">f</span><span class="s1">&#39;The comedian is {comedian[&#39;</span><span class="n">name</span><span class="s1">&#39;]}, aged {comedian[&#39;</span><span class="n">age</span><span class="s1">&#39;]}.&#39;</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果您在字典键周围使用与在f-string外部使用相同类型的引号，则第一个字典键开头的引号将被解释为字符串的结尾。</p>
+
+<h4 id="大括号">大括号</h4>
+
+<p>为了使字符串出现大括号，您必须使用双大括号：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">F</span><span class="s2">&#34;Hello, {name}. &#34;</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">F</span><span class="s2">&#34;Hello, {{name}}. &#34;</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">F</span><span class="s2">&#34;Hello, {{{name}}}. &#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="c1">#输出Hello, Tom.        #替换变量name的值</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span> <span class="c1">#输出Hello, {name}.     #两个{{替换为{，{失去应有的替换作用，name作为字符串打印出来。</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span> <span class="c1">#输出Hello, {Tom}.      #前两个{{替换为{，第三个{将变量name替换为Tom，所以结果是{Tom}。</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="反斜杠">反斜杠</h4>
+
+<p>正如您之前所看到的，您可以在f-string的字符串部分使用反斜杠转义符。但是，您不能使用反斜杠在f-string的表达式部分中进行转义：</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">I am {&#39;Eric Idle&#39;}</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">)</span>    <span class="c1">#输出&#34;I am Eric Idle&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">I am {</span><span class="se">\&#39;</span><span class="s2">Eric Idle</span><span class="se">\&#39;</span><span class="s2">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">)</span>  <span class="c1">#报错</span>
+  <span class="n">File</span> <span class="s2">&#34;main.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;</span><span class="se">\&#34;</span><span class="s2">I am {</span><span class="se">\&#39;</span><span class="s2">Eric Idle</span><span class="se">\&#39;</span><span class="s2">}</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">)</span>
+         <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">f</span><span class="o">-</span><span class="n">string</span> <span class="n">expression</span> <span class="n">part</span> <span class="n">cannot</span> <span class="n">include</span> <span class="n">a</span> <span class="n">backslash</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="lambda表达式">lambda表达式</h4>
+
+<p>如果您需要使用lambda表达式，请记住，lambda表达式必须由显式括号括起来。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="s2">&#34;{lambda x: x * 37(2)}&#34;</span>
+  <span class="n">File</span> <span class="s2">&#34;&lt;fstring&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">)</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">unexpected</span> <span class="n">EOF</span> <span class="k">while</span> <span class="n">parsing</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>您可以通过将您的lambda嵌套在圆括号中来解决此问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="s2">&#34;{(lambda x: x * 37)(2)}&#34;</span>
+<span class="mi">74</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B073-%E6%A0%87%E6%B3%A8annotations/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程073 标注(annotations)</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B071-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-str.format%E6%96%B9%E6%B3%95/">
+            <span class="next-text nav-default">Python教程071 格式化字符串 str.format()方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

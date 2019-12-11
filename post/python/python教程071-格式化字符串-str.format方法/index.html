@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python教程071 格式化字符串 str.format()方法 - None - 记录在日本从事IT的所感所想。</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="inuwashi" /><meta name="description" content="str.format()方法 在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语" /><meta name="keywords" content="日本IT, 程序开发, 运维保守" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B071-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-str.format%E6%96%B9%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python教程071 格式化字符串 str.format()方法" />
+<meta property="og:description" content="str.format()方法 在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B071-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-str.format%E6%96%B9%E6%B3%95/" />
+<meta property="article:published_time" content="2019-11-27T09:09:44+09:00" />
+<meta property="article:modified_time" content="2019-11-27T09:09:44+09:00" />
+<meta itemprop="name" content="Python教程071 格式化字符串 str.format()方法">
+<meta itemprop="description" content="str.format()方法 在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语">
+
+
+<meta itemprop="datePublished" content="2019-11-27T09:09:44&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-27T09:09:44&#43;09:00" />
+<meta itemprop="wordCount" content="2961">
+
+
+
+<meta itemprop="keywords" content="python教程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python教程071 格式化字符串 str.format()方法"/>
+<meta name="twitter:description" content="str.format()方法 在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">None</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">None</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python教程071 格式化字符串 str.format()方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-27 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 2961 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#str-format-方法">str.format()方法</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="str-format-方法">str.format()方法</h2>
+
+<p>在Python 2.6中引入的。str.format()是对%-formatting的改进。它使用正常的函数调用语法，并且可以通过对要转换为字符串的对象的__format __()方法进行扩展。</p>
+
+<p>比如下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Hello, {0}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>  <span class="c1">#输出Hello, Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>&ldquo;Hello, {0}.&ldquo;为我们的模板。{0}为格式符，表示匹配format方法的第一项。变量name的值Tom为替换{0}的真实值。{0}代表了格式化操作。</p>
+
+<p>整个&rdquo;Hello, {0}.&ldquo;.format(name)实际上构成一个字符串表达式。我们可以像一个正常的字符串那样，将它赋值给某个变量。比如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, {0}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1">#输出Hello, Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用str.format()，替换字段用大括号标记：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span> <span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="p">[</span><span class="err">!</span> <span class="n">conversion</span><span class="p">]</span> <span class="p">[:</span> <span class="n">format_spec</span><span class="p">]</span> <span class="p">}</span>  
+
+<span class="n">field_name</span>        <span class="p">::</span><span class="o">=</span>  <span class="n">arg_name</span> <span class="p">(</span><span class="s2">&#34;.&#34;</span> <span class="n">attribute_name</span> <span class="o">|</span> <span class="s2">&#34;[&#34;</span> <span class="n">element_index</span> <span class="s2">&#34;]&#34;</span><span class="p">)</span><span class="o">*</span>  
+<span class="n">arg_name</span>          <span class="p">::</span><span class="o">=</span>  <span class="p">[</span><span class="n">identifier</span> <span class="o">|</span> <span class="n">digit</span><span class="o">+</span><span class="p">]</span>  
+<span class="n">attribute_name</span>    <span class="p">::</span><span class="o">=</span>  <span class="n">identifier</span>  
+<span class="n">element_index</span>     <span class="p">::</span><span class="o">=</span>  <span class="n">digit</span><span class="o">+</span> <span class="o">|</span> <span class="n">index_string</span>  
+<span class="n">index_string</span>      <span class="p">::</span><span class="o">=</span>  <span class="o">&lt;</span><span class="nb">any</span> <span class="n">source</span> <span class="n">character</span> <span class="k">except</span> <span class="s2">&#34;]  &#34;</span><span class="o">&gt;</span> <span class="o">+</span>  
+<span class="n">conversion</span>        <span class="p">::</span><span class="o">=</span>  <span class="s2">&#34;r&#34;</span> <span class="o">|</span> <span class="s2">&#34;s&#34;</span> <span class="o">|</span> <span class="s2">&#34;a&#34;</span>
+
+<span class="n">field_name指定要格式化的对象</span><span class="err">。</span><span class="n">field_name本身以arg_name开头</span><span class="err">，</span><span class="n">arg_name是数字或关键字</span><span class="err">。</span> <span class="err">如果它是一个数字，它引用一个位置参数，如果它是一个关键字，它引用一个命名关键字参数。</span> <span class="err">如果格式字符串中的数字</span><span class="n">arg_names是序列0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="err">，</span><span class="o">...</span><span class="err">，它们都可以省略，数字</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="err">，</span><span class="o">...</span><span class="err">将按顺序自动插入。</span> <span class="n">arg_name后面可以跟任意数量的索引或属性表达式</span><span class="err">。</span> <span class="err">“</span><span class="o">.</span><span class="n">name</span><span class="err">”形式的表达式使用</span><span class="nb">getattr</span><span class="err">（）选择命名属性，而“</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="err">”形式的表达式使用</span><span class="n">__getitem</span> <span class="n">__</span><span class="err">（）执行索引查找。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34;First, thou shalt count to {0}&#34;</span>  <span class="c1"># 引用第一个位置参数</span>
+<span class="s2">&#34;Bring me a {}&#34;</span>                   <span class="c1"># 隐式引用第一个位置参数</span>
+<span class="s2">&#34;From {} to {}&#34;</span>                   <span class="c1"># 相当于&#34;From {0} to {1}&#34;</span>
+<span class="s2">&#34;My quest is {name}&#34;</span>              <span class="c1"># 引用关键字参数&#39;name&#39;</span>
+<span class="s2">&#34;Weight in tons {0.weight}&#34;</span>       <span class="c1"># 第一个位置参数的&#39;weight&#39;属性</span>
+<span class="s2">&#34;Units destroyed: {players[0]}&#34;</span>   <span class="c1"># 关键字参数&#39;players&#39;的第一个元素。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Tom&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">56</span>
+<span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;Hello, {}. You are {}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#输出Hello, Tom. You are 56.</span>
+
+<span class="c1">#通过参数位置访问</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s2">&#34;Hello, {1}. You are {0}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span> <span class="c1">#输出Hello, Tom. You are 56.</span>
+
+<span class="c1">#通过参数名访问</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="s2">&#34;Hello, {name}. You are {age}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">66</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;Hank&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span> <span class="c1">#输出Hello, Hank. You are 66.</span>
+
+<span class="c1">#通过参数的属性访问</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="o">-</span><span class="mi">5j</span>
+<span class="n">str4</span> <span class="o">=</span><span class="s2">&#34;The complex number {0} is formed from the real part {0.real} and the imaginary part {0.imag}.)&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str4</span><span class="p">)</span> <span class="c1">#输出The complex number (3-5j) is formed from the real part 3.0 and the imaginary part -5.0.)</span>
+
+<span class="c1">#通过参数的数据项访问 元组</span>
+<span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">str5</span> <span class="o">=</span> <span class="s1">&#39;X: {0[0]};  Y: {0[1]}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str5</span><span class="p">)</span> <span class="c1">#输出X: 3;  Y: 5</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span> <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">56.</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">Tom</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">56.</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">Hank</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">66.</span>
+<span class="n">The</span> <span class="nb">complex</span> <span class="n">number</span> <span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">5j</span><span class="p">)</span> <span class="ow">is</span> <span class="n">formed</span> <span class="kn">from</span> <span class="nn">the</span> <span class="nn">real</span> <span class="nn">part</span> <span class="mf">3.0</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">imaginary</span> <span class="n">part</span> <span class="o">-</span><span class="mf">5.0</span><span class="o">.</span><span class="p">)</span>
+<span class="n">X</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>  <span class="n">Y</span><span class="p">:</span> <span class="mi">5</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>conversion指定在格式化之前的类型强制。通常，格式化的工作是由值本身的<strong>format</strong>()方法完成的。但是，在某些情况下，需要强制将类型格式化为字符串，从而覆盖其自己的格式化定义。通过在调用<strong>format</strong>()之前将值转换为字符串，可以绕过正常的格式化逻辑。当前支持三个转换标志：“!s&rsquo;调用str()，&rsquo;!r&rsquo;调用repr()和&rsquo;!a&rsquo;一个调用ascii()。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;I am Tom.&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>  <span class="c1">#输出I am Tom. （没有引号）</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="c1">#输出&#39;I am Tom.&#39;. （有引号）</span>
+<span class="n">test</span> <span class="o">=</span> <span class="s2">&#34;repr() shows quotes: {!r}; str() doesn&#39;t: {!s}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>  <span class="c1">#输出repr() shows quotes: &#39;I am Tom.&#39;; str() doesn&#39;t: I am Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">I</span> <span class="n">am</span> <span class="n">Tom</span><span class="o">.</span>
+<span class="s1">&#39;I am Tom.&#39;</span>
+<span class="nb">repr</span><span class="p">()</span> <span class="n">shows</span> <span class="n">quotes</span><span class="p">:</span> <span class="s1">&#39;I am Tom.&#39;</span><span class="p">;</span> <span class="nb">str</span><span class="p">()</span> <span class="n">doesn</span><span class="s1">&#39;t: I am Tom.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>format_spec语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{[[</span><span class="n">fill</span><span class="p">]</span><span class="n">align</span><span class="p">][</span><span class="n">sign</span><span class="p">][</span><span class="c1">#][0][width][,][.precision][type]}  </span>
+<span class="n">fill</span>  <span class="err">可选，可以是任何字符</span>  
+<span class="n">align</span> <span class="err">可选，是对齐方式，可供选择的值有：</span>  
+     <span class="s1">&#39;&lt;&#39;</span> <span class="err">左对齐</span>  
+     <span class="s1">&#39;&gt;&#39;</span> <span class="err">右对齐</span>  
+     <span class="s1">&#39;=&#39;</span> <span class="err">只对数字类型有效</span>  
+     <span class="s1">&#39;^&#39;</span><span class="err">居中对齐</span>
+<span class="n">sign</span>  <span class="err">可选，是对齐方式，可供选择的值有：</span>
+     <span class="s1">&#39;+&#39;</span> <span class="err">表示正负数字都应使用符号。正数前加正号，负数前加负号；</span>
+     <span class="s1">&#39;-&#39;</span> <span class="err">表示符号只能用于负数（这是默认行为）。正数前无符号，负数前加负号；</span>
+     <span class="s1">&#39; &#39;</span> <span class="err">正数前加空格，负数前加负号；</span>
+<span class="c1">#    可选，用于转换。 对于不同类型，替代形式的定义不同。 此选项仅对integer，float，complex和Decimal类型有效。 对于整数，当使用二进制，八进制或十六进制输出时，此选项将前缀“0b”，“0o”或“0x”添加到输出值。 对于浮点数，复数和十进制，备用形式会导致转换结果始终包含小数点字符，即使后面没有数字也是如此。 通常，只有在跟随数字的情况下，这些转换的结果中才会出现小数点字符。 此外，对于“g”和“G”转换，不会从结果中删除尾随零。</span>
+<span class="n">width</span>    <span class="err">可选，数字宽度，表示总共输出多少位数字</span>
+<span class="o">.</span><span class="n">precision</span>    <span class="err">可选，小数点后保留的位数，进行四舍五入计算。</span>
+<span class="n">typecode</span>     <span class="err">可选</span>
+  <span class="n">s</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__str__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">r</span> <span class="p">:</span> <span class="err">获取传入对象的</span><span class="n">__repr__方法的返回值</span><span class="err">，并将其格式化到指定位置</span>
+  <span class="n">c</span> <span class="p">:</span> <span class="err">如果是整数的话，将数字转换成其</span><span class="n">unicode对应的值</span><span class="err">，</span><span class="mi">10</span><span class="err">进制范围为</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1114111</span><span class="p">(</span><span class="n">py27则只支持0</span><span class="o">-</span><span class="mi">255</span><span class="p">)</span><span class="err">；如果是字符的话，将字符添加到指定位置</span>
+  <span class="n">o</span> <span class="p">:</span> <span class="err">将整数转换成八进制表示，并将其格式化到指定位置</span>
+  <span class="n">x</span> <span class="p">:</span> <span class="err">将整数转换成十六进制表示，并将其格式化到指定位置</span>
+  <span class="n">d</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成十进制表示，并将其格式化到指定位置</span>
+  <span class="n">e</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（小写</span><span class="n">e</span><span class="err">）</span>
+  <span class="n">E</span> <span class="p">:</span> <span class="err">将整数、浮点数转换成科学计数法，并将其格式化到指定位置（大写</span><span class="n">E</span><span class="err">）</span>
+  <span class="n">f</span> <span class="p">:</span>  <span class="err">将整数、浮点数转换成浮点数表示，并将其格式化到指定位置（默认保留小数点后</span><span class="mi">6</span><span class="err">位）</span>
+  <span class="n">F</span> <span class="p">:</span> <span class="err">同上</span>
+  <span class="n">g</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">e</span><span class="err">；）</span>
+  <span class="n">G</span> <span class="p">:</span> <span class="err">自动调整将整数、浮点数转换成浮点型或科学计数法表示（超过</span><span class="mi">6</span><span class="err">位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是</span><span class="n">E</span><span class="err">；）</span>
+  <span class="o">%</span> <span class="p">:</span> <span class="err">百分比。将数字乘以</span><span class="mi">100</span><span class="err">，并以固定格式（“</span><span class="n">f</span><span class="err">”）显示，后跟百分号。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 {[[fill]align]}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span><span class="s1">&#39;{:&lt;30}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;left aligned&#39;</span><span class="p">)</span>   <span class="c1">#左对齐</span>
+<span class="s1">&#39;left aligned                  &#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:&gt;30}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;right aligned&#39;</span><span class="p">)</span> <span class="c1">#右对齐</span>
+<span class="s1">&#39;                 right aligned&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:^30}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">)</span>      <span class="c1">#居中对齐</span>
+<span class="s1">&#39;           centered           &#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:*^30}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;centered&#39;</span><span class="p">)</span>     <span class="c1">#居中对齐，不足的部分用*填充</span>
+<span class="s1">&#39;***********centered***********&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 {[fill][sign][type]}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:+f}; {:+f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.14</span><span class="p">)</span>  <span class="c1"># + 表示正负数字都应使用符号。正数前加正号，负数前加负号；</span>
+<span class="s1">&#39;+3.140000; -3.140000&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{: f}; {: f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.14</span><span class="p">)</span>  <span class="c1"># 空格 表示正数前加空格，负数前加负号；</span>
+<span class="s1">&#39; 3.140000; -3.140000&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:-f}; {:-f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.14</span><span class="p">)</span>  <span class="c1"># - 表示符号只能用于负数（这是默认行为）。正数前无符号，负数前加负号；等同于&#39;{:f}; {:f}&#39;</span>
+<span class="s1">&#39;3.140000; -3.140000&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:f}; {:f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="s1">&#39;3.140000; -3.140000&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 {:[type]}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="s2">&#34;int: {0:d};  hex: {0:x};  oct: {0:o};  bin: {0:b}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="s1">&#39;int: 42;  hex: 2a;  oct: 52;  bin: 101010&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># with 0x, 0o, or 0b as prefix:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">&#34;int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="s1">&#39;int: 42;  hex: 0x2a;  oct: 0o52;  bin: 0b101010&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 {:,}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;{:,}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1234567890</span><span class="p">)</span>
+<span class="s1">&#39;1,234,567,890&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 {:[type]%}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">points</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;Correct answers: {:.2%}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">points</span><span class="o">/</span><span class="n">total</span><span class="p">)</span>
+<span class="s1">&#39;Correct answers: 86.36%&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>示例 两种方式引用字典的元素</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Eric&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">74</span><span class="p">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s2">&#34;Hello, {name}. You are {age}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">age</span><span class="o">=</span><span class="n">person</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span><span class="s2">&#34;Hello, {name}. You are {age}.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">person</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 输出Hello, Eric. You are 74.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 输出Hello, Eric. You are 74.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>为什么str.format()并不好<br />
+使用str.format()的代码比使用%-formatting的代码更易读，但当处理多个参数和更长的字符串时，str.format()仍然可能非常冗长。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&#34;Eric&#34;</span>
+<span class="n">last_name</span> <span class="o">=</span> <span class="s2">&#34;Idle&#34;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">74</span>
+<span class="n">profession</span> <span class="o">=</span> <span class="s2">&#34;comedian&#34;</span>
+<span class="n">affiliation</span> <span class="o">=</span> <span class="s2">&#34;Monty Python&#34;</span>
+<span class="k">print</span><span class="p">((</span><span class="s2">&#34;Hello, {first_name} {last_name}. You are {age}. &#34;</span> <span class="o">+</span>
+       <span class="s2">&#34;You are a {profession}. You were a member of {affiliation}.&#34;</span><span class="p">)</span> \
+       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> \
+               <span class="n">profession</span><span class="o">=</span><span class="n">profession</span><span class="p">,</span> <span class="n">affiliation</span><span class="o">=</span><span class="n">affiliation</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行以上程序会输出如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span> <span class="n">Eric</span> <span class="n">Idle</span><span class="o">.</span> <span class="n">You</span> <span class="n">are</span> <span class="mf">74.</span> <span class="n">You</span> <span class="n">are</span> <span class="n">a</span> <span class="n">comedian</span><span class="o">.</span> <span class="n">You</span> <span class="n">were</span> <span class="n">a</span> <span class="n">member</span> <span class="n">of</span> <span class="n">Monty</span> <span class="n">Python</span><span class="o">.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果你有想要传递给字典中的.format()的变量，那么你可以用.format（** some_dict）解压缩它，并通过字符串中的键引用这些值，但是必须有更好的的方法。</p>
+
+<hr />
+
+<p>转载请注明本网址。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python%E6%95%99%E7%A8%8B/">python教程</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python/python%E6%95%99%E7%A8%8B072-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-f-string/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python教程072 格式化字符串 f-string</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/python/python%E6%95%99%E7%A8%8B070-%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%99%BE%E5%88%86%E5%8F%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+            <span class="next-text nav-default">Python教程070 格式化字符串 %(百分号格式化字符串)</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/inuwashi123" class="iconfont icon-github" title="github"></a>
+  <a href="https://inuwashi123.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">inuwashi</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
