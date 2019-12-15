@@ -6,10 +6,37 @@
     <description>Recent content in python on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Dec 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python教程081 上下文管理器(context manager)</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B081-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8context-manager/</link>
+      <pubDate>Sat, 14 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B081-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8context-manager/</guid>
+      <description>上下文管理协议(context management protocol) 上下文管理器(context manager) 上下文管理协议(context management protocol): 包含enter()和exit()方法。 上下</description>
+    </item>
+    
+    <item>
+      <title>Python教程080 读写文件</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B080-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Fri, 13 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B080-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</guid>
+      <description>open()函数打开一个文件，创建一个file对象，相关的方法才可以调用它进行读写。如果打开失败，返回OSError异常。函数参数如下 open(file, mode=&amp;lsquo;r&amp;rsquo;, buffering=-1,</description>
+    </item>
+    
+    <item>
+      <title>Python教程079 Python专业术语</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B079-python%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/</link>
+      <pubDate>Thu, 12 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B079-python%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/</guid>
+      <description>&amp;gt;&amp;gt;&amp;gt; 交互式终端中默认的 Python 提示符。解释器中以交互方式执行的代码示例会经常看到此提示。 &amp;hellip; 交互式终端中输入特殊代码行时默认的 Python 提示符，包括：缩进的代</description>
+    </item>
     
     <item>
       <title>Python教程078 Pythonic代码风格编程</title>
