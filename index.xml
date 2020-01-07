@@ -6,7 +6,7 @@
     <description>Recent content on None - 记录在日本从事IT的所感所想。</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 14 Dec 2019 09:09:44 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Dec 2019 09:09:44 +0900</lastBuildDate>
     
 	<atom:link href="https://inuwashi123.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,24 @@
       
       <guid>https://inuwashi123.github.io/about/</guid>
       <description>inuwashi，在日本从事IT开发运维工作，本网站记录IT学习历程和工作中遇到的相关问题。欢迎大家一起讨论。 联系方式: 邮箱：inuwash</description>
+    </item>
+    
+    <item>
+      <title>Python教程083 连接mysql数据库</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B083-%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Wed, 18 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B083-%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>python操作MYSQL数据库主要有3种方式： 使用原生模块：pymysql 使用MySQL官方提供的驱动器：mysql-connector O</description>
+    </item>
+    
+    <item>
+      <title>Python教程082 Python包管理工具pip</title>
+      <link>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B082-python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7pip/</link>
+      <pubDate>Mon, 16 Dec 2019 09:09:44 +0900</pubDate>
+      
+      <guid>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B082-python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7pip/</guid>
+      <description>pip pip是一个现代的，通用的Python包管理工具。提供了对Python包的查找、下载、安装、卸载的功能。pip默认的安装源是https:/</description>
     </item>
     
     <item>

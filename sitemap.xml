@@ -10,48 +10,62 @@
   
   <url>
     <loc>https://inuwashi123.github.io/categories/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/post/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/categories/python/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/tags/python%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B081-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8context-manager/</loc>
-    <lastmod>2019-12-14T09:09:44+09:00</lastmod>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B083-%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://inuwashi123.github.io/tags/</loc>
+    <lastmod>2019-12-18T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B082-python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7pip/</loc>
+    <lastmod>2019-12-16T09:09:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://inuwashi123.github.io/post/python/python%E6%95%99%E7%A8%8B081-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8context-manager/</loc>
     <lastmod>2019-12-14T09:09:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
